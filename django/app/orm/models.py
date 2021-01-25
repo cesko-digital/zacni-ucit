@@ -1,6 +1,7 @@
 from django.db import models
 
 class SchoolLevel(models.Model):
+    id = models.IntField()
     name = models.CharField(max_length=100)
     description = models.TextField()
 
@@ -8,6 +9,7 @@ class SchoolLevel(models.Model):
         return self.name
 
 class SubjectCategory(models.Model):
+    id = models.IntField()
     name = models.CharField(max_length=100)
     description = models.TextField()
 
