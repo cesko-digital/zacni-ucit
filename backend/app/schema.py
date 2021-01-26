@@ -1,17 +1,17 @@
 import graphene
 from graphene_django import DjangoObjectType
-from app.orm.models import SchoolLevel, SubjectCategory
+from orm.colleges.models import College, Faculty
 
 
-class SchoolLevelType(DjangoObjectType):
+class CollegeType(DjangoObjectType):
     class Meta:
-        model = SchoolLevel
+        model = College
         fields = ("__all__")
 
 
-class SubjectCategoryType(DjangoObjectType):
+class FacultyType(DjangoObjectType):
     class Meta:
-        model = SubjectCategory
+        model = Faculty
         fields = ("__all__")
 
 

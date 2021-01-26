@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+GRAPHENE = {
+    "SCHEMA": "app.schema.schema"
+}
 
 # Application definition
 
@@ -39,9 +42,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
-    "rvp",
-    "maps",
-    "colleges",
+    "ogm",
+    "orm.maps",
+    "orm.colleges",
+    "orm.programs",
 ]
 
 MIDDLEWARE = [
