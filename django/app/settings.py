@@ -11,19 +11,23 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+env = Env()
+env.read_env(path='./.env')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@53t&j)x&0c3k2mzov+a5loy9_v6zm8kx@hr(5&p&)9+yy(njm'
+SECRET_KEY = env.str('PROJECT_SECRET_KEY', default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=True)
 
 ALLOWED_HOSTS = []
 
@@ -123,3 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+BIND_HOST = env('BIND_HOST', default='127.0.0.1')
+BIND_PORT = env.int('BIND_PORT', default=5000)
+
+NEO4J_HOST = env('NEO4J_HOST', default='127.0.0.1')
+NEO4J_PORT = env.int('NEO4J_PORT', default=7687)
+NEO4J_USER = env('NEO4J_USER', default='neo4j')
+NEO4J_PASSWORD = env('NEO4J_PASSWORD', default='8612')
