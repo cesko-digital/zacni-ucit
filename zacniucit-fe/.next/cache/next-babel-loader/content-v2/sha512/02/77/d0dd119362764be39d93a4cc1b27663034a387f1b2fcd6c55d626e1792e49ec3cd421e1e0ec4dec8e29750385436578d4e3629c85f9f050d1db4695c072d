@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var SET_AUTHED = 'SET_AUTHED';","map":{"version":3,"sources":["/Users/vaseknypl/Projects/ceskodigital/zacniucit/zacniucit-fe/redux/types/auth.type.ts"],"names":["SET_AUTHED"],"mappings":"AAAA,OAAO,IAAMA,UAAU,GAAG,YAAnB","sourcesContent":["export const SET_AUTHED = 'SET_AUTHED';\n"]},"metadata":{},"sourceType":"module"}
