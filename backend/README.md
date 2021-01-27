@@ -19,14 +19,24 @@ V prvni konzoli:
 docker-compose up
 ```
 
-V druhe konzoli:
+Pockej ~5 vterin (prvni start PostgreSQL trva dyl) a pak v druhe konzoli:
 
 ```
-sleep 3
 docker-compose restart app
 docker-compose exec app bash
 
 ./manage.py migrate
+```
+
+
+# Data
+
+## Initial data
+
+Spust:
+
+```
+docker-compose exec app bash
 ./manage.py shell_plus
 
 import init
@@ -34,7 +44,15 @@ init.init()
 exit
 ```
 
-Do prohlizece zadat adresu http://localhost:8300/. Na odkazu "Administrace" je dostupny admin pro spravu dat,
-prihlasovaci jmeno `demo`, heslo `demo`.
+Do aplikace se nahraje seznam predmetu (vzdelavaci oblasti podle rvp), mapovani vs oboru na rvp, atd.
+Zaroven se vytvori uzivatel "demo" s heslem "demo", pres ktereho je mozne se prihlasit do administace
+na adrese http://localhost:8300/admin/.
 
-Projekt ukoncis stiskem `<CTRL>+c` v prvni konzoli.
+## Seznam vysokych skol a fakult
+
+Vlez na https://regvssp.msmt.cz/registrvssp/cvslist.aspx, klikni na tlacitko "Export XLSX"
+a uloz si do pocitace XLSX tabulku. Presun soubor do adresare `backend/` a spust prikaz:
+
+```
+./manage.py import_msmt_college_registry <cesta_k_XLSX_souboru>
+```

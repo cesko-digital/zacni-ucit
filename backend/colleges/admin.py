@@ -8,8 +8,10 @@ class FacultyInline(admin.TabularInline):
 
 
 class CollegeAdmin(admin.ModelAdmin):
-    list_display = ("code",)
+    list_display = ("name", "type", "form")
     inlines = [FacultyInline]
+    list_filter = ("type", "form")
+    search_fields = ("code", "name", "address", "rid", "ic", "databox")
 
 
 class FacultyAdmin(admin.ModelAdmin):
@@ -17,6 +19,7 @@ class FacultyAdmin(admin.ModelAdmin):
     list_select_related = ("college",)
     list_filter = ("college",)
     fields = ("college", "name", "town")
+    search_fields = ("name", "college__code", "college__name", "college__address", "rid")
 
 
 class CourseAdmin(admin.ModelAdmin):
