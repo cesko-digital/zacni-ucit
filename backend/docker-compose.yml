@@ -20,7 +20,7 @@ services:
       - "8300:8300"
       - "8301:8301"
     stop_signal: SIGINT
-    working_dir: /app
+    working_dir: /zacni-ucit
     command: ./manage.py runserver zuapp:8300
     links:
       - db

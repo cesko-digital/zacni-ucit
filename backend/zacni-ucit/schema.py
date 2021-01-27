@@ -21,7 +21,7 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_all_school_levels(root, info):
-        return SchoolLevel.objects.all()
+        return SchoolLevel.all()
 
     @staticmethod
     def resolve_subject_category_by_name_by_name(root, info, name):
