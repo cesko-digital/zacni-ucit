@@ -3,3 +3,36 @@ __pycache__/
 *.py[cod]
 *$py.class
 .DS_Store
+
+# dependencies
+zacniucit-fe/node_modules
+zacniucit-fe/.pnp
+zacniucit-fe/.pnp.js
+
+# testing
+zacniucit-fe/coverage
+
+# next.js
+zacniucit-fe/.next/
+zacniucit-fe/out/
+
+# production
+zacniucit-fe/build
+
+# misc
+zacniucit-fe/.DS_Store
+zacniucit-fe/*.pem
+
+# debug
+zacniucit-fe/npm-debug.log*
+zacniucit-fe/yarn-debug.log*
+zacniucit-fe/yarn-error.log*
+
+# local env files
+zacniucit-fe/.env.local
+zacniucit-fe/.env.development.local
+zacniucit-fe/.env.test.local
+zacniucit-fe/.env.production.local
+
+# vercel
+zacniucit-fe/.vercel
