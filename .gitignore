@@ -5,34 +5,34 @@ __pycache__/
 .DS_Store
 
 # dependencies
-zacniucit-fe/node_modules
-zacniucit-fe/.pnp
-zacniucit-fe/.pnp.js
+frontend/node_modules
+frontend/.pnp
+frontend/.pnp.js
 
 # testing
-zacniucit-fe/coverage
+frontend/coverage
 
 # next.js
-zacniucit-fe/.next/
-zacniucit-fe/out/
+frontend/.next/
+frontend/out/
 
 # production
-zacniucit-fe/build
+frontend/build
 
 # misc
-zacniucit-fe/.DS_Store
-zacniucit-fe/*.pem
+frontend/.DS_Store
+frontend/*.pem
 
 # debug
-zacniucit-fe/npm-debug.log*
-zacniucit-fe/yarn-debug.log*
-zacniucit-fe/yarn-error.log*
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
 
 # local env files
-zacniucit-fe/.env.local
-zacniucit-fe/.env.development.local
-zacniucit-fe/.env.test.local
-zacniucit-fe/.env.production.local
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
 
 # vercel
-zacniucit-fe/.vercel
+frontend/.vercel
