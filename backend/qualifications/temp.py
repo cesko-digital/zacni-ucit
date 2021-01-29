@@ -1,5 +1,5 @@
-from .models import CollegeArea, CollegeProgramme
-from rvp.models import Subject
+from .models import CollegeArea, CollegeProgramme, EducationType
+from teaching.models import Subject
 
 
 IGNORED_CHARS = "\t ,."
@@ -299,3 +299,58 @@ Zemědělství		PŘ	F	ENV
             programme, _ = CollegeProgramme.objects.get_or_create(name=programme, area=area)
             if subjects:
                 programme.subjects.add(*subjects)
+
+
+def init_education_type():
+    data = """
+TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ nebo SŠ
+TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ nebo SŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu
+TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ
+TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů SŠ
+TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů SŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu
+TITUL	Mgr., pedagogické vědy, příprava učitelů odborných předmětů SŠ
+TITUL	Mgr., pedagogické vědy, příprava učitelů 1. stupně ZŠ
+TITUL	Mgr., pedagogické vědy, příprava učitelů příslušných cizích jazyků
+TITUL	Mgr., pedagogické vědy, příprava učitelů ZUŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu
+TITUL	Mgr., pedagogické vědy, speciální pedagogika pro učitele
+TITUL	Mgr., tělesná výchova a sport
+TITUL	Mgr., společenské vědy, příslušné cizí jazyky
+TITUL	Mgr., umění, umělecko–pedagogické zaměření
+TITUL	Mgr., oblast studijního oboru, který odpovídá charakteru vyučovaného předmětu
+TITUL	Mgr., jakýkoliv
+TITUL	Bc., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ nebo SŠ
+TITUL	Bc., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ
+TITUL	Bc., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů SŠ
+TITUL	Bc., pedagogické vědy, příprava učitelů 2. stupně ZŠ nebo SŠ
+TITUL	Bc., pedagogické vědy, příprava učitelů
+TITUL	Bc., pedagogické vědy, jiné než příprava učitelů
+TITUL	Bc., oblast studijního oboru, který odpovídá charakteru praktického vyučování
+TITUL	Bc., jakýkoliv
+TITUL	Dis., oblast studijního oboru, který odpovídá charakteru praktického vyučování
+KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů 2. stupně ZŠ nebo SŠ
+KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů 2. stupně ZŠ
+KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů SŠ
+KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů
+DALŠÍ MOŽNOSTI	doplňující studium k rozšíření odborné kvalifikace (DVPP)
+DALŠÍ MOŽNOSTI	doplňující didaktické studium příslušného jazyka
+DALŠÍ MOŽNOSTI	studium pedagogiky
+DALŠÍ MOŽNOSTI	jazyková zkouška min. C1 SERR pro jazyky
+TITUL	maturita, obor vzdělání, který odpovídá charakteru vyučovaného předmětu
+TITUL	maturita, z čehokoliv
+TITUL	výuční list v oboru vzdělání, který odpovídá charakteru vyučovaného předmětu
+DALŠÍ MOŽNOSTI	rodilý mluvčí
+DALŠÍ MOŽNOSTI	výkonný umělec
+"""
+
+    for line in data.strip().split("\n"):
+        (qualification, education) = [i.strip() for i in line.split("\t")]
+        if qualification == "TITUL":
+            q = EducationType.TITLE_QUALIFICATION
+        elif qualification == "KURZ CŽV":
+            q = EducationType.CZV_QUALIFICATION
+        elif qualification == "DALŠÍ MOŽNOSTI":
+            q = EducationType.OTHER_QUALIFICATION
+        else:
+            print(f'Unknown qualification "{qualification}"')
+            continue
+        EducationType.objects.get_or_create(qualification=q, education=education)
