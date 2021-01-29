@@ -1,30 +1,45 @@
-# How to publish code to this repository
+# Jak přispívat
 
-Start with cloning official repository to your computer:
+## Jazyk
+
+V anglickém jazyce:
+
+* Kód
+* Komentáře
+* Commit zprávy
+
+V českém jazyce:
+
+* README a jakákoliv jiná dokumentace
+* Issues a pull requesty
+
+## Publikování kódu
+
+Začni naklonováním repozitáře do svého počítače:
 
 ```
 git clone git@github.com:cesko-digital/zacni-ucit.git
 
 ```
 
-Every time you want to publish new feature or bugfix follow those steps please:
+Pokud naimplementuješ novou funkcionalitu nebo vytvoříš bugfix, postupuj takto:
 
-* Switch to `master` branch with `git checkout master`
-* Create new branch `git checkout -b <your_name_or_nick>/<branch_name>-<issue_number>`.
-  For example, if you want to build new scraper for Masarykova univerzita based on
-  [Trello](https://trello.com/b/zrTT6Cdn/za%C4%8Dni-u%C4%8Dit) ticket \#123,
-  your command will looks like `git checkout -b michal/mu-scraper-123`. If there is no Trello ticket
-  you will name it like `michal/mu-scraper`.
-* Implement your feature. Once you are done, publish it on Github with
-  `git push origin/<your_name_or_nick>/<branch_name>-<issue_number>`, for example
+* Přepni se do větve `master`: `git checkout master`
+* Vytvoř novou větev `git checkout -b <jmeno>/<vetev>-<cislo_issue>`.
+  Například, pokud se na základě [Trello](https://trello.com/b/zrTT6Cdn/za%C4%8Dni-u%C4%8Dit)
+  ticketu \#123 rozhodneš napsat nový scraper kurzů Masarykovy univerzity,
+  pojmenuj větev jako `michal/mu-scraper-123`. Jestliže Trello ticket neexistuje, 
+  větev pojmenuj `michal/mu-scraper`.
+* Po dokončení implementace publikuj kód na Github:  
+  `git push origin/<jmeno>/<vetev>-<cislo_issue>`, tj. například
   `git push origin michal/mu-scraper-123`
-* Go to [GitHub](https://github.com/cesko-digital/zacni-ucit) and create Pull Request. Name it properly
-  and provide basic description what your PR is about.
-* Your Pull Request will be reviewed. Respond to questions & comments. Once Pull Request is reviewed,
-  code is merged into master branch and your feature branch is deleted.
-* Synchronise your local repository regularly.
+* Vlez na [GitHub](https://github.com/cesko-digital/zacni-ucit) a vytvoř nový Pull Request.
+  Dobře jej pojmenuj a popiš.
+* Každý Pull Request je zkontrolován. Pokud se objeví nejasnosti, reaguj na komentáře
+  a dotazy. Po schválení bude proveden merge do `master` větve a tvá branch bude smazána.
 
-Keep in mind, that each Pull Request should be reasonably small. Don't mix multiple features or
-fixes together. Don't publish caches, compiled files, OS specific files, credentials.
+Snaž se publikovat rozumně velké Pull Requesty -- každý PR by měl rešit jedno issue,
+míchání nesouvisejících funkcionalit není přípustné.
 
-Write your codebase, comments, docs, git commit messages in plain English.
+Do repozitáře neposílej cache, zkompilované soubory, OS specifické soubory, přihlašovací
+údaje.
