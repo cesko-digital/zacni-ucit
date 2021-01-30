@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, Group, Permission
 
-from colleges.temp import init_faculties_2021_01
-from maps.temp import init_map_2021_01
-from rvp.temp import init_subjects_2021_01, init_courses_2021_01
+from colleges.temp import init_faculties_2021_01, init_courses_2021_01
+from qualifications.temp import init_map_2021_01, init_education_type
+from teaching.temp import init_subjects_2021_01
 
 
 def init_user():
@@ -34,6 +34,26 @@ def init_user():
                 "change_subject",
                 "delete_subject",
                 "view_subject",
+                "add_educationtype",
+                "change_educationtype",
+                "delete_educationtype",
+                "view_educationtype",
+                "add_title",
+                "change_title",
+                "delete_title",
+                "view_title",
+                "add_schoollevel",
+                "change_schoollevel",
+                "delete_schoollevel",
+                "view_schoollevel",
+                "add_schooltype",
+                "change_schooltype",
+                "delete_schooltype",
+                "view_schooltype",
+                "add_subjectgroup",
+                "change_subjectgroup",
+                "delete_subjectgroup",
+                "view_subjectgroup",
             ]
         )
     )
@@ -54,3 +74,4 @@ def init():
     init_faculties_2021_01()
     init_courses_2021_01()
     init_map_2021_01()
+    init_education_type()
