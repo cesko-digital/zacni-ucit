@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "teaching",
     "qualifications",
     "colleges",
+    "graphene_django"
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+
+####################
+# GraphQL settings #
+####################
+
+GRAPHENE = {
+    "SCHEMA": "zacniucit.schema.schema"
+}

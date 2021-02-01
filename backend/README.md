@@ -56,3 +56,6 @@ a uloz si do pocitace XLSX tabulku. Presun soubor do adresare `backend/` a spust
 ```
 ./manage.py import_msmt_college_registry <cesta_k_XLSX_souboru>
 ```
+
+GraphQL: 
+GraphQL endpoint je na addrese <protokol>://<domain>/graphql/
