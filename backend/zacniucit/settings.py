@@ -85,10 +85,10 @@ WSGI_APPLICATION = "zacniucit.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        'NAME': config('DATABASE_NAME', default='postgres'),
-        'USER': config('DATABASE_USER', default='postgres'),
-        'PASSWORD': config('DATABASE_PASSWORD', default=''),
-        'HOST': config('DATABASE_HOST', default='db'),
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT', default='5432'),
     }
 }
@@ -124,10 +124,27 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
-####################
-# GraphQL settings #
-####################
+# Neo4j
 
-GRAPHENE = {
-    "SCHEMA": "zacniucit.schema.schema"
-}
+import py2neo
+import time
+
+# treat slow neo4j startup (try to connect during `max_wait_time` seconds)
+now = time.time()
+max_wait_time = 10  # in seconds
+try_to_connect = True
+
+while try_to_connect:
+    try:
+        GRAPH = py2neo.Graph(
+            host = config("NEO4J_HOST"),
+            port = config("NEO4J_PORT", default='7687'),
+            user = config("NEO4J_USER"),
+            password = config("NEO4J_PASSWORD"),
+        )
+    except py2neo.client.ConnectionUnavailable:
+        pass
+    else:
+        try_to_connect = False
+    time.sleep(.5)
+    try_to_connect = (time.time() - now) < max_wait_time
