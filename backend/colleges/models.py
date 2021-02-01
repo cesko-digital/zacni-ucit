@@ -7,15 +7,32 @@ class College(TimeStampedModel):
     Vysoka skola.
     """
 
+    TYPE_UNIVERSITY = "univerzitni"
+    TYPE_NON_UNIVERSITY = "neuniverzitni"
+    TYPE_CHOICES = ((TYPE_UNIVERSITY, "univerzitní"), (TYPE_NON_UNIVERSITY, "neuniverzitní"))
+
+    FORM_PRIVATE = "soukroma"
+    FORM_GOV = "statni"
+    FORM_PUBLIC = "verejna"
+    FORM_CHOICES = ((FORM_PRIVATE, "soukromá"), (FORM_GOV, "státní"), (FORM_PUBLIC, "veřejná"))
+
+    name = models.CharField("Název školy", max_length=200, unique=True)
+    type = models.CharField("Typ", max_length=20, choices=TYPE_CHOICES)
+    form = models.CharField("Forma", max_length=20, choices=FORM_CHOICES)
+    address = models.CharField("Adresa", max_length=200)
+    rid = models.CharField("RID", max_length=20, unique=True)
+    ic = models.CharField("IČ", max_length=20)
+    databox = models.CharField("Datová schránka", max_length=20)
+    url = models.URLField("URL")
     code = models.CharField("Zkratka", max_length=30, unique=True)
 
     class Meta:
         verbose_name = "Vysoká škola"
         verbose_name_plural = "Vysoké školy"
-        ordering = ("code",)
+        ordering = ("name",)
 
     def __str__(self):
-        return self.code
+        return self.name
 
 
 class Faculty(TimeStampedModel):
@@ -24,14 +41,16 @@ class Faculty(TimeStampedModel):
     """
 
     name = models.CharField("Název fakulty", max_length=200)
-    town = models.CharField("Město", max_length=50)
+    town = models.CharField("Město", max_length=50, default="")
     college = models.ForeignKey("colleges.College", on_delete=models.SET_NULL, null=True)
+    rid = models.CharField("RID", max_length=20)
+    url = models.URLField("URL")
 
     class Meta:
         verbose_name = "Fakulta vysoké školy"
         verbose_name_plural = "Fakulty vysokých škol"
         ordering = ("name", "college")
-        unique_together = ("name", "college", "town")
+        unique_together = ("name", "college")
 
     def __str__(self):
         return f"{self.name} / {self.college} "
