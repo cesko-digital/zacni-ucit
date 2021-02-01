@@ -1,21 +1,21 @@
 from django.contrib import admin
-
+from common.admin import GraphAdmin
 from .models import Subject, SchoolLevel, SchoolType, SubjectGroup
 
 
-class SubjectAdmin(admin.ModelAdmin):
+class SubjectAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name", "code")
 
 
-class SchoolLevelAdmin(admin.ModelAdmin):
+class SchoolLevelAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name",)
 
 
-class SchoolTypeAdmin(admin.ModelAdmin):
+class SchoolTypeAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name",)
 
 
-class SubjectGroupAdmin(admin.ModelAdmin):
+class SubjectGroupAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name",)
     list_filter = ("subjects",)
     filter_horizontal = ("subjects",)
