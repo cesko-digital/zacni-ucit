@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('created', django_extensions.db.fields.CreationDateTimeField(auto_now_add=True, verbose_name='created')),
                 ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
                 ('name', models.CharField(max_length=100, verbose_name='Název')),
-                ('shortcut', models.CharField(max_length=20, unique=True, verbose_name='Zkratka')),
+                ('code', models.CharField(max_length=20, unique=True, verbose_name='Zkratka')),
             ],
             options={
                 'verbose_name': 'Titul',

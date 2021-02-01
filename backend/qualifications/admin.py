@@ -21,7 +21,7 @@ class EducationTypeAdmin(admin.ModelAdmin):
 
 
 class TitleAdmin(admin.ModelAdmin):
-    list_display = ("name", "shortcut")
+    list_display = ("name", "code")
 
 
 admin.site.register(CollegeArea, CollegeAreaAdmin)
