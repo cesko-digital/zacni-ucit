@@ -1,7 +1,7 @@
 import graphene
 from graphene.types.generic import GenericScalar
 
-from zacniucit.core.choices import ErrorCode
+from common.choices import ErrorCode
 
 ErrorCodeType = graphene.Enum.from_enum(ErrorCode)
 

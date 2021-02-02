@@ -1,8 +1,8 @@
 import graphene
 
 from colleges.graphql.types import CollegeType
-from zacniucit.core.choices import ErrorCode
-from zacniucit.core.mutations import BaseMutation, MutationValidationError
+from common.choices import ErrorCode
+from common.mutations import BaseMutation, MutationValidationError
 from colleges.models import College
 
 

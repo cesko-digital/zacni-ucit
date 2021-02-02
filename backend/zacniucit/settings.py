@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "qualifications",
     "colleges",
     "common",
+    "graphene_django"
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,14 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
+###########
+# GraphQL #
+###########
+
+GRAPHENE = {
+    "SCHEMA": "zacniucit.schema.schema"
+}
+
 # Neo4j
 
 import py2neo
@@ -132,7 +141,7 @@ import time
 # treat slow neo4j startup (try to connect during `max_wait_time` seconds)
 now = time.time()
 max_wait_time = 10  # in seconds
-try_to_connect = True
+try_to_connect = config('GRAPH_TRY_TO_CONNECT_BOOL', default=True, cast=bool)
 
 while try_to_connect:
     try:
