@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "teaching",
     "qualifications",
     "colleges",
+    "common",
 ]
 
 MIDDLEWARE = [
@@ -142,8 +143,7 @@ while try_to_connect:
             password = config("NEO4J_PASSWORD"),
         )
     except py2neo.client.ConnectionUnavailable:
-        pass
+        try_to_connect = (time.time() - now) < max_wait_time
+        time.sleep(.3)
     else:
         try_to_connect = False
-    time.sleep(.5)
-    try_to_connect = (time.time() - now) < max_wait_time
