@@ -1,8 +1,10 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
+from common.models import GraphModel
 
-class Subject(TimeStampedModel):
+
+class Subject(TimeStampedModel, GraphModel):
     """
     Skolni predmet.
 
@@ -20,8 +22,14 @@ class Subject(TimeStampedModel):
     def __str__(self):
         return self.code
 
+    def graph_data(self):
+        return {
+            'name': self.name,
+            'code': self.code,
+        }
 
-class SchoolLevel(TimeStampedModel):
+
+class SchoolLevel(TimeStampedModel, GraphModel):
     """
     Stupen skoly.
     """
@@ -36,8 +44,13 @@ class SchoolLevel(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def graph_data(self):
+        return {
+            'name': self.name,
+        }
 
-class SchoolType(TimeStampedModel):
+
+class SchoolType(TimeStampedModel, GraphModel):
     """
     Typ skoly.
     """
@@ -52,8 +65,13 @@ class SchoolType(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def graph_data(self):
+        return {
+            'name': self.name,
+        }
 
-class SubjectGroup(TimeStampedModel):
+
+class SubjectGroup(TimeStampedModel, GraphModel):
     """
     Predmetova skupina.
     """
@@ -68,3 +86,14 @@ class SubjectGroup(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def graph_data(self):
+        return {
+            'name': self.name,
+        }
+
+    def related_graph_data(self):
+        return [
+            # CollegeProgramme <- BELONGS_TO - Subject
+            ("<-", "BELONGS_TO", "-", 'subjects'),
+        ]

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "teaching",
     "qualifications",
     "colleges",
+    "common",
 ]
 
 MIDDLEWARE = [
@@ -143,6 +144,6 @@ while try_to_connect:
         )
     except py2neo.client.ConnectionUnavailable:
         try_to_connect = (time.time() - now) < max_wait_time
-        time.sleep(.5)
+        time.sleep(.3)
     else:
         try_to_connect = False

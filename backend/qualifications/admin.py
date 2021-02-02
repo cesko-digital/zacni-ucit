@@ -1,12 +1,13 @@
 from django.contrib import admin
+from common.admin import GraphAdmin
 from .models import CollegeArea, CollegeProgramme, EducationType, Title
 
 
-class CollegeAreaAdmin(admin.ModelAdmin):
+class CollegeAreaAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name",)
 
 
-class CollegeProgrammeAdmin(admin.ModelAdmin):
+class CollegeProgrammeAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name", "area")
     list_select_related = ("area",)
     list_filter = ("area", "subjects")
@@ -14,14 +15,14 @@ class CollegeProgrammeAdmin(admin.ModelAdmin):
     filter_horizontal = ("subjects",)
 
 
-class EducationTypeAdmin(admin.ModelAdmin):
+class EducationTypeAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("education", "qualification")
     list_filter = ("qualification",)
     search_fields = ("education",)
 
 
-class TitleAdmin(admin.ModelAdmin):
-    list_display = ("name", "shortcut")
+class TitleAdmin(GraphAdmin, admin.ModelAdmin):
+    list_display = ("name", "code")
 
 
 admin.site.register(CollegeArea, CollegeAreaAdmin)
