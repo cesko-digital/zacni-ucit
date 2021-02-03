@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group, Permission
 
 from qualifications.temp import init_map_2021_01, init_education_type
-from teaching.temp import init_subjects_2021_01
+from teaching.temp import init_subjects_2021_01, init_school_type_2021_02, init_school_level_2021_02
 
 
 def init_user():
@@ -72,3 +72,5 @@ def init():
     init_subjects_2021_01()
     init_map_2021_01()
     init_education_type()
+    init_school_type_2021_02()
+    init_school_level_2021_02()
