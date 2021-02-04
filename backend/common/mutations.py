@@ -1,6 +1,6 @@
 import graphene
-from zacniucit.core.choices import ErrorCode
-from zacniucit.core.types import ErrorType
+from common.choices import ErrorCode
+from common.types import ErrorType
 
 
 class MutationValidationError(Exception):

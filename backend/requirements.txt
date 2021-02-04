@@ -6,3 +6,4 @@ psycopg2==2.8.6
 python-decouple==3.4
 openpyxl==3.0.6
 py2neo==2020.1.1
+graphene_django==2.15.0
