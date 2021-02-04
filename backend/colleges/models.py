@@ -57,7 +57,6 @@ class Faculty(TimeStampedModel, GraphModel):
     """
 
     name = models.CharField("Název fakulty", max_length=200)
-    town = models.CharField("Město", max_length=50, default="")
     college = models.ForeignKey("colleges.College", on_delete=models.SET_NULL, null=True)
     rid = models.CharField("RID", max_length=20)
     url = models.URLField("URL")
