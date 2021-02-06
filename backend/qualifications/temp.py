@@ -1,6 +1,5 @@
-from .models import CollegeArea, CollegeProgramme, EducationType
-from teaching.models import Subject
-
+from .models import CollegeArea, CollegeProgramme, EducationType, Title
+from teaching.models import Subject, SchoolLevel
 
 IGNORED_CHARS = "\t ,."
 
@@ -302,55 +301,83 @@ Zemědělství		PŘ	F	ENV
 
 
 def init_education_type():
+    """
+    Zdroj dat: https://docs.google.com/spreadsheets/d/1W7xre-g4S_Y4LieKOHf-cIScdvU4Gp_i_4Ywvr5nw-8/edit#gid=1514467189
+
+    TODO: David Š: Zatím tam není strojově čitelná podoba dat. Až dostanu práva na write, upravím to google sheetu
+    """
     data = """
-TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ nebo SŠ
-TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ nebo SŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu
-TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ
-TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů SŠ
-TITUL	Mgr., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů SŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu
-TITUL	Mgr., pedagogické vědy, příprava učitelů odborných předmětů SŠ
-TITUL	Mgr., pedagogické vědy, příprava učitelů 1. stupně ZŠ
-TITUL	Mgr., pedagogické vědy, příprava učitelů příslušných cizích jazyků
-TITUL	Mgr., pedagogické vědy, příprava učitelů ZUŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu
-TITUL	Mgr., pedagogické vědy, speciální pedagogika pro učitele
-TITUL	Mgr., tělesná výchova a sport
-TITUL	Mgr., společenské vědy, příslušné cizí jazyky
-TITUL	Mgr., umění, umělecko–pedagogické zaměření
-TITUL	Mgr., oblast studijního oboru, který odpovídá charakteru vyučovaného předmětu
-TITUL	Mgr., jakýkoliv
-TITUL	Bc., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ nebo SŠ
-TITUL	Bc., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů 2. stupně ZŠ
-TITUL	Bc., pedagogické vědy, příprava učitelů všeobecně-vzdělávacích předmětů SŠ
-TITUL	Bc., pedagogické vědy, příprava učitelů 2. stupně ZŠ nebo SŠ
-TITUL	Bc., pedagogické vědy, příprava učitelů
-TITUL	Bc., pedagogické vědy, jiné než příprava učitelů
-TITUL	Bc., oblast studijního oboru, který odpovídá charakteru praktického vyučování
-TITUL	Bc., jakýkoliv
-TITUL	Dis., oblast studijního oboru, který odpovídá charakteru praktického vyučování
-KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů 2. stupně ZŠ nebo SŠ
-KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů 2. stupně ZŠ
-KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů SŠ
-KURZ CŽV	CŽV uskutečňovaném VŠ a zaměřeném na přípravu učitelů
-DALŠÍ MOŽNOSTI	doplňující studium k rozšíření odborné kvalifikace (DVPP)
-DALŠÍ MOŽNOSTI	doplňující didaktické studium příslušného jazyka
-DALŠÍ MOŽNOSTI	studium pedagogiky
-DALŠÍ MOŽNOSTI	jazyková zkouška min. C1 SERR pro jazyky
-TITUL	maturita, obor vzdělání, který odpovídá charakteru vyučovaného předmětu
-TITUL	maturita, z čehokoliv
-TITUL	výuční list v oboru vzdělání, který odpovídá charakteru vyučovaného předmětu
-DALŠÍ MOŽNOSTI	rodilý mluvčí
-DALŠÍ MOŽNOSTI	výkonný umělec
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů studijního oboru, který odpovídá charakteru vyučovaného předmětu:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:SŠ
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů studijního oboru, který odpovídá charakteru vyučovaného předmětu:SŠ
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:odborných předmětů:SŠ
+TITUL:Mgr.:pedagogické vědy:příprava učitelů::Základní škola - 1. stupeň
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:příslušných cizích jazyků:
+TITUL:Mgr.:pedagogické vědy:příprava učitelů:ZUŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu:
+TITUL:Mgr.:pedagogické vědy:speciální pedagogika pro učitele::
+TITUL:Mgr.:tělesná výchova a sport:::
+TITUL:Mgr.:společenské vědy::příslušné cizí jazyky:
+TITUL:Mgr.:umění::umělecko–pedagogické zaměření:
+TITUL:Mgr.:::oblast studijního oboru, který odpovídá charakteru vyučovaného předmětu:
+TITUL:Mgr.:::jakýkoliv:
+TITUL:Bc.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
+TITUL:Bc.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)
+TITUL:Bc.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:SŠ
+TITUL:Bc.:pedagogické vědy:příprava učitelů::Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
+TITUL:Bc.:pedagogické vědy:příprava učitelů::
+TITUL:Bc.:pedagogické vědy:jiné než příprava učitelů::
+TITUL:Bc.:::oblast studijního oboru, který odpovídá charakteru praktického vyučování:
+TITUL:Bc.:::jakýkoliv:
+TITUL:Dis.:::oblast studijního oboru, který odpovídá charakteru praktického vyučování:
+KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
+KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)
+KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::SŠ
+KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::
+DALŠÍ MOŽNOSTI:::doplňující studium k rozšíření odborné kvalifikace (DVPP)::
+DALŠÍ MOŽNOSTI:::doplňující didaktické studium příslušného jazyka::
+DALŠÍ MOŽNOSTI:::studium pedagogiky::
+DALŠÍ MOŽNOSTI:::jazyková zkouška min. C1 SERR pro jazyky::
+TITUL:maturita:::obor vzdělání, který odpovídá charakteru vyučovaného předmětu:
+TITUL:maturita:::jakýkoliv:
+TITUL:výuční list:::obor vzdělání, který odpovídá charakteru vyučovaného předmětu:
+DALŠÍ MOŽNOSTI:::rodilý mluvčí::
+DALŠÍ MOŽNOSTI:::výkonný umělec::
 """
 
     for line in data.strip().split("\n"):
-        (qualification, education) = [i.strip() for i in line.split("\t")]
-        if qualification == "TITUL":
+        (qualification_type, title, area, preparation_type, subjects_type, school_levels) = [i.strip() for i in line.split(":")]
+
+        if qualification_type == "TITUL":
             q = EducationType.TITLE_QUALIFICATION
-        elif qualification == "KURZ CŽV":
+        elif qualification_type == "KURZ CŽV":
             q = EducationType.CZV_QUALIFICATION
-        elif qualification == "DALŠÍ MOŽNOSTI":
+        elif qualification_type == "DALŠÍ MOŽNOSTI":
             q = EducationType.OTHER_QUALIFICATION
         else:
-            print(f'Unknown qualification "{qualification}"')
+            print(f'Unknown qualification "{qualification_type}"')
             continue
-        EducationType.objects.get_or_create(qualification=q, education=education)
+
+        # TODO temporally solution, when we have source of data for Titles, this need to be refactored
+        if title:
+            title, _ = Title.objects.get_or_create(name=title, code=title)
+        else:
+            title = None
+
+        education_type, _ = EducationType.objects.get_or_create(
+            qualification_type=q,
+            title=title,
+            area=area,
+            preparation_type=preparation_type,
+            subjects_type=subjects_type,
+        )
+
+        if school_levels:
+            # TODO We should think about unifying SchoolLevel data
+            school_levels_instances = []
+            for school_level in school_levels.split(';'):
+                school_l, _ = SchoolLevel.objects.get_or_create(name=school_level)
+                school_levels_instances.append(school_l)
+
+            education_type.school_levels.add(*school_levels_instances)

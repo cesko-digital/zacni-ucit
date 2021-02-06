@@ -65,29 +65,42 @@ class EducationType(TimeStampedModel, GraphModel):
     TITLE_QUALIFICATION = "titul"
     CZV_QUALIFICATION = "czv"
     OTHER_QUALIFICATION = "dalsi"
-    QUALIFICATION_CHOICES = (
+    QUALIFICATION_TYPE_CHOICES = (
         (TITLE_QUALIFICATION, "Titul"),
         (CZV_QUALIFICATION, "Kurz CŽV"),
         (OTHER_QUALIFICATION, "Další možnosti"),
     )
 
-    qualification = models.CharField("Možnosti získání kvalifikace", max_length=20, choices=QUALIFICATION_CHOICES)
-    education = models.CharField("Typ vzdělání z hlediska zákona", max_length=200)
+    qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
+    title = models.ForeignKey('qualifications.Title', on_delete=models.SET_NULL, null=True)
+    area = models.CharField("Oblast VŠ vzdělávání", max_length=512, null=True)
+    preparation_type = models.CharField("Typ přípravy učitelů", max_length=200, null=True)
+    subjects_type = models.CharField('Typ předmětů', max_length=512, null=True)
+    school_levels = models.ManyToManyField('teaching.SchoolLevel')
 
     class Meta:
         verbose_name = "Typ vzdělání z hlediska zákona"
         verbose_name_plural = "Typ vzdělání z hlediska zákona"
-        ordering = ("education",)
-        unique_together = ("qualification", "education")
+        ordering = ("qualification_type",)
 
     def __str__(self):
-        return f"{self.qualification} / {self.education}"
+        return f"{self.qualification_type} / {self.area} / {self.subjects_type}"
 
     def graph_data(self):
         return {
-            'qualification': self.qualification,
-            'education': self.education,
+            'qualification_type': self.qualification_type,
+            'area': self.area,
+            'preparation_type': self.preparation_type,
+            'subjects_type': self.subjects_type
         }
+
+    def related_graph_data(self):
+        return [
+            # EducationType - BELONGS_TO -> Title
+            ("-", "BELONGS_TO", "->", 'title'),
+            # EducationType <- BELONGS_TO - SchoolLevel
+            ("<-", "BELONGS_TO", "-", 'school_level'),
+        ]
 
 
 class Title(TimeStampedModel, GraphModel):
