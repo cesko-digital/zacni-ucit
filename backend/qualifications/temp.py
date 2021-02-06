@@ -347,7 +347,9 @@ DALŠÍ MOŽNOSTI:::výkonný umělec::
 """
 
     for line in data.strip().split("\n"):
-        (qualification_type, title, area, preparation_type, subjects_type, school_levels) = [i.strip() for i in line.split(":")]
+        (qualification_type, title, area, preparation_type, subjects_type, school_levels) = [
+            i.strip() for i in line.split(":")
+        ]
 
         if qualification_type == "TITUL":
             q = EducationType.TITLE_QUALIFICATION
@@ -376,7 +378,7 @@ DALŠÍ MOŽNOSTI:::výkonný umělec::
         if school_levels:
             # TODO We should think about unifying SchoolLevel data
             school_levels_instances = []
-            for school_level in school_levels.split(';'):
+            for school_level in school_levels.split(";"):
                 school_l, _ = SchoolLevel.objects.get_or_create(name=school_level)
                 school_levels_instances.append(school_l)
 

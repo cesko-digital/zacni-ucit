@@ -4,9 +4,7 @@ from .models import Subject, SchoolType, SchoolLevel
 def init_subjects_2021_01():
     """
     Zdroj: https://docs.google.com/spreadsheets/d/1msJu1AX_-wYLbhvz8rqsZxFMBwX7-xzghCAFHeeBQEI/edit#gid=2008534637
-    Nejasnost s dvojim vyznamem "CJ":
-        Cizí jazyk	CJ
-        Další cizí jazyk	CJ
+    Nejasnost s dvojim vyznamem "CJ": Cizí jazyk=CJ, Další cizí jazyk=CJ
     """
     SUBJECTS = """
         Český jazyk a literatura	ČJL

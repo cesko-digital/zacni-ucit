@@ -39,15 +39,15 @@ class College(TimeStampedModel, GraphModel):
 
     def graph_data(self):
         return {
-            'name': self.name,
-            'type': self.type,
-            'form': self.form,
-            'address': self.address,
-            'rid': self.rid,
-            'ic': self.ic,
-            'databox': self.databox,
-            'url': self.url,
-            'code': self.code,
+            "name": self.name,
+            "type": self.type,
+            "form": self.form,
+            "address": self.address,
+            "rid": self.rid,
+            "ic": self.ic,
+            "databox": self.databox,
+            "url": self.url,
+            "code": self.code,
         }
 
 
@@ -71,16 +71,12 @@ class Faculty(TimeStampedModel, GraphModel):
         return f"{self.name} / {self.college} "
 
     def graph_data(self):
-        return {
-            'name': self.name,
-            'rid': self.rid,
-            'url': self.url,
-        }
+        return {"name": self.name, "rid": self.rid, "url": self.url}
 
     def related_graph_data(self):
         return [
             # Faculty - BELONGS_TO -> College
-            ("-", "BELONGS_TO", "->", 'college')
+            ("-", "BELONGS_TO", "->", "college")
         ]
 
 

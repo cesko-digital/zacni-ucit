@@ -16,9 +16,7 @@ class CollegeArea(TimeStampedModel, GraphModel):
         return self.name
 
     def graph_data(self):
-        return {
-            'name': self.name,
-        }
+        return {"name": self.name}
 
 
 class CollegeProgramme(TimeStampedModel, GraphModel):
@@ -44,16 +42,14 @@ class CollegeProgramme(TimeStampedModel, GraphModel):
         return self.name
 
     def graph_data(self):
-        return {
-            'name': self.name,
-        }
+        return {"name": self.name}
 
     def related_graph_data(self):
         return [
             # CollegeProgramme - BELONGS_TO -> CollegeArea
-            ("-", "BELONGS_TO", "->", 'area'),
+            ("-", "BELONGS_TO", "->", "area"),
             # CollegeProgramme <- BELONGS_TO - Subject
-            ("<-", "BELONGS_TO", "-", 'subjects'),
+            ("<-", "BELONGS_TO", "-", "subjects"),
         ]
 
 
@@ -72,11 +68,11 @@ class EducationType(TimeStampedModel, GraphModel):
     )
 
     qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
-    title = models.ForeignKey('qualifications.Title', on_delete=models.SET_NULL, null=True)
+    title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True)
     area = models.CharField("Oblast VŠ vzdělávání", max_length=512, null=True)
     preparation_type = models.CharField("Typ přípravy učitelů", max_length=200, null=True)
-    subjects_type = models.CharField('Typ předmětů', max_length=512, null=True)
-    school_levels = models.ManyToManyField('teaching.SchoolLevel')
+    subjects_type = models.CharField("Typ předmětů", max_length=512, null=True)
+    school_levels = models.ManyToManyField("teaching.SchoolLevel")
 
     class Meta:
         verbose_name = "Typ vzdělání z hlediska zákona"
@@ -88,18 +84,18 @@ class EducationType(TimeStampedModel, GraphModel):
 
     def graph_data(self):
         return {
-            'qualification_type': self.qualification_type,
-            'area': self.area,
-            'preparation_type': self.preparation_type,
-            'subjects_type': self.subjects_type
+            "qualification_type": self.qualification_type,
+            "area": self.area,
+            "preparation_type": self.preparation_type,
+            "subjects_type": self.subjects_type,
         }
 
     def related_graph_data(self):
         return [
             # EducationType - BELONGS_TO -> Title
-            ("-", "BELONGS_TO", "->", 'title'),
+            ("-", "BELONGS_TO", "->", "title"),
             # EducationType <- BELONGS_TO - SchoolLevel
-            ("<-", "BELONGS_TO", "-", 'school_level'),
+            ("<-", "BELONGS_TO", "-", "school_level"),
         ]
 
 
@@ -120,7 +116,4 @@ class Title(TimeStampedModel, GraphModel):
         return self.code
 
     def graph_data(self):
-        return {
-            'name': self.name,
-            'code': self.code,
-        }
+        return {"name": self.name, "code": self.code}
