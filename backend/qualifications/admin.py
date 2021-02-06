@@ -18,7 +18,7 @@ class CollegeProgrammeAdmin(GraphAdmin, admin.ModelAdmin):
 class EducationTypeAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("qualification_type", "title", "area", "preparation_type", "subjects_type")
     list_filter = ("qualification_type", "title", "school_levels")
-    search_fields = ("qualification_type", "title", "school_levels")
+    search_fields = ("qualification_type", "title__name", "school_levels__name")
 
 
 class TitleAdmin(GraphAdmin, admin.ModelAdmin):
