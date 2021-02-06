@@ -17,7 +17,7 @@ class CollegeArea(TimeStampedModel, GraphModel):
 
     def graph_data(self):
         return {
-            'name': self.name,
+            "name": self.name,
         }
 
 
@@ -27,7 +27,12 @@ class CollegeProgramme(TimeStampedModel, GraphModel):
     """
 
     name = models.CharField("Studijní program", max_length=100)
-    area = models.ForeignKey(CollegeArea, on_delete=models.SET_NULL, null=True, verbose_name="Oblast VŠ vzdělávání")
+    area = models.ForeignKey(
+        CollegeArea,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="Oblast VŠ vzdělávání",
+    )
     subjects = models.ManyToManyField(
         "teaching.Subject",
         verbose_name="Vzdělávací oblast podle RVP",
@@ -45,15 +50,15 @@ class CollegeProgramme(TimeStampedModel, GraphModel):
 
     def graph_data(self):
         return {
-            'name': self.name,
+            "name": self.name,
         }
 
     def related_graph_data(self):
         return [
             # CollegeProgramme - BELONGS_TO -> CollegeArea
-            ("-", "BELONGS_TO", "->", 'area'),
+            ("-", "BELONGS_TO", "->", "area"),
             # CollegeProgramme <- BELONGS_TO - Subject
-            ("<-", "BELONGS_TO", "-", 'subjects'),
+            ("<-", "BELONGS_TO", "-", "subjects"),
         ]
 
 
@@ -72,11 +77,11 @@ class EducationType(TimeStampedModel, GraphModel):
     )
 
     qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
-    title = models.ForeignKey('qualifications.Title', on_delete=models.SET_NULL, null=True)
+    title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True)
     area = models.CharField("Oblast VŠ vzdělávání", max_length=512, null=True)
     preparation_type = models.CharField("Typ přípravy učitelů", max_length=200, null=True)
-    subjects_type = models.CharField('Typ předmětů', max_length=512, null=True)
-    school_levels = models.ManyToManyField('teaching.SchoolLevel')
+    subjects_type = models.CharField("Typ předmětů", max_length=512, null=True)
+    school_levels = models.ManyToManyField("teaching.SchoolLevel")
 
     class Meta:
         verbose_name = "Typ vzdělání z hlediska zákona"
@@ -88,18 +93,18 @@ class EducationType(TimeStampedModel, GraphModel):
 
     def graph_data(self):
         return {
-            'qualification_type': self.qualification_type,
-            'area': self.area,
-            'preparation_type': self.preparation_type,
-            'subjects_type': self.subjects_type
+            "qualification_type": self.qualification_type,
+            "area": self.area,
+            "preparation_type": self.preparation_type,
+            "subjects_type": self.subjects_type,
         }
 
     def related_graph_data(self):
         return [
             # EducationType - BELONGS_TO -> Title
-            ("-", "BELONGS_TO", "->", 'title'),
+            ("-", "BELONGS_TO", "->", "title"),
             # EducationType <- BELONGS_TO - SchoolLevel
-            ("<-", "BELONGS_TO", "-", 'school_level'),
+            ("<-", "BELONGS_TO", "-", "school_levels"),
         ]
 
 
@@ -121,6 +126,6 @@ class Title(TimeStampedModel, GraphModel):
 
     def graph_data(self):
         return {
-            'name': self.name,
-            'code': self.code,
+            "name": self.name,
+            "code": self.code,
         }

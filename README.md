@@ -2,17 +2,6 @@ Projekt Zacniucit.cz.
 
 # Zbuildeni
 
-Postup pro Linux/MacOS. V konzoli spust:
-
-```
-docker-compose build
-```
-
-Tento krok staci udelat jen jednou, pote co si stahnes projekt z GitHubu.
-
-
-# Spusteni
-
 Pred prvnim spustenim musis nadefinovat vlastni environment promenne.
 Otevri si terminal a v root adresari celeho projektu (mel by si videt
 soubory `docker-compose.yml`, `CONTRIBUTING.md`) spust:
@@ -26,7 +15,18 @@ Otevri si v editoru `backend/.env`, dopln do prommenych tve vlastni hodnoty
 a soubor uloz.  
 POZOR! Hodnota promenne `NEO4J_USER` **musi** byt nastavena na `neo4j`.
 
-Vrat se do terminalu a spust:
+V konzoli spust:
+
+```
+docker-compose build
+```
+
+Tento krok staci udelat jen jednou, pote co si stahnes projekt z GitHubu.
+
+
+# Spusteni
+
+V terminalu spust:
 
 ```
 docker-compose up
@@ -57,13 +57,21 @@ docker-compose exec backend bash
 ./manage.py shell_plus
 
 import init
-init.init()
+init.init()  # prip. init.init(neo4j=True), viz nize
 exit
 ```
 
-Do aplikace se nahraje seznam predmetu (vzdelavaci oblasti podle rvp), mapovani vs oboru na rvp, atd.
-Zaroven se vytvori uzivatel "demo" s heslem "demo", pres ktereho je mozne se prihlasit do administace
-na adrese http://localhost:8300/admin/.
+Init se postara o:
+
+* vytvoreni uzivatele "demo" s heslem "demo", pres ktereho je mozne se prihlasit do administace
+na adrese http://localhost:8300/admin/
+* nahrani statickych dat ulozenych u jednotlivych aplikacich v souborech `temp.py`; napriklad
+seznam predmetu, typy skol, apod
+* nahrani seznamu vysokych skol a fakult (pouze v pripade ze najde soubor `backend/temp/vs.xlsx`;
+pokud soubor chybi, je mozne tato data nahrat manualne, viz "Seznam vysokych skol a fakult"
+nize
+* preklopeni dat do grafove database Neo4j (v pripade ze je init spusten s parametrem
+`init(neo4j=Tue)`)
 
 ## Seznam vysokych skol a fakult
 
