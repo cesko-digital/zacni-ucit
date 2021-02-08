@@ -11,8 +11,8 @@ class Command(BaseCommand):
         parser.add_argument("model", type=str, help="Model specification in form 'app.model'", nargs="*")
 
     def handle(self, *args, **options):
-        for app in [i for i in options['model'] if '.' in i]:
-            app_name, model_name = app.split('.', 1)
+        for app in [i for i in options["model"] if "." in i]:
+            app_name, model_name = app.split(".", 1)
             try:
                 model = apps.get_model(app_name, model_name)
             except LookupError:

@@ -16,10 +16,10 @@ class CollegeAdmin(GraphAdmin, admin.ModelAdmin):
 
 
 class FacultyAdmin(GraphAdmin, admin.ModelAdmin):
-    list_display = ("name", "college", )
+    list_display = ("name", "college")
     list_select_related = ("college",)
     list_filter = ("college",)
-    fields = ("college", "name", )
+    fields = ("college", "name")
     search_fields = ("name", "college__code", "college__name", "college__address", "rid")
 
 

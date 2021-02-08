@@ -56,11 +56,7 @@ class GraphModel:
         Return common data which are used in all models. Optional extra dictionary will be
         merged to common data if provided.
         """
-        out = {
-            'id': self.id,
-            'created': self.created,
-            'modified': self.modified,
-        }
+        out = {"id": self.id, "created": self.created, "modified": self.modified}
         if extra:
             out.update(extra)
         return out
@@ -117,7 +113,7 @@ class GraphModel:
         # exists?
         if self.graph_exists():
             # update
-            attributes = [f"node.{k} = ${k}" for k in data if k != 'id']
+            attributes = [f"node.{k} = ${k}" for k in data if k != "id"]
             query = f"""
                 MATCH (node:{self.__class__.__name__} {{id: $id}})
                 SET {', '.join(attributes)}
@@ -160,10 +156,10 @@ class GraphModel:
                 MERGE (node1){r1}[:{rlabel}]{r2}(node2)
             """
             for value in nodes2:
-                exists = getattr(value, 'graph_exists')
+                exists = getattr(value, "graph_exists")
                 if not exists():
                     # if related model doesn't exist in graph db, save it before we make relation
-                    save = getattr(value, 'graph_save')
+                    save = getattr(value, "graph_save")
                     save()
 
                 settings.GRAPH.run(query, node1_id=self.id, node2_id=value.id)

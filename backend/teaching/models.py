@@ -23,10 +23,7 @@ class Subject(TimeStampedModel, GraphModel):
         return self.code
 
     def graph_data(self):
-        return {
-            'name': self.name,
-            'code': self.code,
-        }
+        return {"name": self.name, "code": self.code}
 
 
 class SchoolLevel(TimeStampedModel, GraphModel):
@@ -45,9 +42,7 @@ class SchoolLevel(TimeStampedModel, GraphModel):
         return self.name
 
     def graph_data(self):
-        return {
-            'name': self.name,
-        }
+        return {"name": self.name}
 
 
 class SchoolType(TimeStampedModel, GraphModel):
@@ -66,9 +61,7 @@ class SchoolType(TimeStampedModel, GraphModel):
         return self.name
 
     def graph_data(self):
-        return {
-            'name': self.name,
-        }
+        return {"name": self.name}
 
 
 class SubjectGroup(TimeStampedModel, GraphModel):
@@ -88,12 +81,10 @@ class SubjectGroup(TimeStampedModel, GraphModel):
         return self.name
 
     def graph_data(self):
-        return {
-            'name': self.name,
-        }
+        return {"name": self.name}
 
     def related_graph_data(self):
         return [
             # CollegeProgramme <- BELONGS_TO - Subject
-            ("<-", "BELONGS_TO", "-", 'subjects'),
+            ("<-", "BELONGS_TO", "-", "subjects")
         ]

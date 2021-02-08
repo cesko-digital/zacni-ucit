@@ -5,6 +5,7 @@ class CourseItem(scrapy.Item):
     """
     Common attributes about course.
     """
+
     name = scrapy.Field()
     college = scrapy.Field()
     faculty = scrapy.Field()
