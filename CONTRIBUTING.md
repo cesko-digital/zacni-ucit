@@ -43,3 +43,21 @@ míchání nesouvisejících funkcionalit není přípustné.
 
 Do repozitáře neposílej cache, zkompilované soubory, OS specifické soubory, přihlašovací
 údaje.
+
+## Code style
+
+Veškerý Python kód musí projít kontrolou utility [Black](https://github.com/psf/black),
+která je automaticky spouštěna s pomocí GitHub action a její výsledek je zobrazen
+ve vláknu Pull requestu.
+
+Před pushnutím kódu do repozitáře vždy spusť:
+
+```
+docker run -ti -v $(pwd):/src -w /src --rm kiwicom/black:20.8b1 black --check .
+```
+
+Detekované prohřešky Black dokáže sám opravit:
+
+```
+docker run -ti -v $(pwd):/src -w /src --rm kiwicom/black:20.8b1 black .
+```
