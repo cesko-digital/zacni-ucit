@@ -20,6 +20,7 @@ class CollegeArea(TimeStampedModel, GraphModel):
             "name": self.name,
         }
 
+
 class CollegeProgramme(TimeStampedModel, GraphModel):
     """
     Zdroj: https://docs.google.com/spreadsheets/d/1msJu1AX_-wYLbhvz8rqsZxFMBwX7-xzghCAFHeeBQEI/edit#gid=0

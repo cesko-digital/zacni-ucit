@@ -1,0 +1,22 @@
+name: Checker
+
+on: push
+
+jobs:
+  black:
+    name: Black
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Black on backend
+        uses: jpetrucciani/black-check@master
+        with:
+          path: '/github/workspace/backend/'
+
+      - name: Run Black on scrapers
+        uses: jpetrucciani/black-check@master
+        with:
+          path: '/github/workspace/scrapers/'
