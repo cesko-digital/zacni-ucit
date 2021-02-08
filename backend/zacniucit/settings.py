@@ -29,7 +29,7 @@ SECRET_KEY = config("DJANGO_SECRET", default='')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [i.strip() for i in config("DJANGO_ALLOWED_HOSTS", default='').strip()split(',')]
 
 
 # Application definition
