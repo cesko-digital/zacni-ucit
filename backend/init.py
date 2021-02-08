@@ -1,7 +1,15 @@
+import os
+from django.apps import apps
 from django.contrib.auth.models import User, Group, Permission
+from django.core import management
 
+from common.models import GraphModel
 from qualifications.temp import init_map_2021_01, init_education_type
-from teaching.temp import init_subjects_2021_01, init_school_type_2021_02, init_school_level_2021_02
+from teaching.temp import (
+    init_subjects_2021_01,
+    init_school_type_2021_02,
+    init_school_level_2021_02,
+)
 
 
 def init_user():
@@ -67,10 +75,25 @@ def init_user():
     user.save()
 
 
-def init():
+def import_colleges(path="temp/vs.xlsx"):
+    if not os.path.exists(path):
+        print(f"Initial college XLSX file not found on {path} path")
+        return
+    management.call_command("import_msmt_college_registry", path)
+
+
+def init_neo4j():
+    models = [i._meta.label for i in apps.get_models() if issubclass(i, GraphModel)]
+    management.call_command("graph_sync", *models)
+
+
+def init(neo4j=False):
     init_user()
     init_subjects_2021_01()
     init_map_2021_01()
     init_education_type()
     init_school_type_2021_02()
     init_school_level_2021_02()
+    import_colleges()
+    if neo4j:
+        init_neo4j()
