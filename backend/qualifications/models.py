@@ -16,8 +16,9 @@ class CollegeArea(TimeStampedModel, GraphModel):
         return self.name
 
     def graph_data(self):
-        return {"name": self.name}
-
+        return {
+            "name": self.name,
+        }
 
 class CollegeProgramme(TimeStampedModel, GraphModel):
     """
@@ -25,7 +26,12 @@ class CollegeProgramme(TimeStampedModel, GraphModel):
     """
 
     name = models.CharField("Studijní program", max_length=100)
-    area = models.ForeignKey(CollegeArea, on_delete=models.SET_NULL, null=True, verbose_name="Oblast VŠ vzdělávání")
+    area = models.ForeignKey(
+        CollegeArea,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="Oblast VŠ vzdělávání",
+    )
     subjects = models.ManyToManyField(
         "teaching.Subject",
         verbose_name="Vzdělávací oblast podle RVP",
@@ -42,7 +48,9 @@ class CollegeProgramme(TimeStampedModel, GraphModel):
         return self.name
 
     def graph_data(self):
-        return {"name": self.name}
+        return {
+            "name": self.name,
+        }
 
     def related_graph_data(self):
         return [
@@ -95,7 +103,7 @@ class EducationType(TimeStampedModel, GraphModel):
             # EducationType - BELONGS_TO -> Title
             ("-", "BELONGS_TO", "->", "title"),
             # EducationType <- BELONGS_TO - SchoolLevel
-            ("<-", "BELONGS_TO", "-", "school_level"),
+            ("<-", "BELONGS_TO", "-", "school_levels"),
         ]
 
 
@@ -116,4 +124,7 @@ class Title(TimeStampedModel, GraphModel):
         return self.code
 
     def graph_data(self):
-        return {"name": self.name, "code": self.code}
+        return {
+            "name": self.name,
+            "code": self.code,
+        }
