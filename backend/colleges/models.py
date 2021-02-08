@@ -1,8 +1,7 @@
-from django.conf import settings
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
-from common.models import GraphModel
+from common.models.mixins import GraphModel
 
 
 class College(TimeStampedModel, GraphModel):

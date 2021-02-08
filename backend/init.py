@@ -3,7 +3,7 @@ from django.apps import apps
 from django.contrib.auth.models import User, Group, Permission
 from django.core import management
 
-from common.models import GraphModel
+from common.models.mixins import GraphModel
 from qualifications.temp import init_map_2021_01, init_education_type
 from teaching.temp import (
     init_subjects_2021_01,

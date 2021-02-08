@@ -156,3 +156,10 @@ while try_to_connect:
         time.sleep(.3)
     else:
         try_to_connect = False
+
+
+#########
+# Auth  #
+#########
+
+AUTH_USER_MODEL = 'common.User'
