@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 .DS_Store
 .env
+*.iml
 
 # dependencies
 frontend/node_modules
@@ -37,5 +38,8 @@ frontend/.env.production.local
 
 # vercel
 frontend/.vercel
+<<<<<<< HEAD
 
 ./check.sh
+=======
+>>>>>>> Pull requesty pravidla
