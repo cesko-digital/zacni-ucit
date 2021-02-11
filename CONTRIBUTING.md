@@ -13,6 +13,18 @@ V českém jazyce:
 * README a jakákoliv jiná dokumentace
 * Issues a pull requesty
 
+## Schvalování pull requestů
+
+Z celého týmu mají odpovědnost za schvalování PR 
+* Za backend: Michal Valoušek a David Šimek
+* Za frontend: Václav Stejskal a Jiří Petera
+
+Pravidla
+* PR musí schválit vždy jiný člověk než ten co PR vytvořil
+* Informace o novém PR je potřeba napsat do dev kanálu na slacku
+* Veškerá konverzace k PR by měla proběhnout ve vláknu k danému postu ve slacku, případně na github
+* Merge dělá za backend: Michal Valoušek a za frontend: Václav Stejskal
+
 ## Publikování kódu
 
 Začni naklonováním repozitáře do svého počítače:
