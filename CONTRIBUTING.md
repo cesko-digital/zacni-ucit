@@ -13,7 +13,7 @@ V českém jazyce:
 * README a jakákoliv jiná dokumentace
 * Issues a pull requesty
 
-##Schvalování pull requestů
+## Schvalování pull requestů
 
 Z celého týmu mají odpovědnost za schvalování PR 
 * Za backend: Michal Valoušek a David Šimek

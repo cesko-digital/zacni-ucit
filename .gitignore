@@ -38,8 +38,5 @@ frontend/.env.production.local
 
 # vercel
 frontend/.vercel
-<<<<<<< HEAD
 
 ./check.sh
-=======
->>>>>>> Pull requesty pravidla
