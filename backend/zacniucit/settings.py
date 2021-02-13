@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     "qualifications",
     "colleges",
     "common",
-    "graphene_django"
+    "graphene_django",
+    "accounts"
 ]
 
 MIDDLEWARE = [
@@ -162,4 +163,4 @@ while try_to_connect:
 # Auth  #
 #########
 
-AUTH_USER_MODEL = 'common.User'
+AUTH_USER_MODEL = 'accounts.CustomUser'

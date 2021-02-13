@@ -1,6 +1,3 @@
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import User
 from .models import GraphModel
 
 
@@ -25,6 +22,3 @@ class GraphAdmin:
         for obj in queryset:
             obj.graph_delete()
         return super().delete_queryset(request, queryset)
-
-
-admin.site.register(User, UserAdmin)

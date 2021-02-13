@@ -1,7 +1,7 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
-from common.models.mixins import GraphModel
+from common.models import GraphModel
 
 
 class CollegeArea(TimeStampedModel, GraphModel):
