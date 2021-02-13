@@ -7,7 +7,7 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(_("email address"), unique=True)
 
     class Meta:
-        db_table = 'auth_user'
+        db_table = "auth_user"
