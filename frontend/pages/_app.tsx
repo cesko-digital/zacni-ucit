@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from '../redux/store';
 import Layout from '../layout/Layout';
 import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "../lib/apolloClient";
+import { useApollo } from "../graphQL/apolloClient";
 
 const MyApp = ({ Component, pageProps }) => {
   const apolloClient =  useApollo(pageProps.initialApolloState)

@@ -6,12 +6,14 @@
 let apolloClient;
 
 const createApolloClient = () => {
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URI)
   const client = new ApolloClient({
     // Provide required constructor fields
     ssrMode: typeof window === "undefined", 
     cache: new InMemoryCache(),
-    uri: 'http://ec2-3-64-179-99.eu-central-1.compute.amazonaws.com/graphql/',
+    link: new HttpLink ({uri:`${process.env.NEXT_PUBLIC_BACKEND_URI}/graphql/`}) ,
   });
+
   return client
 }
 export function initializeApollo(initialState = null) {

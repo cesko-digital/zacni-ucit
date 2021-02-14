@@ -17,8 +17,8 @@ from decouple import AutoConfig
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 config = AutoConfig(os.environ.get('DJANGO_CONFIG_ENV_DIR'))
+CORS_ALLOWED_ORIGINS = [i.strip() for i in config("DJANGO_CORS_ALLOWED_ORIGINS", default='').strip().split(',')]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     "qualifications",
     "colleges",
     "common",
-    "graphene_django"
+    "graphene_django",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = "zacniucit.urls"
