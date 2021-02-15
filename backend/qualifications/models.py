@@ -81,7 +81,7 @@ class EducationType(TimeStampedModel, GraphModel):
     area = models.CharField("Oblast VŠ vzdělávání", max_length=512, null=True)
     preparation_type = models.CharField("Typ přípravy učitelů", max_length=200, null=True)
     subjects_type = models.CharField("Typ předmětů", max_length=512, null=True)
-    school_levels = models.ManyToManyField("teaching.SchoolLevel")
+    school_levels = models.ManyToManyField("teaching.SchoolLevel", related_name="education_types")
 
     class Meta:
         verbose_name = "Typ vzdělání z hlediska zákona"

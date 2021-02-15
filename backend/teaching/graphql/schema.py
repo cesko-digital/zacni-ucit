@@ -5,7 +5,7 @@ from teaching.models import SchoolLevel, Subject
 
 class Query(graphene.ObjectType):
     school_levels = graphene.List(SchoolLevelType)
-    subjects = graphene.Field(SubjectType, school_level_ids=graphene.List(graphene.Int, required=False))
+    subjects = graphene.List(SubjectType, school_level_ids=graphene.List(graphene.Int, required=False))
     want_to_teach_result = graphene.String()
 
     @staticmethod
@@ -15,8 +15,7 @@ class Query(graphene.ObjectType):
     @staticmethod
     def resolve_subjects(root, info, school_level_ids: list = None):
         if school_level_ids:
-            # TODO filter Subjects based on given school levels (currently we don't have this attr on Subject)
-            return Subject.objects.all()
+            return Subject.objects.filter(school_levels__id__in=school_level_ids).distinct()
         return Subject.objects.all()
 
     @staticmethod

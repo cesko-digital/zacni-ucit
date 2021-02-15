@@ -56,8 +56,63 @@ def init_school_level_2021_02():
         Střední škola - víceletá gymnázia, jejichž třídy odpovídají střednímu vzdělávání
         Konzervatoře
     """
+
+    def _get_qs_from_subjects_names(subjects_names: list) -> []:
+        qs = []
+        for subject_name in subjects_names:
+            subject, _ = Subject.objects.get_or_create(name=subject_name)
+            qs.append(subject)
+        return qs
+
+    first_level_elementary_school_subjects = [
+        'Český jazyk a literatura', 'Cizí jazyk', 'Matematika a její aplikace',
+        'Informační a komunikační technologie', 'Člověk a jeho svět (pouze 1. stupeň ZŠ)',
+        'Hudební výchova', 'Výtvarná výchova', 'Tělesná výchova', 'Člověk a svět práce',
+        'Dramatická výchova', 'Etická výchova', 'Filmová / audiovizuální výchova',
+        'Taneční a pohybová výchova', 'Výchova demokratického občana',
+        'Výchova k myšlení v evropských a globálních souvislostech', 'Multikulturní výchova',
+        'Environmentální výchova', 'Mediální výchova'
+    ]
+    first_level_elementary_school_subjects_qs = _get_qs_from_subjects_names(first_level_elementary_school_subjects)
+
+    second_level_elementary_school_subjects = [
+        'Český jazyk a literatura', 'Cizí jazyk', 'Další cizí jazyk', 'Matematika a její aplikace',
+        'Informační a komunikační technologie', 'Dějepis', 'Výchova k občanství', 'Fyzika', 'Chemie',
+        'Přírodopis', 'Zeměpis (Geografie)', 'Hudební výchova', 'Výtvarná výchova', 'Tělesná výchova',
+        'Člověk a svět práce', 'Dramatická výchova', 'Etická výchova', 'Filmová / audiovizuální výchova',
+        'Taneční a pohybová výchova', 'Osobnostní a sociální výchova',
+        'Výchova k myšlení v evropských a globálních souvislostech', 'Multikulturní výchova', 'Environmentální výchova',
+        'Mediální výchova'
+    ]
+    second_level_elementary_school_subjects_qs = _get_qs_from_subjects_names(second_level_elementary_school_subjects)
+
+    high_school_subjects = [
+        'Český jazyk a literatura', 'Cizí jazyk', 'Další cizí jazyk', 'Matematika a její aplikace',
+        'Informační a komunikační technologie', 'Dějepis', 'Výchova k občanství', 'Fyzika', 'Chemie', 'Přírodopis',
+        'Zeměpis (Geografie)', 'Hudební výchova', 'Výtvarná výchova', 'Výchova ke zdraví',
+        'Výchova demokratického občana', 'Výchova demokratického občana',
+        'Výchova k myšlení v evropských a globálních souvislostech', 'Multikulturní výchova', 'Environmentální výchova',
+        'Mediální výchova', 'Odborné předměty', 'Praktické vyučování', 'Odborný výcvik'
+    ]
+    high_school_subjects_qs = _get_qs_from_subjects_names(high_school_subjects)
+
+    conservatory = [
+        'Dramatická výchova', 'Etická výchova', 'Filmová / audiovizuální výchova',
+        'Taneční a pohybová výchova'
+    ]
+
+    conservatory_qs = _get_qs_from_subjects_names(conservatory)
+
     for name in [i.strip() for i in data.strip().split("\n")]:
-        SchoolLevel.objects.get_or_create(name=name)
+        school_level, _ = SchoolLevel.objects.get_or_create(name=name)
+        if name == 'Základní škola - 1. stupeň':
+            school_level.subjects.add(*first_level_elementary_school_subjects_qs)
+        elif name == 'Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)':
+            school_level.subjects.add(*second_level_elementary_school_subjects_qs)
+        elif name == 'Střední škola - SŠ':
+            school_level.subjects.add(*high_school_subjects_qs)
+        elif name == 'Konzervatoře':
+            school_level.subjects.add(*conservatory_qs)
 
 
 def init_school_type_2021_02():
