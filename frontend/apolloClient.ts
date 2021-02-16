@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import * as config from './config/config.json';
 
 let apolloClient;
 
@@ -9,7 +10,7 @@ const createApolloClient = () => {
     ssrMode: typeof window === 'undefined',
     cache: new InMemoryCache(),
     link: new HttpLink({
-      uri: `${process.env.NEXT_PUBLIC_BACKEND_URI}/graphql/`,
+      uri: `${config.backendUri}/graphql/`,
     }),
   });
 
