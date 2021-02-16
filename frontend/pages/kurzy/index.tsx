@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
-import { allCollegesQuery } from '../../queries/colleges.queries';
+import { allCollegesQuery } from '../../queries/colleges.query';
 
 const Welcome = styled.div`
   background-color: ${(props) => props.theme.color.main};
