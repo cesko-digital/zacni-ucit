@@ -1,21 +1,20 @@
-
- import { useMemo } from "react";
- import { ApolloClient, HttpLink, InMemoryCache } from 
- "@apollo/client";
+import { useMemo } from 'react';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 let apolloClient;
 
 const createApolloClient = () => {
-  console.log(process.env.NEXT_PUBLIC_BACKEND_URI)
   const client = new ApolloClient({
     // Provide required constructor fields
-    ssrMode: typeof window === "undefined", 
+    ssrMode: typeof window === 'undefined',
     cache: new InMemoryCache(),
-    link: new HttpLink ({uri:`${process.env.NEXT_PUBLIC_BACKEND_URI}/graphql/`}) ,
+    link: new HttpLink({
+      uri: `${process.env.NEXT_PUBLIC_BACKEND_URI}/graphql/`,
+    }),
   });
 
-  return client
-}
+  return client;
+};
 export function initializeApollo(initialState = null) {
   const _apolloClient = apolloClient ?? createApolloClient();
 
@@ -31,17 +30,14 @@ export function initializeApollo(initialState = null) {
   }
 
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === "undefined") return _apolloClient;
+  if (typeof window === 'undefined') return _apolloClient;
 
   // Create the Apollo Client once in the client
   if (!apolloClient) apolloClient = _apolloClient;
   return _apolloClient;
 }
 
-
-
 export function useApollo(initialState) {
   const store = useMemo(() => initializeApollo(initialState), [initialState]);
   return store;
 }
-
