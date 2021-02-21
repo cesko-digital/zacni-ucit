@@ -32,6 +32,7 @@ class SchoolLevel(TimeStampedModel, GraphModel):
     """
 
     name = models.CharField("Název", max_length=100, unique=True)
+    subjects = models.ManyToManyField(Subject, related_name="school_levels", verbose_name="Předměty")
 
     class Meta:
         verbose_name = "Stupeň školy"
@@ -43,6 +44,12 @@ class SchoolLevel(TimeStampedModel, GraphModel):
 
     def graph_data(self):
         return {"name": self.name}
+
+    def related_graph_data(self):
+        return [
+            # SchoolLevel <- BELONGS_TO - Subjects
+            ("<-", "BELONGS_TO", "-", "subjects"),
+        ]
 
 
 class SchoolType(TimeStampedModel, GraphModel):
