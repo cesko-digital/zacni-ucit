@@ -1,5 +1,6 @@
 import os
 from django.apps import apps
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User, Group, Permission
 from django.core import management
 
@@ -65,6 +66,7 @@ def init_user():
         )
     )
 
+    User = get_user_model()
     qs = User.objects.filter(username="demo")
     if not User.objects.filter(username="demo").exists():
         user = User.objects.create_user(username="demo", email="demo@zacniucit.cz", password="demo")
