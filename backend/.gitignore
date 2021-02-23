@@ -3,3 +3,4 @@ NOTES.md
 .idea/
 .env
 temp/
+venv
