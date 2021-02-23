@@ -63,8 +63,8 @@ exit
 
 Init se postara o:
 
-* vytvoreni uzivatele "demo" s heslem "demo", pres ktereho je mozne se prihlasit do administace
-na adrese http://localhost:8300/admin/
+* vytvoreni uzivatele "demo@zacniucit.cz" s heslem "demo", pres ktereho je mozne se prihlasit
+do administace na adrese http://localhost:8300/admin/
 * nahrani statickych dat ulozenych u jednotlivych aplikacich v souborech `temp.py`; napriklad
 seznam predmetu, typy skol, apod
 * nahrani seznamu vysokych skol a fakult (pouze v pripade ze najde soubor `backend/temp/vs.xlsx`;

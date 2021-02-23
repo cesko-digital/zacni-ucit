@@ -1,5 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
-from django.db.utils import IntegrityError
+from django.core.management.base import BaseCommand
 from common.models import GraphModel
 from django.apps import apps
 
