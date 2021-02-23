@@ -1,4 +1,4 @@
-from .models import Subject, SchoolType, SchoolLevel
+from .models import Subject, SchoolType, SchoolSubType, SchoolLevel
 
 
 def init_subjects_2021_01():
@@ -169,29 +169,36 @@ def init_school_type_2021_02():
     * https://www.atlasskolstvi.cz/stredni-skoly
     * https://www.zakonyprolidi.cz/cs/2005-13#cast1
     """
-    data = """
+    types = """
         ZŠ
         ZŠ speciální
-        SŠ - gymnázium
-        SŠ - střední odborná škola
-        SŠ - střední odborné učiliště
-        SŠ - střední průmyslová škola
-        SŠ - střední zemědělská škola
-        SŠ - střední zahradnická škola
-        SŠ - střední vinařská škola
-        SŠ - střední lesnická škola
-        SŠ - střední rybářská škola
-        SŠ - střední zdravotnická škola
-        SŠ - hotelová škola
-        SŠ - střední pedagogická škola
-        SŠ - střední umělecká škola
-        SŠ - střední uměleckoprůmyslová škola
-        SŠ - obchodní akademie
-        SŠ - odborná škola
-        SŠ - odborné učiliště
-        SŠ - praktická škola
+        SŠ
         Konzervatoř
         ZUŠ - základní umělecká škola
     """
-    for name in [i.strip() for i in data.strip().split("\n")]:
+    subtypes = """
+        gymnázium
+        střední odborná škola
+        střední odborné učiliště
+        střední průmyslová škola
+        střední zemědělská škola
+        střední zahradnická škola
+        střední vinařská škola
+        střední lesnická škola
+        střední rybářská škola
+        střední zdravotnická škola
+        hotelová škola
+        střední pedagogická škola
+        střední umělecká škola
+        střední uměleckoprůmyslová škola
+        obchodní akademie
+        odborná škola
+        odborné učiliště
+        praktická škola
+    """
+    for name in [i.strip() for i in types.strip().split("\n")]:
         SchoolType.objects.get_or_create(name=name)
+
+    ss_type = SchoolType.objects.get(name="SŠ")
+    for name in [i.strip() for i in subtypes.strip().split("\n")]:
+        SchoolSubType.objects.get_or_create(name=name, type=ss_type)

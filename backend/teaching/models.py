@@ -71,6 +71,37 @@ class SchoolType(TimeStampedModel, GraphModel):
         return {"name": self.name}
 
 
+class SchoolSubType(TimeStampedModel, GraphModel):
+    """
+    Podtyp skoly.
+    """
+
+    name = models.CharField("Název", max_length=100, unique=True)
+    type = models.ForeignKey(
+        SchoolType,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="Typ školy",
+    )
+
+    class Meta:
+        verbose_name = "Podtyp školy"
+        verbose_name_plural = "Podtypy škol"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
+
+    def graph_data(self):
+        return {"name": self.name}
+
+    def related_graph_data(self):
+        return [
+            # SchoolSubType - BELONGS_TO -> SchoolType
+            ("-", "BELONGS_TO", "->", "type"),
+        ]
+
+
 class SubjectGroup(TimeStampedModel, GraphModel):
     """
     Predmetova skupina.

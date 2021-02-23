@@ -1,6 +1,6 @@
 from django.contrib import admin
 from common.admin import GraphAdmin
-from .models import Subject, SchoolLevel, SchoolType, SubjectGroup
+from .models import Subject, SchoolLevel, SchoolSubType, SchoolType, SubjectGroup
 
 
 class SubjectAdmin(GraphAdmin, admin.ModelAdmin):
@@ -9,6 +9,11 @@ class SubjectAdmin(GraphAdmin, admin.ModelAdmin):
 
 class SchoolLevelAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name",)
+
+
+class SchoolSubTypeAdmin(GraphAdmin, admin.ModelAdmin):
+    list_display = ("name", "type")
+    list_filter = ("type",)
 
 
 class SchoolTypeAdmin(GraphAdmin, admin.ModelAdmin):
@@ -23,5 +28,6 @@ class SubjectGroupAdmin(GraphAdmin, admin.ModelAdmin):
 
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(SchoolLevel, SchoolLevelAdmin)
+admin.site.register(SchoolSubType, SchoolSubTypeAdmin)
 admin.site.register(SchoolType, SchoolTypeAdmin)
 admin.site.register(SubjectGroup, SubjectGroupAdmin)
