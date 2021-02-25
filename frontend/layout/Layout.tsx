@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Navbar from './Navbar';
 import Logo from '../components/Logo.component';
 import MaxWidth from '../components/MaxWidth.component';
+import Homepage from './Homepage/Homepage';
 
 type LayoutProps = {
   children: ReactNode;
@@ -15,6 +16,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <Logo margin="10px" width={200} />
         <Navbar />
         {children}
+        <Homepage />
       </MaxWidth>
     </>
   );
