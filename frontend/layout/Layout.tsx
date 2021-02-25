@@ -4,10 +4,17 @@ import Navbar from './Navbar';
 import Logo from '../components/Logo.component';
 import MaxWidth from '../components/MaxWidth.component';
 import Homepage from './Homepage/Homepage';
+import Footer from './footer/Footer';
 
 type LayoutProps = {
   children: ReactNode;
 };
+
+const BlackPage = styled.div `
+  height: 100px;
+  width: 100%;
+  background-color: white;
+`
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
@@ -17,6 +24,8 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <Navbar />
         {children}
         <Homepage />
+        <BlackPage/>
+        <Footer />
       </MaxWidth>
     </>
   );

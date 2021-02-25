@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import Dropdowns from './DropDowns'
 import Headline from './Headline'
-import Search from './Search'
+
 
 
 
@@ -11,7 +11,6 @@ const Homepage = () => {
         <>
             <Headline />
             <Dropdowns />
-            <Search />
         </>
     )
 }
