@@ -5,6 +5,9 @@ import Logo from '../components/Logo.component';
 import MaxWidth from '../components/MaxWidth.component';
 import Homepage from './Homepage/Homepage';
 import Footer from './footer/Footer';
+import Router from 'next/dist/next-server/lib/router/router';
+import StudyOptions from './StudyOptions/StudyOptions';
+
 
 type LayoutProps = {
   children: ReactNode;
@@ -19,14 +22,15 @@ const BlackPage = styled.div `
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <MaxWidth>
-        <Logo margin="10px" width={200} />
-        <Navbar />
-        {children}
-        <Homepage />
-        <BlackPage/>
-        <Footer />
-      </MaxWidth>
+        <MaxWidth>
+          <Logo margin="10px" width={200} />
+          <Navbar />
+          {children}
+          {/* <Homepage /> */}
+          {/* <BlackPage/> */}
+          <StudyOptions></StudyOptions>
+          <Footer />
+        </MaxWidth>
     </>
   );
 };
