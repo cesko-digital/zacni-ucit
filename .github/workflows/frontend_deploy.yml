@@ -1,0 +1,33 @@
+name: 'Deploy frontend to S3'
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'frontend/**'
+env:
+  bucket: ${{ secrets.FRONTEND_BUCKET_NAME }}
+  cloudFrontDeploymentId: ${{ secrets.AWS_CLOUDFRONT_DEPLOYMENT_ID }}
+  name: 'frontend'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v1
+      - name: 'Build'
+        run: |
+          yarn install
+          npx next build
+          npx next export
+        working-directory: ${{ env.name }}
+      - name: 'Deploy to AWS'
+        run: |
+          aws s3 sync --acl public-read --delete . s3://${{ env.bucket }}
+#          aws cloudfront create-invalidation --distribution-id ${{ env.cloudFrontDeploymentId }} --paths "/*"
+        working-directory: ${{ env.name }}/out
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'eu-central-1'
