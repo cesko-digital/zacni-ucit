@@ -40,3 +40,7 @@ frontend/.env.production.local
 frontend/.vercel
 
 ./check.sh
+
+# terraform
+.terraform
+.terraform.lock.hcl

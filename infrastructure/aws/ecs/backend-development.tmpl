@@ -1,0 +1,104 @@
+${jsonencode([
+  {
+    "dnsSearchDomains": null,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "secretOptions": null,
+      "options": {
+        "awslogs-group": "/ecs/backend-development",
+        "awslogs-region": "${aws-region}",
+        "awslogs-stream-prefix": "ecs"
+      }
+    },
+    "entryPoint": [],
+    "portMappings": [
+      {
+        "hostPort": 8300,
+        "protocol": "tcp",
+        "containerPort": 8300
+      }
+    ],
+    "command": [],
+    "linuxParameters": null,
+    "cpu": 0,
+    "environment": [
+    {
+      "name": "DATABASE_NAME",
+      "value": "${database-name}"
+    },
+    {
+      "name": "DATABASE_USER",
+      "value": "${database-user}"
+    },
+    {
+      "name": "DATABASE_PASSWORD",
+      "value": "${database-password}"
+    },
+    {
+      "name": "DATABASE_HOST",
+      "value": "${database-host}"
+    },
+    {
+      "name": "DATABASE_PORT",
+      "value": "${database-port}"
+    },
+    {
+      "name": "NEO4J_HOST",
+      "value": "${neo4j-host}"
+    },
+    {
+      "name": "NEO4J_PORT",
+      "value": "${neo4j-port}"
+    },
+    {
+      "name": "NEO4J_USER",
+      "value": "neo4j"
+    },
+    {
+      "name": "NEO4J_PASSWORD",
+      "value": "${neo4j-password}"
+    },
+    {
+      "name": "DJANGO_SECRET",
+      "value": "${django-secret}"
+    },
+    {
+      "name": "DJANGO_ALLOWED_HOSTS",
+      "value": "${django-allowed-hosts}"
+    },
+    {
+      "name": "DJANGO_CORS_ALLOWED_ORIGINS",
+      "value": "${django-cors-allowed-origin}"
+    },
+    ],
+    "resourceRequirements": null,
+    "ulimits": null,
+    "dnsServers": null,
+    "mountPoints": [],
+    "workingDirectory": null,
+    "secrets": null,
+    "dockerSecurityOptions": null,
+    "memory": null,
+    "memoryReservation": null,
+    "volumesFrom": [],
+    "stopTimeout": null,
+    "image": "${aws-repository}:latest",
+    "startTimeout": null,
+    "firelensConfiguration": null,
+    "dependsOn": null,
+    "disableNetworking": null,
+    "interactive": null,
+    "healthCheck": null,
+    "essential": true,
+    "links": [],
+    "hostname": null,
+    "extraHosts": null,
+    "pseudoTerminal": null,
+    "user": null,
+    "readonlyRootFilesystem": null,
+    "dockerLabels": null,
+    "systemControls": null,
+    "privileged": null,
+    "name": "zacniucit-backend-development"
+  }
+])}
