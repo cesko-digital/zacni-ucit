@@ -8,3 +8,4 @@ openpyxl==3.0.6
 py2neo==2020.1.1
 graphene_django==2.15.0
 django-cors-headers==3.7.0
+django-anymail[sendgrid]==8.2

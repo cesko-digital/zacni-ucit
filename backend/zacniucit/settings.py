@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     "common",
     "graphene_django",
     "corsheaders",
-    "accounts"
+    "accounts",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -167,3 +168,16 @@ while try_to_connect:
 #########
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+#########
+# Email #
+#########
+
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+
+ANYMAIL = {
+    "SENDGRID_API_KEY": config('SENDGRID_API_KEY', default='', cast=str)
+}
+
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='notifications@cesko.digital', cast=str)
