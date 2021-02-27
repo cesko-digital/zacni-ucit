@@ -47,12 +47,9 @@ INSTALLED_APPS = [
     "colleges",
     "common",
     "graphene_django",
-<<<<<<< HEAD
     "corsheaders",
-    "accounts"
-=======
-    "anymail"
->>>>>>> SENDGRID anymail integration
+    "accounts",
+    "anymail",
 ]
 
 MIDDLEWARE = [
