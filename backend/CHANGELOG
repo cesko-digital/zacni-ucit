@@ -15,4 +15,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Prvni implementace Django backendu (zakladni modely, admin, init data od holek)
 - Realizace dvou demonstracnich scraperu kurzu z UK a UP
-
