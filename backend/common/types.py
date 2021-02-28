@@ -8,5 +8,5 @@ ErrorCodeType = graphene.Enum.from_enum(ErrorCode)
 
 class ErrorType(graphene.ObjectType):
     code = ErrorCodeType(required=True)
-    message = graphene.String(description="Human readable message for debugging")
+    messages = graphene.List(graphene.String, description="Human readable error messages")
     data = GenericScalar(description="Additional error data")

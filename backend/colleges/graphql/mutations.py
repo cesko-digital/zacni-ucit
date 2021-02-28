@@ -21,7 +21,7 @@ class UpdateCollegeName(BaseMutation):
             college = College.objects.get(pk=pk)
         except College.DoesNotExist:
             message = "College with selected ID does not exists"
-            raise MutationValidationError(ErrorCode.OBJECT_DOES_NOT_EXIST, message=message, data=pk)
+            raise MutationValidationError(ErrorCode.OBJECT_DOES_NOT_EXIST, messages=[message], data=pk)
         else:
             college.name = name
             college.save(update_fields=["name"])
