@@ -1,4 +1,4 @@
-from .models import CollegeArea, CollegeProgramme, EducationType, Title
+from .models import CollegeArea, CollegeProgramme, EducationType, Title, EducationArea, PreparationType, SubjectType
 from teaching.models import Subject, SchoolLevel
 
 IGNORED_CHARS = "\t ,."
@@ -347,7 +347,7 @@ DALŠÍ MOŽNOSTI:::výkonný umělec::
 """
 
     for line in data.strip().split("\n"):
-        (qualification_type, title, area, preparation_type, subjects_type, school_levels) = [
+        (qualification_type, title, area, preparation_type, subject_type, school_levels) = [
             i.strip() for i in line.split(":")
         ]
 
@@ -367,12 +367,27 @@ DALŠÍ MOŽNOSTI:::výkonný umělec::
         else:
             title = None
 
+        if area:
+            area, _ = EducationArea.objects.get_or_create(name=area)
+        else:
+            area = None
+
+        if preparation_type:
+            preparation_type, _ = PreparationType.objects.get_or_create(name=preparation_type)
+        else:
+            preparation_type = None
+
+        if subject_type:
+            subject_type, _ = SubjectType.objects.get_or_create(name=subject_type)
+        else:
+            subject_type = None
+
         education_type, _ = EducationType.objects.get_or_create(
             qualification_type=q,
             title=title,
             area=area,
             preparation_type=preparation_type,
-            subjects_type=subjects_type,
+            subject_type=subject_type,
         )
 
         if school_levels:

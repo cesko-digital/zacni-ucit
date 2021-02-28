@@ -66,6 +66,18 @@ def init_user():
                 "change_subjectgroup",
                 "delete_subjectgroup",
                 "view_subjectgroup",
+                "add_educationarea",
+                "change_educationarea",
+                "delete_educationarea",
+                "view_educationarea",
+                "add_preparationtype",
+                "change_preparationtype",
+                "delete_preparationtype",
+                "view_preparationtype",
+                "add_subjecttype",
+                "change_subjecttype",
+                "delete_subjecttype",
+                "view_subjecttype",
             ]
         )
     )
