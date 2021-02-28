@@ -11,25 +11,26 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 from decouple import AutoConfig
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-config = AutoConfig(os.environ.get('DJANGO_CONFIG_ENV_DIR'))
-CORS_ALLOWED_ORIGINS = [i.strip() for i in config("DJANGO_CORS_ALLOWED_ORIGINS", default='').strip().split(',')]
+config = AutoConfig(os.environ.get("DJANGO_CONFIG_ENV_DIR"))
+CORS_ALLOWED_ORIGINS = [i.strip() for i in config("DJANGO_CORS_ALLOWED_ORIGINS", default="").strip().split(",")]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("DJANGO_SECRET", default='')
+SECRET_KEY = config("DJANGO_SECRET", default="")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [i.strip() for i in config("DJANGO_ALLOWED_HOSTS", default='').strip().split(',')]
+ALLOWED_HOSTS = [i.strip() for i in config("DJANGO_ALLOWED_HOSTS", default="").strip().split(",")]
 
 
 # Application definition
@@ -41,7 +42,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd party apps
     "django_extensions",
+    "graphql_auth",
+    "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
+    "django_filters",
+    # Custom apps
     "teaching",
     "qualifications",
     "colleges",
@@ -60,8 +66,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "zacniucit.urls"
@@ -91,11 +97,11 @@ WSGI_APPLICATION = "zacniucit.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': config('DATABASE_PORT', default='5432'),
+        "NAME": config("DATABASE_NAME"),
+        "USER": config("DATABASE_USER"),
+        "PASSWORD": config("DATABASE_PASSWORD"),
+        "HOST": config("DATABASE_HOST"),
+        "PORT": config("DATABASE_PORT", default="5432"),
     }
 }
 
@@ -135,7 +141,10 @@ STATIC_URL = "/static/"
 ###########
 
 GRAPHENE = {
-    "SCHEMA": "zacniucit.schema.schema"
+    "SCHEMA": "zacniucit.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
 
 # Neo4j
@@ -146,19 +155,19 @@ import time
 # treat slow neo4j startup (try to connect during `max_wait_time` seconds)
 now = time.time()
 max_wait_time = 10  # in seconds
-try_to_connect = config('GRAPH_TRY_TO_CONNECT_BOOL', default=True, cast=bool)
+try_to_connect = config("GRAPH_TRY_TO_CONNECT_BOOL", default=True, cast=bool)
 
 while try_to_connect:
     try:
         GRAPH = py2neo.Graph(
-            host = config("NEO4J_HOST"),
-            port = config("NEO4J_PORT", default='7687'),
-            user = config("NEO4J_USER"),
-            password = config("NEO4J_PASSWORD"),
+            host=config("NEO4J_HOST"),
+            port=config("NEO4J_PORT", default="7687"),
+            user=config("NEO4J_USER"),
+            password=config("NEO4J_PASSWORD"),
         )
     except py2neo.client.ConnectionUnavailable:
         try_to_connect = (time.time() - now) < max_wait_time
-        time.sleep(.3)
+        time.sleep(0.3)
     else:
         try_to_connect = False
 
@@ -169,6 +178,39 @@ while try_to_connect:
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+AUTHENTICATION_BACKENDS = [
+    "graphql_auth.backends.GraphQLAuthBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_ALLOW_ANY_CLASSES": [
+        "accounts.graphql.mutations.CustomRegister",
+        "graphql_auth.mutations.PasswordSet",
+        "graphql_auth.mutations.RevokeToken",
+        "graphql_auth.mutations.ObtainJSONWebToken",
+        "graphql_auth.mutations.RefreshToken",
+    ],
+}
+
+
+GRAPHQL_AUTH = {
+    "LOGIN_ALLOWED_FIELDS": ['email'],
+    "REGISTER_MUTATION_FIELDS": {
+        "email": "String"
+    },
+    "ALLOW_LOGIN_NOT_VERIFIED": False,
+    "ALLOW_PASSWORDLESS_REGISTRATION": True,
+
+    # We don't want to automatically send emails, because we are using sendGrid templates
+    "SEND_PASSWORD_SET_EMAIL": False,
+    "SEND_ACTIVATION_EMAIL": False,
+}
+
 
 #########
 # Email #
@@ -176,8 +218,16 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 
-ANYMAIL = {
-    "SENDGRID_API_KEY": config('SENDGRID_API_KEY', default='', cast=str)
-}
+ANYMAIL = {"SENDGRID_API_KEY": config("SENDGRID_API_KEY", default="", cast=str)}
 
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='notifications@cesko.digital', cast=str)
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="notifications@cesko.digital", cast=str)
+
+SET_EMAIL_TEMPLATE_ID = config('SET_EMAIL_TEMPLATE_ID', default="d-e58beb380bed4cb7afb8a9e456263a8d", cast=str)
+
+
+############
+# Frontend #
+############
+
+# TODO Don't know what is fronted url, let's change it when we know
+BASE_FRONTED_URL = config("BASE_FRONTED_URL", default="https://zacniucit.cz")
