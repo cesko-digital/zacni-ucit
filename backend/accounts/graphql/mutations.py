@@ -10,7 +10,6 @@ from accounts.models import CustomUser
 
 
 class CustomRegister(mutations.Register):
-
     @classmethod
     def resolve_mutation(cls, root, info, **kwargs):
         email = kwargs.get("email")
@@ -22,9 +21,9 @@ class CustomRegister(mutations.Register):
             message = EmailMessage(to=[email], from_email=settings.DEFAULT_FROM_EMAIL)
             message.template_id = settings.SET_EMAIL_TEMPLATE_ID
             message.merge_global_data = {
-                'jmeno': 'TODO_REMOVE_THIS_OR_FORCE_ADDING_NAME_TO_REGISTRATION',
-                'activation_url': f"{settings.BASE_FRONTED_URL}/password-set/{set_password_token}",
-                'odesilatel': settings.DEFAULT_FROM_EMAIL
+                "jmeno": "TODO_REMOVE_THIS_OR_FORCE_ADDING_NAME_TO_REGISTRATION",
+                "activation_url": f"{settings.BASE_FRONTED_URL}/password-set/{set_password_token}",
+                "odesilatel": settings.DEFAULT_FROM_EMAIL,
             }
             message.send()
 
