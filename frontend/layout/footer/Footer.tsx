@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 /**Section */
 const FooterSection = styled.section `
+
     width: 100%;
     height: 200px;
     background-color: #F1F1F1;
@@ -13,6 +14,7 @@ const FooterSection = styled.section `
     }
 `
 const Container  = styled.div `
+
     width: 500px;
     height: 200px;
     display: flex;
@@ -25,19 +27,23 @@ const Container  = styled.div `
     }
 `
 const ResponsiveContainer = styled.div `
+
+margin-left:10%;
     display: flex;
     @media (max-width: 670px) {
         height: 400px;
         flex-direction: column;
+        margin-left:0%;
     }
     
 `
 /**Fonts */
 const FooterH3 = styled.h3 `
+
     font-size: 1.5rem;
     padding-left: 50px;
     @media (max-width: 670px) {
-        padding-left: 10px;
+        padding-left: 15px;
     }
 `
 const FooterSecondH3 = styled.h3 `
@@ -46,12 +52,15 @@ const FooterSecondH3 = styled.h3 `
 const FooterP = styled.p `
     font-size: 0.8rem;
     padding-left: 50px;
+    padding-bottom: 10px;
     @media (max-width: 670px) {
-        padding-left: 10px;
+        padding-left: 15px;
+        padding-bottom: 0px;
     }
 `
 /**Logo */
 const Logocontainer = styled.div `
+
     width: 130px;
     height: 200px;
     padding-top: 10px;
@@ -67,7 +76,8 @@ const Logo = styled.div `
     border-radius: 100px;
 `
 /**Naši partneři */
-const HeadingContainer = styled.div ` 
+const HeadingContainer = styled.div `
+ 
     max-width: 640px;
     height: 70px;
     text-align: center;
@@ -76,6 +86,7 @@ const HeadingContainer = styled.div `
     }
 `
 const BlankDivContainer = styled.div `
+
     max-width: 640px;
     height: 130px;
     display: flex;
