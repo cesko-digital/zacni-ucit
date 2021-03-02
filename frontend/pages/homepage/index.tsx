@@ -1,6 +1,11 @@
 import React,{useState} from 'react'
-import Dropdowns from './DropDowns'
-import Headline from './Headline'
+import Dropdowns from './components/DropDowns'
+import Headline from './components/Headline'
+import Head from "./components/Head"
+import CurrentEducation from './components/CurrentEducation'
+import ChooseGrade from './components/ChooseGrade'
+import ChooseSubject from './components/ChooseSubject'
+import SearchMore from './components/SearchMore'
 
 
 
@@ -9,8 +14,11 @@ const Homepage = () => {
 
     return (
         <>
-            <Headline />
-            <Dropdowns />
+            <Head />
+            <CurrentEducation />
+            <ChooseGrade />
+            <ChooseSubject />
+            <SearchMore />
         </>
     )
 }
