@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group, Permission
 from django.core import management
 
 from common.models import GraphModel
-from qualifications.temp import init_map_2021_01, init_education_type
+from qualifications.temp import init_map_2021_01, init_education_type, init_other_options
 from teaching.temp import (
     init_subjects_2021_01,
     init_school_type_2021_02,
@@ -78,6 +78,10 @@ def init_user():
                 "change_subjecttype",
                 "delete_subjecttype",
                 "view_subjecttype",
+                "add_otheroption",
+                "change_otheroption",
+                "delete_otheroption",
+                "view_otheroption",
             ]
         )
     )
@@ -110,6 +114,7 @@ def init(neo4j=False):
     init_subjects_2021_01()
     init_map_2021_01()
     init_education_type()
+    init_other_options()
     init_school_type_2021_02()
     init_school_level_2021_02()
     import_colleges()

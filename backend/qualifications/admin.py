@@ -1,6 +1,15 @@
 from django.contrib import admin
 from common.admin import GraphAdmin
-from .models import CollegeArea, CollegeProgramme, EducationType, Title, EducationArea, PreparationType, SubjectType
+from .models import (
+    CollegeArea,
+    CollegeProgramme,
+    EducationType,
+    Title,
+    EducationArea,
+    PreparationType,
+    SubjectType,
+    OtherOption,
+)
 
 
 class CollegeAreaAdmin(GraphAdmin, admin.ModelAdmin):
@@ -39,6 +48,10 @@ class SubjectTypeAdmin(GraphAdmin, admin.ModelAdmin):
     list_display = ("name",)
 
 
+class OtherOptionAdmin(GraphAdmin, admin.ModelAdmin):
+    list_display = ("name",)
+
+
 admin.site.register(CollegeArea, CollegeAreaAdmin)
 admin.site.register(CollegeProgramme, CollegeProgrammeAdmin)
 admin.site.register(EducationType, EducationTypeAdmin)
@@ -46,3 +59,4 @@ admin.site.register(Title, TitleAdmin)
 admin.site.register(EducationArea, EducationAreaAdmin)
 admin.site.register(PreparationType, PreparationTypeAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
+admin.site.register(OtherOption, OtherOptionAdmin)
