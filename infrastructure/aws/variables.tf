@@ -21,15 +21,19 @@ variable "database-username" {
 }
 
 variable "database-password" {
-  type    = string
+  type = string
 }
 
 variable "neo4j-password" {
-  type    = string
+  type = string
 }
 
 variable "django-secret" {
-  type    = string
+  type = string
+}
+
+variable "sendgrid-api-key" {
+  type = string
 }
 
 variable "development-frontend-bucket-name" {

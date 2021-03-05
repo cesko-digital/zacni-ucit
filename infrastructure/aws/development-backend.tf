@@ -49,7 +49,8 @@ resource "aws_ecs_task_definition" "backend-development" {
     neo4j-password             = var.neo4j-password,
     django-secret              = var.django-secret,
     django-allowed-hosts       = "*",
-    django-cors-allowed-origin = "*"
+    django-cors-allowed-origin = "*",
+    sendgrid-api-key           = var.sendgrid-api-key
   })
   network_mode          = "awsvpc"
   execution_role_arn    = aws_iam_role.ecr-task-execution-role.arn

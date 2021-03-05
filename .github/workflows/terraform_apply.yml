@@ -11,6 +11,7 @@ env:
   TF_VAR_database-password: ${{ secrets.DATABASE_PASSWORD }}
   TF_VAR_neo4j-password: ${{ secrets.NEO4J_PASSWORD }}
   TF_VAR_django-secret: ${{ secrets.DJANGO_SECRET }}
+  TF_VAR_sendgrid-api-key: ${{ secrets.SENDGRID_API_KEY }}
 jobs:
   terraform:
     name: 'Terraform'
