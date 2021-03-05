@@ -42,7 +42,7 @@ resource "aws_ecs_task_definition" "backend-development" {
     database-name              = aws_db_instance.database.name,
     database-user              = var.database-username,
     database-password          = var.database-password,
-    database-host              = "database.internal.${var.codename-domain}",
+    database-host              = aws_db_instance.database.address,
     database-port              = tostring(aws_db_instance.database.port),
     neo4j-host                 = "neo4j.internal.${var.codename-domain}",
     neo4j-port                 = "7474",
@@ -63,7 +63,7 @@ resource "aws_ecs_service" "backend-development" {
   cluster                            = aws_ecs_cluster.backend-development.id
   task_definition                    = aws_ecs_task_definition.backend-development.arn
   launch_type                        = "FARGATE"
-  desired_count                      = 0
+  desired_count                      = 1
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent         = 200
   health_check_grace_period_seconds  = 20

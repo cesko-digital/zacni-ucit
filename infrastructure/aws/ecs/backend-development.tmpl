@@ -10,7 +10,9 @@ ${jsonencode([
         "awslogs-stream-prefix": "ecs"
       }
     },
-    "entryPoint": [],
+    "entryPoint": [
+        "bash"
+    ],
     "portMappings": [
       {
         "hostPort": 8300,
@@ -18,7 +20,9 @@ ${jsonencode([
         "containerPort": 8300
       }
     ],
-    "command": [],
+    "command": [
+        "/app/run_command.sh"
+    ],
     "linuxParameters": null,
     "cpu": 0,
     "environment": [
@@ -70,6 +74,10 @@ ${jsonencode([
       "name": "DJANGO_CORS_ALLOWED_ORIGINS",
       "value": "${django-cors-allowed-origin}"
     },
+    {
+      "name": "GRAPH_TRY_TO_CONNECT_BOOL",
+      "value": "false"
+    }
     ],
     "resourceRequirements": null,
     "ulimits": null,
