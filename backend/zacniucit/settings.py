@@ -222,7 +222,7 @@ ANYMAIL = {"SENDGRID_API_KEY": config("SENDGRID_API_KEY", default="", cast=str)}
 
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="notifications@cesko.digital", cast=str)
 
-SET_EMAIL_TEMPLATE_ID = config('SET_EMAIL_TEMPLATE_ID', default="d-e58beb380bed4cb7afb8a9e456263a8d", cast=str)
+SET_EMAIL_TEMPLATE_ID = config('SET_EMAIL_TEMPLATE_ID', default="", cast=str)
 
 
 ############
