@@ -18,19 +18,19 @@ from decouple import AutoConfig
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-config = AutoConfig(os.environ.get("DJANGO_CONFIG_ENV_DIR"))
-CORS_ALLOWED_ORIGINS = [i.strip() for i in config("DJANGO_CORS_ALLOWED_ORIGINS", default="").strip().split(",")]
+config = AutoConfig(os.environ.get('DJANGO_CONFIG_ENV_DIR'))
+CORS_ALLOWED_ORIGINS = [i.strip() for i in config("DJANGO_CORS_ALLOWED_ORIGINS", default='').strip().split(',')]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("DJANGO_SECRET", default="")
+SECRET_KEY = config("DJANGO_SECRET", default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [i.strip() for i in config("DJANGO_ALLOWED_HOSTS", default="").strip().split(",")]
+ALLOWED_HOSTS = [i.strip() for i in config("DJANGO_ALLOWED_HOSTS", default='').strip().split(',')]
 
 
 # Application definition
@@ -66,8 +66,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = "zacniucit.urls"
@@ -97,11 +97,11 @@ WSGI_APPLICATION = "zacniucit.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DATABASE_NAME"),
-        "USER": config("DATABASE_USER"),
-        "PASSWORD": config("DATABASE_PASSWORD"),
-        "HOST": config("DATABASE_HOST"),
-        "PORT": config("DATABASE_PORT", default="5432"),
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT', default='5432'),
     }
 }
 
@@ -155,19 +155,19 @@ import time
 # treat slow neo4j startup (try to connect during `max_wait_time` seconds)
 now = time.time()
 max_wait_time = 10  # in seconds
-try_to_connect = config("GRAPH_TRY_TO_CONNECT_BOOL", default=True, cast=bool)
+try_to_connect = config('GRAPH_TRY_TO_CONNECT_BOOL', default=True, cast=bool)
 
 while try_to_connect:
     try:
         GRAPH = py2neo.Graph(
-            host=config("NEO4J_HOST"),
-            port=config("NEO4J_PORT", default="7687"),
-            user=config("NEO4J_USER"),
-            password=config("NEO4J_PASSWORD"),
+            host = config("NEO4J_HOST"),
+            port = config("NEO4J_PORT", default='7687'),
+            user = config("NEO4J_USER"),
+            password = config("NEO4J_PASSWORD"),
         )
     except py2neo.client.ConnectionUnavailable:
         try_to_connect = (time.time() - now) < max_wait_time
-        time.sleep(0.3)
+        time.sleep(.3)
     else:
         try_to_connect = False
 
@@ -218,9 +218,11 @@ GRAPHQL_AUTH = {
 
 EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 
-ANYMAIL = {"SENDGRID_API_KEY": config("SENDGRID_API_KEY", default="", cast=str)}
+ANYMAIL = {
+    "SENDGRID_API_KEY": config('SENDGRID_API_KEY', default='', cast=str)
+}
 
-DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="notifications@cesko.digital", cast=str)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='notifications@cesko.digital', cast=str)
 
 SET_EMAIL_TEMPLATE_ID = config('SET_EMAIL_TEMPLATE_ID', default="", cast=str)
 
@@ -229,5 +231,4 @@ SET_EMAIL_TEMPLATE_ID = config('SET_EMAIL_TEMPLATE_ID', default="", cast=str)
 # Frontend #
 ############
 
-# TODO Don't know what is fronted url, let's change it when we know
 BASE_FRONTED_URL = config("BASE_FRONTED_URL", default="https://zacniucit.cz")
