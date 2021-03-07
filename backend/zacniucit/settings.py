@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 from decouple import AutoConfig
 
@@ -41,7 +42,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd party apps
     "django_extensions",
+    "graphql_auth",
+    "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
+    "django_filters",
+    # Custom apps
     "teaching",
     "qualifications",
     "colleges",
@@ -135,7 +141,10 @@ STATIC_URL = "/static/"
 ###########
 
 GRAPHENE = {
-    "SCHEMA": "zacniucit.schema.schema"
+    "SCHEMA": "zacniucit.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
 
 # Neo4j
@@ -169,6 +178,39 @@ while try_to_connect:
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+AUTHENTICATION_BACKENDS = [
+    "graphql_auth.backends.GraphQLAuthBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_ALLOW_ANY_CLASSES": [
+        "accounts.graphql.mutations.CustomRegister",
+        "graphql_auth.mutations.PasswordSet",
+        "graphql_auth.mutations.RevokeToken",
+        "graphql_auth.mutations.ObtainJSONWebToken",
+        "graphql_auth.mutations.RefreshToken",
+    ],
+}
+
+
+GRAPHQL_AUTH = {
+    "LOGIN_ALLOWED_FIELDS": ['email'],
+    "REGISTER_MUTATION_FIELDS": {
+        "email": "String"
+    },
+    "ALLOW_LOGIN_NOT_VERIFIED": False,
+    "ALLOW_PASSWORDLESS_REGISTRATION": True,
+
+    # We don't want to automatically send emails, because we are using sendGrid templates
+    "SEND_PASSWORD_SET_EMAIL": False,
+    "SEND_ACTIVATION_EMAIL": False,
+}
+
 
 #########
 # Email #
@@ -181,3 +223,12 @@ ANYMAIL = {
 }
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='notifications@cesko.digital', cast=str)
+
+SET_EMAIL_TEMPLATE_ID = config('SET_EMAIL_TEMPLATE_ID', default="", cast=str)
+
+
+############
+# Frontend #
+############
+
+BASE_FRONTED_URL = config("BASE_FRONTED_URL", default="https://zacniucit.cz")
