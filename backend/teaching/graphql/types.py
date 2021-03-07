@@ -1,12 +1,17 @@
-import graphene
+from graphene_django import DjangoObjectType
+from graphene_django.types import ALL_FIELDS
+
+from teaching.models import SchoolLevel, Subject
 
 
-class SchoolLevelType(graphene.ObjectType):
-    id = graphene.Int()
-    name = graphene.String()
+class SchoolLevelObjectType(DjangoObjectType):
+    class Meta:
+        model = SchoolLevel
+        fields = ALL_FIELDS
 
 
-class SubjectType(graphene.ObjectType):
-    id = graphene.Int()
-    name = graphene.String()
-    code = graphene.String()
+class SubjectObjectType(DjangoObjectType):
+    class Meta:
+        model = Subject
+        fields = ALL_FIELDS
+

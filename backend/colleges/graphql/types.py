@@ -1,26 +1,22 @@
-import graphene
-from colleges.models import College
+from colleges.models import College, Faculty, Course
+from graphene_django import DjangoObjectType
+from graphene_django.types import ALL_FIELDS
 
 
-class CollegeTypeEnum(graphene.Enum):
-    COLLEGE_TYPE_UNIVERSITY = College.TYPE_UNIVERSITY
-    COLLEGE_TYPE_NON_UNIVERSITY = College.TYPE_NON_UNIVERSITY
+class CollegeObjectType(DjangoObjectType):
+    class Meta:
+        model = College
+        fields = ALL_FIELDS
 
 
-class CollegeFormEnum(graphene.Enum):
-    COLLEGE_FORM_PRIVATE = College.FORM_PRIVATE
-    COLLEGE_FORM_GOV = College.FORM_GOV
-    COLLEGE_FORM_PUBLIC = College.FORM_PUBLIC
+class FacultyObjectType(DjangoObjectType):
+    class Meta:
+        model = Faculty
+        fields = ALL_FIELDS
 
 
-class CollegeType(graphene.ObjectType):
-    id = graphene.Int()
-    name = graphene.String()
-    type = CollegeTypeEnum()
-    form = CollegeFormEnum()
-    address = graphene.String()
-    rid = graphene.String()
-    ic = graphene.String()
-    databox = graphene.String()
-    url = graphene.String()
-    code = graphene.String()
+class CourseObjectType(DjangoObjectType):
+    class Meta:
+        model = Course
+        fields = ALL_FIELDS
+
