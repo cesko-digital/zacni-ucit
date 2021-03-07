@@ -1,13 +1,16 @@
-import graphene
+from graphene_django import DjangoObjectType
+from graphene_django.types import ALL_FIELDS
+
+from qualifications.models import Title, CollegeArea
 
 
-class TitleType(graphene.ObjectType):
-    id = graphene.Int()
-    name = graphene.String()
-    code = graphene.String()
+class TitleObjectType(DjangoObjectType):
+    class Meta:
+        model = Title
+        fields = ALL_FIELDS
 
 
-class CollegeAreaType(graphene.ObjectType):
-    id = graphene.Int()
-    name = graphene.String()
-
+class CollegeAreaObjectType(DjangoObjectType):
+    class Meta:
+        model = CollegeArea
+        fields = ALL_FIELDS

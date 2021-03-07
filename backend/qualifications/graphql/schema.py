@@ -1,13 +1,16 @@
 import graphene
-from qualifications.graphql.types import TitleType, CollegeAreaType
+from qualifications.graphql.types import TitleObjectType, CollegeAreaObjectType
 from qualifications.models import Title, CollegeArea
 
 
 class Query(graphene.ObjectType):
-    titles = graphene.List(TitleType)
-    title = graphene.Field(TitleType, pk=graphene.Int(required=True))
-    college_areas = graphene.List(CollegeAreaType)
-    college_area = graphene.Field(CollegeAreaType, pk=graphene.Int(required=True))
+    # Titles queries
+    titles = graphene.List(TitleObjectType)
+    title = graphene.Field(TitleObjectType, pk=graphene.Int(required=True))
+
+    # College areas queries
+    college_areas = graphene.List(CollegeAreaObjectType)
+    college_area = graphene.Field(CollegeAreaObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
     def resolve_titles(root, info):
