@@ -2,15 +2,17 @@ import React, {useState} from 'react'
 import styled from 'styled-components'
 import Divider from '@material-ui/core/Divider';
 import SchoolIcon from '@material-ui/icons/School';
+import { resolveModuleNameFromCache } from 'typescript';
 
 const MainSection = styled.section `
-    height: 55vh;
+    height: 400px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 `
+
 const Heading = styled.h2 `
     font-size: 2.5rem;
     font-weight: 500;
@@ -37,6 +39,9 @@ const SubHeadingContainer = styled.div `
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
+`
+const SpecializationWrapper = styled.div `
+    display: ${props => props.isSpecialition? "flex" : "none"};
 `
 const Line = styled.div `
     width: 50px;
@@ -84,20 +89,29 @@ const EducationInput = styled.input `
     font-size: 1rem;
     text-align: center;
 `
+const EducationSubInput = styled(EducationInput) `
+    width: 200px
+`
 const SubText = styled.p `
     color: grey
 `
 const CurrentEducation = () => {
 
-    const data:string[] = [
-        "Sociální práce","Design","Zdravotnictví","Dřevařství","Ekonomie","Podnikání","Elektrikář","Elektronika",
-        "Energetika","Ergoterapeut","Facility","Farmář","Finance a daně","Účetnictví","Ekonomické poradenství","Managment",
-        "Grafika","Herectví", "Hotelnictví","Chemie","Chovatelství", "Informatika", "Jezdectví", "Kadeřník", 
-        "Lesnictví", "Malířství","Nábytkářství", "Obchodní akademie", "Pedagogika", "Reklama", "Řízení výroby",
-        "Silniční doprava", "Telekomunikace",   
-    ]
-    const [x, setX] = useState("")
+    const data = ["Architektura a urbanismus","Bezpečnostní obory","Biologie, ekologie a životní prostředí","Doprava",
+                "Ekonomické obory","Elektrotechnika","Energetika","Farmacie","Filologie","Filozofie, religionistika a teologie",
+                "Fyzika","Historické vědy","Chemie","Informatika","Kybernetika","Lesnictví a dřevařství","Matematika",
+                "Mediální a komunikační studia","Neučitelská pedagogika","Politické vědy","Potravinářství","Právo",
+                "Psychologie","Sociální práce","Sociologie","Stavebnictví","Strojírenství, technologie a materiály","Tělesná výchova a sport; kinantropologie",
+                "Těžba a zpracování nerostných surovin","Učitelství","Umění","Vědy o umění a kultuře","Vědy o Zemi","Veterinární lékařství, veterinární hygiena",
+                "Všeobecné lékařství a zubní lékařství","Zdravotnické obory","Zemědělství",]
 
+    const schoolType = ["Základní škola 1. stupeň","Základní škola 2. stupeň","Střední škola" ]
+
+    const specialization = ["Všeobecně-vzdělávací předměty", "Cizí jazyk", "Umělecké předměty", "Tělesná výchova", 
+                        "Odborné předměty"," Praktické vyučování", "Odborný výcvik"]
+
+    const [text, setText] = useState("");
+    const [isSpecialition, setIsSpecialization] = useState(false)
     return (
 
         <>
@@ -150,14 +164,36 @@ const CurrentEducation = () => {
                         </MainButton>
                     </SubContainer>
                 </MainContainer>
-                <EducationInput type="text" list="data" placeholder="Vyberte prosím obor" value={x}/> 
+                <EducationInput type="text" list="data" placeholder="Vyberte prosím obor" onChange={e => {
+                    setText(e.target.value)
+                    e.target.value === "Učitelství" ? setIsSpecialization(true) : setIsSpecialization(false)
+                }
+                }/> 
                     <datalist id="data">
-                        {data.map(res => {
-                            setX({res})
-                            return <option value={res} key={res}> {res} </option>
+                        {data.map(res => { 
+                            return <option key={res}>{res}</option>
                         })}
-                        option
                     </datalist>
+                <SpecializationWrapper isSpecialition={isSpecialition}>
+                    <EducationSubInput type="text" list="schoolType" placeholder="Vyberte typ školy"/>
+                        <datalist id="schoolType">
+                        {text === "Učitelství" ? schoolType.map(res => {
+                            return <option key={res}>{res}</option>
+
+                        })
+                            : null
+                        }
+                        </datalist>
+                    <EducationSubInput type="text" list="specialization"  placeholder="Vyberte specializaci" />
+                    <datalist id="specialization">
+                        {text === "Učitelství" ? specialization.map(res => {
+                            return <option key={res}>{res}</option>
+
+                        })
+                            : null
+                        }
+                        </datalist>
+                </SpecializationWrapper>
                 <SubText>+ Přidat vzdělání</SubText>
                 
             </MainSection>

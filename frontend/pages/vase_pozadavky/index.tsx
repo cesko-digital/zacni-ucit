@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Dropdowns from './components/DropDowns'
 import Headline from './components/Headline'
 import Head from "./components/Head"
-import CurrentEducation from './components/CurrentEducation'
+import CurrentEducation from './components/CurrentEducation.js'
 import ChooseGrade from './components/ChooseGrade'
 import ChooseSubject from './components/ChooseSubject'
 import SearchMore from './components/SearchMore'
