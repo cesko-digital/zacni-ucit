@@ -12,7 +12,6 @@ from accounts.models import CustomUser
 
 
 class PasswordLessRegisterWithUsernameForm(PasswordLessRegisterForm):
-
     def save(self, commit=True):
         user = super().save(commit=False)
         user.username = user.email
