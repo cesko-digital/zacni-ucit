@@ -1,4 +1,13 @@
-from .models import CollegeArea, CollegeProgramme, EducationType, Title, EducationArea, PreparationType, SubjectType
+from .models import (
+    CollegeArea,
+    CollegeProgramme,
+    EducationType,
+    Title,
+    EducationArea,
+    PreparationType,
+    SubjectType,
+    OtherOption,
+)
 from teaching.models import Subject, SchoolLevel
 
 IGNORED_CHARS = "\t ,."
@@ -398,3 +407,17 @@ DALŠÍ MOŽNOSTI:::výkonný umělec::
                 school_levels_instances.append(school_l)
 
             education_type.school_levels.add(*school_levels_instances)
+
+
+def init_other_options():
+    data = """
+		Rodily mluvci
+		doplňující studium k rozšíření odborné kvalifikace (DVPP)
+		doplňující didaktické studium příslušného jazyka
+		studium pedagogiky
+		jazyková zkouška min. C1 SERR pro jazyky
+		výkonný umělec)
+	"""
+
+    for name in data.strip().split("\n"):
+        OtherOption.objects.get_or_create(name=name.strip())

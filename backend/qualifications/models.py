@@ -187,3 +187,26 @@ class Title(TimeStampedModel, GraphModel):
             "name": self.name,
             "code": self.code,
         }
+
+
+class OtherOption(TimeStampedModel, GraphModel):
+    """
+    Dalsi moznosti krome TITULu nebo Kurzu CZV.
+
+    https://miro.com/app/board/o9J_lby_RpM=/?moveToWidget=3074457353767573317&cot=14
+    """
+
+    name = models.CharField("Název", max_length=100)
+
+    class Meta:
+        verbose_name = "Další možnost"
+        verbose_name_plural = "Další možnosti"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
+
+    def graph_data(self):
+        return {
+            "name": self.name,
+        }
