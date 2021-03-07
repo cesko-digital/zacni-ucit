@@ -5,6 +5,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import RoomIcon from '@material-ui/icons/Room';
 import { BrokenImage } from '@material-ui/icons';
+import Link from 'next/link'
 
 const ResultsContainer = styled.div`
     width: 95%;
@@ -170,7 +171,9 @@ const Results = () => {
                                     </ResultTextContainer>
                                 </ResultInnerExtendedContainer>
                                 <ResultDetailButton>
-                                    <h5>    DETAIL  </h5>
+                                    <Link href={`/moznosti_kvalifikace/detail/${res.name}`}>
+                                        <h5>    DETAIL  </h5>
+                                    </Link>
                                 </ResultDetailButton>
                             </ResultContainer>
                         </ResultMainContainer>

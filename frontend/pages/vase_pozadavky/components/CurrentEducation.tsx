@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import Divider from '@material-ui/core/Divider';
 import SchoolIcon from '@material-ui/icons/School';
@@ -88,7 +88,18 @@ const SubText = styled.p `
     color: grey
 `
 const CurrentEducation = () => {
+
+    const data:string[] = [
+        "Sociální práce","Design","Zdravotnictví","Dřevařství","Ekonomie","Podnikání","Elektrikář","Elektronika",
+        "Energetika","Ergoterapeut","Facility","Farmář","Finance a daně","Účetnictví","Ekonomické poradenství","Managment",
+        "Grafika","Herectví", "Hotelnictví","Chemie","Chovatelství", "Informatika", "Jezdectví", "Kadeřník", 
+        "Lesnictví", "Malířství","Nábytkářství", "Obchodní akademie", "Pedagogika", "Reklama", "Řízení výroby",
+        "Silniční doprava", "Telekomunikace",   
+    ]
+    const [x, setX] = useState("")
+
     return (
+
         <>
             <MainSection>
                 <Heading>
@@ -139,11 +150,16 @@ const CurrentEducation = () => {
                         </MainButton>
                     </SubContainer>
                 </MainContainer>
-                <EducationInput 
-                    type="text" 
-                    placeholder= "Molekulární biologie a biotechnologie" 
-                    />
+                <EducationInput type="text" list="data" placeholder="Vyberte prosím obor" value={x}/> 
+                    <datalist id="data">
+                        {data.map(res => {
+                            setX({res})
+                            return <option value={res} key={res}> {res} </option>
+                        })}
+                        option
+                    </datalist>
                 <SubText>+ Přidat vzdělání</SubText>
+                
             </MainSection>
         </>
     )

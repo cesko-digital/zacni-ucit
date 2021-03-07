@@ -8,8 +8,6 @@ import ChooseSubject from './components/ChooseSubject'
 import SearchMore from './components/SearchMore'
 
 
-
-
 const Homepage = () => {
 
     return (
