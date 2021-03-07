@@ -1,5 +1,7 @@
 import graphene
+from django.db import transaction
 from graphql_auth import mutations
+from graphql_auth.forms import PasswordLessRegisterForm
 from graphql_auth.utils import get_token
 from graphql_auth.constants import TokenAction
 
@@ -9,12 +11,24 @@ from django.conf import settings
 from accounts.models import CustomUser
 
 
+class PasswordLessRegisterWithUsernameForm(PasswordLessRegisterForm):
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.username = user.email
+        if commit:
+            user.save()
+        return user
+
+
 class CustomRegister(mutations.Register):
+    form = PasswordLessRegisterWithUsernameForm
+
     @classmethod
+    @transaction.atomic
     def resolve_mutation(cls, root, info, **kwargs):
         email = kwargs.get("email")
         response = super(CustomRegister, cls).resolve_mutation(root, info, **kwargs)
-
         if response.success:
             user = CustomUser.objects.get(email=email)
             set_password_token = get_token(user, TokenAction.PASSWORD_RESET, **kwargs)
