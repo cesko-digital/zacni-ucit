@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SelectionContainer = styled.div`
+const SelectionWrapper= styled.div`
     width: 60%;
     height: 5vh;
     display: flex;
@@ -38,7 +38,7 @@ const QualificationsBttn = styled.button `
 const Selection = () => {
     return (
         <>
-            <SelectionContainer>
+            <SelectionWrapper>
                         <QualificationsBttn>
                             Titul
                         </QualificationsBttn>
@@ -48,7 +48,7 @@ const Selection = () => {
                         <QualificationsBttn>
                             CŽV
                         </QualificationsBttn>
-            </SelectionContainer>
+            </SelectionWrapper>
         </>
     )
 }

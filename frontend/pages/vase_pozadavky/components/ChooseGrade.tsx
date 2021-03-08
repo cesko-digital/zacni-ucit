@@ -35,7 +35,7 @@ const SmallText = styled.p `
     font-size: 0.4rem;
     font-weight: 400;
 `
-const SubHeadingContainer = styled.div `
+const SubHeadingWrapper = styled.div `
     height: 11vh;
     width: 20%;
     display: flex;
@@ -43,12 +43,12 @@ const SubHeadingContainer = styled.div `
     align-items: flex-start;
     justify-content: flex-end;
 `
-const MainContainer = styled.div `
+const MainWrapper = styled.div `
     width: 500px;
     display: flex;
     justify-content: space-around;
 `
-const SubContainer = styled.div `
+const SubWrapper= styled.div `
     width: 120px;
     height: 115px;
     display: flex;
@@ -81,16 +81,16 @@ const ChooseGrade = () => {
     return (
         <>
             <MainSection>
-                <SubHeadingContainer>
+                <SubHeadingWrapper>
                     <HeadingText>
                         Nepovinné
                     </HeadingText>
                     <Subheading>
                         Chci učit stupeň
                     </Subheading>
-                </SubHeadingContainer>
-                <MainContainer>
-                    <SubContainer>
+                </SubHeadingWrapper>
+                <MainWrapper>
+                    <SubWrapper>
                         <LocationCityIcon fontSize="large"/>
                         <MainButton>
                             <BoldText>
@@ -100,9 +100,9 @@ const ChooseGrade = () => {
                                 1. stupeň
                             </SmallText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <LocationCityIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
@@ -112,9 +112,9 @@ const ChooseGrade = () => {
                                 2. stupeň
                             </SmallText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <LocationCityIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
@@ -122,9 +122,9 @@ const ChooseGrade = () => {
                             </BoldText>
                             <SmallText />
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <LocationCityIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
@@ -132,8 +132,8 @@ const ChooseGrade = () => {
                             </BoldText>
                             <SmallText />
                         </MainButton>
-                    </SubContainer>
-                </MainContainer>
+                    </SubWrapper>
+                </MainWrapper>
             </MainSection>
         </>
     )

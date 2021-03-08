@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import TuneIcon from '@material-ui/icons/Tune';
 
-const TextContainer = styled.div `
+const TextWrapper = styled.div `
     height: 50vh;
     width: 80%;
     display: flex;
@@ -12,14 +12,14 @@ const TextContainer = styled.div `
         height: 50vh;
     }
 `
-const HeadingContainer = styled.div `
+const HeadingWrapper = styled.div `
     height: 15vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 `
-const InnerTextContainer = styled.div `
+const InnerTextWrapper= styled.div `
     height: 25vh;
     width: 70%;
     display:flex;
@@ -33,7 +33,7 @@ const InnerTextContainer = styled.div `
         height: 25vh;
     }
 `
-const FilterContainer = styled.div `
+const FilterWrapper= styled.div `
     height: 10vh;
     width: 100%;
     display: flex;
@@ -100,13 +100,13 @@ const OptionsText = styled.p `
 const Heading = () => {
     return (
         <>
-            <TextContainer>
-                    <HeadingContainer>
+            <TextWrapper>
+                    <HeadingWrapper>
                         <MainHeading>
                             Možnosti studia:
                         </MainHeading>
-                    </HeadingContainer>
-                    <InnerTextContainer>
+                    </HeadingWrapper>
+                    <InnerTextWrapper>
                         <RedText>
                             Našli jsme 150 výsledků, doporučujeme použít filtry pro přesnější výsledky
                         </RedText>
@@ -115,14 +115,14 @@ const Heading = () => {
                             <OptionsText>    Kvalifikace -   </OptionsText>
                             <OptionsText>    CŽV -   </OptionsText>
                         </span>
-                    </InnerTextContainer>
-                    <FilterContainer>
+                    </InnerTextWrapper>
+                    <FilterWrapper>
                         <FilterButton>
                             FILTROVAT
                             <TuneIcon fontSize="small" />
                         </FilterButton>
-                    </FilterContainer>
-                </TextContainer>
+                    </FilterWrapper>
+                </TextWrapper>
         </>
     )
 }

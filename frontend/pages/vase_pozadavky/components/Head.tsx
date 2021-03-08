@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import vector6 from "../assets/vector6.png"
 
-const MainContainer = styled.section `
+const MainWrapper = styled.section `
     height: 45vh;
     width: 100vw;
     margin-left: -275px;
@@ -35,7 +35,7 @@ const Text = styled.p `
 const Head = () => {
     return (
         <>
-            <MainContainer>
+            <MainWrapper>
                 <BackgroundImg src={vector6}></BackgroundImg>
                 <MainHeading>
                     Vyber si co začneš učit
@@ -44,7 +44,7 @@ const Head = () => {
                     Hledáme ve 176 kurzech. Pomůžeme ti najít rekvalifikaci,
                     doplnit si pedagogické minimum nebo další specializaci.
                 </Text>
-            </MainContainer>
+            </MainWrapper>
         </>
     )
 }

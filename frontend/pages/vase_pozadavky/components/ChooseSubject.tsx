@@ -30,7 +30,7 @@ const BoldText = styled.p `
     font-size: 0.6rem;
     font-weight: 800;
 `
-const SubHeadingContainer = styled.div `
+const SubHeadingWrapper = styled.div `
     height: 11vh;
     width: 20%;
     display: flex;
@@ -38,12 +38,12 @@ const SubHeadingContainer = styled.div `
     align-items: flex-start;
     justify-content: flex-end;
 `
-const MainContainer = styled.div `
+const MainWrapper = styled.div `
     width: 1000px;
     display: flex;
     justify-content: space-around;
 `
-const SubContainer = styled.div `
+const SubWrapper = styled.div `
     width: 120px;
     height: 115px;
     display: flex;
@@ -78,87 +78,87 @@ const ChooseSubject = () => {
     return (
         <>
             <MainSection>
-                <SubHeadingContainer>
+                <SubHeadingWrapper>
                     <HeadingText>
                         Nepovinné
                     </HeadingText>
                     <Subheading>
                         Chci učit stupeň
                     </Subheading>
-                </SubHeadingContainer>
-                <MainContainer>
-                    <SubContainer>
+                </SubHeadingWrapper>
+                <MainWrapper>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large"/>
                         <MainButton>
                             <BoldText>
                                 Matematika
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Chemie
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Informatika
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Angličtina
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Český jazyk
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Tělesná výchova
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Zeměpis
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <DescriptionIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Fyzika
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
-                </MainContainer>
+                    </SubWrapper>
+                </MainWrapper>
                 <SubText> + Další Předměty </SubText>
             </MainSection>
         </>

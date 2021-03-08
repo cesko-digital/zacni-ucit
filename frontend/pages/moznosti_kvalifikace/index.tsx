@@ -12,7 +12,7 @@ const StudyOptionsSection = styled.section `
     flex-direction: column;
     align-items: center;
 `
-const ResultsCotainer = styled.div `
+const ResultsWrapper = styled.div `
     height: 40vh;
     width: 100%;
     display: flex;
@@ -39,10 +39,10 @@ const StudyOptions = () => {
         <>
             <StudyOptionsSection>
                 <Heading />
-                <ResultsCotainer>
+                <ResultsWrapper>
                     <Selection />
                     <Results />
-                </ResultsCotainer>
+                </ResultsWrapper>
                 <ShowMore>  Zobrazit více   </ShowMore>
             </StudyOptionsSection>
         </>

@@ -31,7 +31,7 @@ const BoldText = styled.p `
     font-size: 0.6rem;
     font-weight: 800;
 `
-const SubHeadingContainer = styled.div `
+const SubHeadingWrapper = styled.div `
     height: 90px;
     width: 20%;
     display: flex;
@@ -39,13 +39,13 @@ const SubHeadingContainer = styled.div `
     align-items: flex-start;
     justify-content: flex-end;
 `
-const MainContainer = styled.div `
+const MainWrapper = styled.div `
     padding-top: 25px;
     width: 500px;
     display: flex;
     justify-content: space-around;
 `
-const SubContainer = styled.div `
+const SubWrapper = styled.div `
     width: 120px;
     height: 110px;
     display: flex;
@@ -84,51 +84,51 @@ const CurrentEducationWrapper= () => {
                 <Heading>
                     Chci učit:
                 </Heading>
-                <SubHeadingContainer>
+                <SubHeadingWrapper>
                     <HeadingText>
                         Povinné
                     </HeadingText>
                     <Subheading>
                         Mám dosažené vzdělání
                     </Subheading>
-                </SubHeadingContainer>
-                <MainContainer>
-                    <SubContainer>
+                </SubHeadingWrapper>
+                <MainWrapper>
+                    <SubWrapper>
                         <SchoolIcon fontSize="large"/>
                         <MainButton>
                             <BoldText>
                                 Bakalář (Bc.)
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <SchoolIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Magistr (Mgr.)
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <SchoolIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Inženýr (Ing.)
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
+                    </SubWrapper>
                     <Divider orientation="vertical" flexItem />
-                    <SubContainer>
+                    <SubWrapper>
                         <SchoolIcon fontSize="large" />
                         <MainButton>
                             <BoldText>
                                 Další...
                             </BoldText>
                         </MainButton>
-                    </SubContainer>
-                </MainContainer>
+                    </SubWrapper>
+                </MainWrapper>
                 <CurrentEducation />
             </MainSection>
         </>

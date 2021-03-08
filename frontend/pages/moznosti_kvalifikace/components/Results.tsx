@@ -4,10 +4,9 @@ import SchoolIcon from '@material-ui/icons/School';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import RoomIcon from '@material-ui/icons/Room';
-import { BrokenImage } from '@material-ui/icons';
 import Link from 'next/link'
 
-const ResultsContainer = styled.div`
+const ResultsWrapper = styled.div`
     width: 95%;
     height: auto;
     display: flex;
@@ -21,7 +20,7 @@ const ResultsContainer = styled.div`
         padding-top: 0vh;
     }
 `
-const ResultContainer = styled.div `
+const ResultWrapper = styled.div `
     width: 340px;
     height: 18vh;
     display: flex;
@@ -31,19 +30,19 @@ const ResultContainer = styled.div `
     align-items: flex-end;
     padding: 15px 5px 10px 5px;
 `
-const ResultInnerBasicContainer = styled.div `
+const ResultInnerBasicWrapper = styled.div `
     height: 5vh;
     width: 105px;
     display:flex;
     padding-left: 5px;
 `
-const ResultInnerExtendedContainer = styled.div `
+const ResultInnerExtendedWrapper= styled.div `
     height: 5vh;
     min-width: 120px;
     display:flex;
     padding-left: 5px; 
 `
-const ResultMainContainer = styled.fieldset `
+const ResultMainWrapper = styled.fieldset `
     width: 340px;
     height: 19vh;
     display: flex;
@@ -53,7 +52,7 @@ const ResultMainContainer = styled.fieldset `
         margin-top: 5vh;
     }
 `
-const ResultTextContainer = styled.div `
+const ResultTextWrapper = styled.div `
     height: 5vh;
     min-width: 70px;
     max-width: 120px;
@@ -130,60 +129,60 @@ const Results = () => {
     
     return (
             <>
-                <ResultsContainer>
+                <ResultsWrapper>
                     {load=== true ? schools.map(res => {
                         return  <>
-                        <ResultMainContainer>
+                        <ResultMainWrapper>
                             <Legend>{res.name}</Legend>
-                            <ResultContainer>
-                                <ResultInnerBasicContainer>
+                            <ResultWrapper>
+                                <ResultInnerBasicWrapper>
                                     <ResultImg>
                                         <WatchLaterIcon/>    
                                     </ResultImg>
-                                    <ResultTextContainer>
+                                    <ResultTextWrapper>
                                         <ResultP>   DÉLKA STUDIA    </ResultP>
                                         <ResultH5>  {res.length} </ResultH5>
-                                    </ResultTextContainer>
-                                </ResultInnerBasicContainer>
-                                <ResultInnerBasicContainer>
+                                    </ResultTextWrapper>
+                                </ResultInnerBasicWrapper>
+                                <ResultInnerBasicWrapper>
                                     <ResultImg><AttachMoneyIcon/></ResultImg>
-                                    <ResultTextContainer>
+                                    <ResultTextWrapper>
                                         <ResultP>   CENA STUDIA </ResultP>
                                         <ResultH5>  {res.price}   </ResultH5>
-                                    </ResultTextContainer>
-                                </ResultInnerBasicContainer>
-                                <ResultInnerBasicContainer>
+                                    </ResultTextWrapper>
+                                </ResultInnerBasicWrapper>
+                                <ResultInnerBasicWrapper>
                                     <ResultImg>
                                         <RoomIcon/>
                                     </ResultImg>
-                                    <ResultTextContainer>
+                                    <ResultTextWrapper>
                                         <ResultP>   MÍSTO STUDIA    </ResultP>
                                         <ResultH5>  {res.place} </ResultH5>
-                                    </ResultTextContainer>
-                                </ResultInnerBasicContainer>
-                                <ResultInnerExtendedContainer>
+                                    </ResultTextWrapper>
+                                </ResultInnerBasicWrapper>
+                                <ResultInnerExtendedWrapper>
                                     <ResultImg>
                                         <SchoolIcon/>
                                     </ResultImg>
-                                    <ResultTextContainer>
+                                    <ResultTextWrapper>
                                         <ResultP>   ZAKONČENÍ STUDIA    </ResultP>
                                         <ResultH5>  {res.title}    </ResultH5>
-                                    </ResultTextContainer>
-                                </ResultInnerExtendedContainer>
-                                <ResultDetailButton>
-                                    <Link href={`/moznosti_kvalifikace/detail/${res.name}`}>
-                                        <h5>    DETAIL  </h5>
-                                    </Link>
+                                    </ResultTextWrapper>
+                                </ResultInnerExtendedWrapper>
+                                <Link href={`/moznosti_kvalifikace/detail`}>
+                                <ResultDetailButton>                                   
+                                        <h5>    DETAIL  </h5>                           
                                 </ResultDetailButton>
-                            </ResultContainer>
-                        </ResultMainContainer>
+                                </Link>
+                            </ResultWrapper>
+                        </ResultMainWrapper>
                                 </>
                     }): 
                         <NullResults>
                             No Schools currently available
                         </NullResults>
                         }
-                </ResultsContainer>   
+                </ResultsWrapper>   
             </>
     )
 }

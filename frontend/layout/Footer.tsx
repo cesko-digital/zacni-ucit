@@ -13,7 +13,7 @@ const FooterSection = styled.section `
         flex-direction: row;
     }
 `
-const Container  = styled.div `
+const Wrapper  = styled.div `
 
     width: 500px;
     height: 200px;
@@ -26,7 +26,7 @@ const Container  = styled.div `
         justify-content: flex-end;
     }
 `
-const ResponsiveContainer = styled.div `
+const ResponsiveWrapper = styled.div `
 
 margin-left:10%;
     display: flex;
@@ -59,7 +59,7 @@ const FooterP = styled.p `
     }
 `
 /**Logo */
-const Logocontainer = styled.div `
+const LogoWrapper = styled.div `
 
     width: 130px;
     height: 200px;
@@ -76,7 +76,7 @@ const Logo = styled.div `
     border-radius: 100px;
 `
 /**Naši partneři */
-const HeadingContainer = styled.div `
+const HeadingWrapper = styled.div `
  
     max-width: 640px;
     height: 70px;
@@ -85,7 +85,7 @@ const HeadingContainer = styled.div `
         width: 200px;
     }
 `
-const BlankDivContainer = styled.div `
+const PartnersWrapper  = styled.div `
 
     max-width: 640px;
     height: 130px;
@@ -102,7 +102,7 @@ const BlankDivContainer = styled.div `
         align-items: center;
     }
 `
-const BlankDiv = styled.div ` 
+const Partners = styled.div ` 
     height: 90px;
     width: 90px;
     background-color: #C4C4C4;
@@ -117,13 +117,13 @@ const Footer = () => {
     return (
         <>
             <FooterSection>
-                <ResponsiveContainer>
-                    <Logocontainer>
+                <ResponsiveWrapper>
+                    <LogoWrapper>
                         <Logo>
 
                         </Logo>
-                    </Logocontainer>
-                    <Container>
+                    </LogoWrapper>
+                    <Wrapper>
                         <FooterH3>ZACNIUCIT.CZ</FooterH3>
                         <FooterP>
                             info@zacniucit.cz <br/>
@@ -133,21 +133,21 @@ const Footer = () => {
                             Staré Město, 110 00 Praha<br/>
                             &copy; 2021 - ZačniUČIT.cz
                         </FooterP>
-                    </Container>
-                </ResponsiveContainer>
-                <ResponsiveContainer>
-                    <Container>
-                        <HeadingContainer>
+                    </Wrapper>
+                </ResponsiveWrapper>
+                <ResponsiveWrapper>
+                    <Wrapper>
+                        <HeadingWrapper>
                             <FooterSecondH3>Naši partneři</FooterSecondH3>
-                        </HeadingContainer>
-                        <BlankDivContainer>
-                            <BlankDiv/>
-                            <BlankDiv/>
-                            <BlankDiv/>
-                            <BlankDiv/>
-                        </BlankDivContainer>
-                    </Container>
-                </ResponsiveContainer>
+                        </HeadingWrapper>
+                        <PartnersWrapper>
+                            <Partners/>
+                            <Partners/>
+                            <Partners/>
+                            <Partners/>
+                        </PartnersWrapper>
+                    </Wrapper>
+                </ResponsiveWrapper>
             </FooterSection>
         </>
     )

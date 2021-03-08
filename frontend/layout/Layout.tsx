@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Navbar from './Navbar';
 import Logo from '../components/Logo.component';
 import MaxWidth from '../components/MaxWidth.component';
-import Footer from './footer/Footer';
+import Footer from './Footer';
 import Router from 'next/dist/next-server/lib/router/router';
 
 
