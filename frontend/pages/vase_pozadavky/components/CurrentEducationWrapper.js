@@ -73,10 +73,29 @@ const MainButton = styled.button `
         color:white
     }
 `
-
+const AddAdditionalEducation = styled.button `
+    height: 20px;
+    background: transparent;
+    border: none;
+    color: grey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    :focus {
+        outline:none
+    }
+`
+const AdditionalEducationWrapper = styled.div `
+    display: ${props => props.addEducation? "block" : "none"}
+`
 
 const CurrentEducationWrapper= () => {
 
+    const [buttonText, setButtonText] = useState("+ přidej vzdělání")
+    const [addEducation, setAddEducation] = useState(false)
+    const addAdditionalEducation = () => {
+        setAddEducation(!addEducation)
+        addEducation === true? setButtonText("+ přidej vzdělání") : setButtonText("- odeber vzdělání") 
+    }
     return (
 
         <>
@@ -130,6 +149,12 @@ const CurrentEducationWrapper= () => {
                     </SubWrapper>
                 </MainWrapper>
                 <CurrentEducation />
+                <AddAdditionalEducation onClick={addAdditionalEducation}>
+                    {buttonText}
+                </AddAdditionalEducation> 
+                <AdditionalEducationWrapper addEducation={addEducation}>
+                    <CurrentEducation />
+                </AdditionalEducationWrapper>
             </MainSection>
         </>
     )
