@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 
 const Section = styled.section `
-border: 1px solid black;
     height: 30px;
     width: 100%;
     display: flex;
@@ -17,12 +16,9 @@ const Input = styled.div `
 const Filter = styled.button `
     height: 30px;
     width: 200px;
-    border: 1px solid black;
     text-align: center;
     font-size: 0.9rem;
 `
-
-
 const DetailHead = () => {
     return (
         <>

@@ -1,12 +1,11 @@
 import React from 'react'
-import DetailHead from './components/detail.head'
-import DetailCard from './components/detail.card.head'
+
+import DetailCardWrapper from './components/detail.card.wrapper'
 
 const index = () => {
     return (
         <>
-            <DetailHead />
-            <DetailCard />
+            <DetailCardWrapper></DetailCardWrapper>
         </>
     )
 }

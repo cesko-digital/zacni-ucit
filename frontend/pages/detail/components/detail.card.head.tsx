@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 
 const Section = styled.section `
-border: 1px solid black;
     height: 200px;
     width: 100%;
     display:flex;
@@ -10,7 +9,6 @@ border: 1px solid black;
     padding: 15px;
 `
 const SchoolNameWrapper = styled.div `
-border: 1px solid black;
     height: 180px;
     width: 100%;
     display:flex;
@@ -18,26 +16,23 @@ border: 1px solid black;
     align-items: center;
 `
 const HeadingCard = styled.div `
-border: 1px solid black;
     height: 180px;
     width: 600px;
     display:flex;
     align-items: center;
 `
 const SchoolPicture = styled.div `
-border: 1px solid black;
+
     height: 150px;
     width: 150px;
     background-color: grey;
 `
 const SchoolName = styled.div `
-border: 1px solid black;
     height: 150px;
     width: 450px;
     padding-left: 10px;
 `
 const DetailWrapper = styled.div `
-border: 1px solid black;
     height: 180px;
     width: 200px;
     text-align: center;
