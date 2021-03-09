@@ -1,6 +1,12 @@
-import { useLazyQuery, useQuery } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloQueryResult,
+  useLazyQuery,
+  useQuery,
+} from '@apollo/client';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { initializeApollo } from '../../apolloClient';
 import {
   allCollegesQuery,
   allSchoolLevelsQuery,
@@ -19,22 +25,25 @@ const ButtonContainerDiv = styled.div`
   margin: 24px 0 8px 0;
 `;
 
+type Props = {
+  allCollegesQueryResponse: ApolloQueryResult<any>;
+  allSchoolsLevelsQueryResponse: ApolloQueryResult<any>;
+  allSubjectsQueryResponse: ApolloQueryResult<any>;
+};
+
 //* Page for showcasing Queries - only temporary
-const BaseQueriesPreview = () => {
+const BaseQueriesPreview = (props) => {
   // UseLazyQuery fetches the data on function call - in this case getTitles
   const [
     getTitles,
     { error: titlesError, loading: titlesLoading, data: titlesData },
   ] = useLazyQuery(allTitlesQuery);
 
-  // useQuery starts to fetch data on load - ussualy returns {loading:Boolean, error:boolean, data}
-  const allCollegesQueryResponse = useQuery(allCollegesQuery);
-  const allSchoolsLevelsQueryResponse = useQuery(allSchoolLevelsQuery);
-  const allSubjectsQueryResponse = useQuery(allSubjectsQuery);
-
-  const _onButtonPress = () => {
-    getTitles();
-  };
+  const {
+    allCollegesQueryResponse,
+    allSchoolsLevelsQueryResponse,
+    allSubjectsQueryResponse,
+  } = props;
   return (
     <>
       <Wrap>
@@ -57,7 +66,7 @@ const BaseQueriesPreview = () => {
           data={allSubjectsQueryResponse.data?.subjects}
         />
         <ButtonContainerDiv>
-          <button onClick={_onButtonPress}>Získej tituly</button>
+          <button onClick={() => getTitles()}>Získej tituly</button>
         </ButtonContainerDiv>
         <Title>Tituly</Title>
         <DataList
@@ -69,4 +78,27 @@ const BaseQueriesPreview = () => {
     </>
   );
 };
+
+export const getStaticProps = async () => {
+  const apolloClient = initializeApollo();
+  //Fetch the static data during the build phase
+  const allCollegesQueryResponse = await apolloClient.query({
+    query: allCollegesQuery,
+  });
+  const allSchoolsLevelsQueryResponse = await apolloClient.query({
+    query: allSchoolLevelsQuery,
+  });
+  const allSubjectsQueryResponse = await apolloClient.query({
+    query: allSubjectsQuery,
+  });
+  console.log(allSubjectsQueryResponse);
+  return {
+    props: {
+      allCollegesQueryResponse,
+      allSchoolsLevelsQueryResponse,
+      allSubjectsQueryResponse,
+    },
+  };
+};
+
 export default BaseQueriesPreview;
