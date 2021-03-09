@@ -19,7 +19,8 @@ from decouple import AutoConfig
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 config = AutoConfig(os.environ.get('DJANGO_CONFIG_ENV_DIR'))
-CORS_ALLOWED_ORIGINS = [i.strip() for i in config("DJANGO_CORS_ALLOWED_ORIGINS", default='').strip().split(',')]
+#CORS_ALLOWED_ORIGINS = [i.strip() for i in config("DJANGO_CORS_ALLOWED_ORIGINS", default='').strip().split(',')]
+CORS_ALLOW_ALL_ORIGINS=True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
