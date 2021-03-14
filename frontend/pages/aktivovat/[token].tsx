@@ -28,7 +28,7 @@ const LoginPage = () => {
   const [registerUser, { data }] = useMutation(setPasswordMutation);
 
   return (
-    <MiddleContainer>
+    <Wrapper>
       Heslo 1:
       <PasswordInput
         value={password1}
@@ -54,7 +54,7 @@ const LoginPage = () => {
       >
         Aktivovat
       </ActivateButton>
-    </MiddleContainer>
+    </Wrapper>
   );
 };
 export default LoginPage;
