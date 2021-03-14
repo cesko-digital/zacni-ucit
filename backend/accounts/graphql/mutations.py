@@ -48,5 +48,5 @@ class Mutations(graphene.ObjectType):
     password_set = mutations.PasswordSet.Field()
     login = mutations.ObtainJSONWebToken.Field()
     update_account = mutations.UpdateAccount.Field()
-    revoke_token = mutations.RevokeToken.Field()
+    logout = mutations.RevokeToken.Field()
     refresh_token = mutations.RefreshToken.Field()
