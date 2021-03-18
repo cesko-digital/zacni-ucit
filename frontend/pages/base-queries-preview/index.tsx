@@ -1,9 +1,4 @@
-import {
-  ApolloClient,
-  ApolloQueryResult,
-  useLazyQuery,
-  useQuery,
-} from '@apollo/client';
+import { ApolloQueryResult, useLazyQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { initializeApollo } from '../../apolloClient';
@@ -32,7 +27,7 @@ type Props = {
 };
 
 //* Page for showcasing Queries - only temporary
-const BaseQueriesPreview = (props) => {
+const BaseQueriesPreview = (props: Props) => {
   // UseLazyQuery fetches the data on function call - in this case getTitles
   const [
     getTitles,
@@ -44,6 +39,7 @@ const BaseQueriesPreview = (props) => {
     allSchoolsLevelsQueryResponse,
     allSubjectsQueryResponse,
   } = props;
+
   return (
     <>
       <Wrap>
@@ -66,7 +62,13 @@ const BaseQueriesPreview = (props) => {
           data={allSubjectsQueryResponse.data?.subjects}
         />
         <ButtonContainerDiv>
-          <button onClick={() => getTitles()}>Získej tituly</button>
+          <button
+            onClick={() => {
+              getTitles();
+            }}
+          >
+            Získej tituly
+          </button>
         </ButtonContainerDiv>
         <Title>Tituly</Title>
         <DataList
@@ -91,7 +93,6 @@ export const getStaticProps = async () => {
   const allSubjectsQueryResponse = await apolloClient.query({
     query: allSubjectsQuery,
   });
-  console.log(allSubjectsQueryResponse);
   return {
     props: {
       allCollegesQueryResponse,
