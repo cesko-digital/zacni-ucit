@@ -8,7 +8,13 @@ import accounts.graphql.mutations
 from graphql_auth.schema import MeQuery
 
 
-class Query(MeQuery, qualifications.graphql.schema, colleges.graphql.schema.Query, teaching.graphql.schema.Query, graphene.ObjectType):
+class Query(
+    MeQuery,
+    qualifications.graphql.schema,
+    colleges.graphql.schema.Query,
+    teaching.graphql.schema.Query,
+    graphene.ObjectType,
+):
     is_alive = graphene.Boolean(description="Base API test")
 
 
