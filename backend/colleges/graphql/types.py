@@ -19,4 +19,3 @@ class CourseObjectType(DjangoObjectType):
     class Meta:
         model = Course
         fields = ALL_FIELDS
-

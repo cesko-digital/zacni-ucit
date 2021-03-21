@@ -14,4 +14,3 @@ class SubjectObjectType(DjangoObjectType):
     class Meta:
         model = Subject
         fields = ALL_FIELDS
-
