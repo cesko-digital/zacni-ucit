@@ -1,6 +1,8 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { setUser } from '../../redux/actions/user.action';
+import { connect } from 'react-redux';
 import {
   loginMutation,
   registerMutation,
@@ -19,7 +21,7 @@ const RegisterButton = styled.button`
   margin-top: 12px;
 `;
 
-const LoginPage = () => {
+const LoginPage = ({ setUser, user }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -46,4 +48,7 @@ const LoginPage = () => {
     </Wrapper>
   );
 };
-export default LoginPage;
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+export default connect(mapStateToProps, { setUser })(LoginPage);
