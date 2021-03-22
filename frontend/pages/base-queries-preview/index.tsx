@@ -1,5 +1,5 @@
 import { ApolloQueryResult, useLazyQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { initializeApollo } from '../../apolloClient';
 import {
@@ -45,21 +45,21 @@ const BaseQueriesPreview = (props: Props) => {
       <Wrap>
         <Title>Vysoké školy</Title>
         <DataList
-          error={allCollegesQueryResponse.error}
-          loading={allCollegesQueryResponse.loading}
-          data={allCollegesQueryResponse.data?.colleges}
+          error={allCollegesQueryResponse?.error}
+          loading={allCollegesQueryResponse?.loading}
+          data={allCollegesQueryResponse?.data?.colleges}
         />
         <Title>Stupně: </Title>
         <DataList
-          error={allSchoolsLevelsQueryResponse.error}
-          loading={allSchoolsLevelsQueryResponse.loading}
-          data={allSchoolsLevelsQueryResponse.data?.schoolLevels}
+          error={allSchoolsLevelsQueryResponse?.error}
+          loading={allSchoolsLevelsQueryResponse?.loading}
+          data={allSchoolsLevelsQueryResponse?.data?.schoolLevels}
         />
         <Title>Předměty: </Title>
         <DataList
-          error={allSubjectsQueryResponse.error}
-          loading={allSubjectsQueryResponse.loading}
-          data={allSubjectsQueryResponse.data?.subjects}
+          error={allSubjectsQueryResponse?.error}
+          loading={allSubjectsQueryResponse?.loading}
+          data={allSubjectsQueryResponse?.data?.subjects}
         />
         <ButtonContainerDiv>
           <button
@@ -82,24 +82,34 @@ const BaseQueriesPreview = (props: Props) => {
 };
 
 export const getStaticProps = async () => {
-  const apolloClient = initializeApollo();
-  //Fetch the static data during the build phase
-  const allCollegesQueryResponse = await apolloClient.query({
-    query: allCollegesQuery,
-  });
-  const allSchoolsLevelsQueryResponse = await apolloClient.query({
-    query: allSchoolLevelsQuery,
-  });
-  const allSubjectsQueryResponse = await apolloClient.query({
-    query: allSubjectsQuery,
-  });
-  return {
-    props: {
-      allCollegesQueryResponse,
-      allSchoolsLevelsQueryResponse,
-      allSubjectsQueryResponse,
-    },
-  };
+  try {
+    const apolloClient = initializeApollo();
+    //Fetch the static data during the build phase
+    const allCollegesQueryResponse = await apolloClient.query({
+      query: allCollegesQuery,
+    });
+    const allSchoolsLevelsQueryResponse = await apolloClient.query({
+      query: allSchoolLevelsQuery,
+    });
+    const allSubjectsQueryResponse = await apolloClient.query({
+      query: allSubjectsQuery,
+    });
+    return {
+      props: {
+        allCollegesQueryResponse,
+        allSchoolsLevelsQueryResponse,
+        allSubjectsQueryResponse,
+      },
+    };
+  } catch {
+    return {
+      props: {
+        allCollegesQueryResponse: { error: true },
+        allSchoolsLevelsQueryResponse: { error: true },
+        allSubjectsQueryResponse: { error: true },
+      },
+    };
+  }
 };
 
 export default BaseQueriesPreview;
