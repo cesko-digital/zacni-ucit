@@ -30,7 +30,7 @@ class CustomRegister(mutations.Register):
         response = super(CustomRegister, cls).resolve_mutation(root, info, **kwargs)
         if response.success:
             user = CustomUser.objects.get(email=email)
-            set_password_token = get_token(user, TokenAction.PASSWORD_RESET, **kwargs)
+            set_password_token = get_token(user, TokenAction.PASSWORD_SET, **kwargs)
             message = EmailMessage(to=[email], from_email=settings.DEFAULT_FROM_EMAIL)
             message.template_id = settings.SET_EMAIL_TEMPLATE_ID
             message.merge_global_data = {
@@ -48,5 +48,5 @@ class Mutations(graphene.ObjectType):
     password_set = mutations.PasswordSet.Field()
     login = mutations.ObtainJSONWebToken.Field()
     update_account = mutations.UpdateAccount.Field()
-    revoke_token = mutations.RevokeToken.Field()
+    logout = mutations.RevokeToken.Field()
     refresh_token = mutations.RefreshToken.Field()
