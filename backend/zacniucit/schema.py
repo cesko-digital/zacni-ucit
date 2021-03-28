@@ -10,7 +10,7 @@ from graphql_auth.schema import MeQuery
 
 class Query(
     MeQuery,
-    qualifications.graphql.schema,
+    qualifications.graphql.schema.Query,
     colleges.graphql.schema.Query,
     teaching.graphql.schema.Query,
     graphene.ObjectType,
