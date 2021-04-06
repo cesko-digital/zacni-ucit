@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { setPasswordMutation } from '../../queries/authorazation.mutations';
 import { useRouter } from 'next/router';
-import MiddleContainer from '../../components/MiddleContainer.component';
 
 const Wrapper = styled.div`
   display: flex;
