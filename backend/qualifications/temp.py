@@ -312,8 +312,6 @@ Zemědělství		PŘ	F	ENV
 def init_education_type():
     """
     Zdroj dat: https://docs.google.com/spreadsheets/d/1W7xre-g4S_Y4LieKOHf-cIScdvU4Gp_i_4Ywvr5nw-8/edit#gid=1514467189
-
-    TODO: David Š: Zatím tam není strojově čitelná podoba dat. Až dostanu práva na write, upravím to google sheetu
     """
     data = """
 TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
