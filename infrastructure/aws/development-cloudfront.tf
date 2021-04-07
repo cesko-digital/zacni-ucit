@@ -5,16 +5,11 @@ resource "aws_cloudfront_origin_access_identity" "default" {
 
 resource "aws_cloudfront_distribution" "frontend_cloudfront" {
   origin {
-    domain_name = aws_s3_bucket.frontend.bucket_regional_domain_name
-    origin_id = "S3-${aws_s3_bucket.frontend.id}"
+    domain_name = "${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
+    origin_id   = "S3-Website-${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.default.cloudfront_access_identity_path
     }
-  }
-  origin {
-    domain_name = "${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
-    origin_id   = "S3-Website-${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
-
     custom_origin_config {
       http_port              = 80
       https_port             = 443
@@ -32,7 +27,7 @@ resource "aws_cloudfront_distribution" "frontend_cloudfront" {
   default_root_object = "index.html"
 
   aliases = [
-    "${var.codename-domain}-development-cloudfront"
+    "${var.codename}.ceskodigital.net"
   ]
 
   default_cache_behavior {
@@ -42,7 +37,7 @@ resource "aws_cloudfront_distribution" "frontend_cloudfront" {
     cached_methods   = [
       "GET",
       "HEAD"]
-    target_origin_id = "S3-${aws_s3_bucket.frontend.id}"
+    target_origin_id = "S3-Website-${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
 
     forwarded_values {
       query_string = false
