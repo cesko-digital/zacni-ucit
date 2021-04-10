@@ -6,7 +6,7 @@ resource "aws_cloudfront_origin_access_identity" "default" {
 resource "aws_cloudfront_distribution" "frontend_cloudfront" {
   origin {
     domain_name = "${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
-    origin_id   = "S3-Website-${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
+    origin_id   = aws_s3_bucket.frontend.id
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.default.cloudfront_access_identity_path
     }
