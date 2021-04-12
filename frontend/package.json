@@ -16,6 +16,7 @@
     "graphql": "^15.5.0",
     "import": "^0.0.6",
     "next": "10.0.5",
+    "next-auth": "^3.13.0",
     "next-images": "^1.7.0",
     "prettier": "^2.2.1",
     "react": "17.0.1",
