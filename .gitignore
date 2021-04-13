@@ -44,3 +44,4 @@ frontend/.vercel
 # terraform
 .terraform
 .terraform.lock.hcl
+*.tfvars
