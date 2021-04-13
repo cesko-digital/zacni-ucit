@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { setPasswordMutation } from '../../queries/authorazation.mutations';
+import { setPasswordMutation } from '../../queries/authorization.mutations';
 import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`

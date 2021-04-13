@@ -9,7 +9,7 @@ RUN yarn install
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
 WORKDIR /app
-COPY . .
+ADD . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN yarn build
 

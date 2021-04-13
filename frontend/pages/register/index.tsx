@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { registerMutation } from '../../queries/authorazation.mutations';
+import { registerMutation } from '../../queries/authorization.mutations';
 
 const Wrapper = styled.div`
   display: flex;

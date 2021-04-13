@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   loginMutation,
-  registerMutation,
-} from '../../queries/authorazation.mutations';
+} from '../../queries/authorization.mutations';
 
 const Wrapper = styled.div`
   display: flex;
