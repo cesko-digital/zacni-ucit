@@ -185,7 +185,7 @@ resource "aws_db_instance" "database" {
   max_allocated_storage   = 1000
   storage_type            = "gp2"
   engine                  = "postgres"
-  engine_version          = "12.4"
+  engine_version          = "12.5"
   instance_class          = "db.t3.small"
   name                    = "${var.codename}development"
   backup_retention_period = 7
