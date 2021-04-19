@@ -2,8 +2,8 @@ import baseStyled, { ThemedStyledInterface } from 'styled-components';
 
 export const theme = {
   color: {
-    primary: '#1C1C1C' /* dark black */,
-    secondary: '#404FA7' /* violet */,
+    primary: '#5227CC' /* violet */,
+    secondary: '#0C0807' /* dark black */,
     error: '#EA4435' /* red */,
     gray: '#e5e5e5',
   },

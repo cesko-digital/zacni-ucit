@@ -3,8 +3,18 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'Hind';
-    src: url('../fonts/hind-v11-latin-regular.woff2') format('opentype');
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/Roboto-Bold.ttf') format('opentype');
+    font-weight: 100;
+  }
+  @font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.ttf') format('opentype');
+    font-weight: 100;
+  }
+  @font-face {
+    font-family: 'Roboto-Light';
+    src: url('../fonts/Roboto-Light.ttf') format('opentype');
     font-weight: 100;
   }
 
@@ -26,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-size: 1.5rem;
-    font-family: 'Hind';
+    font-family: 'Roboto-Regular', sans-serif;
   }
 
   #root {

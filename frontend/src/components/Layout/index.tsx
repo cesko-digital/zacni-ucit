@@ -1,10 +1,19 @@
-import React, { FC, ReactNode } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, ReactNode, useState } from 'react';
+// import { connect } from 'react-redux';
 
 // import { AppState } from '../../store';
 import * as routes from '../../routes';
+import menu from '../../constants/menu';
 
-import { Wrapper, Header, HeaderSection, HeaderLink } from './styled';
+import {
+  Wrapper,
+  Header,
+  HeaderSection,
+  HeaderLink,
+  Burger,
+  Logo,
+} from './styled';
+import { Navbar } from './Navbar';
 
 // type Props = ReturnType<typeof mapStateToProps> & {
 //   children: ReactNode;
@@ -17,25 +26,31 @@ const Layout: FC<Props> = ({ children }) => {
   const isAuthenticated = true;
   return (
     <>
-      <Header>
-        <HeaderSection>
-          <HeaderLink href={routes.PRODUCT_LIST}>All Products</HeaderLink>
+      {/* <HeaderSection>
+          <Logo href={routes.HOMEPAGE}>ZačniUČIT</Logo>
         </HeaderSection>
         <HeaderSection>
-          <HeaderLink href={routes.ACCOUNT}>My Cart</HeaderLink>|
+          <Burger onClick={() => setNavbarIsOpened(!navbarIsOpened)}>
+            &#9776;
+          </Burger>
+          {menu?.map((item, idx) => (
+            <HeaderLink key={idx} href={item.route}>
+              {item.label}
+            </HeaderLink>
+          ))}
           {isAuthenticated ? (
             <>
-              <HeaderLink href={routes.ACCOUNT}>My Account</HeaderLink>|
-              <HeaderLink href={routes.LOGOUT}>Logout</HeaderLink>
+              <HeaderLink href={routes.ACCOUNT}>Můj účet</HeaderLink>
+              <HeaderLink href={routes.LOGOUT}>Odhlásit</HeaderLink>
             </>
           ) : (
             <>
-              <HeaderLink href={routes.LOGIN}>Log In</HeaderLink> |
-              <HeaderLink href={routes.SIGN_UP}>Sign Up</HeaderLink>
+              <HeaderLink href={routes.LOGIN}>Přihlásit</HeaderLink> |
+              <HeaderLink href={routes.SIGN_UP}>Registrovat</HeaderLink>
             </>
           )}
-        </HeaderSection>
-      </Header>
+        </HeaderSection> */}
+      <Navbar />
       <Wrapper>{children}</Wrapper>
     </>
   );
