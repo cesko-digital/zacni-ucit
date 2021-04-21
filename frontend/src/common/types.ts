@@ -8,3 +8,7 @@ export type TeacherType = {
     };
   };
 };
+export type POC = {
+  childrenOfAge: string;
+  selectedSubjects: Array<{ subjectName: string; checked: boolean }>;
+};
