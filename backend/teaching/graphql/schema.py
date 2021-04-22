@@ -20,7 +20,7 @@ class Query(graphene.ObjectType):
         preparation_type_ids=graphene.List(graphene.Int, required=False),
         subjects_type_ids=graphene.List(graphene.Int, required=False),
         education_type_ids=graphene.List(graphene.Int, required=False),
-        other_option_ids=graphene.List(graphene.Int, required=False)
+        other_option_ids=graphene.List(graphene.Int, required=False),
     )
 
     @staticmethod
@@ -35,17 +35,17 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_need_to_study(
-            root,
-            info,
-            school_level_ids: list,
-            subjects_ids: list,
-            title_ids: list,
-            college_programme_ids: list = None,
-            college_area_ids: list = None,
-            education_area_ids: list = None,
-            preparation_type_ids: list = None,
-            subjects_type_ids: list = None,
-            other_option_ids: list = None
+        root,
+        info,
+        school_level_ids: list,
+        subjects_ids: list,
+        title_ids: list,
+        college_programme_ids: list = None,
+        college_area_ids: list = None,
+        education_area_ids: list = None,
+        preparation_type_ids: list = None,
+        subjects_type_ids: list = None,
+        other_option_ids: list = None,
     ):
         # TODO add cypher query for and filter courses based on result
         return Course.objects.all()

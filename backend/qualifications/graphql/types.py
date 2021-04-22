@@ -1,8 +1,16 @@
 from graphene_django import DjangoObjectType
 from graphene_django.types import ALL_FIELDS
 
-from qualifications.models import Title, CollegeArea, CollegeProgramme, EducationArea, PreparationType, SubjectType, \
-    EducationType, OtherOption
+from qualifications.models import (
+    Title,
+    CollegeArea,
+    CollegeProgramme,
+    EducationArea,
+    PreparationType,
+    SubjectType,
+    EducationType,
+    OtherOption,
+)
 
 
 class TitleObjectType(DjangoObjectType):

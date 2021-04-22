@@ -1,9 +1,23 @@
 import graphene
-from qualifications.graphql.types import TitleObjectType, CollegeAreaObjectType, CollegeProgrammeObjectType, \
-    EducationAreaObjectType, PreparationTypeObjectType, SubjectTypeObjectType, EducationTypeObjectType, \
-    OtherOptionObjectType
-from qualifications.models import Title, CollegeArea, CollegeProgramme, EducationArea, PreparationType, SubjectType, \
-    OtherOption
+from qualifications.graphql.types import (
+    TitleObjectType,
+    CollegeAreaObjectType,
+    CollegeProgrammeObjectType,
+    EducationAreaObjectType,
+    PreparationTypeObjectType,
+    SubjectTypeObjectType,
+    EducationTypeObjectType,
+    OtherOptionObjectType,
+)
+from qualifications.models import (
+    Title,
+    CollegeArea,
+    CollegeProgramme,
+    EducationArea,
+    PreparationType,
+    SubjectType,
+    OtherOption,
+)
 
 
 class Query(graphene.ObjectType):
