@@ -86,7 +86,7 @@ FOREACH(l IN levels |
     MERGE (t)-[:DEFINED_BY]->(l)));
 
 
-MATCH (NODE) WHERE NODE.name IN ["None", "Any", "Any kromě cizí jazyk"]
-DETACH DELETE NODE;
+MATCH (node) WHERE node.name IN ["None", "Any", "Any kromě cizí jazyk"]
+DETACH DELETE node;
 
 
