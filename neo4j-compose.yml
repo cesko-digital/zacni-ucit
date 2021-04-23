@@ -3,11 +3,10 @@ version: '3'
 services:
   neo4j:
     image: neo4j:4.2
-    env_file: ./backend/.env
     volumes:
       - ./data_import/files:/var/lib/neo4j/import
     environment:
-      NEO4J_AUTH: "neo4j/pass1234"
+      NEO4J_AUTH: "neo4j/mpLFxTJG2WrJY2avsR"
     ports:
       - "7474:7474"
       - "7687:7687"
