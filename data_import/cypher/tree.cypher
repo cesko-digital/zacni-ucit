@@ -8,14 +8,15 @@ MERGE (title1:EducationTitle {name: row[3]})
 MERGE (title1Level1:SchoolLevel {name: row[4]})
 MERGE (title1Level2:SchoolLevel {name: row[5]})
 MERGE (title1Subject:Subject {name: row[6]})
-MERGE (title1Field:StudyField {name: row[7]})
+MERGE (title1Field:CollegeArea {name: row[7]})
 MERGE (title1Char:StudyCharacteristic {name: row[8]})
 
 MERGE (title2:EducationTitle {name: row[11]})
 MERGE (title2Level:SchoolLevel {name: row[12]})
 MERGE (title2Subject:Subject {name: row[13]})
-MERGE (title2Field:StudyField {name: row[14]})
+MERGE (title2Field:CollegeArea {name: row[14]})
 MERGE (title2Char:StudyCharacteristic {name: row[15]})
+
 MERGE (courseLevel:SchoolLevel {name: row[18]})
 
 MERGE (experience1:OtherExperience {name: row[21]})
@@ -24,6 +25,8 @@ MERGE (experience2:OtherExperience {name: row[23]})
 MERGE (eduTypeTitle1:EducationType {name: row[9], title: row[3], type: "title"})
 MERGE (eduTypeTitle2:EducationType {name: row[16], title: row[11], type: "title"})
 MERGE (eduTypeCourse:EducationType {name: row[19], type: "course"})
+
+MERGE (eduTypeCourse)-[:DEFINED_BY]->(courseLevel)
 
 MERGE (eduTypeTitle1)-[:DEFINED_BY]->(title1)
 MERGE (eduTypeTitle1)-[:DEFINED_BY]->(title1Level2)
@@ -41,6 +44,7 @@ MERGE (eduTypeTitle2)-[:DEFINED_BY]->(title2Char)
 MERGE (qualification:Qualification {legalParagraph: row[25], example: row[27], rowId: row[28]})
 MERGE (qualification)-[:COMBINES]->(eduTypeTitle1)
 MERGE (qualification)-[:COMBINES]->(eduTypeTitle2)
+MERGE (qualification)-[:COMBINES]->(eduTypeCourse)
 MERGE (qualification)-[:COMBINES]->(experience1)
 MERGE (qualification)-[:COMBINES]->(experience2)
 MERGE (qualification)-[:QUALIFIES_FOR]->(teachingLevel)
@@ -54,8 +58,8 @@ subject.name CONTAINS 'předměty' OR subject.name CONTAINS 'jazyk'
 SET subject:SubjectGroup;
 
 //Connect any study field
-MATCH (type:EducationType)-[r]->(old:StudyField {name: 'Any'})
-MATCH (field:StudyField)
+MATCH (type:EducationType)-[r]->(old:CollegeArea {name: 'Any'})
+MATCH (field:CollegeArea)
 WITH type, COLLECT(field) AS fields, COLLECT(type) AS types
 FOREACH(f IN fields |
   FOREACH (t IN types |
