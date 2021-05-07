@@ -54,7 +54,7 @@ MERGE (qualification)-[:QUALIFIES_FOR]->(teachingSubject);
 
 
 MATCH (subject:Subject) WHERE
-subject.name CONTAINS 'předměty' OR subject.name CONTAINS 'jazyk'
+subject.name CONTAINS 'předměty' OR subject.name CONTAINS 'cizí jazyk' OR subject.name CONTAINS 'tělesná výchova' OR subject.name CONTAINS 'výcvik' OR subject.name CONTAINS 'konverzace'
 SET subject:SubjectGroup;
 
 //Connect any study field
