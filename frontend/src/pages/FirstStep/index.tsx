@@ -19,8 +19,8 @@ export const FirstStep = () => {
     <main>
       <h2>Který stupeň chcete učit?</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="components">Stupeň: </label>
-        <select {...register('component')} name="components" id="components">
+        <label htmlFor="degree">Stupeň: </label>
+        <select {...register('degree')} name="degree" id="degree">
           <option value="firstLevel">1. stupeň ZŠ</option>
           <option value="secondLevel">2. stupeň ZŠ</option>
           <option value="highschool">SŠ</option>
@@ -36,10 +36,12 @@ export const FirstStep = () => {
           <Input key={idx} type="checkbox" label={item} name={item} />
         ))}
         <h2>Doplňte studijní specializaci</h2>
-        <label htmlFor="components">
-          Ze kterého oboru máte Magisterské vzdělání?
-        </label>
-        <select {...register('component')} name="components" id="components">
+        <h3>Ze kterého oboru máte Magisterské vzdělání?</h3>
+        <select
+          {...register('magisterFrom')}
+          name="magisterFrom"
+          id="magisterFrom"
+        >
           <option value="pedagogika">Pedagogika</option>
           <option value="specializace1">Specialicace 1</option>
           <option value="specializace2">Specialzace 2</option>
@@ -50,6 +52,29 @@ export const FirstStep = () => {
         <Input type="checkbox" label="1. stupeň" name="level" />
         <Input type="checkbox" label="2. stupeň" name="level" />
         <Input type="checkbox" label="SŠ" name="level" />
+        <br />
+        <h4>Který předmět?</h4>
+        <select {...register('subject')} name="subject" id="subject">
+          <option value="vvp">Všeobecně vzdělávací předměty</option>
+          <option value="specializace1">Předmět 1</option>
+          <option value="specializace2">Předmět 2</option>
+        </select>
+        <br />
+        <h3>
+          Máte další relevantní zkušenosti pro učení {'===vybraný předmět==='}
+        </h3>
+        <select
+          {...register('otherExperience')}
+          name="otherExperience"
+          id="otherExperience"
+        >
+          <option value="hv">
+            Doplňující studium k rozšíření odborné kvalifikace pro obor učitel
+            hudební výchovy pro 2. stupeň ZŠ, absolvováno na univerzitě
+          </option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
         <br />
         {/* <div>
           <label htmlFor="redux">
