@@ -1,29 +1,17 @@
-MATCH (teachingLevel:SchoolLevel {name: "SŠ"})<-[:QUALIFIES_FOR]-(qualification:Qualification)
-MATCH (teachingSubject:Subject {name: "cizí jazyk"})<-[:QUALIFIES_FOR]-(qualification)
-MATCH (achievedTitle:EducationTitle {name: "Bc."})<-[:DEFINED_BY]-(type:EducationType)
-MATCH (achievedField:CollegeArea {name: "Učitelství"})<-[:DEFINED_BY]-(type)
-MATCH (toStudy:EducationType)<-[:COMBINES]-(qualification)-[:COMBINES]->(type) WHERE toStudy <> type
-RETURN toStudy
-
-
-MATCH (teachingLevel:SchoolLevel {name: "SŠ"})<-[:QUALIFIES_FOR]-(qualification:Qualification)
-MATCH (teachingSubject:Subject {name: "cizí jazyk"})<-[:QUALIFIES_FOR]-(qualification)
-MATCH (achievedTitle:EducationTitle {name: "Mgr."})<-[:DEFINED_BY]-(type:EducationType)
-MATCH (achievedField:CollegeArea {name: "Stavebnictví"})<-[:DEFINED_BY]-(type)
-MATCH (toStudy:EducationType)<-[:COMBINES]-(qualification)-[:COMBINES]->(type) WHERE toStudy <> type
-RETURN toStudy
-
-
-MATCH (teachingLevel:SchoolLevel {name: "SŠ"})<-[:QUALIFIES_FOR]-(qualification:Qualification)
+MATCH (teachingLevel:SchoolLevel {name: "2. stupeň ZŠ"})<-[:QUALIFIES_FOR]-(qualification:Qualification)
 MATCH (teachingSubject:Subject {code: "M"})-[:IS_PART_OF]->(teachingSubjectGroup:SubjectGroup)<-[:QUALIFIES_FOR]-(qualification)
 MATCH (achievedTitle:EducationTitle {name: "Mgr."})<-[:DEFINED_BY]-(type:EducationType)
 MATCH (achievedField:CollegeArea {name: "Stavebnictví"})<-[:DEFINED_BY]-(type)
+MATCH (character:StudyCharacteristic)  WHERE ((teachingSubject)<-[:QUALIFIES_FOR]-(achievedField)<-[:DEFINED_BY]-(type)–[:DEFINED_BY]->(character) AND character.name = 'Odborný') OR character.name <> 'Odborný'
 MATCH (toStudy:EducationType)<-[:COMBINES]-(qualification)-[:COMBINES]->(type) WHERE toStudy <> type
-RETURN toStudy
+RETURN toStudy.name, qualification.rowId
+
+
+create (achievedField:CollegeArea {name: "Stavebnictví"})-[:QUALIFIES_FOR]->(teachingSubject:Subject {code: "M"})
 
 
 MATCH (teachingSubject:Subject {code: "M"})-[:IS_PART_OF]->(teachingSubjectGroup:SubjectGroup)<-[:QUALIFIES_FOR]-(qualification)
 RETURN teachingSubject, teachingSubjectGroup, qualification
 
-mATCH (teachingSubjectGroup:SubjectGroup)<-[:QUALIFIES_FOR]-(qualification)
+MATCH (teachingSubjectGroup:SubjectGroup)<-[:QUALIFIES_FOR]-(qualification)
 RETURN  teachingSubjectGroup, qualification
