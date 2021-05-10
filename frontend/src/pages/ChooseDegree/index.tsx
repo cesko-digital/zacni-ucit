@@ -4,7 +4,7 @@ import { Input } from '../../components/Input';
 import subjects from '../../constants/subjects';
 import education from '../../constants/education';
 
-export const FirstStep = () => {
+export const ChooseDegree = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (e) => {

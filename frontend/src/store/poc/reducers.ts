@@ -1,10 +1,11 @@
 import { SET_SIDEBAR_IS_DISPLAYED, LayoutAction } from './actions';
-import { LayoutType } from '../../common/types';
+import { POC } from '../../common/types';
 
-export type LayoutState = LayoutType | null;
+export type LayoutState = POC | null;
 
 const initialState: LayoutState = {
-  sidebarIsDisplayed: true,
+  degree: '',
+  selectedSubjects: [{ subjectName: '', checked: false }],
 };
 
 const reducer = (

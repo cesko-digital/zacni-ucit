@@ -4,7 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 // import { getCustomer } from "../../api/customers/get-customer";
 // import * as routes from "../../routes";
 
-import { LayoutType } from '../../common/types';
+import { POC } from '../../common/types';
 // import { setToken, removeToken } from "../../utils/token";
 // import { setRefreshToken, removeRefreshToken } from "../../utils/refresh-token";
 // import { removeCustomer } from "../../utils/customer";
@@ -23,7 +23,7 @@ export type LayoutAction = ReturnType<
 
 export type Dispatch = ThunkDispatch<{}, {}, LayoutAction>;
 
-export const setSidebarIsDisplayed = (rule: LayoutType) => ({
+export const setSidebarIsDisplayed = (rule: POC) => ({
   type: SET_SIDEBAR_IS_DISPLAYED,
   payload: { rule },
 });

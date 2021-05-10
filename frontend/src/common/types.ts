@@ -9,6 +9,6 @@ export type TeacherType = {
   };
 };
 export type POC = {
-  childrenOfAge: string;
+  degree: string;
   selectedSubjects: Array<{ subjectName: string; checked: boolean }>;
 };

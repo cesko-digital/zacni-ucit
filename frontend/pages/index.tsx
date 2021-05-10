@@ -1,3 +1,3 @@
-import { FirstStep } from '../src/pages/FirstStep';
+import { ChooseDegree } from '../src/pages/ChooseDegree';
 
-export default FirstStep;
+export default ChooseDegree;
