@@ -1,13 +1,13 @@
 import graphene
 
-from colleges.graphql.types import CollegeType
+from colleges.graphql.types import CollegeObjectType
 from common.choices import ErrorCode
 from common.mutations import BaseMutation, MutationValidationError
 from colleges.models import College
 
 
 class UpdateCollegeName(BaseMutation):
-    college = graphene.Field(CollegeType)
+    college = graphene.Field(CollegeObjectType)
 
     class Arguments:
         name = graphene.String(required=True)

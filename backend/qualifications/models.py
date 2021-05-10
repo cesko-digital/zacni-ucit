@@ -159,7 +159,7 @@ class EducationType(TimeStampedModel, GraphModel):
             ("-", "BELONGS_TO", "->", "area"),
             # EducationType - BELONGS_TO -> PreparationType
             ("-", "BELONGS_TO", "->", "preparation_type"),
-            # EducationType - BELONGS_TO -> SubjectType
+            # EducationType - BELONGS_TO -> SubjectObjectType
             ("-", "BELONGS_TO", "->", "subject_type"),
             # EducationType <- BELONGS_TO - SchoolLevel
             ("<-", "BELONGS_TO", "-", "school_levels"),
