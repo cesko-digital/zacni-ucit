@@ -5,7 +5,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
-import * as config from './config/config.json';
+import config from './src/config';
 
 let apolloClient;
 

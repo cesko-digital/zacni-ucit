@@ -1,15 +1,3 @@
-import React from 'react';
-import styled from 'styled-components';
+import { FirstStep } from '../src/pages/FirstStep';
 
-const Wrap = styled.div`
-  background-color: #dddddd;
-`;
-
-const App = () => {
-  return (
-    <>
-      <Wrap>Home</Wrap>
-    </>
-  );
-};
-export default App;
+export default FirstStep;

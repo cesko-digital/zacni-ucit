@@ -1,0 +1,11 @@
+export const HOMEPAGE = '/';
+export const QUALIFICATION = '/kvalifikace';
+export const WORK_FOR_EDUCATION = '/prace-ve-skolstvi';
+export const TEACHING_START = '/zacinam-ucit';
+export const MOTIVATION = '/motivace';
+export const ABOUT_US = '/o-nas';
+export const CONTACT = '/kontakt';
+export const SIGN_UP = '/registrace';
+export const LOGIN = '/login';
+export const ACCOUNT = '/ucet';
+export const LOGOUT = '/logout';
