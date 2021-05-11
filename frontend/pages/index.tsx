@@ -1,15 +1,3 @@
-import React from 'react';
-import styled from 'styled-components';
+import { ChooseDegree } from '../src/pages/ChooseDegree';
 
-const Wrap = styled.div`
-  background-color: #dddddd;
-`;
-
-const App = () => {
-  return (
-    <>
-      <Wrap>Home</Wrap>
-    </>
-  );
-};
-export default App;
+export default ChooseDegree;

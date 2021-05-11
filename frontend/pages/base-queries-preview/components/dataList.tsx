@@ -1,18 +1,5 @@
-import { useQuery } from '@apollo/client';
-import { DocumentNode, GraphQLType } from 'graphql';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { allTitlesQuery } from '../../queries/tmp.queries';
-
-const ListContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-const ListItem = styled.div`
-  margin: 2px;
-`;
 
 const LoadingText = styled.p`
   color: #555;
