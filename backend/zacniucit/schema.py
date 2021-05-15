@@ -4,6 +4,7 @@ import colleges.graphql.mutations
 import teaching.graphql.schema
 import qualifications.graphql.schema
 import accounts.graphql.mutations
+import teaching.graphql.mutations
 
 from graphql_auth.schema import MeQuery
 
@@ -18,7 +19,12 @@ class Query(
     is_alive = graphene.Boolean(description="Base API test")
 
 
-class Mutations(accounts.graphql.mutations.Mutations, colleges.graphql.mutations.Mutations, graphene.ObjectType):
+class Mutations(
+    accounts.graphql.mutations.Mutations,
+    colleges.graphql.mutations.Mutations,
+    teaching.graphql.mutations.Mutations,
+    graphene.ObjectType
+):
     pass
 
 
