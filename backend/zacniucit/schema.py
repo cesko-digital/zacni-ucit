@@ -23,7 +23,7 @@ class Mutations(
     accounts.graphql.mutations.Mutations,
     colleges.graphql.mutations.Mutations,
     teaching.graphql.mutations.Mutations,
-    graphene.ObjectType
+    graphene.ObjectType,
 ):
     pass
 
