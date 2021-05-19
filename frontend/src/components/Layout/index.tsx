@@ -4,6 +4,7 @@ import React, { FC, ReactNode, useState } from 'react';
 // import { AppState } from '../../store';
 import * as routes from '../../routes';
 import menu from '../../constants/menu';
+import Image from 'next/image';
 
 import {
   Wrapper,
@@ -14,6 +15,8 @@ import {
   Logo,
 } from './styled';
 import { Navbar } from './Navbar';
+import Footer from '../../components/Layout/Footer';
+import { useRouter } from 'next/router';
 
 // type Props = ReturnType<typeof mapStateToProps> & {
 //   children: ReactNode;
@@ -23,6 +26,7 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children }) => {
+  const router = useRouter();
   const isAuthenticated = true;
   return (
     <>
@@ -52,6 +56,7 @@ const Layout: FC<Props> = ({ children }) => {
         </HeaderSection> */}
       <Navbar />
       <Wrapper>{children}</Wrapper>
+      {router.pathname === '/vysledky-hledani' ? null : <Footer />}
     </>
   );
 };

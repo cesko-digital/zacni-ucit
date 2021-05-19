@@ -1,10 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Input } from '../../components/Input';
+import Image from 'next/image';
+import bgImage from '../../../public/images/home-background.png';
+import { HomeImageWrap } from './styled';
 import subjects from '../../constants/subjects';
 import education from '../../constants/education';
 
-export const ChooseDegree = () => {
+export const Home = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (e) => {
@@ -17,16 +20,14 @@ export const ChooseDegree = () => {
 
   return (
     <main>
+      <HomeImageWrap>
+        <Image src={bgImage} width={1000} height="auto" />
+      </HomeImageWrap>
       <h2>Který stupeň chcete učit?</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="degree">Stupeň: </label>
-        <select {...register('degree')} name="degree" id="degree">
-          <option value="firstLevel">1. stupeň ZŠ</option>
-          <option value="secondLevel">2. stupeň ZŠ</option>
-          <option value="highschool">SŠ</option>
-        </select>
-        <br />
-        <br />
+      <Input label="1.Stupeň ZŠ" name="firstDegree" type="radio" />
+      <Input label="2.Stupeň ZŠ" name="secondDegree" type="radio" />
+      <Input label="SŠ" name="highSchool" type="radio" />
+      {/* <br />
         <h2>Který předmět chcete učit?</h2>
         {subjects.map((item, idx) => (
           <Input key={idx} type="checkbox" label={item} name={item} />
@@ -90,9 +91,8 @@ export const ChooseDegree = () => {
             Connect to Redux
           </label>
         </div> */}
-        <br />
-        <input type="submit" value="Výsledky" />
-      </form>
+      {/* <br /> */}
+      {/* <input type="submit" value="Výsledky" /> */}
     </main>
   );
 };

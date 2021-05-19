@@ -19,8 +19,8 @@ export const Navbar: FC<Props> = () => {
           />
           <Logo>ZačniUČIT</Logo>
           <List listOpened={listOpened}>
-            {menuItems.map((item) => (
-              <Item>
+            {menuItems.map((item, idx) => (
+              <Item key={idx}>
                 <Link href={item.route}>
                   <NavLink>{item.label}</NavLink>
                 </Link>
