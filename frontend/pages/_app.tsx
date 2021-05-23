@@ -5,6 +5,7 @@ import GlobaLStyles from '../src/globalStyles';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../apolloClient';
 import Head from 'next/head';
+import { wrapper } from '../src/store';
 
 const MyApp = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -27,4 +28,4 @@ const MyApp = ({ Component, pageProps }) => {
   );
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

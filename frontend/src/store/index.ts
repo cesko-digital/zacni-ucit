@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { isBrowser } from '../utils/is-browser';
 import teacher from './teacher/reducer';
+import firstStep from './firstStep/reducer';
 import { createWrapper } from 'next-redux-wrapper';
 
 const reducer = combineReducers({
   teacher,
+  firstStep,
 });
 
 export type AppStore = ReturnType<typeof makeStore>;

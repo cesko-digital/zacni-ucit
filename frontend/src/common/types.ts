@@ -8,7 +8,10 @@ export type TeacherType = {
     };
   };
 };
-export type POC = {
-  degree: string;
-  selectedSubjects: Array<{ subjectName: string; checked: boolean }>;
-};
+
+export type FirstStepForm = Array<{
+  id: string;
+  htmlId: string;
+  label: string;
+  checked: boolean;
+}>;

@@ -7,7 +7,8 @@ import menu from '../../constants/menu';
 import Image from 'next/image';
 
 import {
-  Wrapper,
+  Wrap,
+  MainWrap,
   Header,
   HeaderSection,
   HeaderLink,
@@ -18,9 +19,6 @@ import { Navbar } from './Navbar';
 import Footer from '../../components/Layout/Footer';
 import { useRouter } from 'next/router';
 
-// type Props = ReturnType<typeof mapStateToProps> & {
-//   children: ReactNode;
-// };
 type Props = {
   children: ReactNode;
 };
@@ -29,7 +27,7 @@ const Layout: FC<Props> = ({ children }) => {
   const router = useRouter();
   const isAuthenticated = true;
   return (
-    <>
+    <MainWrap homePage={router.pathname === '/'}>
       {/* <HeaderSection>
           <Logo href={routes.HOMEPAGE}>ZačniUČIT</Logo>
         </HeaderSection>
@@ -55,9 +53,9 @@ const Layout: FC<Props> = ({ children }) => {
           )}
         </HeaderSection> */}
       <Navbar />
-      <Wrapper>{children}</Wrapper>
+      <Wrap>{children}</Wrap>
       {router.pathname === '/vysledky-hledani' ? null : <Footer />}
-    </>
+    </MainWrap>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { FooterSection, RowWrapper, FooterText } from './styled';
 import Image from 'next/image';
 import hatIcon from '../../../../public/images/hat-icon.svg';
