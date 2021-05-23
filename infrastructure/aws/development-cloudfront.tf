@@ -1,11 +1,10 @@
-
 resource "aws_cloudfront_origin_access_identity" "default" {
   comment = "CloudFront Origin Identity"
 }
 
 resource "aws_cloudfront_distribution" "frontend_cloudfront" {
   origin {
-    domain_name = "${aws_s3_bucket.frontend.bucket_domain_name}"
+    domain_name = aws_s3_bucket.frontend.bucket_domain_name
     origin_id   = "S3-Website-${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.default.cloudfront_access_identity_path
@@ -61,6 +60,6 @@ resource "aws_cloudfront_distribution" "frontend_cloudfront" {
     error_code            = 403
     error_caching_min_ttl = 300
     response_code         = 200
-    response_page_path    = "/index.html"
+    response_page_path    = "/404.html"
   }
 }
