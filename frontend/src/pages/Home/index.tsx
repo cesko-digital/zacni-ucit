@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 import { useRouter } from 'next/router';
 import { Input } from '../../components/Input';
 import { H1, H2, LightText } from '../../components/Typography';
-import Image from 'next/image';
-import bgImage from '../../../public/images/home-background.png';
-import { HomeImageWrap, Wrap, HeadTitle } from './styled';
-import subjects from '../../constants/subjects';
-import education from '../../constants/education';
+import { Wrap } from './styled';
 import StyleWrapper from '../../components/StyledWrapper';
-import { List, Map } from 'immutable';
 import { AppState } from '../../store/';
 import { connect } from 'react-redux';
 import { updateFirstStep } from '../../store/firstStep/actions';
@@ -17,9 +12,10 @@ import { FirstStepForm } from '../../common/types';
 type Props = {
   stages: Array<FirstStepForm>;
   updateFirstStep: typeof updateFirstStep;
+  firstStep: FirstStepForm;
 };
 
-const Home = ({ updateFirstStep, firstStep }) => {
+const Home: FC<Props> = ({ updateFirstStep, firstStep }) => {
   const router = useRouter();
   return (
     <Wrap>
