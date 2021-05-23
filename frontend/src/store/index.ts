@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import { isBrowser } from '../utils/is-browser';
 import teacher from './teacher/reducer';
 import firstStep from './firstStep/reducer';
+import secondStep from './secondStep/reducer';
 import { createWrapper } from 'next-redux-wrapper';
 
 const reducer = combineReducers({
   teacher,
   firstStep,
+  secondStep,
 });
 
 export type AppStore = ReturnType<typeof makeStore>;

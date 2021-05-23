@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { Input } from '../../components/Input';
 import { H1, H2, LightText } from '../../components/Typography';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import bgImage from '../../../public/images/home-background.png';
 import { HomeImageWrap, Wrap, HeadTitle } from './styled';
 import subjects from '../../constants/subjects';
 import education from '../../constants/education';
-import StyleWrapper from '../../components/Margin';
+import StyleWrapper from '../../components/StyledWrapper';
 import { List, Map } from 'immutable';
 import { AppState } from '../../store/';
 import { connect } from 'react-redux';
@@ -20,12 +20,13 @@ type Props = {
 };
 
 const Home = ({ updateFirstStep, firstStep }) => {
+  const router = useRouter();
   return (
     <Wrap>
       <StyleWrapper margin="4rem 0 1rem 0">
         <H1>Začni učit</H1>
       </StyleWrapper>
-      <StyleWrapper margin="0 0 10rem 0">
+      <StyleWrapper margin="0 0 8rem 0">
         <LightText>
           Chcete se stát pedagogem? Pomůžeme vám! Zjistěte, jestli musíte ještě
           studovat, než můžete začít učit.
@@ -48,6 +49,17 @@ const Home = ({ updateFirstStep, firstStep }) => {
               }}
             />
           ))}
+        </StyleWrapper>
+        <StyleWrapper textAlign="center">
+          <Input
+            value="Vybrat předměty   >"
+            type="button"
+            padding="1.5rem 2rem"
+            margin="2.5rem 0 0 0"
+            onClick={() => {
+              router.push('/vyber-predmetu');
+            }}
+          />
         </StyleWrapper>
       </form>
     </Wrap>

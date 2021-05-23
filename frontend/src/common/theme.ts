@@ -18,6 +18,7 @@ export const theme = {
   },
   radius: {
     basic: '5px',
+    max: '50px',
   },
 };
 

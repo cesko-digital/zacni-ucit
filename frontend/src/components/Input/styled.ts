@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 const defaultLabelStyle = css`
   font-size: ${({ theme }) => theme.fontSize.medium};
-  margin-left: 1rem;
 `;
 const radioLabelStyle = (checked) => css`
   background-color: ${({ theme }) =>
@@ -21,14 +20,27 @@ export const Wrapper = styled.div`
   /* margin-left: 1.6rem; */
 `;
 
-export const StyledInput = styled.input<{ hasError?: boolean }>`
+export const StyledInput = styled.input<{
+  hasError?: boolean;
+  type: string;
+  bgColor: string;
+  color: string;
+  padding: string;
+  margin: string;
+}>`
+  padding: ${({ padding }) => (!!padding ? padding : '1rem 1.2rem')};
+  margin: ${({ margin }) => (!!margin ? margin : '0')};
+  width: 100%;
   border: 2px solid
     ${({ hasError }) => ({ theme }) =>
       hasError ? theme.color.red : theme.color.gray};
-  border-radius: ${({ theme }) => theme.radius.basic};
-  font-size: ${({ theme }) => theme.fontSize.medium};
+  border-radius: ${({ theme, type }) =>
+    type === 'button' ? theme.radius.max : theme.radius.basic};
+  background-color: ${({ theme, bgColor }) =>
+    !!bgColor ? bgColor : theme.color.secondary};
+  color: ${({ theme, color }) => (!!color ? color : 'white')};
+  font-size: ${({ theme }) => theme.fontSize.normal};
   font-weight: 100;
-  padding: 1rem 1.2rem;
   ${({ type }) => (type === 'radio' ? 'display: none;' : null)}
 `;
 

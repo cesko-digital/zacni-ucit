@@ -8,8 +8,13 @@ export type TeacherType = {
     };
   };
 };
-
 export type FirstStepForm = Array<{
+  id: string;
+  htmlId: string;
+  label: string;
+  checked: boolean;
+}>;
+export type SecondStepForm = Array<{
   id: string;
   htmlId: string;
   label: string;

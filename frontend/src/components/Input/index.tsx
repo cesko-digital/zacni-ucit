@@ -4,10 +4,15 @@ import { ChangeEventHandler } from 'react';
 import { Wrapper, Label, StyledInput } from './styled';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
-  label: string;
-  id: string;
-  name: string;
+  label?: string;
+  id?: string;
+  name?: string;
   checked?: boolean;
+  value?: string;
+  bgColor?: string;
+  color?: string;
+  padding?: string;
+  margin?: string;
   onChange?: (
     e: ChangeEventHandler<HTMLInputElement> & ChangeEvent<Element>
   ) => void;
@@ -22,19 +27,27 @@ export const Input: FC<Props> = ({
   checked,
   onChange,
   onClick,
+  value,
+  bgColor,
+  color,
+  padding,
+  margin,
 }) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-
   return (
     <Wrapper>
       <Label htmlFor={id} checked={checked} type={type}>
         <StyledInput
+          padding={padding}
+          margin={margin}
+          bgColor={bgColor}
+          color={color}
           id={id}
           name={name}
           type={type}
           checked={checked}
           onClick={onClick}
           onChange={onChange}
+          value={type === 'button' ? value : ''}
         />
         {label}
       </Label>
