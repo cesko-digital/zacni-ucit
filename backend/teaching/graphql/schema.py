@@ -6,7 +6,6 @@ from teaching.models import SchoolLevel, Subject
 class Query(graphene.ObjectType):
     school_levels = graphene.List(SchoolLevelObjectType)
     subjects = graphene.List(SubjectObjectType, school_level_ids=graphene.List(graphene.Int, required=False))
-    want_to_teach_result = graphene.String()
 
     @staticmethod
     def resolve_school_levels(root, info):
@@ -17,9 +16,3 @@ class Query(graphene.ObjectType):
         if school_level_ids:
             return Subject.objects.filter(school_levels__id__in=school_level_ids).distinct()
         return Subject.objects.all()
-
-    @staticmethod
-    def resolve_want_to_teach_result(root, info):
-        # TODO We need to discuss how this result should work.
-        #  We also need some cypher queries, to get the data from Neo4J
-        return "Everything"
