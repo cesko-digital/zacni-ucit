@@ -100,12 +100,11 @@ resource "aws_eip" "lb-public-ip" {
 
 resource "aws_lb" "elb" {
   name               = "${var.codename}-elb"
-  internal           = false
+  internal           = true
   load_balancer_type = "network"
 
   subnet_mapping {
-    subnet_id     = aws_subnet.public.id
-    allocation_id = aws_eip.lb-public-ip.id
+    subnet_id = aws_subnet.private.id
   }
 
   idle_timeout = 400
@@ -144,4 +143,62 @@ resource "aws_route53_record" "backend-elb" {
     zone_id                = aws_lb.elb.zone_id
     evaluate_target_health = false
   }
+}
+
+# ------------
+# API gateway
+# ------------
+
+resource "aws_api_gateway_vpc_link" "backend-development-link" {
+  name        = "service-link"
+  target_arns = [
+    aws_lb.elb.arn]
+}
+
+resource "aws_api_gateway_rest_api" "backend-development-api" {
+  name = "${var.codename}-api-development"
+  endpoint_configuration {
+    types = [
+      "REGIONAL"
+    ]
+  }
+}
+
+resource "aws_api_gateway_resource" "graphql" {
+  rest_api_id = aws_api_gateway_rest_api.backend-development-api.id
+  parent_id   = aws_api_gateway_rest_api.backend-development-api.root_resource_id
+  path_part   = "graphql"
+}
+
+resource "aws_api_gateway_method" "graphql-proxy" {
+  rest_api_id   = aws_api_gateway_rest_api.backend-development-api.id
+  resource_id   = aws_api_gateway_resource.graphql.id
+  http_method   = "POST"
+  authorization = "NONE"
+
+  request_parameters = {
+    "method.request.path.proxy" = true
+  }
+}
+
+resource "aws_api_gateway_integration" "graphql-proxy" {
+  rest_api_id = aws_api_gateway_rest_api.backend-development-api.id
+  resource_id = aws_api_gateway_resource.graphql.id
+  http_method = aws_api_gateway_method.graphql-proxy.http_method
+
+  type                    = "HTTP_PROXY"
+  uri                     = "http://${aws_lb.elb.dns_name}:8300/graphql/"
+  integration_http_method = aws_api_gateway_method.graphql-proxy.http_method
+
+  request_parameters = {
+    "integration.request.path.proxy" = "method.request.path.proxy"
+  }
+
+  connection_type = "VPC_LINK"
+  connection_id   = aws_api_gateway_vpc_link.backend-development-link.id
+}
+
+resource "aws_api_gateway_deployment" "backend-development" {
+  rest_api_id = aws_api_gateway_rest_api.backend-development-api.id
+  stage_name  = "development"
 }

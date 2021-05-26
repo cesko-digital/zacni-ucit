@@ -11,6 +11,22 @@ resource "aws_cloudfront_distribution" "frontend_cloudfront" {
     }
   }
 
+  origin {
+    domain_name = replace(aws_api_gateway_deployment.backend-development.invoke_url, "/^https?://([^/]*).*/", "$1")
+    origin_id   = aws_api_gateway_deployment.backend-development.id
+    origin_path = "/development"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = [
+        "TLSv1",
+        "TLSv1.1",
+        "TLSv1.2"]
+    }
+  }
+
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
@@ -38,6 +54,38 @@ resource "aws_cloudfront_distribution" "frontend_cloudfront" {
     default_ttl            = 86400
     max_ttl                = 86400
     compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
+  ordered_cache_behavior {
+    path_pattern     = "/graphql"
+    allowed_methods  = [
+      "HEAD",
+      "DELETE",
+      "POST",
+      "GET",
+      "OPTIONS",
+      "PUT",
+      "PATCH"]
+    cached_methods   = [
+      "GET",
+      "HEAD"]
+    target_origin_id = aws_api_gateway_deployment.backend-development.id
+
+    forwarded_values {
+      query_string = true
+      headers      = [
+        "Authorization"
+      ]
+      cookies {
+        forward = "all"
+      }
+    }
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+    compress               = true
+    smooth_streaming       = true
     viewer_protocol_policy = "redirect-to-https"
   }
 
