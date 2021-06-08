@@ -4,11 +4,12 @@ from .models import (
     EducationType,
     Title,
     EducationArea,
-    PreparationType,
     SubjectType,
-    OtherOption,
+    OtherExperience,
+    Qualification
 )
 from teaching.models import Subject, SchoolLevel
+import csv
 
 IGNORED_CHARS = "\t ,."
 
@@ -309,107 +310,148 @@ Zemědělství		PŘ	F	ENV
                 programme.subjects.add(*subjects)
 
 
-def init_education_type():
+def init_qualification():
     """
-    Zdroj dat: https://docs.google.com/spreadsheets/d/1W7xre-g4S_Y4LieKOHf-cIScdvU4Gp_i_4Ywvr5nw-8/edit#gid=1514467189
+    Zdroj dat: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=645564954
     """
-    data = """
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů studijního oboru, který odpovídá charakteru vyučovaného předmětu:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:SŠ
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů studijního oboru, který odpovídá charakteru vyučovaného předmětu:SŠ
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:odborných předmětů:SŠ
-TITUL:Mgr.:pedagogické vědy:příprava učitelů::Základní škola - 1. stupeň
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:příslušných cizích jazyků:
-TITUL:Mgr.:pedagogické vědy:příprava učitelů:ZUŠ studijního oboru, který odpovídá charakteru vyučovaného předmětu:
-TITUL:Mgr.:pedagogické vědy:speciální pedagogika pro učitele::
-TITUL:Mgr.:tělesná výchova a sport:::
-TITUL:Mgr.:společenské vědy::příslušné cizí jazyky:
-TITUL:Mgr.:umění::umělecko–pedagogické zaměření:
-TITUL:Mgr.:::oblast studijního oboru, který odpovídá charakteru vyučovaného předmětu:
-TITUL:Mgr.:::jakýkoliv:
-TITUL:Bc.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
-TITUL:Bc.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)
-TITUL:Bc.:pedagogické vědy:příprava učitelů:všeobecně-vzdělávacích předmětů:SŠ
-TITUL:Bc.:pedagogické vědy:příprava učitelů::Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
-TITUL:Bc.:pedagogické vědy:příprava učitelů::
-TITUL:Bc.:pedagogické vědy:jiné než příprava učitelů::
-TITUL:Bc.:::oblast studijního oboru, který odpovídá charakteru praktického vyučování:
-TITUL:Bc.:::jakýkoliv:
-TITUL:Dis.:::oblast studijního oboru, který odpovídá charakteru praktického vyučování:
-KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá);SŠ
-KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)
-KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::SŠ
-KURZ CŽV:CŽV::uskutečňovaném VŠ a zaměřeném na přípravu učitelů::
-DALŠÍ MOŽNOSTI:::doplňující studium k rozšíření odborné kvalifikace (DVPP)::
-DALŠÍ MOŽNOSTI:::doplňující didaktické studium příslušného jazyka::
-DALŠÍ MOŽNOSTI:::studium pedagogiky::
-DALŠÍ MOŽNOSTI:::jazyková zkouška min. C1 SERR pro jazyky::
-TITUL:maturita:::obor vzdělání, který odpovídá charakteru vyučovaného předmětu:
-TITUL:maturita:::jakýkoliv:
-TITUL:výuční list:::obor vzdělání, který odpovídá charakteru vyučovaného předmětu:
-DALŠÍ MOŽNOSTI:::rodilý mluvčí::
-DALŠÍ MOŽNOSTI:::výkonný umělec::
-"""
 
-    for line in data.strip().split("\n"):
-        (qualification_type, title, area, preparation_type, subject_type, school_levels) = [
-            i.strip() for i in line.split(":")
+    csvfile = open("../data_init/tree.csv", newline='')
+    data = csv.reader(csvfile, delimiter=',', quotechar='|')
+
+    for row in data:
+        (teaching_level, teaching_subject, _, type_1_title, type_1_level_1, type_1_level_2, type_1_subject, type_1_area,
+         type_1_character, type_1_name, __,  type_2_title, type_2_level, type_2_subject, type_2_area, type_2_character, type_2_name,
+         ___, course_level, course_name, ____, experience_1_name, _____, experience_2_name, ______,
+         legal_paragraph, note, example, row_id
+         ) = [
+            item.strip() for item in row
         ]
 
-        if qualification_type == "TITUL":
-            q = EducationType.TITLE_QUALIFICATION
-        elif qualification_type == "KURZ CŽV":
-            q = EducationType.CZV_QUALIFICATION
-        elif qualification_type == "DALŠÍ MOŽNOSTI":
-            q = EducationType.OTHER_QUALIFICATION
+        if teaching_level and teaching_level != "None":
+            teaching_level, _ = SchoolLevel.objects.get_or_create(name=teaching_level)
         else:
-            print(f'Unknown qualification "{qualification_type}"')
-            continue
+            teaching_level = None
 
-        # TODO temporally solution, when we have source of data for Titles, this need to be refactored
-        if title:
-            title, _ = Title.objects.get_or_create(name=title, code=title)
+        if teaching_subject and teaching_subject != "None":
+            teaching_subject, _ = Subject.objects.get_or_create(name=teaching_subject)
         else:
-            title = None
+            teaching_subject = None
 
-        if area:
-            area, _ = EducationArea.objects.get_or_create(name=area)
+        if type_1_title and type_1_title != "None":
+            type_1_title, _ = Title.objects.get_or_create(name=type_1_title, code=type_1_title)
         else:
-            area = None
+            type_1_title = None
 
-        if preparation_type:
-            preparation_type, _ = PreparationType.objects.get_or_create(name=preparation_type)
+        if type_2_title and type_2_title != "None":
+            type_2_title, _ = Title.objects.get_or_create(name=type_2_title, code=type_2_title)
         else:
-            preparation_type = None
+            type_2_title = None
 
-        if subject_type:
-            subject_type, _ = SubjectType.objects.get_or_create(name=subject_type)
+        if type_1_area and type_1_area != "None":
+            type_1_area, _ = EducationArea.objects.get_or_create(name=type_1_area)
         else:
-            subject_type = None
+            type_1_area = None
 
-        education_type, _ = EducationType.objects.get_or_create(
-            qualification_type=q,
-            title=title,
-            area=area,
-            preparation_type=preparation_type,
-            subject_type=subject_type,
+        if type_2_area and type_2_area != "None":
+            type_2_area, _ = EducationArea.objects.get_or_create(name=type_2_area)
+        else:
+            type_2_area = None
+
+        if type_1_subject and type_1_subject != "None":
+            type_1_subject, _ = SubjectType.objects.get_or_create(name=type_1_subject)
+        else:
+            type_1_subject = None
+
+        if type_2_subject and type_2_subject != "None":
+            type_2_subject, _ = SubjectType.objects.get_or_create(name=type_2_subject)
+        else:
+            type_2_subject = None
+
+        if type_1_title:
+            education_type_1, _ = EducationType.objects.get_or_create(
+                qualification_type=EducationType.TITLE_QUALIFICATION,
+                name=type_1_name,
+                title=type_1_title,
+                area=type_1_area,
+                subject_type=type_1_subject,
+                character=type_1_character
+            )
+        else:
+            education_type_1 = None
+
+        if type_2_title:
+            education_type_2, _ = EducationType.objects.get_or_create(
+                qualification_type=EducationType.TITLE_QUALIFICATION,
+                name=type_2_name,
+                title=type_2_title,
+                area=type_2_area,
+                subject_type=type_2_subject,
+                character=type_2_character
+            )
+        else:
+            education_type_2 = None
+
+        if course_name:
+            education_type_course, _ = EducationType.objects.get_or_create(
+                qualification_type=EducationType.CZV_QUALIFICATION,
+                name=course_name,
+            )
+        else:
+            education_type_course = None
+
+        if experience_1_name:
+            education_type_experience_1, _ = EducationType.objects.get_or_create(
+                qualification_type=EducationType.OTHER_EXPERIENCE,
+                name=experience_1_name,
+            )
+        else:
+            education_type_experience_1 = None
+
+        if experience_2_name:
+            education_type_experience_2, _ = EducationType.objects.get_or_create(
+                qualification_type=EducationType.OTHER_EXPERIENCE,
+                name=experience_2_name,
+            )
+        else:
+            education_type_experience_2 = None
+
+        type_1_school_levels = []
+        if type_1_level_1 and type_1_level_1 != "None":
+            type_1_level_1, _ = SchoolLevel.objects.get_or_create(name=type_1_level_1)
+            type_1_school_levels.append(type_1_level_1)
+        if type_1_level_2 and type_1_level_2 != "None":
+            type_1_level_2, _ = SchoolLevel.objects.get_or_create(name=type_1_level_2)
+            type_1_school_levels.append(type_1_level_2)
+        education_type_1.school_levels.add(*type_1_school_levels)
+
+        type_2_school_levels = []
+        if type_2_level and type_2_level != "None":
+            type_2_level, _ = SchoolLevel.objects.get_or_create(name=type_2_level)
+            type_2_school_levels.append(type_2_level)
+            education_type_2.school_levels.add(*type_2_school_levels)
+
+        type_course_school_levels = []
+        if course_level and course_level != "None":
+            course_level, _ = SchoolLevel.objects.get_or_create(name=course_level)
+            type_course_school_levels.append(course_level)
+            education_type_course.school_levels.add(*type_course_school_levels)
+
+        qualification = Qualification.objects.get_or_create(
+            legal_paragraph=legal_paragraph,
+            example=example,
+            row_id=row_id,
+            school_level=teaching_level,
+            subject_type=teaching_subject
         )
+        education = [x for x in [education_type_1, education_type_2, education_type_course, education_type_experience_1, education_type_experience_2] if x]
+        qualification.education_types.add(*education)
 
-        if school_levels:
-            # TODO We should think about unifying SchoolLevel data
-            school_levels_instances = []
-            for school_level in school_levels.split(";"):
-                school_l, _ = SchoolLevel.objects.get_or_create(name=school_level)
-                school_levels_instances.append(school_l)
 
-            education_type.school_levels.add(*school_levels_instances)
 
 
 def init_other_options():
     data = """
-		Rodily mluvci
+		rodilý mluvčí
 		doplňující studium k rozšíření odborné kvalifikace (DVPP)
 		doplňující didaktické studium příslušného jazyka
 		studium pedagogiky
@@ -418,4 +460,4 @@ def init_other_options():
 	"""
 
     for name in data.strip().split("\n"):
-        OtherOption.objects.get_or_create(name=name.strip())
+        OtherExperience.objects.get_or_create(name=name.strip())

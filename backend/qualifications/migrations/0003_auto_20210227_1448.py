@@ -77,9 +77,4 @@ class Migration(migrations.Migration):
             name='area',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='qualifications.educationarea', verbose_name='Oblast VŠ vzdělávání'),
         ),
-        migrations.AlterField(
-            model_name='educationtype',
-            name='preparation_type',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='qualifications.preparationtype', verbose_name='Typ přípravy učitelů'),
-        ),
     ]

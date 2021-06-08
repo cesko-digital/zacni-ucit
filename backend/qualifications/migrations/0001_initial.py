@@ -54,7 +54,6 @@ class Migration(migrations.Migration):
                 ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
                 ('qualification_type', models.CharField(choices=[('titul', 'Titul'), ('czv', 'Kurz CŽV'), ('dalsi', 'Další možnosti')], max_length=20, verbose_name='Typ kvalifikace')),
                 ('area', models.CharField(max_length=512, null=True, verbose_name='Oblast VŠ vzdělávání')),
-                ('preparation_type', models.CharField(max_length=200, null=True, verbose_name='Typ přípravy učitelů')),
                 ('subjects_type', models.CharField(max_length=512, null=True, verbose_name='Typ předmětů')),
                 ('school_levels', models.ManyToManyField(to='teaching.SchoolLevel')),
                 ('title', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='qualifications.title')),
