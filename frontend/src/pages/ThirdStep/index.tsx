@@ -1,28 +1,36 @@
 import React, { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Input } from '../../components/Input';
-import { H3, H2, LightText } from '../../components/Typography';
+import { H3, H2, LightText, PrimaryText } from '../../components/Typography';
 import { Wrap } from './styled';
 import StyleWrapper from '../../components/StyledWrapper';
 import { AppState } from '../../store/';
 import { connect } from 'react-redux';
 import {
-  updateFirstStep,
+  setThirdStep,
   setButtonIsDisabled,
-} from '../../store/firstStep/actions';
-import { FirstStepForm } from '../../common/types';
+} from '../../store/thirdStep/actions';
+import {
+  ThirdStepForm,
+  FirstStepForm,
+  SecondStepForm,
+} from '../../common/types';
 
 type Props = {
-  stages: Array<FirstStepForm>;
-  updateFirstStep: typeof updateFirstStep;
+  stages: Array<ThirdStepForm>;
   firstStep: FirstStepForm;
+  secondStep: SecondStepForm;
+  thirdStep: ThirdStepForm;
+  setThirdStep: typeof setThirdStep;
   setButtonIsDisabled: typeof setButtonIsDisabled;
   buttonIsDisabled: boolean;
 };
 
-const Home: FC<Props> = ({
-  updateFirstStep,
+const ThirdStep: FC<Props> = ({
+  setThirdStep,
   firstStep,
+  secondStep,
+  thirdStep,
   setButtonIsDisabled,
   buttonIsDisabled,
 }) => {
@@ -31,36 +39,45 @@ const Home: FC<Props> = ({
   return (
     <Wrap>
       <StyleWrapper margin="3rem 0 1rem 0">
-        <H2>Chcete se stát učitelem, ale nevíte jak na to?</H2>
+        <H2>Jaké je Vaše vzdělání?</H2>
       </StyleWrapper>
-      <StyleWrapper margin="0 0 3rem 0">
+      <H3>
+        Vyberte všechna vaše vzdělání, která by mohla být relevantní pro učení
+        předmětu <PrimaryText size="1em">{secondStep}</PrimaryText> na 
+        <PrimaryText size="1em">
+          {firstStep.chooseDegreeState.map((button, idx) => {
+            if (button.checked) {
+              return button.label;
+            }
+          })}
+        </PrimaryText>
+      </H3>
+      <StyleWrapper margin="2rem 0 3rem 0">
         <LightText>
-          Udělejte další krok na cestě za katedru.Chcete učit? Vyplňte náš
-          dotazník a my vám doporučíme seznam potřebných pedagogických
-          studijních programů a kurzů, nebo jednoduše zjistíte, že můžete začít
-          učit třeba hned.
+          Poznámka: Vyšší než magisterský stupeň vzdělání není pro učitelství
+          podstatný. Relevantní pro učitelství je pouze maturita z odborných
+          předmětů ze SOU nebo SOŠ.
         </LightText>
       </StyleWrapper>
       <form>
-        <H3>Na jakém školním stupni chcete učit?</H3>
         <StyleWrapper margin="2rem 0">
-          {firstStep.chooseDegreeState.map((button, idx) => (
+          {thirdStep.chooseDegreeState.map((button, idx) => (
             <Input
               key={idx}
               id={button.id}
               label={button.label}
               name="degree"
-              type="radio"
+              type="checkbox"
               checked={button.checked}
               onChange={() => {}}
               onClick={() => {
-                updateFirstStep(firstStep, button.id);
+                setThirdStep(thirdStep, button.id);
                 setButtonIsDisabled(false);
               }}
             />
           ))}
         </StyleWrapper>
-        <StyleWrapper textAlign="center" padding="0 0 5rem 0">
+        <StyleWrapper textAlign="center" padding="0 0 7rem 0">
           <Input
             value="Pokračovat   >"
             type="button"
@@ -68,7 +85,7 @@ const Home: FC<Props> = ({
             padding="1.5rem 2rem"
             margin="2.5rem 0 0 0"
             onClick={() => {
-              router.push('/vyber-predmetu');
+              router.push('/vyber-specializace');
             }}
           />
         </StyleWrapper>
@@ -79,10 +96,12 @@ const Home: FC<Props> = ({
 
 const mapStateToProps = (state: AppState) => ({
   firstStep: state.firstStep,
-  buttonIsDisabled: state.firstStep.buttonIsDisabled,
+  secondStep: state.secondStep,
+  thirdStep: state.thirdStep,
+  buttonIsDisabled: state.thirdStep.buttonIsDisabled,
 });
 
 export default connect(mapStateToProps, {
-  updateFirstStep,
+  setThirdStep,
   setButtonIsDisabled,
-})(Home);
+})(ThirdStep);

@@ -5,7 +5,6 @@ export const Wrapper = styled.nav`
   font-size: 18px;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 2rem;
   padding: 0.5rem;
   @media (min-width: 768px) {
     display: flex;

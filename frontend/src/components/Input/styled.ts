@@ -8,12 +8,14 @@ const radioLabelStyle = (checked) => css`
     checked ? theme.color.primary : 'transparent'};
   color: ${({ theme }) => (checked ? 'white' : theme.color.secondary)};
   padding: 0.8rem 1.5rem;
+  box-sizing: border-box;
   margin: 0.3rem;
   border: ${({ theme }) =>
     checked ? 'none' : `1px solid ${theme.color.secondary}`};
   border-radius: 100px;
   float: left;
-  font-size: ${({ theme }) => theme.fontSize.small};
+  font-size: ${({ theme }) => theme.fontSize.xxS};
+  font-weight: bolder;
 `;
 
 export const Wrapper = styled.div`
@@ -27,6 +29,7 @@ export const StyledInput = styled.input<{
   color: string;
   padding: string;
   margin: string;
+  disabled: boolean;
 }>`
   padding: ${({ padding }) => (!!padding ? padding : '1rem 1.2rem')};
   margin: ${({ margin }) => (!!margin ? margin : '0')};
@@ -36,17 +39,25 @@ export const StyledInput = styled.input<{
       hasError ? theme.color.red : theme.color.gray};
   border-radius: ${({ theme, type }) =>
     type === 'button' ? theme.radius.max : theme.radius.basic};
-  background-color: ${({ theme, bgColor }) =>
-    !!bgColor ? bgColor : theme.color.secondary};
+  background-color: ${({ theme, bgColor, disabled }) => {
+    if (disabled) {
+      return theme.color.gray;
+    } else {
+      return !!bgColor ? bgColor : theme.color.secondary;
+    }
+  }};
   color: ${({ theme, color }) => (!!color ? color : 'white')};
   font-size: ${({ theme }) => theme.fontSize.normal};
   font-weight: 100;
-  ${({ type }) => (type === 'radio' ? 'display: none;' : null)}
+  ${({ type }) =>
+    type === 'radio' || type === 'checkbox' ? 'display: none;' : null}
 `;
 
 export const Label = styled.label<{ type: string; checked?: boolean }>`
   ${({ type, checked }) =>
-    type === 'radio' ? radioLabelStyle(checked) : defaultLabelStyle};
+    type === 'radio' || type === 'checkbox'
+      ? radioLabelStyle(checked)
+      : defaultLabelStyle};
 `;
 
 export const StyledError = styled.div`

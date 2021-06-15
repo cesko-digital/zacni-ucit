@@ -13,6 +13,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   color?: string;
   padding?: string;
   margin?: string;
+  disabled?: boolean;
   onChange?: (
     e: ChangeEventHandler<HTMLInputElement> & ChangeEvent<Element>
   ) => void;
@@ -32,6 +33,7 @@ export const Input: FC<Props> = ({
   color,
   padding,
   margin,
+  disabled,
 }) => {
   return (
     <Wrapper>
@@ -47,6 +49,7 @@ export const Input: FC<Props> = ({
           checked={checked}
           onClick={onClick}
           onChange={onChange}
+          disabled={disabled}
           value={type === 'button' ? value : ''}
         />
         {label}

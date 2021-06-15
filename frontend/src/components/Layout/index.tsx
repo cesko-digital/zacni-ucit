@@ -18,6 +18,7 @@ import {
 import { Navbar } from './Navbar';
 import Footer from '../../components/Layout/Footer';
 import { useRouter } from 'next/router';
+import NavButton from '../NavButton';
 
 type Props = {
   children: ReactNode;
@@ -53,6 +54,7 @@ const Layout: FC<Props> = ({ children }) => {
           )}
         </HeaderSection> */}
       <Navbar />
+      {router.pathname !== '/' ? <NavButton direction="back" /> : null}
       <Wrap>{children}</Wrap>
       {router.pathname === '/vysledky-hledani' ? null : <Footer />}
     </MainWrap>
