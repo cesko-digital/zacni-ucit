@@ -153,7 +153,7 @@ Zdroj dat:
 * https://miro.com/app/board/o9J_lby_RpM=/?moveToWidget=3074457353765310040&cot=14
 * https://docs.google.com/spreadsheets/d/1W7xre-g4S_Y4LieKOHf-cIScdvU4Gp_i_4Ywvr5nw-8/edit#gid=1514467189
 
-### EducationArea, PreparationType, SubjectType
+### EducationArea, SubjectType
 
 Pomocne modely, na ktere se odkazuje EducationType.
 

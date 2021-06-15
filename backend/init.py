@@ -5,6 +5,7 @@ from django.contrib.auth.models import Group, Permission
 from django.core import management
 
 from common.models import GraphModel
+from data_init.import_tree import init_data_tree
 from qualifications.temp import init_map_2021_01, init_education_type, init_other_options
 from colleges.temp import init_courses_2021_01
 from teaching.temp import (
@@ -71,10 +72,6 @@ def init_user():
                 "change_educationarea",
                 "delete_educationarea",
                 "view_educationarea",
-                "add_preparationtype",
-                "change_preparationtype",
-                "delete_preparationtype",
-                "view_preparationtype",
                 "add_subjecttype",
                 "change_subjecttype",
                 "delete_subjecttype",
@@ -119,6 +116,7 @@ def init(neo4j=False):
     init_other_options()
     init_school_type_2021_02()
     init_school_level_2021_02()
+    init_data_tree()
     import_colleges()
     if neo4j:
         init_neo4j()
