@@ -11,7 +11,9 @@ const radioLabelStyle = (checked) => css`
   box-sizing: border-box;
   margin: 0.3rem;
   border: ${({ theme }) =>
-    checked ? 'none' : `1px solid ${theme.color.secondary}`};
+    checked
+      ? `1px solid ${theme.color.primary}`
+      : `1px solid ${theme.color.secondary}`};
   border-radius: 100px;
   float: left;
   font-size: ${({ theme }) => theme.fontSize.xxS};
