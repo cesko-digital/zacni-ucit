@@ -7,11 +7,17 @@ from common.models import GraphModel
 class College(TimeStampedModel, GraphModel):
     """
     Vysoka skola.
+    Jazyková škola.
     """
 
     TYPE_UNIVERSITY = "univerzitni"
     TYPE_NON_UNIVERSITY = "neuniverzitni"
-    TYPE_CHOICES = ((TYPE_UNIVERSITY, "univerzitní"), (TYPE_NON_UNIVERSITY, "neuniverzitní"))
+    TYPE_LANGUAGE_SCHOOL = "jazykova skola"
+    TYPE_CHOICES = (
+        (TYPE_UNIVERSITY, "univerzitní"),
+        (TYPE_NON_UNIVERSITY, "neuniverzitní"),
+        (TYPE_LANGUAGE_SCHOOL, "jazyková škola")
+        )
 
     FORM_PRIVATE = "soukroma"
     FORM_GOV = "statni"
@@ -86,12 +92,22 @@ class Course(TimeStampedModel):
     Zdroj: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=0
     """
 
-    name = models.CharField("Název", max_length=300)
+    qualification_type = models.CharField("Typ kvalifikace", max_length=150)
+    title = models.ForeignKey("qualifications.Title",  on_delete=models.SET_NULL, null=True, verbose_name="Titul")
+    school_levels = models.ManyToManyField("teaching.SchoolLevel", verbose_name="Stupně škol")
+    #education_type = models.ForeignKey(EducationType, on_delete=models.SET_NULL, null=True, verbose_name="Typy vzdělání z hlediska zákona")
+    other_qualification_type = models.CharField("Typ ostatní kvalifikace", max_length=150)
+    name = models.CharField("Název", max_length=300)  #Realny nazev kurzu
+    university = models.ForeignKey(College, on_delete=models.SET_NULL, null=True, verbose_name="Vysoká škola")
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, verbose_name="Fakulta")
+    city = models.CharField("Město", max_length=200)
     price = models.IntegerField("Cena")
-    sds = models.IntegerField("Standardní doba studia")
+    study_length_in_semesters = models.IntegerField("Standardní doba studia")
     form_present = models.BooleanField("Prezenční forma studia", default=False)
     form_combined = models.BooleanField("Kombinovaná forma studia", default=True)
+    form_distant = models.BooleanField("Distanční forma studia", default=False)
+    double_major = models.BooleanField("Dvouobor", default=False)
+    single_major = models.BooleanField("Jednoobor", default=True)
     url = models.URLField("URL na podrobnější informace")
     subjects = models.ManyToManyField("teaching.Subject", verbose_name="Předměty")
     note = models.TextField("Poznámka", blank=True)
