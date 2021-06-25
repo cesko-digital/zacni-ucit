@@ -100,7 +100,7 @@ class Course(TimeStampedModel):
     name = models.CharField("Název", max_length=300)  #Realny nazev kurzu
     university = models.ForeignKey(College, on_delete=models.SET_NULL, null=True, verbose_name="Vysoká škola")
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, verbose_name="Fakulta")
-    city = models.CharField("Město", max_length=200)
+    city = models.CharField("Město", max_length=350)
     price = models.IntegerField("Cena")
     study_length_in_semesters = models.IntegerField("Standardní doba studia")
     form_present = models.BooleanField("Prezenční forma studia", default=False)
@@ -108,7 +108,7 @@ class Course(TimeStampedModel):
     form_distant = models.BooleanField("Distanční forma studia", default=False)
     double_major = models.BooleanField("Dvouobor", default=False)
     single_major = models.BooleanField("Jednoobor", default=True)
-    url = models.URLField("URL na podrobnější informace")
+    url = models.URLField("URL na podrobnější informace", max_length=350)
     subjects = models.ManyToManyField("teaching.Subject", verbose_name="Předměty")
     note = models.TextField("Poznámka", blank=True)
 

@@ -3,6 +3,7 @@ import csv
 from .models import College, Faculty, Course
 from teaching.models import SchoolLevel, Subject
 from qualifications.models import Title
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def get_courses_from_csv(filepath):
@@ -13,6 +14,33 @@ def get_courses_from_csv(filepath):
             course["Cena"] = course["Cena"].replace("\xa0", "").replace(" Kč", "")
             courses_list.append(course)
     return courses_list
+
+
+def add_missing_language_school():
+    c, created = College.objects.get_or_create(
+        name="Jazyková škola - EVROPSKÉ VZDĚLÁVACÍ CENTRUM",
+        defaults={"type": "jazykova skola",
+                  "address": "Pospíšilova 324 500 03 Hradec Králové",
+                  "ic": "24249904",
+                  "url": "https://www.evcentrum.cz/"}
+    )
+
+
+def add_missing_institute_of_lifelong_learning():
+    college = College.objects.get(name="Mendelova univerzita v Brně")
+    c, created = Faculty.objects.get_or_create(
+        name="Institut celoživotního vzdělávání",
+        defaults={"college": college, "url": "https://icv.mendelu.cz/"}
+    )
+
+
+def add_missing_subjects():
+    subjects = ["Angličtina", "Němčina", "Francouzština", "Španělština", "Ruština"]
+    codes = ["AJ", "NJ", "FJ", "ŠJ", "RJ"]
+    for i in range(len(subjects)):
+        Subject.objects.get_or_create(
+            code=codes[i],
+            defaults={"name": subjects[i]})
 
 
 def init_courses():
@@ -31,17 +59,21 @@ def init_courses():
             "OV / ZSV", "F", "CH", "PŘ", "Z", "HV", "VV", "VKZ", "TV",
             "ČSP", "DV", "ETV", "FAV", "TPV", "OSV", "VDO", "EGS", "MKV",
             "ENV", "MV", "ODBP", "PV", "ODBV"]
+
     for course in courses:
         qualification_type = course["Typ kvalifikace"]
-        title = ""
+        title = False
         if qualification_type == "Titul":
-            title = Title.objects.filter(code=course["Titul"])
+            title = Title.objects.filter(code=course["Titul"]).first()
         other_qualification_type = ""
         if qualification_type == "Ostatní kvalifikace":
             other_qualification_type = course["Typ ostatní kvalifikace"]
         name = course["Název"]
-        university = College.objects.filter(name=course["Vysoká škola"])
-        faculty = Faculty.objects.filter(name=course["Fakulta"], college__in=university)
+        university = College.objects.filter(name=course["Vysoká škola"]).first()
+        try:
+            faculty = Faculty.objects.get(name=course["Fakulta"], college=university.id)
+        except ObjectDoesNotExist:
+            faculty = False
         city = course["Město"]
         try:
             price = int(course["Cena"])
@@ -65,23 +97,29 @@ def init_courses():
         note = course["Poznámka"]
 
         c, created = Course.objects.get_or_create(
-            qualification_type=qualification_type,
-            title=title,
-            other_qualification_type=other_qualification_type,
             name=name,
-            university=university,
-            faculty=faculty,
-            city=city,
-            price=price,
-            study_length_in_semesters=study_length_in_semesters,
-            form_present=form_present,
-            form_combined=form_combined,
-            form_distant=form_distant,
-            double_major=double_major,
-            single_major=single_major,
             url=url,
-            note=note
+            defaults={"qualification_type": qualification_type,
+                      "other_qualification_type": other_qualification_type,
+                      "university": university,
+                      "city": city,
+                      "price": price,
+                      "study_length_in_semesters": study_length_in_semesters,
+                      "form_present": form_present,
+                      "form_combined": form_combined,
+                      "form_distant": form_distant,
+                      "double_major": double_major,
+                      "single_major": single_major,
+                      "note": note}
         )
+
+        if title:
+            c.title = title
+            c.save()
+
+        if faculty:
+            c.faculty = faculty
+            c.save()
 
         if not created:
             c.subjects.clear()
@@ -95,10 +133,14 @@ def init_courses():
         for level in school_levels:
             level = level.replace(" ZŠ", "")
             if level != "0":
-                levels.append(SchoolLevel.objects.filter(name__contains=level))
+                levels_db = SchoolLevel.objects.filter(name__contains=level)
+                if len(levels_db) > 1:
+                    levels.append(levels_db[1].id)
+                else:
+                    levels.append(levels_db[0].id)
         c.school_levels.add(*levels)
         subjects = []
         for code in subject_codes:
-            if course[code] != "0" and course[code] != "":
-                subjects.append(Subject.objects.filter(code=code))
+            if course[code] == code:
+                subjects.append(Subject.objects.get(code=code).id)
         c.subjects.add(*subjects)
