@@ -19,18 +19,19 @@ def get_courses_from_csv(filepath):
 def add_missing_language_school():
     c, created = College.objects.get_or_create(
         name="Jazyková škola - EVROPSKÉ VZDĚLÁVACÍ CENTRUM",
-        defaults={"type": "jazykova skola",
-                  "address": "Pospíšilova 324 500 03 Hradec Králové",
-                  "ic": "24249904",
-                  "url": "https://www.evcentrum.cz/"}
+        defaults={
+            "type": "jazykova skola",
+            "address": "Pospíšilova 324 500 03 Hradec Králové",
+            "ic": "24249904",
+            "url": "https://www.evcentrum.cz/",
+        },
     )
 
 
 def add_missing_institute_of_lifelong_learning():
     college = College.objects.get(name="Mendelova univerzita v Brně")
     c, created = Faculty.objects.get_or_create(
-        name="Institut celoživotního vzdělávání",
-        defaults={"college": college, "url": "https://icv.mendelu.cz/"}
+        name="Institut celoživotního vzdělávání", defaults={"college": college, "url": "https://icv.mendelu.cz/"}
     )
 
 
@@ -38,9 +39,7 @@ def add_missing_subjects():
     subjects = ["Angličtina", "Němčina", "Francouzština", "Španělština", "Ruština"]
     codes = ["AJ", "NJ", "FJ", "ŠJ", "RJ"]
     for i in range(len(subjects)):
-        Subject.objects.get_or_create(
-            code=codes[i],
-            defaults={"name": subjects[i]})
+        Subject.objects.get_or_create(code=codes[i], defaults={"name": subjects[i]})
 
 
 def init_courses():
@@ -55,10 +54,40 @@ def init_courses():
     courses = get_courses_from_csv(filepath)
 
     subject_codes = [
-            "ČJL", "AJ", "NJ", "FJ", "ŠJ", "RJ", "M", "IKT", "ČAS", "D",
-            "OV / ZSV", "F", "CH", "PŘ", "Z", "HV", "VV", "VKZ", "TV",
-            "ČSP", "DV", "ETV", "FAV", "TPV", "OSV", "VDO", "EGS", "MKV",
-            "ENV", "MV", "ODBP", "PV", "ODBV"]
+        "ČJL",
+        "AJ",
+        "NJ",
+        "FJ",
+        "ŠJ",
+        "RJ",
+        "M",
+        "IKT",
+        "ČAS",
+        "D",
+        "OV / ZSV",
+        "F",
+        "CH",
+        "PŘ",
+        "Z",
+        "HV",
+        "VV",
+        "VKZ",
+        "TV",
+        "ČSP",
+        "DV",
+        "ETV",
+        "FAV",
+        "TPV",
+        "OSV",
+        "VDO",
+        "EGS",
+        "MKV",
+        "ENV",
+        "MV",
+        "ODBP",
+        "PV",
+        "ODBV",
+    ]
 
     for course in courses:
         qualification_type = course["Typ kvalifikace"]
@@ -77,11 +106,11 @@ def init_courses():
         city = course["Město"]
         try:
             price = int(course["Cena"])
-        except(ValueError):
+        except (ValueError):
             price = 0
         try:
             study_length_in_semesters = int(course["SDS / semestr"])
-        except(ValueError):
+        except (ValueError):
             breakpoint()
         form_present = "P" in course["P"]
         form_combined = "K" in course["K"]
@@ -99,18 +128,20 @@ def init_courses():
         c, created = Course.objects.get_or_create(
             name=name,
             url=url,
-            defaults={"qualification_type": qualification_type,
-                      "other_qualification_type": other_qualification_type,
-                      "university": university,
-                      "city": city,
-                      "price": price,
-                      "study_length_in_semesters": study_length_in_semesters,
-                      "form_present": form_present,
-                      "form_combined": form_combined,
-                      "form_distant": form_distant,
-                      "double_major": double_major,
-                      "single_major": single_major,
-                      "note": note}
+            defaults={
+                "qualification_type": qualification_type,
+                "other_qualification_type": other_qualification_type,
+                "university": university,
+                "city": city,
+                "price": price,
+                "study_length_in_semesters": study_length_in_semesters,
+                "form_present": form_present,
+                "form_combined": form_combined,
+                "form_distant": form_distant,
+                "double_major": double_major,
+                "single_major": single_major,
+                "note": note,
+            },
         )
 
         if title:

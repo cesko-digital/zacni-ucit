@@ -7,9 +7,11 @@ from django.core import management
 from common.models import GraphModel
 from qualifications.temp import init_map_2021_01, init_education_type, init_other_options
 from colleges.temp2 import (
-    init_courses, add_missing_language_school,
+    init_courses,
+    add_missing_language_school,
     add_missing_institute_of_lifelong_learning,
-    add_missing_subjects)
+    add_missing_subjects,
+)
 from teaching.temp import (
     init_subjects_2021_01,
     init_school_type_2021_02,

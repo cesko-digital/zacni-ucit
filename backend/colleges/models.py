@@ -16,8 +16,8 @@ class College(TimeStampedModel, GraphModel):
     TYPE_CHOICES = (
         (TYPE_UNIVERSITY, "univerzitní"),
         (TYPE_NON_UNIVERSITY, "neuniverzitní"),
-        (TYPE_LANGUAGE_SCHOOL, "jazyková škola")
-        )
+        (TYPE_LANGUAGE_SCHOOL, "jazyková škola"),
+    )
 
     FORM_PRIVATE = "soukroma"
     FORM_GOV = "statni"
@@ -93,11 +93,11 @@ class Course(TimeStampedModel):
     """
 
     qualification_type = models.CharField("Typ kvalifikace", max_length=150)
-    title = models.ForeignKey("qualifications.Title",  on_delete=models.SET_NULL, null=True, verbose_name="Titul")
+    title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True, verbose_name="Titul")
     school_levels = models.ManyToManyField("teaching.SchoolLevel", verbose_name="Stupně škol")
-    #education_type = models.ForeignKey(EducationType, on_delete=models.SET_NULL, null=True, verbose_name="Typy vzdělání z hlediska zákona")
+    # education_type = models.ForeignKey(EducationType, on_delete=models.SET_NULL, null=True, verbose_name="Typy vzdělání z hlediska zákona")
     other_qualification_type = models.CharField("Typ ostatní kvalifikace", max_length=150)
-    name = models.CharField("Název", max_length=300)  #Realny nazev kurzu
+    name = models.CharField("Název", max_length=300)  # Realny nazev kurzu
     university = models.ForeignKey(College, on_delete=models.SET_NULL, null=True, verbose_name="Vysoká škola")
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, verbose_name="Fakulta")
     city = models.CharField("Město", max_length=350)
