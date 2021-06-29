@@ -8,6 +8,7 @@ from .models import (
     EducationArea,
     SubjectType,
     OtherExperience,
+    Qualification,
 )
 
 
@@ -58,3 +59,4 @@ admin.site.register(Title, TitleAdmin)
 admin.site.register(EducationArea, EducationAreaAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(OtherExperience, OtherExperienceAdmin)
+admin.site.register(Qualification)
