@@ -4,6 +4,7 @@ from .models import College, Faculty, Course
 from teaching.models import SchoolLevel, Subject
 from qualifications.models import Title
 from django.core.exceptions import ObjectDoesNotExist
+from decimal import Decimal
 
 
 def get_courses_from_csv(filepath):
@@ -105,13 +106,13 @@ def init_courses():
             faculty = False
         city = course["Město"]
         try:
-            price = int(course["Cena"])
+            price = Decimal(float(course["Cena"]))
         except (ValueError):
             price = 0
         try:
             study_length_in_semesters = int(course["SDS / semestr"])
         except (ValueError):
-            breakpoint()
+            study_length_in_semesters = 0
         form_present = "P" in course["P"]
         form_combined = "K" in course["K"]
         form_distant = "D" in course["D"]
@@ -156,10 +157,11 @@ def init_courses():
             c.subjects.clear()
             c.school_levels.clear()
 
-        school_levels = []
-        school_levels.append(course["1. stupeň ZŠ"])
-        school_levels.append(course["2. stupeň ZŠ"])
-        school_levels.append(course["SŠ"])
+        school_levels = [
+            course["1. stupeň ZŠ"],
+            course["2. stupeň ZŠ"],
+            course["SŠ"],
+        ]
         levels = []
         for level in school_levels:
             level = level.replace(" ZŠ", "")
