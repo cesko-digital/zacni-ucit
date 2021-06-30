@@ -339,7 +339,7 @@ def init_qualification():
     Adds missing SubjectType - Jakýkoli kromě cizího jazyka
     """
 
-    filepath = os.getcwd() + "\\data_init\\tree.csv"
+    filepath = os.path.join(os.getcwd(), "data_init", "tree.csv")
     csvfile = open(filepath, newline="", encoding="utf-8")
     data = csv.reader(csvfile, delimiter=",", quotechar='"')
 
