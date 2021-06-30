@@ -51,7 +51,7 @@ def init_courses():
     The first one was edited to:
     Typ kvalifikace,Titul,1. stupeň ZŠ,2. stupeň ZŠ,SŠ,Typ ostatní kvalifikace,Název,Vysoká škola,Fakulta,Cena,Město,SDS / semestr,P,D,K,jednoobor,dvouobor,Odkaz na více info,Poznámka,ČJL,AJ,NJ,FJ,ŠJ,RJ,M,IKT,ČAS,D,OV / ZSV,F,CH,PŘ,Z,HV,VV,VKZ,TV,ČSP,DV,ETV,FAV,TPV,OSV,VDO,EGS,MKV,ENV,MV,ODBP,PV,ODBV,NOVÁ AKREDITACE DO 2021
     """
-    filepath = os.getcwd() + "\\colleges\\courses_MVP.csv"
+    filepath = os.path.join(os.getcwd(), "colleges", "courses_MVP.csv")
     courses = get_courses_from_csv(filepath)
 
     subject_codes = [
