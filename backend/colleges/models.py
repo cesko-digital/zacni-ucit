@@ -7,26 +7,32 @@ from common.models import GraphModel
 class College(TimeStampedModel, GraphModel):
     """
     Vysoka skola.
+    Jazyková škola.
     """
 
     TYPE_UNIVERSITY = "univerzitni"
     TYPE_NON_UNIVERSITY = "neuniverzitni"
-    TYPE_CHOICES = ((TYPE_UNIVERSITY, "univerzitní"), (TYPE_NON_UNIVERSITY, "neuniverzitní"))
+    TYPE_LANGUAGE_SCHOOL = "jazykova skola"
+    TYPE_CHOICES = (
+        (TYPE_UNIVERSITY, "univerzitní"),
+        (TYPE_NON_UNIVERSITY, "neuniverzitní"),
+        (TYPE_LANGUAGE_SCHOOL, "jazyková škola"),
+    )
 
     FORM_PRIVATE = "soukroma"
     FORM_GOV = "statni"
     FORM_PUBLIC = "verejna"
     FORM_CHOICES = ((FORM_PRIVATE, "soukromá"), (FORM_GOV, "státní"), (FORM_PUBLIC, "veřejná"))
 
-    name = models.CharField("Název školy", max_length=200, unique=True)
-    type = models.CharField("Typ", max_length=20, choices=TYPE_CHOICES)
-    form = models.CharField("Forma", max_length=20, choices=FORM_CHOICES)
-    address = models.CharField("Adresa", max_length=200)
-    rid = models.CharField("RID", max_length=20, unique=True)
-    ic = models.CharField("IČ", max_length=20)
-    databox = models.CharField("Datová schránka", max_length=20)
-    url = models.URLField("URL")
-    code = models.CharField("Zkratka", max_length=30, unique=True)
+    name = models.CharField(help_text="Název školy", max_length=200, unique=True)
+    type = models.CharField(help_text="Typ", max_length=20, choices=TYPE_CHOICES)
+    form = models.CharField(help_text="Forma", max_length=20, choices=FORM_CHOICES)
+    address = models.CharField(help_text="Adresa", max_length=200)
+    rid = models.CharField(help_text="RID", max_length=20, unique=True)
+    ic = models.CharField(help_text="IČ", max_length=20)
+    databox = models.CharField(help_text="Datová schránka", max_length=20)
+    url = models.URLField(help_text="URL")
+    code = models.CharField(help_text="Zkratka", max_length=30, unique=True)
 
     class Meta:
         verbose_name = "Vysoká škola"
@@ -55,10 +61,10 @@ class Faculty(TimeStampedModel, GraphModel):
     Fakulta na vysoke skole.
     """
 
-    name = models.CharField("Název fakulty", max_length=200)
+    name = models.CharField(help_text="Název fakulty", max_length=200)
     college = models.ForeignKey("colleges.College", on_delete=models.SET_NULL, null=True)
-    rid = models.CharField("RID", max_length=20)
-    url = models.URLField("URL")
+    rid = models.CharField(help_text="RID", max_length=20)
+    url = models.URLField(help_text="URL")
 
     class Meta:
         verbose_name = "Fakulta vysoké školy"
@@ -86,15 +92,25 @@ class Course(TimeStampedModel):
     Zdroj: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=0
     """
 
-    name = models.CharField("Název", max_length=300)
+    qualification_type = models.CharField(help_text="Typ kvalifikace", max_length=150)
+    title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True, verbose_name="Titul")
+    school_levels = models.ManyToManyField("teaching.SchoolLevel", verbose_name="Stupně škol")
+    # education_type = models.ForeignKey(EducationType, on_delete=models.SET_NULL, null=True, verbose_name="Typy vzdělání z hlediska zákona")
+    other_qualification_type = models.CharField(help_text="Typ ostatní kvalifikace", max_length=150)
+    name = models.CharField(help_text="Název", max_length=300)  # Realny nazev kurzu
+    university = models.ForeignKey(College, on_delete=models.SET_NULL, null=True, verbose_name="Vysoká škola")
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, verbose_name="Fakulta")
-    price = models.IntegerField("Cena")
-    sds = models.IntegerField("Standardní doba studia")
-    form_present = models.BooleanField("Prezenční forma studia", default=False)
-    form_combined = models.BooleanField("Kombinovaná forma studia", default=True)
-    url = models.URLField("URL na podrobnější informace")
+    city = models.CharField(help_text="Město", max_length=350)
+    price = models.DecimalField(help_text="Cena", max_digits=8, decimal_places=2)
+    study_length_in_semesters = models.IntegerField(help_text="Standardní doba studia")
+    form_present = models.BooleanField(help_text="Prezenční forma studia", default=False)
+    form_combined = models.BooleanField(help_text="Kombinovaná forma studia", default=True)
+    form_distant = models.BooleanField(help_text="Distanční forma studia", default=False)
+    double_major = models.BooleanField(help_text="Dvouobor", default=False)
+    single_major = models.BooleanField(help_text="Jednoobor", default=True)
+    url = models.URLField(help_text="URL na podrobnější informace", max_length=350)
     subjects = models.ManyToManyField("teaching.Subject", verbose_name="Předměty")
-    note = models.TextField("Poznámka", blank=True)
+    note = models.TextField(help_text="Poznámka", blank=True)
 
     class Meta:
         verbose_name = "Kurz"

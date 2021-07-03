@@ -6,7 +6,12 @@ from django.core import management
 
 from common.models import GraphModel
 from qualifications.temp import init_map_2021_01, init_education_type, init_other_options
-from colleges.temp import init_courses_2021_01
+from colleges.temp2 import (
+    init_courses,
+    add_missing_language_school,
+    add_missing_institute_of_lifelong_learning,
+    add_missing_subjects,
+)
 from teaching.temp import (
     init_subjects_2021_01,
     init_school_type_2021_02,
@@ -114,11 +119,14 @@ def init(neo4j=False):
     init_user()
     init_subjects_2021_01()
     init_map_2021_01()
-    init_courses_2021_01()
+    init_courses()
     init_education_type()
     init_other_options()
     init_school_type_2021_02()
     init_school_level_2021_02()
     import_colleges()
+    add_missing_language_school()
+    add_missing_institute_of_lifelong_learning()
+    add_missing_subjects()
     if neo4j:
         init_neo4j()
