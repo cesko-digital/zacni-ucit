@@ -1,10 +1,8 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
-from common.models import GraphModel
 
-
-class Subject(TimeStampedModel, GraphModel):
+class Subject(TimeStampedModel):
     """
     Skolni predmet.
 
@@ -22,11 +20,8 @@ class Subject(TimeStampedModel, GraphModel):
     def __str__(self):
         return self.code
 
-    def graph_data(self):
-        return {"name": self.name, "code": self.code}
 
-
-class SchoolLevel(TimeStampedModel, GraphModel):
+class SchoolLevel(TimeStampedModel):
     """
     Stupen skoly.
     """
@@ -42,17 +37,8 @@ class SchoolLevel(TimeStampedModel, GraphModel):
     def __str__(self):
         return self.name
 
-    def graph_data(self):
-        return {"name": self.name}
 
-    def related_graph_data(self):
-        return [
-            # SchoolLevel <- BELONGS_TO - Subjects
-            ("<-", "BELONGS_TO", "-", "subjects"),
-        ]
-
-
-class SchoolType(TimeStampedModel, GraphModel):
+class SchoolType(TimeStampedModel):
     """
     Typ skoly.
     """
@@ -67,11 +53,8 @@ class SchoolType(TimeStampedModel, GraphModel):
     def __str__(self):
         return self.name
 
-    def graph_data(self):
-        return {"name": self.name}
 
-
-class SchoolSubType(TimeStampedModel, GraphModel):
+class SchoolSubType(TimeStampedModel):
     """
     Podtyp skoly.
     """
@@ -92,17 +75,8 @@ class SchoolSubType(TimeStampedModel, GraphModel):
     def __str__(self):
         return self.name
 
-    def graph_data(self):
-        return {"name": self.name}
 
-    def related_graph_data(self):
-        return [
-            # SchoolSubType - BELONGS_TO -> SchoolType
-            ("-", "BELONGS_TO", "->", "type"),
-        ]
-
-
-class SubjectGroup(TimeStampedModel, GraphModel):
+class SubjectGroup(TimeStampedModel):
     """
     Predmetova skupina.
     """
@@ -117,12 +91,3 @@ class SubjectGroup(TimeStampedModel, GraphModel):
 
     def __str__(self):
         return self.name
-
-    def graph_data(self):
-        return {"name": self.name}
-
-    def related_graph_data(self):
-        return [
-            # CollegeProgramme <- BELONGS_TO - Subject
-            ("<-", "BELONGS_TO", "-", "subjects")
-        ]

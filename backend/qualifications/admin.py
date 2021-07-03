@@ -1,5 +1,4 @@
 from django.contrib import admin
-from common.admin import GraphAdmin
 from .models import (
     CollegeArea,
     CollegeProgramme,
@@ -12,11 +11,11 @@ from .models import (
 )
 
 
-class CollegeAreaAdmin(GraphAdmin, admin.ModelAdmin):
+class CollegeAreaAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-class CollegeProgrammeAdmin(GraphAdmin, admin.ModelAdmin):
+class CollegeProgrammeAdmin(admin.ModelAdmin):
     list_display = ("name", "area")
     list_select_related = ("area",)
     list_filter = ("area", "subjects")
@@ -24,7 +23,7 @@ class CollegeProgrammeAdmin(GraphAdmin, admin.ModelAdmin):
     filter_horizontal = ("subjects",)
 
 
-class EducationTypeAdmin(GraphAdmin, admin.ModelAdmin):
+class EducationTypeAdmin(admin.ModelAdmin):
     list_display = ("qualification_type", "title", "area", "preparation_type", "subject_type")
     list_filter = ("qualification_type", "title", "school_levels")
     search_fields = ("qualification_type", "title__name", "school_levels__name")
@@ -32,23 +31,23 @@ class EducationTypeAdmin(GraphAdmin, admin.ModelAdmin):
     filter_horizontal = ("school_levels",)
 
 
-class TitleAdmin(GraphAdmin, admin.ModelAdmin):
+class TitleAdmin(admin.ModelAdmin):
     list_display = ("name", "code")
 
 
-class EducationAreaAdmin(GraphAdmin, admin.ModelAdmin):
+class EducationAreaAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-class PreparationTypeAdmin(GraphAdmin, admin.ModelAdmin):
+class PreparationTypeAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-class SubjectTypeAdmin(GraphAdmin, admin.ModelAdmin):
+class SubjectTypeAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-class OtherOptionAdmin(GraphAdmin, admin.ModelAdmin):
+class OtherOptionAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 

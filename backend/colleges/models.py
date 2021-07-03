@@ -1,10 +1,8 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
-from common.models import GraphModel
 
-
-class College(TimeStampedModel, GraphModel):
+class College(TimeStampedModel):
     """
     Vysoka skola.
     Jazyková škola.
@@ -42,21 +40,8 @@ class College(TimeStampedModel, GraphModel):
     def __str__(self):
         return self.name
 
-    def graph_data(self):
-        return {
-            "name": self.name,
-            "type": self.type,
-            "form": self.form,
-            "address": self.address,
-            "rid": self.rid,
-            "ic": self.ic,
-            "databox": self.databox,
-            "url": self.url,
-            "code": self.code,
-        }
 
-
-class Faculty(TimeStampedModel, GraphModel):
+class Faculty(TimeStampedModel):
     """
     Fakulta na vysoke skole.
     """
@@ -74,15 +59,6 @@ class Faculty(TimeStampedModel, GraphModel):
 
     def __str__(self):
         return f"{self.name} / {self.college} "
-
-    def graph_data(self):
-        return {"name": self.name, "rid": self.rid, "url": self.url}
-
-    def related_graph_data(self):
-        return [
-            # Faculty - BELONGS_TO -> College
-            ("-", "BELONGS_TO", "->", "college")
-        ]
 
 
 class Course(TimeStampedModel):
