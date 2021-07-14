@@ -79,9 +79,37 @@ resource "aws_eip" "nat-gateway-ip" {
   vpc = true
 }
 
-resource "aws_nat_gateway" "nat-gateway" {
-  subnet_id     = aws_subnet.public.id
+# Pick the most recent NAT Ami.
+# It'll deploy most recent version with every `terraform apply`
+data "aws_ami" "nat-gateway" {
+  owners      = [
+    "amazon"]
+  most_recent = true
+  filter {
+    name   = "name"
+    values = [
+      "amzn-ami-vpc-nat-*-x86_64-ebs"]
+  }
+}
+
+resource "aws_eip_association" "nat-gateway" {
+  instance_id   = aws_instance.nat-gateway.id
   allocation_id = aws_eip.nat-gateway-ip.id
+}
+
+resource "aws_instance" "nat-gateway" {
+  ami                     = data.aws_ami.nat-gateway.id
+  instance_type           = "t3.micro"
+  subnet_id               = aws_subnet.public.id
+  source_dest_check       = false
+  disable_api_termination = false
+  availability_zone       = "${var.aws-region}a"
+  vpc_security_group_ids  = [
+    aws_security_group.private-default-sg.id]
+
+  tags = {
+    Name = "NAT"
+  }
 }
 
 # Routing table settings, we have 2 routing tables
@@ -106,8 +134,8 @@ resource "aws_route_table" "private-routes" {
   vpc_id = aws_vpc.vpc.id
 
   route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat-gateway.id
+    cidr_block  = "0.0.0.0/0"
+    instance_id = aws_instance.nat-gateway.id
   }
 
   tags = {
