@@ -13,7 +13,6 @@ ln -s backend/.env
 
 Otevri si v editoru `backend/.env`, dopln do prommenych tve vlastni hodnoty
 a soubor uloz.  
-POZOR! Hodnota promenne `NEO4J_USER` **musi** byt nastavena na `neo4j`.
 
 V konzoli spust:
 
@@ -32,7 +31,7 @@ V terminalu spust:
 docker-compose up
 ```
 
-Pockej ~10 vterin (prvni start PostgreSQL a Neo4j trva dyl) a pak v druhe konzoli:
+Pockej ~10 vterin (prvni start PostgreSQL trva dyl) a pak v druhe konzoli:
 
 ```
 docker-compose exec backend bash
@@ -40,8 +39,7 @@ docker-compose exec backend bash
 ./manage.py migrate
 ```
 
-V tuto chvili najel kompletni backend stack -- relacni databaze Postgres, grafova
-databaze Neo4j (s konzoli dostupnou na adrese http://localhost:7474, backendova 
+V tuto chvili najel kompletni backend stack -- relacni databaze Postgres, backendova 
 aplikace (dostupna na adrese http://localhost:8300) a kontejner pro scrapovani dat
 o kurzech.
 
@@ -70,8 +68,6 @@ seznam predmetu, typy skol, apod
 * nahrani seznamu vysokych skol a fakult (pouze v pripade ze najde soubor `backend/temp/vs.xlsx`;
 pokud soubor chybi, je mozne tato data nahrat manualne, viz "Seznam vysokych skol a fakult"
 nize
-* preklopeni dat do grafove database Neo4j (v pripade ze je init spusten s parametrem
-`init(neo4j=Tue)`)
 
 ## Seznam vysokych skol a fakult
 

@@ -148,31 +148,6 @@ GRAPHENE = {
     ],
 }
 
-# Neo4j
-
-import py2neo
-import time
-
-# treat slow neo4j startup (try to connect during `max_wait_time` seconds)
-now = time.time()
-max_wait_time = 10  # in seconds
-try_to_connect = config('GRAPH_TRY_TO_CONNECT_BOOL', default=True, cast=bool)
-
-while try_to_connect:
-    try:
-        GRAPH = py2neo.Graph(
-            host = config("NEO4J_HOST"),
-            port = config("NEO4J_PORT", default='7687'),
-            user = config("NEO4J_USER"),
-            password = config("NEO4J_PASSWORD"),
-        )
-    except py2neo.client.ConnectionUnavailable:
-        try_to_connect = (time.time() - now) < max_wait_time
-        time.sleep(.3)
-    else:
-        try_to_connect = False
-
-
 #########
 # Auth  #
 #########
