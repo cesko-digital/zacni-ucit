@@ -74,44 +74,24 @@ DATABASE_HOST=localhost
 DATABASE_PORT=5432
 
 DJANGO_SECRET=27383abcdef2738fcd
-DJANGO_ALLOWED_HOSTS=
+DJANGO_ALLOWED_HOSTS=*
 DJANGO_CORS_ALLOWED_ORIGINS=
 SENDGRID_API_KEY=
 ```
 
-V konzoli spust:
+Pokud máš databázi lokálně (nepoužíváš tu ve VPNce), pak ještě udělej migrace:
 
 ```
-docker-compose build
+python backend/manage.py migrate
 ```
 
-Tento krok staci udelat jen jednou, pote co si stahnes projekt z GitHubu.
-
-
-# Spusteni
-
-V terminalu spust:
+A nakonec spusť backend projektu:
 
 ```
-docker-compose up
+python backend/manage.py runserver 8300
 ```
 
-Pockej ~10 vterin (prvni start PostgreSQL trva dyl) a pak v druhe konzoli:
-
-```
-docker-compose exec backend bash
-
-./manage.py migrate
-```
-
-V tuto chvili najel kompletni backend stack -- relacni databaze Postgres, backendova 
-aplikace (dostupna na adrese http://localhost:8300) a kontejner pro scrapovani dat
-o kurzech.
-
-
-# Data
-
-## Zakladni initial data
+## Zakladni initial data NEAKTUÁLNÍ
 
 V terminalu spust:
 
