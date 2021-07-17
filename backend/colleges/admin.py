@@ -1,5 +1,4 @@
 from django.contrib import admin
-from common.admin import GraphAdmin
 from .models import College, Faculty, Course
 
 
@@ -8,14 +7,14 @@ class FacultyInline(admin.TabularInline):
     extra = 0
 
 
-class CollegeAdmin(GraphAdmin, admin.ModelAdmin):
+class CollegeAdmin(admin.ModelAdmin):
     list_display = ("name", "type", "form")
     inlines = [FacultyInline]
     list_filter = ("type", "form")
     search_fields = ("code", "name", "address", "rid", "ic", "databox")
 
 
-class FacultyAdmin(GraphAdmin, admin.ModelAdmin):
+class FacultyAdmin(admin.ModelAdmin):
     list_display = ("name", "college")
     list_select_related = ("college",)
     list_filter = ("college",)

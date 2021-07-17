@@ -1,6 +1,7 @@
 from django.conf import settings
 
 
+# Currently obsolete for this project, leaving un touch here
 class GraphModel:
     """
     Generic mixin for publishing Django models to graph DB.

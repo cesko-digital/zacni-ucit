@@ -1,0 +1,49 @@
+---
+version: '3'
+
+services:
+
+  backend:
+    image: zacniucit/backend:latest
+    build: backend/
+    volumes:
+      - $PWD/backend:/app/
+      - data:/data
+    env_file: ./backend/.env
+    environment:
+        PYTHONUNBUFFERED: 1
+    ports:
+      - "8300:8300"
+      - "8301:8301"
+    stop_signal: SIGINT
+    working_dir: /app
+    command: ./manage.py runserver backend:8300
+    links:
+      - db
+    depends_on:
+      - db
+
+  scrapers:
+    image: zacniucit/scrapers:latest
+    build: scrapers/
+    volumes:
+      - $PWD/scrapers:/app/
+      - data:/data
+    stop_signal: SIGINT
+    working_dir: /app
+    command: tail -f /dev/null
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    image: postgres:9.5.20
+    env_file: ./backend/.env
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+volumes:
+     data: 
