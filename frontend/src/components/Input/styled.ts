@@ -1,16 +1,20 @@
 import styled, { css } from 'styled-components';
+import { mediaQueries } from '../../common/mediaQueries';
 
 const defaultLabelStyle = css`
   font-size: ${({ theme }) => theme.fontSize.medium};
 `;
-const radioLabelStyle = checked => css`
-  background-color: ${({ theme }) => (checked ? theme.color.primary : 'transparent')};
+const radioLabelStyle = (checked) => css`
+  background-color: ${({ theme }) =>
+    checked ? theme.color.green : 'transparent'};
   color: ${({ theme }) => (checked ? 'white' : theme.color.secondary)};
   padding: 0.8rem 1.5rem;
   box-sizing: border-box;
   margin: 0.3rem;
   border: ${({ theme }) =>
-    (checked ? `1px solid ${theme.color.primary}` : `1px solid ${theme.color.secondary}`)};
+    checked
+      ? `1px solid ${theme.color.green}`
+      : `1px solid ${theme.color.secondary}`};
   border-radius: 100px;
   font-size: ${({ theme }) => theme.fontSize.xxS};
   font-weight: bolder;
