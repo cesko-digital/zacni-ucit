@@ -5,8 +5,11 @@ Projekt Zacniucit.cz.
 - Python 3.6+
 - PostreSQL 10+ (pokud si chceš db zprovoznit u sebe na localhostu)
 - PIP (kvůli instalaci requirements)
+- Node.js
+- npm
+- Yarn
 
-# Instalace a spuštění virtuálního prostředí
+# Backend - Instalace a spuštění virtuálního prostředí
 
 Ještě než začneš řešit projekt samotný, vytvoř si u sebe na localhostu
 virtuální prostředí. Otevři si terminál a v kořenovém adresáři celého
@@ -27,7 +30,7 @@ Virtuální prostředí pak aktivuješ příkazem:
 source .venv/bin/activate
 ```
 
-# Spuštění projektu
+# Backend - Spuštění projektu
 
 Jsme ve virtuálním prostředí a teď je potřeba už konfigurovat a spustit projekt.
 Nejprve si nainstalujeme všechny povinný requirements pro backend. To uděláme
@@ -91,18 +94,33 @@ A nakonec spusť backend projektu:
 python backend/manage.py runserver 8300
 ```
 
-## Zakladni initial data NEAKTUÁLNÍ
+Backend se následně spustí na http://localhost:8300.
 
-V terminalu spust:
+
+# Frontend - Spuštění projektu
+
+Pro spuštění frontendu projektu, se přesunu do adresáře frontend:
 
 ```
-docker-compose exec backend bash
-./manage.py shell_plus
-
-import init
-init.init()  # prip. init.init(neo4j=True), viz nize
-exit
+cd frontend
 ```
+
+A odtud spustím příkaz:
+
+```
+yarn install
+```
+
+Nainstalují se mi všechny závislosti. Frontend následně spustím příkazem:
+
+```
+yarn dev
+```
+
+Frontend se následně spustí na http://localhost:3000.
+
+
+# NEAKTUÁLNÍ
 
 Init se postara o:
 
