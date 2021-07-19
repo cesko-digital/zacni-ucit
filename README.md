@@ -99,19 +99,19 @@ Backend se následně spustí na http://localhost:8300.
 
 # Frontend - Spuštění projektu
 
-Pro spuštění frontendu projektu, se přesunu do adresáře frontend:
+Pro spuštění frontendu projektu, se přesuň do adresáře frontend:
 
 ```
 cd frontend
 ```
 
-A odtud spustím příkaz:
+A odtud spusť příkaz:
 
 ```
 yarn install
 ```
 
-Nainstalují se mi všechny závislosti. Frontend následně spustím příkazem:
+Nainstalují se mi všechny závislosti. Frontend následně spustíš příkazem:
 
 ```
 yarn dev
