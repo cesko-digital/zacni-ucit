@@ -133,6 +133,22 @@ yarn dev
 Frontend se následně spustí na http://localhost:3000.
 
 
+# Připojení do VPN projektu
+
+Testovací verze aplikace běží na veřejné URL adrese https://zacniucit.ceskodigital.net.
+Přístup k databázi a GraphQL rozhraní s dokumentací jsou však dostupné pouze, pokud se připojíš
+do VPNky projektu.
+
+Pokud jsi neobdržel(a) prozatím přístupové údaje (config) do VPN, požádej Honzu Koprajdu
+nebo Martina Wenishe. Podobně, pokud potřebuješ přístupové údaje do databáze ve VPN.
+Loginy a hesla nejsou součástí tohoto README. Je potřeba, aby ses o ně přihlásil.
+
+## Odkazy
+
+- Veřejný test: https://zacniucit.ceskodigital.net
+- GraphQL (pouze přes VPN): http://zacniucit-elb-406a2c6714d8ca1b.elb.eu-central-1.amazonaws.com:8300/graphql/
+
+
 # NEAKTUÁLNÍ
 
 Init se postara o:
