@@ -9,6 +9,19 @@ Projekt Zacniucit.cz.
 - npm
 - Yarn
 
+# PostgreSQL - Instalace a spuštění na localhostu
+
+Pokud máš databázi PostgreSQL již na svém počítači nainstalovanou, můžeš
+tento krok přeskočit. Pokud ji potřebuješ nainstalovat a zprovoznit, níže
+jsou návody podle OS, který používáš pro vývoj.
+
+V návodech se pracuje s PostgreSQL verzí 13.
+
+- Fedora: https://computingforgeeks.com/install-postgresql-13-on-fedora/
+- Ubuntu: https://computingforgeeks.com/how-to-install-postgresql-13-on-ubuntu/
+- Windows: https://techexpert.tips/windows/installing-postgresql-windows/
+- MacOS: https://www.sqlservercentral.com/articles/getting-started-with-postgresql-on-macos
+
 # Backend - Instalace a spuštění virtuálního prostředí
 
 Ještě než začneš řešit projekt samotný, vytvoř si u sebe na localhostu
