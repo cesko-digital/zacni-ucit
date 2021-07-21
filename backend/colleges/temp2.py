@@ -99,7 +99,12 @@ def init_courses():
         if qualification_type == "Ostatní kvalifikace":
             other_qualification_type = course["Typ ostatní kvalifikace"]
         name = course["Název"]
+
         university = College.objects.filter(name=course["Vysoká škola"].strip()).first()
+        if not university:
+           print('Can not import %s' % name)
+           continue
+
         try:
             faculty = Faculty.objects.get(name=course["Fakulta"], college=university.id)
         except ObjectDoesNotExist:
