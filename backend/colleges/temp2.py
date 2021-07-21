@@ -102,7 +102,7 @@ def init_courses():
 
         university = College.objects.filter(name=course["Vysoká škola"].strip()).first()
         if not university:
-            print('Can not import %s' % name)
+            print("Can not import %s" % name)
             continue
 
         try:
