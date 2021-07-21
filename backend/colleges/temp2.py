@@ -102,8 +102,8 @@ def init_courses():
 
         university = College.objects.filter(name=course["Vysoká škola"].strip()).first()
         if not university:
-           print('Can not import %s' % name)
-           continue
+            print('Can not import %s' % name)
+            continue
 
         try:
             faculty = Faculty.objects.get(name=course["Fakulta"], college=university.id)
