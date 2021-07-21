@@ -149,23 +149,39 @@ Loginy a hesla nejsou součástí tohoto README. Je potřeba, aby ses o ně při
 - GraphQL (pouze přes VPN): http://zacniucit-elb-406a2c6714d8ca1b.elb.eu-central-1.amazonaws.com:8300/graphql/
 
 
-# NEAKTUÁLNÍ
+# Naplnění lokální databáze daty
 
-Init se postara o:
+Prvotní data do databáze můžeš nahrát následujícím postupem:
 
-* vytvoreni uzivatele "demo@zacniucit.cz" s heslem "demo", pres ktereho je mozne se prihlasit
-do administace na adrese http://localhost:8300/admin/
-* nahrani statickych dat ulozenych u jednotlivych aplikacich v souborech `temp.py`; napriklad
-seznam predmetu, typy skol, apod
-* nahrani seznamu vysokych skol a fakult (pouze v pripade ze najde soubor `backend/temp/vs.xlsx`;
-pokud soubor chybi, je mozne tato data nahrat manualne, viz "Seznam vysokych skol a fakult"
-nize
-
-## Seznam vysokych skol a fakult
-
-Vlez na https://regvssp.msmt.cz/registrvssp/cvslist.aspx, klikni na tlacitko "Export XLSX"
-a uloz si do pocitace XLSX tabulku. Presun soubor do adresare `backend/` a spust prikaz:
+1. Stáhni si seznam vysokých škol a fakult z webu https://regvssp.msmt.cz/registrvssp/cvslist.aspx,
+kde klikni na tlačítko "Export XLSX" a ulož si tento soubor do počítače. Přesuň se s kořenového
+adresáře projektu do složky `backend`:
 
 ```
-./manage.py import_msmt_college_registry <cesta_k_XLSX_souboru>
+cd backend 
 ```
+
+a následně spusť django command:
+
+```
+python manage.py import_msmt_college_registry <cesta_ke_stazenemu_souboru>
+```
+
+Pak se přepni do django shellu:
+
+```
+python manage.py shell_plus
+```
+
+a proveď následující příkazy:
+
+```
+import init
+init.init()
+```
+
+Init se postárá o:
+* Vytvoření uživatele `demo@zacniucit.cz` s heslem `demo`
+* Nahrání statických dat uložených u jednotlivých aplikacích v souborech `temp.py`. Např. seznam
+předmětů, typy škol, apod.
+
