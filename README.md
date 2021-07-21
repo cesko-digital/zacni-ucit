@@ -149,11 +149,11 @@ Loginy a hesla nejsou součástí tohoto README. Je potřeba, aby ses o ně při
 - GraphQL (pouze přes VPN): http://zacniucit-elb-406a2c6714d8ca1b.elb.eu-central-1.amazonaws.com:8300/graphql/
 
 
-# Naplnění lokální databáze daty
+# Nahrání prvotních dat do databáze
 
 Prvotní data do databáze můžeš nahrát následujícím postupem:
 
-1. Stáhni si seznam vysokých škol a fakult z webu https://regvssp.msmt.cz/registrvssp/cvslist.aspx,
+Stáhni si seznam vysokých škol a fakult z webu https://regvssp.msmt.cz/registrvssp/cvslist.aspx,
 kde klikni na tlačítko "Export XLSX" a ulož si tento soubor do počítače. Přesuň se s kořenového
 adresáře projektu do složky `backend`:
 
