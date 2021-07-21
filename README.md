@@ -50,7 +50,7 @@ Nejprve si nainstalujeme všechny povinný requirements pro backend. To udělám
 příkazem (stále zůstaň v kořenovém adresáři projektu):
 
 ```
-pip install -r backend/requirements.txt
+pip install -r backend/requirements.devel.txt
 ```
 
 Může se stát, že ti instalace requirements skončí chybou na balíčku psycopg:
@@ -184,4 +184,14 @@ Init se postárá o:
 * Vytvoření uživatele `demo@zacniucit.cz` s heslem `demo`
 * Nahrání statických dat uložených u jednotlivých aplikacích v souborech `temp.py`. Např. seznam
 předmětů, typy škol, apod.
+
+
+# Na co musím myslet před commitem
+
+Pokud pracuješ na backendu, než pošleš své změny do repositáře, nech svůj kód zkontrolovat code formatterem black
+pomocí příkazu:
+
+```
+black backend/
+```
 
