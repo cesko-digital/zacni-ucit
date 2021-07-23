@@ -3,14 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'Roboto-Bold';
-    src: url('../fonts/Roboto-Bold.ttf') format('opentype');
-    font-weight: 100;
+    font-family: 'StabilGrotesk-Bold';
+    src: url('../fonts/StabilGrotesk-Bold.woff') format('opentype');
+    font-weight: 700;
   }
   @font-face {
-    font-family: 'Roboto-Regular';
-    src: url('../fonts/Roboto-Regular.ttf') format('opentype');
-    font-weight: 100;
+    font-family: 'StabilGrotesk-Regular';
+    src: url('../fonts/StabilGrotesk-Regular.woff') format('opentype');
+    font-weight: 400;
   }
   @font-face {
     font-family: 'Roboto-Light';
@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
 
     &::after,
     &::before {
@@ -29,14 +30,15 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    font-size: 62.5%;
+    //font-size: 62.5%;
+    font-size: 100%;
     width: 100vw;
     height: 100vh;
   }
 
   body {
-    font-size: 1.5rem;
-    font-family: 'Roboto-Regular', sans-serif;
+    font-size: 1rem;
+    font-family: 'StabilGrotesk-regular', sans-serif;
   }
 
   #root {

@@ -5,24 +5,31 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 
 import MobileStepper from '@material-ui/core/MobileStepper';
+import { inherits } from 'util';
 
 const GreenStepper = styled(Stepper)({
   width: '100%',
   backgroundColor: 'transparent',
+  fontFamily: 'inherit',
+  marginLeft: 0,
+  paddingLeft: 0,
+  fontWeight: 'normal',
 
   ['@media(max-width: 800px)']: {
     display: 'none',
   },
 
   '& .MuiSvgIcon-root': {
-    fontSize: '3rem',
+    fontSize: '2rem',
     fontWeight: '900',
   },
   '& .MuiStepIcon-text': {
-    fontSize: '1.2rem',
-    ['@media(max-width: 800px)']: {
-      display: 'none',
-    },
+    fontFamily: 'inherit',
+  },
+
+  '& .MuiTypography-body2': {
+    fontFamily: 'inherit',
+    fontWeight: 700,
   },
   '& svg.MuiSvgIcon-root.MuiStepIcon-root.MuiStepIcon-active': {
     color: theme.color.green,
@@ -39,6 +46,7 @@ const GreenStepper = styled(Stepper)({
 const GreenMobileStepper = styled(MobileStepper)({
   backgroundColor: 'transparent',
   justifyContent: 'flex-start',
+  fontSize: '12px',
 
   ['@media(min-width: 801px)']: {
     display: 'none',
@@ -65,22 +73,22 @@ const CustomStepper: React.FC<IStep> = ({ activeStep }) => {
       <GreenStepper activeStep={activeStep}>
         <Step>
           <StepLabel className="step_label">
-            {activeStep == 0 ? 'Krok 1 ze 4' : ''}
+            {activeStep == 0 ? 'KROK 1 ZE 4' : ''}
           </StepLabel>
         </Step>
         <Step>
           <StepLabel className="step_label">
-            {activeStep == 1 ? 'Krok 2 ze 4' : ''}
+            {activeStep == 1 ? 'KROK 2 ZE 4' : ''}
           </StepLabel>
         </Step>
         <Step>
           <StepLabel className="step_label">
-            {activeStep == 2 ? 'Krok 3 ze 4' : ''}
+            {activeStep == 2 ? 'KROK 3 ZE 4' : ''}
           </StepLabel>
         </Step>
         <Step>
           <StepLabel className="step_label">
-            {activeStep == 3 ? 'Krok 4 ze 4' : ''}
+            {activeStep == 3 ? 'KROK 4 ZE 4' : ''}
           </StepLabel>
         </Step>
       </GreenStepper>

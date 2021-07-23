@@ -16,7 +16,9 @@ const radioLabelStyle = (checked) => css`
       ? `1px solid ${theme.color.green}`
       : `1px solid ${theme.color.secondary}`};
   border-radius: 100px;
-  font-size: ${({ theme }) => theme.fontSize.xxS};
+  float: left;
+  font-size: ${({ theme }) => theme.fontSize.normal};
+  font-weight: bold;
   font-weight: bolder;
   cursor: pointer;
 `;
@@ -46,7 +48,7 @@ export const StyledInput = styled.input<{
     return !!bgColor ? bgColor : theme.color.secondary;
   }};
   color: ${({ theme, color }) => (!!color ? color : 'white')};
-  font-size: ${({ theme }) => theme.fontSize.normal};
+  font-size: ${({ theme }) => theme.fontSize.large};
   font-weight: 100;
   ${({ type }) => (type === 'radio' || type === 'checkbox' ? 'display: none;' : null)}
 `;
