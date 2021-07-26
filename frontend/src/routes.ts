@@ -1,11 +1,16 @@
-export const HOMEPAGE = '/';
-export const QUALIFICATION = '/kvalifikace';
-export const WORK_FOR_EDUCATION = '/prace-ve-skolstvi';
-export const TEACHING_START = '/zacinam-ucit';
-export const MOTIVATION = '/motivace';
-export const ABOUT_US = '/o-nas';
-export const CONTACT = '/kontakt';
-export const SIGN_UP = '/registrace';
-export const LOGIN = '/login';
-export const ACCOUNT = '/ucet';
-export const LOGOUT = '/logout';
+export const routes = {
+  homepage: '/',
+  configurator: '/pruvodce',
+  searchResults: '/vysledky-hledani',
+  chooseSubject: '/vyber-predmetu',
+  qualification: '/kvalifikace',
+  workForEducation: '/prace-ve-skolstvi',
+  teachingStart: '/zacinam-ucit',
+  motivation: '/motivace',
+  aboutUs: '/o-nas',
+  contact: '/kontakt',
+  signUp: '/registrace',
+  login: '/login',
+  account: '/ucet',
+  logout: '/logout',
+};

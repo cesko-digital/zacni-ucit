@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
 
 export const Wrapper = styled.nav`
   font-size: 18px;
@@ -14,7 +14,7 @@ export const Wrapper = styled.nav`
     align-items: center;
   }
 `;
-export const Logo = styled.a`
+export const Logo = styled.span`
   text-decoration: none;
   display: inline-block;
   color: ${({ theme }) => theme.color.secondary};
@@ -25,7 +25,7 @@ export const Logo = styled.a`
   padding-bottom: 10px;
 `;
 
-export const Burger = styled.img<{ listOpened: boolean }>`
+export const Burger = styled.button`
   position: absolute;
   top: 22px;
   right: 20px;

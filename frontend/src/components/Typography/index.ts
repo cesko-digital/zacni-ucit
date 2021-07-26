@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { textAlign, TextAlignProps } from 'styled-system';
+import type { TextAlignProps } from 'styled-system';
+import { textAlign } from 'styled-system';
 
 const headerFonts = css`
   ${textAlign}

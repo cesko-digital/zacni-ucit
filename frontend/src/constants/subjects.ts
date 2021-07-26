@@ -1,7 +1,7 @@
 export default [
+  'Čeština',
   'Angličtina',
   'Němčina',
-  'Čeština',
   'Francouzština',
   'Španělština',
   'Ruština',
