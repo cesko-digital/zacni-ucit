@@ -96,6 +96,28 @@ class SubjectType(TimeStampedModel, GraphModel):
         }
 
 
+class Title(TimeStampedModel, GraphModel):
+    """
+    Titul.
+    """
+    name = models.CharField("Název", max_length=100)
+    code = models.CharField("Zkratka", max_length=20, unique=True)
+
+    class Meta:
+        verbose_name = "Titul"
+        verbose_name_plural = "Tituly"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.code
+
+    def graph_data(self):
+        return {
+            "name": self.name,
+            "code": self.code,
+        }
+
+
 class EducationType(TimeStampedModel, GraphModel):
     """
     Typ vzdelani z hlediska zakona.
@@ -110,8 +132,8 @@ class EducationType(TimeStampedModel, GraphModel):
         (OTHER_EXPERIENCE, "Další zkušenost"),
     )
     qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
-    name = models.CharField("Název", max_length=200)
-    title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True, verbose_name="Titul")
+    name = models.CharField("Název", max_length=200)  # zákonná formulace
+    title = models.ForeignKey(Title, on_delete=models.SET_NULL, null=True, verbose_name="Titul")
     area = models.ForeignKey(EducationArea, on_delete=models.SET_NULL, null=True, verbose_name="Oblast VŠ vzdělávání")
     character = models.CharField("Charakter", max_length=100)
     subject_type = models.ForeignKey(SubjectType, on_delete=models.SET_NULL, null=True, verbose_name="Typ předmětů")
@@ -144,30 +166,6 @@ class EducationType(TimeStampedModel, GraphModel):
             ("<-", "BELONGS_TO", "-", "school_levels"),
         ]
 
-
-class Title(TimeStampedModel, GraphModel):
-    """
-    Titul.
-    """
-
-    name = models.CharField("Název", max_length=100)
-    code = models.CharField("Zkratka", max_length=20, unique=True)
-
-    class Meta:
-        verbose_name = "Titul"
-        verbose_name_plural = "Tituly"
-        ordering = ("name",)
-
-    def __str__(self):
-        return self.code
-
-    def graph_data(self):
-        return {
-            "name": self.name,
-            "code": self.code,
-        }
-
-
 class Qualification(TimeStampedModel, GraphModel):
     legal_paragraph = models.CharField("Paragraf zákona", max_length=400, unique=True)
     example = models.CharField("Paragraf zákona", max_length=400, unique=True)
@@ -179,6 +177,7 @@ class Qualification(TimeStampedModel, GraphModel):
         verbose_name="Typ vzdělání z hlediska zákona",
         help_text="Typ vzdělání z hlediska zákona",
     )
+    note = models.TextField("Poznámka", null=True)
 
     class Meta:
         verbose_name = "Kvalifikace"

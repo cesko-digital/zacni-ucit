@@ -3,9 +3,8 @@ from django.apps import apps
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.core import management
-
 from common.models import GraphModel
-from qualifications.temp import init_map_2021_01, init_education_type, init_other_options
+from qualifications.temp import init_map_2021_01, init_subject_types, init_other_options, init_qualification
 from colleges.temp import init_courses_2021_01
 from teaching.temp import (
     init_subjects_2021_01,
@@ -111,10 +110,11 @@ def init(neo4j=False):
     init_subjects_2021_01()
     init_map_2021_01()
     init_courses_2021_01()
-    init_education_type()
+    init_subject_types()
     init_other_options()
     init_school_type_2021_02()
     init_school_level_2021_02()
+    init_qualification()
     import_colleges()
     if neo4j:
         init_neo4j()
