@@ -54,7 +54,7 @@ class EducationArea(TimeStampedModel):
         return self.name
 
 
-class SubjectType(TimeStampedModel, GraphModel):
+class SubjectType(TimeStampedModel):
     name = models.CharField("Název", max_length=512, unique=True)
 
 class PreparationType(TimeStampedModel):
@@ -69,7 +69,7 @@ class PreparationType(TimeStampedModel):
 
 
 
-class Title(TimeStampedModel, GraphModel):
+class Title(TimeStampedModel):
     """
     Titul.
     """
@@ -118,7 +118,7 @@ class EducationType(TimeStampedModel):
     def __str__(self):
         return f"{self.qualification_type} / {self.area} / {self.subject_type}"
 
-class Qualification(TimeStampedModel, GraphModel):
+class Qualification(TimeStampedModel):
     legal_paragraph = models.CharField("Paragraf zákona", max_length=400, unique=True)
     example = models.CharField("Paragraf zákona", max_length=400, unique=True)
     row_id = models.SmallIntegerField()
@@ -141,10 +141,10 @@ class Title(TimeStampedModel):
     class Meta:
         verbose_name = "Kvalifikace"
         verbose_name_plural = "Kvalifikace"
-        ordering = ("row_id", "legal_paragraph", "example")
+        ordering = ("name", "code")
 
     def __str__(self):
-        return self.rowId
+        return self.name
 
 
 class OtherExperience(TimeStampedModel):
