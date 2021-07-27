@@ -1,17 +1,17 @@
 import { SecondStepForm } from '../../common/types';
-import { UPDATE_SECOND_STEP, SecondStepAction } from './actions';
+import { SET_SECOND_STEP, SecondStepAction } from './actions';
 
 export type SecondStepState = SecondStepForm;
 
-const initialState = [];
+const initialState = 'Čeština';
 
 const reducer = (
   state: SecondStepState = initialState,
   action: SecondStepAction
 ): SecondStepState => {
   switch (action.type) {
-    case UPDATE_SECOND_STEP:
-      return state;
+    case SET_SECOND_STEP:
+      return action.payload.secondStep;
     default:
       return state;
   }

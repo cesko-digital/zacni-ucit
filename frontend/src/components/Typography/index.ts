@@ -24,3 +24,12 @@ export const LightText = styled.p`
   margin: 0;
   font-family: 'Roboto-Light';
 `;
+export const PrimaryText = styled.span<{
+  size?: string;
+}>`
+  font-size: ${({ size }) => (!!size ? size : '1.2em')};
+  font-weight: bolder;
+  color: ${({ theme }) => theme.color.primary};
+  margin: 0;
+  font-family: 'Roboto-Regular';
+`;

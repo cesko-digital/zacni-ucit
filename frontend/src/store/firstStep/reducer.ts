@@ -1,14 +1,31 @@
 import { FirstStepForm } from '../../common/types';
-import { UPDATE_FIRST_STEP, FirstStepAction } from './actions';
+import {
+  UPDATE_FIRST_STEP,
+  FirstStepAction,
+  SET_BUTTON_IS_DISABLED,
+} from './actions';
 import { List } from 'immutable';
 
 export type TeacherState = FirstStepForm;
 
-const initialState = [
-  { id: '0', htmlId: 'firstDegree', label: '1. Stupeň ZŠ', checked: false },
-  { id: '1', htmlId: 'secondDegree', label: '2. Stupeň ZŠ', checked: false },
-  { id: '2', htmlId: 'highSchool', label: 'SŠ', checked: false },
-];
+const initialState = {
+  buttonIsDisabled: true,
+  chooseDegreeState: [
+    { id: '0', htmlId: 'firstDegree', label: '1. Stupeň ZŠ', checked: false },
+    {
+      id: '1',
+      htmlId: 'secondDegree',
+      label: '2. Stupeň ZŠ, nižší stupně gymnázií',
+      checked: false,
+    },
+    {
+      id: '2',
+      htmlId: 'highSchool',
+      label: 'SŠ, SOŠ, SOU, vyšší stupně gymnázií',
+      checked: false,
+    },
+  ],
+};
 
 const reducer = (
   state: TeacherState = initialState,
@@ -16,14 +33,15 @@ const reducer = (
 ): TeacherState => {
   switch (action.type) {
     case UPDATE_FIRST_STEP:
-      const buttonList = List(state);
+      const { chooseDegreeState } = state;
+      const buttonList = List(chooseDegreeState);
 
       let updatedState = buttonList.setIn(
         [action.payload.buttonId.toString(), 'checked'],
         true
       );
 
-      state.map((el) => {
+      chooseDegreeState.map((el) => {
         if (el.id !== action.payload.buttonId) {
           updatedState = updatedState.setIn(
             [el.id.toString(), 'checked'],
@@ -32,7 +50,15 @@ const reducer = (
         } else {
         }
       });
-      return updatedState.toArray();
+      return {
+        ...state,
+        chooseDegreeState: updatedState.toArray(),
+      };
+    case SET_BUTTON_IS_DISABLED:
+      return {
+        ...state,
+        buttonIsDisabled: action.payload.buttonIsDisabled,
+      };
     default:
       return state;
   }

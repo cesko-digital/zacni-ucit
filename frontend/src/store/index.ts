@@ -4,12 +4,14 @@ import { isBrowser } from '../utils/is-browser';
 import teacher from './teacher/reducer';
 import firstStep from './firstStep/reducer';
 import secondStep from './secondStep/reducer';
+import thirdStep from './thirdStep/reducer';
 import { createWrapper } from 'next-redux-wrapper';
 
 const reducer = combineReducers({
   teacher,
   firstStep,
   secondStep,
+  thirdStep,
 });
 
 export type AppStore = ReturnType<typeof makeStore>;

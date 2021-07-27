@@ -8,15 +8,22 @@ export type TeacherType = {
     };
   };
 };
-export type FirstStepForm = Array<{
-  id: string;
-  htmlId: string;
-  label: string;
-  checked: boolean;
-}>;
-export type SecondStepForm = Array<{
-  id: string;
-  htmlId: string;
-  label: string;
-  checked: boolean;
-}>;
+export type FirstStepForm = {
+  buttonIsDisabled: boolean;
+  chooseDegreeState: Array<{
+    id: string;
+    htmlId: string;
+    label: string;
+    checked: boolean;
+  }>;
+};
+export type SecondStepForm = string;
+export type ThirdStepForm = {
+  buttonIsDisabled: boolean;
+  chooseDegreeState: Array<{
+    id: string;
+    htmlId: string;
+    label: string;
+    checked: boolean;
+  }>;
+};

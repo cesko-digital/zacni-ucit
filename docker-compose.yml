@@ -20,10 +20,8 @@ services:
     command: ./manage.py runserver backend:8300
     links:
       - db
-      - neo4j
     depends_on:
       - db
-      - neo4j
 
   scrapers:
     image: zacniucit/scrapers:latest
@@ -46,15 +44,6 @@ services:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-
-  neo4j:
-    image: neo4j:4.2
-    env_file: ./backend/.env
-    environment:
-        NEO4J_AUTH: "${NEO4J_USER}/${NEO4J_PASSWORD}"
-    ports:
-        - "7474:7474"
-        - "7687:7687"
 
 volumes:
      data: 

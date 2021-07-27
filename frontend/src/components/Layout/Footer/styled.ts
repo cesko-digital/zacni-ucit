@@ -7,7 +7,8 @@ export const FooterSection = styled.footer`
   font-weight: bold;
   letter-spacing: 1px;
   background-color: ${({ theme }) => theme.color.secondary};
-  position: absolute;
+  position: fixed;
+  left: 0;
   bottom: 0;
   width: 100%;
 `;
