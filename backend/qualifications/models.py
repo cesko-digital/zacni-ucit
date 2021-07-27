@@ -1,6 +1,6 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
-
+from teaching.models import SchoolLevel
 
 class CollegeArea(TimeStampedModel):
     name = models.CharField("Název oblasti", max_length=100, unique=True)
@@ -54,21 +54,11 @@ class EducationArea(TimeStampedModel):
         return self.name
 
 
-class PreparationType(TimeStampedModel):
-    name = models.CharField("Název", max_length=200, unique=True)
-
-    class Meta:
-        verbose_name = "Typ přípravy učitelů"
-        verbose_name_plural = "Typy příprav učitelů"
-        ordering = ("name",)
-
-    def __str__(self):
-        return self.name
-
-
-class SubjectType(TimeStampedModel):
+class SubjectType(TimeStampedModel, GraphModel):
     name = models.CharField("Název", max_length=512, unique=True)
 
+class PreparationType(TimeStampedModel):
+    name = models.CharField("Název", max_length=200, unique=True)
     class Meta:
         verbose_name = "Typ předmětů"
         verbose_name_plural = "Typy předmětů"
@@ -78,6 +68,25 @@ class SubjectType(TimeStampedModel):
         return self.name
 
 
+
+class Title(TimeStampedModel, GraphModel):
+    """
+    Titul.
+    """
+    name = models.CharField("Název", max_length=100)
+    code = models.CharField("Zkratka", max_length=20, unique=True)
+
+class SubjectType(TimeStampedModel):
+    name = models.CharField("Název", max_length=512, unique=True)
+
+    class Meta:
+        verbose_name = "Titul"
+        verbose_name_plural = "Tituly"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.code
+
 class EducationType(TimeStampedModel):
     """
     Typ vzdelani z hlediska zakona.
@@ -85,19 +94,17 @@ class EducationType(TimeStampedModel):
 
     TITLE_QUALIFICATION = "titul"
     CZV_QUALIFICATION = "czv"
-    OTHER_QUALIFICATION = "dalsi"
+    OTHER_EXPERIENCE = "dalsi"
     QUALIFICATION_TYPE_CHOICES = (
         (TITLE_QUALIFICATION, "Titul"),
         (CZV_QUALIFICATION, "Kurz CŽV"),
-        (OTHER_QUALIFICATION, "Další možnosti"),
+        (OTHER_EXPERIENCE, "Další zkušenost"),
     )
-
     qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
-    title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True, verbose_name="Titul")
+    name = models.CharField("Název", max_length=200)  # zákonná formulace
+    title = models.ForeignKey(Title, on_delete=models.SET_NULL, null=True, verbose_name="Titul")
     area = models.ForeignKey(EducationArea, on_delete=models.SET_NULL, null=True, verbose_name="Oblast VŠ vzdělávání")
-    preparation_type = models.ForeignKey(
-        PreparationType, on_delete=models.SET_NULL, null=True, verbose_name="Typ přípravy učitelů"
-    )
+    character = models.CharField("Charakter", max_length=100)
     subject_type = models.ForeignKey(SubjectType, on_delete=models.SET_NULL, null=True, verbose_name="Typ předmětů")
     school_levels = models.ManyToManyField(
         "teaching.SchoolLevel", related_name="education_types", verbose_name="Stupeň školy"
@@ -111,6 +118,18 @@ class EducationType(TimeStampedModel):
     def __str__(self):
         return f"{self.qualification_type} / {self.area} / {self.subject_type}"
 
+class Qualification(TimeStampedModel, GraphModel):
+    legal_paragraph = models.CharField("Paragraf zákona", max_length=400, unique=True)
+    example = models.CharField("Paragraf zákona", max_length=400, unique=True)
+    row_id = models.SmallIntegerField()
+    subject_type = models.ForeignKey(SubjectType, default='', on_delete=models.SET_DEFAULT, null=False, verbose_name="Typ předmětů")
+    school_level = models.ForeignKey(SchoolLevel, default='', on_delete=models.SET_DEFAULT, null=False, verbose_name="Stupeň školy")
+    education_types = models.ManyToManyField(
+        EducationType,
+        verbose_name="Typ vzdělání z hlediska zákona",
+        help_text="Typ vzdělání z hlediska zákona",
+    )
+    note = models.TextField("Poznámka", null=True)
 
 class Title(TimeStampedModel):
     """
@@ -119,17 +138,16 @@ class Title(TimeStampedModel):
 
     name = models.CharField("Název", max_length=100)
     code = models.CharField("Zkratka", max_length=20, unique=True)
-
     class Meta:
-        verbose_name = "Titul"
-        verbose_name_plural = "Tituly"
-        ordering = ("name",)
+        verbose_name = "Kvalifikace"
+        verbose_name_plural = "Kvalifikace"
+        ordering = ("row_id", "legal_paragraph", "example")
 
     def __str__(self):
-        return self.code
+        return self.rowId
 
 
-class OtherOption(TimeStampedModel):
+class OtherExperience(TimeStampedModel):
     """
     Dalsi moznosti krome TITULu nebo Kurzu CZV.
 

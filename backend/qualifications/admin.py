@@ -5,9 +5,10 @@ from .models import (
     EducationType,
     Title,
     EducationArea,
-    PreparationType,
     SubjectType,
-    OtherOption,
+    OtherExperience,
+    Qualification,
+
 )
 
 
@@ -46,8 +47,7 @@ class PreparationTypeAdmin(admin.ModelAdmin):
 class SubjectTypeAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
-
-class OtherOptionAdmin(admin.ModelAdmin):
+class OtherExperienceAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
@@ -56,6 +56,7 @@ admin.site.register(CollegeProgramme, CollegeProgrammeAdmin)
 admin.site.register(EducationType, EducationTypeAdmin)
 admin.site.register(Title, TitleAdmin)
 admin.site.register(EducationArea, EducationAreaAdmin)
-admin.site.register(PreparationType, PreparationTypeAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
-admin.site.register(OtherOption, OtherOptionAdmin)
+admin.site.register(OtherExperience, OtherExperienceAdmin)
+admin.site.register(Qualification)
+
