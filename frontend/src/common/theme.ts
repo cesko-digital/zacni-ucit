@@ -18,7 +18,6 @@ export const theme = {
   //   xxLarge: '2.4rem',
   //   xxxLarge: '3rem',
   // },
-
   fontSize: {
     small: '10px',
     normal: '12px',
@@ -31,6 +30,9 @@ export const theme = {
   radius: {
     basic: '5px',
     max: '50px',
+  },
+  margin: {
+    marginInput: '0 0.5rem 0.5rem 0',
   },
 };
 

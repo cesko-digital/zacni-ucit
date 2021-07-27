@@ -3,17 +3,14 @@ import { styled } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-
 import MobileStepper from '@material-ui/core/MobileStepper';
-import { inherits } from 'util';
 
 const GreenStepper = styled(Stepper)({
   width: '100%',
   backgroundColor: 'transparent',
   fontFamily: 'inherit',
-  marginLeft: 0,
-  paddingLeft: 0,
-  fontWeight: 'normal',
+  margin: 0,
+  padding: '1rem 0 1rem 0',
 
   ['@media(max-width: 800px)']: {
     display: 'none',
@@ -29,7 +26,7 @@ const GreenStepper = styled(Stepper)({
 
   '& .MuiTypography-body2': {
     fontFamily: 'inherit',
-    fontWeight: 700,
+    fontWeight: 400,
   },
   '& svg.MuiSvgIcon-root.MuiStepIcon-root.MuiStepIcon-active': {
     color: theme.color.green,
@@ -47,6 +44,7 @@ const GreenMobileStepper = styled(MobileStepper)({
   backgroundColor: 'transparent',
   justifyContent: 'flex-start',
   fontSize: '12px',
+  padding: '1rem 0 0 0',
 
   ['@media(min-width: 801px)']: {
     display: 'none',

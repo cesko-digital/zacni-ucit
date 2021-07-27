@@ -15,11 +15,19 @@ export const H1 = styled.h1<TextAlignProps>`
 export const H2 = styled.h2`
   font-size: 32px;
   margin: 0;
+  font-weight: 400;
   ${headerFonts}
 `;
 export const H3 = styled.h3`
   font-size: 24px;
   margin: 0;
+  font-weight: bold;
+  ${headerFonts}
+`;
+export const H4 = styled.h3`
+  font-size: 16px;
+  margin: 0;
+  font-weight: bold;
   ${headerFonts}
 `;
 export const LightText = styled.p`
@@ -30,10 +38,11 @@ export const LightText = styled.p`
 `;
 export const PrimaryText = styled.span<{
   size?: string;
+  marginLeft?: string;
 }>`
   font-size: ${({ size }) => (!!size ? size : '1.2em')};
-  font-weight: bolder;
+  font-weight: bold;
   color: ${({ theme }) => theme.color.primary};
   margin: 0;
-  font-family: 'Roboto-Regular';
+  margin-left: ${({ marginLeft }) => (!!marginLeft ? marginLeft : 0)};
 `;

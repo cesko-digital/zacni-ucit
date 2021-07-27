@@ -4,13 +4,14 @@ import { mediaQueries } from '../../common/mediaQueries';
 const defaultLabelStyle = css`
   font-size: ${({ theme }) => theme.fontSize.medium};
 `;
-const radioLabelStyle = (checked) => css`
+const radioLabelStyle = ({ checked, margin }) => css`
   background-color: ${({ theme }) =>
     checked ? theme.color.green : 'transparent'};
   color: ${({ theme }) => (checked ? 'white' : theme.color.secondary)};
   padding: 0.8rem 1.5rem;
   box-sizing: border-box;
-  margin: 0.3rem;
+  //margin: 0.3rem;
+  margin: ${({ theme }) => (margin ? margin : theme.margin.marginInput)};
   border: ${({ theme }) =>
     checked
       ? `1px solid ${theme.color.green}`
@@ -53,9 +54,15 @@ export const StyledInput = styled.input<{
   ${({ type }) => (type === 'radio' || type === 'checkbox' ? 'display: none;' : null)}
 `;
 
-export const Label = styled.label<{ type: string; checked?: boolean }>`
-  ${({ type, checked }) =>
-    (type === 'radio' || type === 'checkbox' ? radioLabelStyle(checked) : defaultLabelStyle)};
+export const Label = styled.label<{
+  type: string;
+  checked?: boolean;
+  margin?: string;
+}>`
+  ${({ type, checked, margin }) =>
+    type === 'radio' || type === 'checkbox'
+      ? radioLabelStyle({ checked, margin })
+      : defaultLabelStyle};
 `;
 
 export const StyledError = styled.div`
