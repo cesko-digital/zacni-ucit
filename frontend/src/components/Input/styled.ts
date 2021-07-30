@@ -50,6 +50,7 @@ export const StyledInput = styled.input<{
   }};
   color: ${({ theme, color }) => (!!color ? color : 'white')};
   font-size: ${({ theme }) => theme.fontSize.large};
+  cursor: pointer;
   font-weight: 100;
   ${({ type }) => (type === 'radio' || type === 'checkbox' ? 'display: none;' : null)}
 `;
