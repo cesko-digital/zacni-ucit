@@ -1,26 +1,17 @@
 import styled from 'styled-components';
 
-export const FooterSection = styled.footer`
-  padding: 0.5rem 3rem;
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
-  letter-spacing: 1px;
-  background-color: ${({ theme }) => theme.color.secondary};
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+export const FooterSection1 = styled.section`
+  background: rgba(127, 80, 255, 0.2);
 `;
-export const FooterText = styled.span`
-  font-size: 1rem;
-  position: relative;
-  left: 1.7rem;
-  top: -0.4rem;
+
+export const Flex1 = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  padding: 2rem 1rem;
 `;
-export const RowWrapper = styled.span`
-  float: right;
-  position: relative;
-  right: 1rem;
-  top: 0.5rem;
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 `;

@@ -18,16 +18,22 @@ export const H1 = styled.h1<TextAlignProps>`
   }
 `;
 
-export const H2 = styled.h2`
+export const H2 = styled.h2<{
+  margin?: string;
+}>`
   font-size: 32px;
-  margin: 0;
+  margin: ${({ margin }) => (!!margin ? margin : '0')};
   font-weight: 400;
   ${headerFonts}
 `;
-export const H3 = styled.h3`
+export const H3 = styled.h3<{
+  margin?: string;
+  padding?: string;
+}>`
   font-size: 24px;
-  margin: 0;
-  font-weight: bold;
+  margin: ${({ margin }) => (margin ? margin : '0')};
+  padding: ${({ padding }) => (padding ? padding : '0')};
+  font-weight: 700;
   ${headerFonts}
 `;
 export const H4 = styled.h3`
@@ -58,6 +64,19 @@ export const LinkRegular = styled.a<{
 }>`
   font-size: ${theme.fontSize.medium};
   font-weight: 700;
+  color: ${({ color }) => (!!color ? color : 'inherit')};
+  text-decoration: underline;
+  margin-right: 1rem;
+  &:hover {
+    color: inherit;
+  }
+`;
+
+export const LinkLight = styled.a<{
+  color?: string;
+}>`
+  font-size: ${theme.fontSize.medium};
+  font-weight: 400;
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;
   margin-right: 1rem;
