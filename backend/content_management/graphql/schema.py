@@ -12,9 +12,9 @@ class Query(graphene.ObjectType):
         return WebSiteText.objects.all()
 
     @staticmethod
-    def resolve_text_by_page_id(root, info, pk:int):
+    def resolve_text_by_page_id(root, info, pk: int):
         return WebSiteText.objects.get(pk=pk)
 
     @staticmethod
-    def resolve_text_by_element_id(root, info, pk:int):
+    def resolve_text_by_element_id(root, info, pk: int):
         return WebSiteText.objects.get(pk=pk)

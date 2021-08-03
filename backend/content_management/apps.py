@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ContentManagementConfig(AppConfig):
-    name = 'content_management'
+    name = "content_management"
