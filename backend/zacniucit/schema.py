@@ -5,6 +5,7 @@ import teaching.graphql.schema
 import qualifications.graphql.schema
 import accounts.graphql.mutations
 import teaching.graphql.mutations
+import content_management.graphql.schema
 
 from graphql_auth.schema import MeQuery
 
@@ -14,6 +15,7 @@ class Query(
     qualifications.graphql.schema.Query,
     colleges.graphql.schema.Query,
     teaching.graphql.schema.Query,
+    content_management.graphql.schema.Query,
     graphene.ObjectType,
 ):
     is_alive = graphene.Boolean(description="Base API test")
