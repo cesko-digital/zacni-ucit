@@ -9,7 +9,7 @@ import SubjectPage from './SubjectPage/SubjectPage';
 import StepBack from '@components/StepBack/StepBack';
 import Stepper from '@components/Stepper/Stepper';
 import StyleWrapper from '@components/StyledWrapper';
-import { H2, LightText } from '@components/Typography';
+import { H1, LightText } from '@components/Typography';
 import subjects from 'src/constants/subjects';
 
 export type ConfiguratorValues = {
@@ -49,7 +49,7 @@ const Configurator: FC = () => {
       {activeStep === 1 && (
         <>
           <StyleWrapper margin="3rem 0 1rem 0">
-            <H2>Chcete se stát učitelem, ale nevíte jak na to?</H2>
+            <H1>Chcete se stát učitelem, ale nevíte jak na to?</H1>
           </StyleWrapper>
           <StyleWrapper margin="0 0 3rem 0">
             <LightText>

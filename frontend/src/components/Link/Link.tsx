@@ -11,7 +11,7 @@ interface ILinkProps {
 
 const Link: FC<ILinkProps> = React.forwardRef(({ href, title, children }, ref: any) => (
   <ReactLink href={href} prefetch={false}>
-    <a ref={ref} title={title}>
+    <a ref={ref} style={{ color: 'inherit', fontWeight: 'bold' }} title={title}>
       {children}
     </a>
   </ReactLink>

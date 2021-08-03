@@ -4,6 +4,11 @@ import React from 'react';
 import Button from '@components/Button/Button';
 import { routes } from '@routes';
 
-const HomePage: FC = () => <Button href={routes.configurator}>Průvodce</Button>;
+const HomePage: FC = () => (
+  <div>
+    <h1>HomePage</h1>
+    <Button href={routes.configurator}>Průvodce</Button>
+  </div>
+);
 
 export default HomePage;

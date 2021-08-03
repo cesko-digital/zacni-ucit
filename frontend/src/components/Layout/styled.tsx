@@ -13,4 +13,5 @@ export const MainWrap = styled.main<{ homePage: boolean }>`
 `;
 export const Wrap = styled.div`
   padding: 0 2.5rem;
+  margin: 0 auto;
 `;

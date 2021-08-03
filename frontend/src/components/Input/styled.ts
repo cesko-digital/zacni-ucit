@@ -4,17 +4,17 @@ const defaultLabelStyle = css`
   font-size: ${({ theme }) => theme.fontSize.medium};
 `;
 const radioLabelStyle = checked => css`
-  background-color: ${({ theme }) => (checked ? theme.color.primary : 'transparent')};
+  background-color: ${({ theme }) => (checked ? '#54C176' : 'transparent')};
   color: ${({ theme }) => (checked ? 'white' : theme.color.secondary)};
   padding: 0.8rem 1.5rem;
   box-sizing: border-box;
   margin: 0.3rem;
-  border: ${({ theme }) =>
-    (checked ? `1px solid ${theme.color.primary}` : `1px solid ${theme.color.secondary}`)};
+  border: ${({ theme }) => `1px solid ${checked ? '#54C176' : theme.color.secondary}`};
   border-radius: 100px;
-  font-size: ${({ theme }) => theme.fontSize.xxS};
-  font-weight: bolder;
+  font-size: 12px;
+  font-weight: bold;
   cursor: pointer;
+  display: inline-block;
 `;
 
 export const StyledInput = styled.input<{

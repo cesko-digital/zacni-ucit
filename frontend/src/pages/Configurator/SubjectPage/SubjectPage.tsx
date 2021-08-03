@@ -1,38 +1,47 @@
-import { Select, MenuItem, FormControl } from '@material-ui/core';
+import { MenuItem, FormControl } from '@material-ui/core';
 import { useFormikContext } from 'formik';
 import React from 'react';
-import type { FC } from 'react';
 
 import type { ConfiguratorValues } from '../Configurator';
 import { degrees } from '../DegreePage/DegreePage';
+import { Select } from './styled';
+import InfoButton from '@components/InfoButton/InfoButton';
 import StyleWrapper from '@components/StyledWrapper';
 import { LightText, PrimaryText } from '@components/Typography';
 import subjects from 'src/constants/subjects';
 
-const SubjectPage: FC = () => {
+const SubjectPage: React.FC = () => {
   const { values, handleChange } = useFormikContext<ConfiguratorValues>();
 
   return (
     <>
       <PrimaryText>Pro {degrees[values.degree].label}</PrimaryText>
-      <StyleWrapper margin="0 0 3rem 0">
-        <LightText>
-          Vyberte si prosím pouze jeden předmět. V případě, že chcete učit i nějaký další předmět,
-          je potřeba vybrat z daných kombinací studijních dvouoborů. Pokud vám ani jedna nebude
-          vyhovovat, můžete se na výuce druhého předmětu domluvit až přímo se svým zaměstnavatelem:
-          ředitelem školy.
-        </LightText>
+      <StyleWrapper margin="0 0 1rem 0">
+        <LightText>Vyberte si prosím pouze jeden předmět.</LightText>
       </StyleWrapper>
-      <StyleWrapper margin="2rem 0"></StyleWrapper>
-      <FormControl>
-        <Select name="subject" value={values.subject} onChange={handleChange}>
-          {subjects.sort().map(subject => (
-            <MenuItem key={subject} value={subject}>
-              {subject}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <StyleWrapper>
+        <InfoButton onClick={console.log}>Chcete učit více předmětů?</InfoButton>
+        <InfoButton onClick={console.log}>
+          Zjistěte, jaké předměty můžete s vašim vzděláním vyučovat
+        </InfoButton>
+      </StyleWrapper>
+      <StyleWrapper margin="0 0 2rem">
+        <FormControl fullWidth>
+          <Select
+            name="subject"
+            value={values.subject}
+            variant="outlined"
+            fullWidth
+            onChange={handleChange}
+          >
+            {subjects.sort().map(subject => (
+              <MenuItem key={subject} value={subject}>
+                {subject}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </StyleWrapper>
     </>
   );
 };

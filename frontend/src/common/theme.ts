@@ -1,4 +1,5 @@
-import baseStyled, { ThemedStyledInterface } from 'styled-components';
+import type { ThemedStyledInterface } from 'styled-components';
+import baseStyled from 'styled-components';
 
 export const theme = {
   color: {
@@ -6,6 +7,8 @@ export const theme = {
     secondary: '#0C0807' /* dark black */,
     error: '#EA4435' /* red */,
     gray: '#e5e5e5',
+    green: '#54C176',
+    gray: '#D8D8D7',
   },
   fontSize: {
     xxS: '0.9rem',

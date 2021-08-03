@@ -1,4 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
+import { StylesProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -11,18 +12,30 @@ import Layout from '@components/Layout/Layout';
 const MyApp = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Head>
         <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
       </Head>
-      <GlobaLStyles />
-      <ApolloProvider client={apolloClient}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ApolloProvider>
-    </ThemeProvider>
+      <StylesProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <GlobaLStyles />
+          <ApolloProvider client={apolloClient}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ApolloProvider>
+        </ThemeProvider>
+      </StylesProvider>
+    </>
   );
 };
 
