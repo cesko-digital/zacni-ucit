@@ -35,6 +35,7 @@ class EducationAreaObjectType(DjangoObjectType):
         model = EducationArea
         fields = ALL_FIELDS
 
+
 class SubjectTypeObjectType(DjangoObjectType):
     class Meta:
         model = SubjectType

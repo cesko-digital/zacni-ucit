@@ -2,6 +2,7 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 from teaching.models import SchoolLevel
 
+
 class CollegeArea(TimeStampedModel):
     name = models.CharField("Název oblasti", max_length=100, unique=True)
 
@@ -57,8 +58,10 @@ class EducationArea(TimeStampedModel):
 class SubjectType(TimeStampedModel):
     name = models.CharField("Název", max_length=512, unique=True)
 
+
 class PreparationType(TimeStampedModel):
     name = models.CharField("Název", max_length=200, unique=True)
+
     class Meta:
         verbose_name = "Typ předmětů"
         verbose_name_plural = "Typy předmětů"
@@ -68,13 +71,14 @@ class PreparationType(TimeStampedModel):
         return self.name
 
 
-
 class Title(TimeStampedModel):
     """
     Titul.
     """
+
     name = models.CharField("Název", max_length=100)
     code = models.CharField("Zkratka", max_length=20, unique=True)
+
 
 class SubjectType(TimeStampedModel):
     name = models.CharField("Název", max_length=512, unique=True)
@@ -86,6 +90,7 @@ class SubjectType(TimeStampedModel):
 
     def __str__(self):
         return self.code
+
 
 class EducationType(TimeStampedModel):
     """
@@ -118,18 +123,24 @@ class EducationType(TimeStampedModel):
     def __str__(self):
         return f"{self.qualification_type} / {self.area} / {self.subject_type}"
 
+
 class Qualification(TimeStampedModel):
     legal_paragraph = models.CharField("Paragraf zákona", max_length=400, unique=True)
     example = models.CharField("Paragraf zákona", max_length=400, unique=True)
     row_id = models.SmallIntegerField()
-    subject_type = models.ForeignKey(SubjectType, default='', on_delete=models.SET_DEFAULT, null=False, verbose_name="Typ předmětů")
-    school_level = models.ForeignKey(SchoolLevel, default='', on_delete=models.SET_DEFAULT, null=False, verbose_name="Stupeň školy")
+    subject_type = models.ForeignKey(
+        SubjectType, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Typ předmětů"
+    )
+    school_level = models.ForeignKey(
+        SchoolLevel, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Stupeň školy"
+    )
     education_types = models.ManyToManyField(
         EducationType,
         verbose_name="Typ vzdělání z hlediska zákona",
         help_text="Typ vzdělání z hlediska zákona",
     )
     note = models.TextField("Poznámka", null=True)
+
 
 class Title(TimeStampedModel):
     """
@@ -138,6 +149,8 @@ class Title(TimeStampedModel):
 
     name = models.CharField("Název", max_length=100)
     code = models.CharField("Zkratka", max_length=20, unique=True)
+    visible_in_form = models.BooleanField(default=True)
+
     class Meta:
         verbose_name = "Kvalifikace"
         verbose_name_plural = "Kvalifikace"

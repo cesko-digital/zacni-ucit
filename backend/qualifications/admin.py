@@ -8,7 +8,6 @@ from .models import (
     SubjectType,
     OtherExperience,
     Qualification,
-
 )
 
 
@@ -33,7 +32,7 @@ class EducationTypeAdmin(admin.ModelAdmin):
 
 
 class TitleAdmin(admin.ModelAdmin):
-    list_display = ("name", "code")
+    list_display = ("name", "code", "visible_in_form")
 
 
 class EducationAreaAdmin(admin.ModelAdmin):
@@ -47,6 +46,7 @@ class PreparationTypeAdmin(admin.ModelAdmin):
 class SubjectTypeAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
+
 class OtherExperienceAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
@@ -59,4 +59,3 @@ admin.site.register(EducationArea, EducationAreaAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(OtherExperience, OtherExperienceAdmin)
 admin.site.register(Qualification)
-
