@@ -15,6 +15,7 @@ from qualifications.models import (
     CollegeProgramme,
     EducationArea,
     SubjectType,
+    EducationType,
     OtherOption,
 )
 
@@ -50,7 +51,7 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_titles(root, info):
-        return Title.objects.all()
+        return Title.objects.filter(visible_in_form=True)
 
     @staticmethod
     def resolve_title(root, info, pk: int):
@@ -90,11 +91,11 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_education_types(root, info):
-        return SubjectType.objects.all()
+        return EducationType.objects.all()
 
     @staticmethod
     def resolve_education_type(root, info, pk: int):
-        return SubjectType.objects.get(pk=pk)
+        return EducationType.objects.get(pk=pk)
 
     @staticmethod
     def resolve_other_options(root, info):

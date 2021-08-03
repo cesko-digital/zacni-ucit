@@ -6,7 +6,7 @@ from .models import (
     EducationArea,
     SubjectType,
     OtherExperience,
-    Qualification
+    Qualification,
 )
 from teaching.models import Subject, SchoolLevel
 import csv
@@ -310,6 +310,7 @@ Zemědělství		PŘ	F	ENV
             if subjects:
                 programme.subjects.add(*subjects)
 
+
 def init_subject_types():
     """
     Init for subject types
@@ -558,6 +559,7 @@ def init_qualification():
             if x
         ]
         qualification.education_types.add(*education)
+
 
 def init_other_options():
     data = """
