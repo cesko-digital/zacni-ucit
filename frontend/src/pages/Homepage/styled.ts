@@ -7,7 +7,7 @@ export const Wrap = styled.main`
   padding: 0;
 `;
 
-export const Grid1 = styled.div`
+export const GridforImg = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr auto;
@@ -60,7 +60,7 @@ export const Grid1 = styled.div`
   }
 `;
 
-export const Grid2 = styled.div`
+export const GridS1Path = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
@@ -93,7 +93,7 @@ export const Grid2 = styled.div`
     align-self: end;
   }
 
-  & svg {
+  & img {
     grid-column: 2/2;
     grid-row: 1/1;
   }

@@ -13,7 +13,7 @@ export const Wrap = styled.div`
   `}
 `;
 
-export const UL = styled.ul`
+export const List = styled.ul`
   width: 120%;
   margin-left: -10%;
   height: 5rem;
@@ -36,15 +36,14 @@ export const MobileStepperLabel = styled.p`
   ${mediaQueries('md')`
    display: block;
    margin-right: 0.5rem;
-   font-size: 12px;
+   font-size: 0.75rem;
   `}
 `;
 
-export const Li = styled.li`
+export const ListItem = styled.li`
   list-style-type: none;
   float: left;
   width: 25%;
-  /* left: -15%; */
   display: block;
   position: relative;
   text-align: center;
@@ -58,7 +57,7 @@ export const Li = styled.li`
 
   & span {
     display: block;
-    font-size: 12px;
+    font-size: ${theme.fontSize.normal};
 
     ${mediaQueries('md')`
       display: none;
@@ -73,7 +72,6 @@ export const Li = styled.li`
     line-height: 2rem;
     font-size: 1rem;
     font-weight: 500;
-    /* border: 1px solid ${theme.color.primary}; */
     background: ${theme.color.gray};
     color: white;
     border-radius: 50%;

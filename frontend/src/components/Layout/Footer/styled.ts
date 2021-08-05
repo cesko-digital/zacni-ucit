@@ -4,7 +4,7 @@ export const FooterSection1 = styled.section`
   background: rgba(127, 80, 255, 0.2);
 `;
 
-export const Flex1 = styled.div`
+export const FlexRowSB = styled.div`
   display: flex;
   flex-direction: row;
   align-items: space-between;

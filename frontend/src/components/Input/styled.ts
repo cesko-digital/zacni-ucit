@@ -11,7 +11,7 @@ const radioLabelStyle = ({ checked, margin }) => css`
   padding: 0.8rem 1.5rem;
   box-sizing: border-box;
   //margin: 0.3rem;
-  margin: ${({ theme }) => (margin ? margin : theme.margin.marginInput)};
+  margin: ${({ theme }) => (margin ? margin : '0 0.5rem 0.5rem 0')};
   border: ${({ theme }) =>
     checked
       ? `1px solid ${theme.color.green}`
