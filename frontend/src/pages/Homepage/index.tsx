@@ -8,6 +8,7 @@ import {
   GridforImg,
   GridS1Path,
   FlexS5Logos,
+  GridS5,
 } from './styled';
 import { Input } from '../../components/Input';
 import { H1, H3, LightText, LinkRegular } from '../../components/Typography';
@@ -142,11 +143,12 @@ const Index = () => {
         </GridforImg>
       </Section>
       <Section className="section_5">
-        <GridforImg>
+        <GridS5>
           <H3>
             <span>Začni učit!</span> <br></br>je projektem organizace Výluka
           </H3>
-          <img id="vylukaLogo" src={vyluka_logo} alt="Logo Výluka" />
+
+          <img className="vylukaLogo" src={vyluka_logo} alt="Logo Výluka" />
 
           <Input
             value="Podpořete nás na Darujme.cz"
@@ -156,10 +158,10 @@ const Index = () => {
             bgColor={theme.color.primary}
           />
           <LinkRegular>Přispějte jinak</LinkRegular>
-        </GridforImg>
+        </GridS5>
       </Section>
       <Section className="section_6">
-        <H3>Naši partneři</H3>
+        <H3 padding="2rem 0 0 0">Naši partneři</H3>
         <LightText>
           Děkujeme <LinkRegular margin="0"> všem našim partnerům </LinkRegular>
           a podporovatelům za to, že při nás stojí.

@@ -55,17 +55,11 @@ export const GridforImg = styled.div`
     align-self: start;
   }
 
-  & img {
-    grid-column: 2/2;
-    grid-row: 1/3;
-    justify-self: start;
-    align-self: start;
-  }
-
   & svg {
     grid-column: 2/2;
-    grid-row: 1/2;
+    grid-row: 1/3;
     justify-self: end;
+    align-self: start;
     z-index: 2;
   }
 `;
@@ -120,6 +114,12 @@ export const Section = styled.section`
   position: relative;
   padding-right: 1rem;
 
+  &.section_2,
+  &.section_5,
+  &.section_6 {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
   &.section_3 {
     background: ${theme.color.primary};
     color: white;
@@ -160,6 +160,40 @@ export const Img = styled.img`
   &.section3_img {
     border-bottom: 30px solid rgb(255, 182, 11);
     object-position: 50% 0;
+  }
+`;
+
+export const GridS5 = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr auto auto;
+  column-gap: 0.5rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+
+  & H3 {
+    grid-column: 1/1;
+    grid-row: 1/1;
+  }
+
+  & Input {
+    grid-column: 1/2;
+    grid-row: 2/2;
+    justify-self: stretch;
+  }
+
+  & a {
+    grid-column: 1/1;
+    align-self: end;
+    grid-row: 3/3;
+    margin-left: 1rem;
+  }
+
+  & img {
+    grid-column: 2/2;
+    grid-row: 1/3;
+    justify-self: start;
+    align-self: center;
   }
 `;
 
