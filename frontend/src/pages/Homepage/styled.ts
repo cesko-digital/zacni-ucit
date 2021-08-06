@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mediaQueries } from '../../common/mediaQueries';
+import { mediaQueries, mediaQueriesUp } from '../../common/mediaQueries';
 import { theme } from '../../common/theme';
 
 export const Wrap = styled.main`
@@ -10,7 +10,10 @@ export const Wrap = styled.main`
 export const GridforImg = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr auto auto;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  margin-bottom: 2rem;
 
   & H1 {
     grid-column: 1/1;
@@ -29,33 +32,40 @@ export const GridforImg = styled.div`
 
   & Input {
     grid-column: 1/1;
-    justify-self: end;
+    grid-row: 2/2;
+    justify-self: center;
   }
 
   & a:nth-child(1) {
     grid-column: 1/1;
-    align-self: center;
-    grid-row: 2/2;
+    align-self: end;
+    grid-row: 3/3;
     margin-left: 1rem;
   }
 
   & a:nth-child(2) {
     grid-column: 2/2;
-    grid-row: 2/2;
+    grid-row: 3/3;
   }
 
   & Img {
     grid-column: 2/2;
     grid-row: 1/3;
     justify-self: end;
-    align-self: stretch;
+    align-self: start;
+  }
+
+  & img {
+    grid-column: 2/2;
+    grid-row: 1/3;
+    justify-self: start;
+    align-self: start;
   }
 
   & svg {
     grid-column: 2/2;
     grid-row: 1/2;
     justify-self: end;
-
     z-index: 2;
   }
 `;
@@ -65,6 +75,10 @@ export const GridS1Path = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   margin: 3rem 0;
+  ${mediaQueriesUp('md')`
+margin: auto;
+max-width: 60%;
+  `}
 
   & a:nth-child(1) {
     grid-column: 1/1;
@@ -110,27 +124,50 @@ export const Section = styled.section`
     background: ${theme.color.primary};
     color: white;
   }
+
+  &.section_6 {
+    & img {
+      margin: 1rem;
+    }
+    ${mediaQueriesUp('md')`
+margin: auto;
+max-width: 60%;
+text-align: center;
+  `}
+  }
 `;
 
 export const Img = styled.img`
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1/2.25;
+  width: 25vw;
+  aspect-ratio: 1/1.5;
   object-fit: cover;
-  clip-path: url(#imgFrame);
-  //clip-path: ellipse(100% 70% at 100% 0%);
-  overflow: visible;
+  border-bottom-left-radius: 90%;
+  overflow: hidden;
+  ${mediaQueries('sm')`
+   width: 40vw;
+ aspect-ratio: 1/1.5;
+  `}
 
   &.section1_img {
-    border-top: 30px solid rgba(127, 80, 255, 0.5);
+    border-top: 20px solid rgba(127, 80, 255, 0.5);
     border-right: 20px solid rgba(127, 80, 255, 0.5);
-    object-position: 65% -2rem;
+    object-position: 60% center;
   }
   &.section2_img {
-    border-bottom: 6rem solid rgba(255, 47, 91, 0.8);
+    border-bottom: 30px solid rgb(255, 47, 91);
     object-position: 35% 0;
   }
   &.section3_img {
+    border-bottom: 30px solid rgb(255, 182, 11);
     object-position: 50% 0;
   }
+`;
+
+export const FlexS5Logos = styled.div`
+  ${mediaQueriesUp('md')`
+margin: auto;
+max-width: 60%;
+display: flex;
+justify-content: space-between;
+  `}
 `;

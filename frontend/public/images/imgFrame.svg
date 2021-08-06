@@ -1,6 +1,0 @@
-<svg id="svgFrame" width="132" height="237" viewBox="0 0 132 237" fill="none" xmlns="http://www.w3.org/2000/svg">
-<clipPath  id="imgFrame">
-<path id="Rectangle2" d="M0.5 0.5H131.5V236.5C125.327 236.5 122.188 236.497 119.526 236.38C55.0679 233.543 3.45724 181.932 0.620399 117.474C0.500122 114.741 0.5 111.505 0.5 105V0.5Z" stroke="black"/>
-<path id="Rectangle4" d="M130.637 0.5V133.699C119.232 133.433 110.069 124.105 110.069 112.636V0.5H130.637Z" fill="yellow"/>
-</clipPath>
-</svg>

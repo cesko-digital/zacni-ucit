@@ -35,6 +35,11 @@ export const H3 = styled.h3<{
   padding: ${({ padding }) => (padding ? padding : '0')};
   font-weight: 700;
   ${headerFonts}
+
+  & span {
+    font-size: ${theme.fontSize.xxLarge};
+    font-weight: 400;
+  }
 `;
 export const H4 = styled.h3`
   font-size: ${theme.fontSize.large};
@@ -61,12 +66,13 @@ export const PrimaryText = styled.span<{
 
 export const LinkRegular = styled.a<{
   color?: string;
+  margin?: string;
 }>`
   font-size: ${theme.fontSize.medium};
   font-weight: 700;
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;
-  margin-right: 1rem;
+  margin: ${({ margin }) => (!!margin ? margin : '0 1rem 0 0')};
   &:hover {
     color: inherit;
   }
