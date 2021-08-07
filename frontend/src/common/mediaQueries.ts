@@ -4,10 +4,8 @@ export const breakpoints = {
   lg: 1200,
 };
 
-export const mediaQueries = (key) => {
-  return (style) => `@media (max-width: ${breakpoints[key]}px) { ${style} }`;
-};
+export const mediaQueries = key => style =>
+  `@media (max-width: ${breakpoints[key]}px) { ${style} }`;
 
-export const mediaQueriesUp = (key) => {
-  return (style) => `@media (min-width: ${breakpoints[key]}px) { ${style} }`;
-};
+export const mediaQueriesUp = key => style =>
+  `@media (min-width: ${breakpoints[key]}px) { ${style} }`;

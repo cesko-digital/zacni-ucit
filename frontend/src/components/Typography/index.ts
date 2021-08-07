@@ -8,58 +8,41 @@ const headerFonts = css`
 `;
 
 export const H1 = styled.h1<TextAlignProps>`
-  font-weight: 700;
+  font-weight: normal;
   margin: 0;
-  font-size: ${theme.fontSize.xxxLarge};
+  font-size: 32px;
+  color: #0c0807;
+  line-height: 38px;
   ${headerFonts}
-  & span {
-    font-size: ${theme.fontSize.large};
-    font-weight: 400;
-  }
 `;
 
-export const H2 = styled.h2<{
-  margin?: string;
-}>`
-  font-size: ${theme.fontSize.xxxLarge};
-  margin: ${({ margin }) => (!!margin ? margin : '0')};
-  font-weight: 400;
+export const H2 = styled.h2`
+  margin: 0;
   ${headerFonts}
 `;
-export const H3 = styled.h3<{
-  margin?: string;
-  padding?: string;
-}>`
-  font-size: ${theme.fontSize.xxLarge};
-  margin: ${({ margin }) => (margin ? margin : '0')};
-  padding: ${({ padding }) => (padding ? padding : '0')};
-  font-weight: 700;
+export const H3 = styled.h3`
+  margin: 0;
   ${headerFonts}
-
-  & span {
-    font-size: ${theme.fontSize.xxLarge};
-    font-weight: 400;
-  }
 `;
-export const H4 = styled.h3`
+export const H4 = styled.h4`
   font-size: ${theme.fontSize.large};
   margin: 0;
   font-weight: 700;
   ${headerFonts}
 `;
 export const LightText = styled.p`
-  font-size: ${theme.fontSize.large};
+  font-size: 16px;
+  line-height: 1.5;
   margin: 0;
-  font-family: 'StabilGrotesk-regular', sans-serif;
-  font-weight: 400;
+  color: #0c0807;
 `;
 export const PrimaryText = styled.span<{
   size?: string;
-  marginLeft?: string;
 }>`
   font-size: ${({ size }) => (!!size ? size : '1.2em')};
-  font-weight: 700;
+  font-weight: bolder;
   color: ${({ theme }) => theme.color.primary};
+  display: inline;
   margin: 0;
   margin-left: ${({ marginLeft }) => (!!marginLeft ? marginLeft : 0)};
 `;
