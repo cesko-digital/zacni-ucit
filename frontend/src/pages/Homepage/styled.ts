@@ -60,7 +60,7 @@ export const GridforImg = styled.div`
     grid-row: 1/3;
     justify-self: end;
     align-self: start;
-    z-index: 2;
+    z-index: 5;
   }
 `;
 
@@ -69,9 +69,10 @@ export const GridS1Path = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   margin: 3rem 0;
+
   ${mediaQueriesUp('md')`
-margin: auto;
-max-width: 60%;
+  margin: auto;
+  max-width: 60%;
   `}
 
   & a:nth-child(1) {
@@ -84,6 +85,7 @@ max-width: 60%;
     grid-row: 1/1;
     align-self: center;
   }
+
   & a:nth-child(3) {
     grid-column: 1/1;
     grid-row: 1/1;
@@ -95,6 +97,7 @@ max-width: 60%;
     grid-row: 1/1;
     align-self: start;
   }
+
   & a:nth-child(6) {
     grid-column: 3/3;
     grid-row: 1/1;
@@ -129,10 +132,11 @@ export const Section = styled.section`
     & img {
       margin: 1rem;
     }
+
     ${mediaQueriesUp('md')`
-margin: auto;
-max-width: 60%;
-text-align: center;
+  margin: auto;
+  max-width: 60%;
+  text-align: center;
   `}
   }
 `;
@@ -143,9 +147,10 @@ export const Img = styled.img`
   object-fit: cover;
   border-bottom-left-radius: 90%;
   overflow: hidden;
+
   ${mediaQueries('sm')`
    width: 40vw;
- aspect-ratio: 1/1.5;
+   aspect-ratio: 1/1.5;
   `}
 
   &.section1_img {
@@ -153,10 +158,12 @@ export const Img = styled.img`
     border-right: 20px solid rgba(127, 80, 255, 0.5);
     object-position: 60% center;
   }
+
   &.section2_img {
     border-bottom: 30px solid rgb(255, 47, 91);
     object-position: 35% 0;
   }
+
   &.section3_img {
     border-bottom: 30px solid rgb(255, 182, 11);
     object-position: 50% 0;
@@ -199,9 +206,9 @@ export const GridS5 = styled.div`
 
 export const FlexS5Logos = styled.div`
   ${mediaQueriesUp('md')`
-margin: auto;
-max-width: 60%;
-display: flex;
-justify-content: space-between;
+  margin: auto;
+  max-width: 60%;
+  display: flex;
+  justify-content: space-between;
   `}
 `;

@@ -101,6 +101,11 @@ export const FlexColumn = styled.div`
   padding: 1rem 0;
 `;
 
+export const FooterText = styled.p`
+  font-size: ${theme.fontSize.normal};
+  font-weight: 400;
+`;
+
 export const SmallText = styled.p`
   font-size: ${theme.fontSize.small};
   font-weight: 400;
@@ -110,4 +115,44 @@ export const SmallText = styled.p`
 export const LinkSmall = styled.a`
   font-size: ${theme.fontSize.small};
   font-weight: 700;
+`;
+
+export const FooterBTN = styled.button`
+  background: transparent;
+  border: 2px solid ${theme.color.primary};
+  border-radius: ${theme.radius.max};
+  line-height: 1.25rem;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  font-size: ${theme.fontSize.normal};
+  cursor: pointer;
+
+  & svg {
+    margin-right: 0.5rem;
+  }
+`;
+
+export const FooterInput = styled.input`
+  background: white;
+  border: none;
+  border-radius: ${theme.radius.max};
+  font-size: ${theme.fontSize.normal};
+  padding: 0.5rem 1rem;
+  line-height: 2rem;
+  width: 80%;
+`;
+
+export const FooterLabel = styled.label`
+  background: ${theme.color.primary};
+  color: white;
+  border: 2px solid white;
+  border-radius: ${theme.radius.max};
+  font-size: ${theme.fontSize.normal};
+  width: 20%;
+  text-align: center;
+  padding: 0.5rem;
+  display: block;
+  line-height: 28px;
+  transform: translateX(300%) translateY(-100%);
+  cursor: pointer;
 `;

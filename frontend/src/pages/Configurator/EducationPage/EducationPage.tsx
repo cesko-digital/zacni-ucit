@@ -21,8 +21,8 @@ const EducationPage: FC = () => {
       </H3>
       <StyleWrapper margin="2rem 0 3rem 0">
         <LightText>
-          Poznámka: Vyšší než magisterský stupeň vzdělání není pro učitelství podstatný. Relevantní
-          pro učitelství je pouze maturita z odborných předmětů ze SOU nebo SOŠ.
+          Vyšší než magisterský stupeň ani maturita bez odborných předmětů nejsou pro učitelství
+          podstatné.
         </LightText>
       </StyleWrapper>
       <StyleWrapper margin="2rem 0">

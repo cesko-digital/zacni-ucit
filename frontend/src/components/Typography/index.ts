@@ -7,37 +7,62 @@ const headerFonts = css`
   ${textAlign}
 `;
 
-export const H1 = styled.h1<TextAlignProps>`
-  font-weight: normal;
+export const H1 = styled.h1<{
+  bold?: boolean;
+  padding?: string;
+}>`
+  font-weight: ${({ bold }) => (!!bold ? '700' : '400')};
   margin: 0;
-  font-size: 32px;
-  color: #0c0807;
+  padding: ${({ padding }) => (padding ? padding : '0')};
+  font-size: ${theme.fontSize.xxxLarge};
   line-height: 38px;
+  ${headerFonts}
+  & span {
+    font-size: ${theme.fontSize.large};
+    font-weight: 400;
+  }
+`;
+
+export const H2 = styled.h2<{
+  margin?: string;
+  padding?: string;
+}>`
+  font-size: ${theme.fontSize.xxLarge};
+  margin: ${({ margin }) => (margin ? margin : '0')};
+  padding: ${({ padding }) => (padding ? padding : '0')};
+  font-weight: 700;
+  ${headerFonts}
+  & span {
+    font-size: ${theme.fontSize.xxLarge};
+    font-weight: 400;
+  }
+`;
+
+export const H3 = styled.h3`
+  font-size: ${theme.fontSize.large};
+  margin: 0;
+  font-weight: 700;
   ${headerFonts}
 `;
 
-export const H2 = styled.h2`
-  margin: 0;
-  ${headerFonts}
-`;
-export const H3 = styled.h3`
-  margin: 0;
-  ${headerFonts}
-`;
 export const H4 = styled.h4`
   font-size: ${theme.fontSize.large};
   margin: 0;
   font-weight: 700;
   ${headerFonts}
 `;
+
 export const LightText = styled.p`
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: ${theme.fontSize.large};
   margin: 0;
-  color: #0c0807;
+  font-family: 'StabilGrotesk-regular', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
 `;
+
 export const PrimaryText = styled.span<{
   size?: string;
+  marginLeft?: string;
 }>`
   font-size: ${({ size }) => (!!size ? size : '1.2em')};
   font-weight: bolder;
@@ -50,8 +75,9 @@ export const PrimaryText = styled.span<{
 export const LinkRegular = styled.a<{
   color?: string;
   margin?: string;
+  footer?: boolean;
 }>`
-  font-size: ${theme.fontSize.medium};
+  font-size: ${({ footer }) => (!!footer ? theme.fontSize.normal : theme.fontSize.medium)};
   font-weight: 700;
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;
@@ -63,8 +89,9 @@ export const LinkRegular = styled.a<{
 
 export const LinkLight = styled.a<{
   color?: string;
+  footer?: boolean;
 }>`
-  font-size: ${theme.fontSize.medium};
+  font-size: ${({ footer }) => (!!footer ? theme.fontSize.normal : theme.fontSize.medium)};
   font-weight: 400;
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;

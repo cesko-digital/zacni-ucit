@@ -3,7 +3,7 @@ import { theme } from '../../common/theme';
 import StyleWrapper from '../../components/StyledWrapper';
 import { Wrap, Section, Img, GridforImg, GridS1Path, GridS5 } from './styled';
 import Input from '../../components/Input/Input';
-import { H1, H3, LightText, LinkRegular } from '../../components/Typography';
+import { H1, H2, LightText, LinkRegular } from '../../components/Typography';
 import s1Img from '../../../public/images/homepage/homepage_s1.jpg';
 import s2Img from '../../../public/images/homepage/homepage_s2.jpg';
 import s3Img from '../../../public/images/homepage/homepage_s3.jpg';
@@ -22,7 +22,9 @@ const HomePage: FC = () => (
         <HomepageWhiteImg />
         <Img src={s1Img} alt="Teacher" className="section1_img" />
         <div>
-          <H1>Začni učit!</H1>
+          <H1 bold padding="2rem 0 0 0">
+            Začni učit!
+          </H1>
           <StyleWrapper padding="1rem 0 1rem 0">
             <LightText>
               Provádíme zájemce o učitelství vším, co potřebují znát, aby se mohli stát spokojenými
@@ -57,7 +59,7 @@ const HomePage: FC = () => (
         <HomepageWhiteImg />
         <Img src={s2Img} alt="Teacher" className="section2_img" />
         <div>
-          <H3 padding="2rem 0 0 0">Vyzkoušejte si učení</H3>
+          <H2 padding="2rem 0 0 0">Vyzkoušejte si učení</H2>
           <StyleWrapper padding="1rem 0 1rem 0">
             <LightText>
               Nevíte, zda je učitelství pro vás? S naším programem <b>Zkus učit!</b> se na týden
@@ -84,7 +86,7 @@ const HomePage: FC = () => (
       </GridforImg>
     </Section>
     <Section className="section_3">
-      <H3 padding="2rem 0 0 0">Proč jít učit?</H3>
+      <H2 padding="2rem 0 0 0">Proč jít učit?</H2>
       <H1>
         6000 <span>učitelů chybí</span>
       </H1>
@@ -113,7 +115,7 @@ const HomePage: FC = () => (
         <HomepageWhiteImg />
         <Img src={s3Img} alt="Students" className="section3_img" />
         <div>
-          <H3 padding="2rem 0 1rem 0">Začínám učit</H3>
+          <H2 padding="2rem 0 1rem 0">Začínám učit</H2>
           <StyleWrapper>
             <LightText>
               Začátky za katedrou jsou velkou výzvou. Nejste na to ale sami – můžete se zapojit do
@@ -133,9 +135,9 @@ const HomePage: FC = () => (
     </Section>
     <Section className="section_5">
       <GridS5>
-        <H3>
+        <H2>
           <span>Začni učit!</span> <br></br>je projektem organizace Výluka
-        </H3>
+        </H2>
 
         <img className="vylukaLogo" src={vyluka_logo} alt="Logo Výluka" />
 
@@ -150,7 +152,7 @@ const HomePage: FC = () => (
       </GridS5>
     </Section>
     <Section className="section_6">
-      <H3 padding="2rem 0 0 0">Naši partneři</H3>
+      <H2 padding="2rem 0 0 0">Naši partneři</H2>
       <LightText>
         Děkujeme <LinkRegular margin="0"> všem našim partnerům </LinkRegular>
         a podporovatelům za to, že při nás stojí.
