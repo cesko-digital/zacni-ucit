@@ -18,7 +18,7 @@ import HomepageWhiteImg from '../../../public/images/homepage//HomepageWhiteImg.
 const HomePage: FC = () => (
   <Wrap>
     <Section className="section_1">
-      <GridforImg>
+      <GridforImg className="section1_grid">
         <HomepageWhiteImg />
         <Img src={s1Img} alt="Teacher" className="section1_img" />
         <div>
@@ -44,18 +44,17 @@ const HomePage: FC = () => (
 
         <LinkRegular href="">Jací učitelé chybí?</LinkRegular>
       </GridforImg>
-
-      <GridS1Path>
-        <LinkRegular href="">Je učitelství pro mě?</LinkRegular>
-        <LinkRegular href="">Chci si doplnit kvalifikaci</LinkRegular>
-        <LinkRegular href="">Začínám učit</LinkRegular>
-        <HomepageS1Path />
-        <LinkRegular href="">Chci si zkusit učení</LinkRegular>
-        <LinkRegular href="">Vybírám školu, kde budu učit</LinkRegular>
-      </GridS1Path>
     </Section>
+    <GridS1Path className="section1_path">
+      <LinkRegular href="">Je učitelství pro mě?</LinkRegular>
+      <LinkRegular href="">Chci si doplnit kvalifikaci</LinkRegular>
+      <LinkRegular href="">Začínám učit</LinkRegular>
+      <HomepageS1Path />
+      <LinkRegular href="">Chci si zkusit učení</LinkRegular>
+      <LinkRegular href="">Vybírám školu, kde budu učit</LinkRegular>
+    </GridS1Path>
     <Section className="section_2">
-      <GridforImg>
+      <GridforImg className="section2_grid">
         <HomepageWhiteImg />
         <Img src={s2Img} alt="Teacher" className="section2_img" />
         <div>
@@ -96,13 +95,15 @@ const HomePage: FC = () => (
       <H1>
         650 <span>dětí učitel ovlivní za deset let</span>
       </H1>
-      <Input
-        value="Příběhy učitelů"
-        type="button"
-        padding="1rem 2rem"
-        margin="2.5rem 0 1rem 0"
-        bgColor="transparent"
-      />
+      <StyleWrapper>
+        <Input
+          value="Příběhy učitelů"
+          type="button"
+          padding="1rem 2rem"
+          margin="2.5rem 0 1rem 0"
+          bgColor="transparent"
+        />
+      </StyleWrapper>
       <LinkRegular href="http://" target="_blank" rel="noopener noreferrer">
         Platy učitelů
       </LinkRegular>
@@ -111,7 +112,7 @@ const HomePage: FC = () => (
       </LinkRegular>
     </Section>
     <Section className="section_4">
-      <GridforImg>
+      <GridforImg className="section4_grid">
         <HomepageWhiteImg />
         <Img src={s3Img} alt="Students" className="section3_img" />
         <div>
