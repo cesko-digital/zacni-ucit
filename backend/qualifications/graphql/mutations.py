@@ -21,7 +21,7 @@ class UpdateCollegeAreaName(BaseMutation):
             raise MutationValidationError(ErrorCode.OBJECT_DOES_NOT_EXIST, message=message, data=pk)
         else:
             college_area.name = name
-            college.save(update_fields=['name'])
+            college.save(update_fields=["name"])
 
         return cls(ok=True, college_area=college_area)
 
