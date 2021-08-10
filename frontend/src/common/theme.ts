@@ -4,18 +4,18 @@ export const theme = {
   color: {
     primary: '#5227CC' /* violet */,
     secondary: '#0C0807' /* dark black */,
+    green: '#54C176' /* green */,
     error: '#EA4435' /* red */,
     gray: '#e5e5e5',
   },
   fontSize: {
-    xxS: '0.9rem',
-    small: '1.2rem',
-    normal: '1.4rem',
-    medium: '1.6rem',
-    large: '1.8rem',
-    xLarge: '2rem',
-    xxLarge: '2.4rem',
-    xxxLarge: '3rem',
+    small: '0.625rem', // 10px
+    normal: '0.75rem', // 12px
+    medium: '0.875rem', // 14px
+    large: '1rem', // 16px
+    xLarge: '1.125rem', // 18px
+    xxLarge: '1.5rem', // 24px
+    xxxLarge: '2rem', // 32px
   },
   radius: {
     basic: '5px',

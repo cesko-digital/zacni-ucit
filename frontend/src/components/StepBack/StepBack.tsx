@@ -1,15 +1,21 @@
 import React from 'react';
-import type { FC } from 'react';
 
-import Button from '@components/Button/Button';
+import { Button, IconWrapper } from './styled';
+
+import ArrowIcon from '@icons/arrow.svg';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   children: string;
 };
 
-const StepBack: FC<Props> = ({ onClick, children }) => (
-  <Button onClick={onClick}>Změnit {children}</Button>
+const StepBack: React.FC<Props> = ({ onClick, children }) => (
+  <Button onClick={onClick}>
+    <IconWrapper>
+      <ArrowIcon />
+    </IconWrapper>
+    Změnit {children}
+  </Button>
 );
 
 export default StepBack;

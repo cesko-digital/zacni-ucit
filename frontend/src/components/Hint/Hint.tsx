@@ -1,15 +1,21 @@
-import type { FC } from 'react';
 import React from 'react';
 
-import { HintText } from './styled';
+import { Button, IconWrapper } from './styled';
 
 import InfoIcon from '@icons/info.svg';
 
-type Props = { text: string };
+type Props = {
+  children: string;
+  onClick: () => void;
+};
 
-export const Hint: FC<Props> = ({ text }) => (
-  <>
-    <InfoIcon height={15} width={15} />
-    <HintText>{text}</HintText>
-  </>
+const Hint: React.FC<Props> = ({ onClick, children }) => (
+  <Button type="button" onClick={onClick}>
+    <IconWrapper>
+      <InfoIcon />
+    </IconWrapper>
+    {children}
+  </Button>
 );
+
+export default Hint;

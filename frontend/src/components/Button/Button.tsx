@@ -1,12 +1,19 @@
 import type { ButtonProps } from '@material-ui/core';
-import { Button as MaterialButton } from '@material-ui/core';
 import React from 'react';
-import type { FC } from 'react';
 
-import Link from '@components/Link/Link';
+import { Link, Button, IconWrapper } from './styled';
 
-const Button: FC<ButtonProps> = ({ ...props }) => (
-  <MaterialButton component={(props.href ? Link : undefined) as any} href={props.href} {...props} />
-);
+const ButtonComponent: React.FC<ButtonProps> = props =>
+  props.href ? (
+    <Link {...props}>
+      {props.children}
+      <IconWrapper>{props.endIcon}</IconWrapper>
+    </Link>
+  ) : (
+    <Button {...props}>
+      {props.children}
+      <IconWrapper>{props.endIcon}</IconWrapper>
+    </Button>
+  );
 
-export default Button;
+export default ButtonComponent;
