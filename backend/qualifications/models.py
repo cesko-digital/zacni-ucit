@@ -92,6 +92,24 @@ class SubjectType(TimeStampedModel):
         return self.code
 
 
+class Title(TimeStampedModel):
+    """
+    Titul.
+    """
+
+    name = models.CharField("Název", max_length=100)
+    code = models.CharField("Zkratka", max_length=20, unique=True)
+    visible_in_form = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Kvalifikace"
+        verbose_name_plural = "Kvalifikace"
+        ordering = ("name", "code")
+
+    def __str__(self):
+        return self.name
+
+
 class EducationType(TimeStampedModel):
     """
     Typ vzdelani z hlediska zakona.
@@ -140,24 +158,6 @@ class Qualification(TimeStampedModel):
         help_text="Typ vzdělání z hlediska zákona",
     )
     note = models.TextField("Poznámka", null=True)
-
-
-class Title(TimeStampedModel):
-    """
-    Titul.
-    """
-
-    name = models.CharField("Název", max_length=100)
-    code = models.CharField("Zkratka", max_length=20, unique=True)
-    visible_in_form = models.BooleanField(default=True)
-
-    class Meta:
-        verbose_name = "Kvalifikace"
-        verbose_name_plural = "Kvalifikace"
-        ordering = ("name", "code")
-
-    def __str__(self):
-        return self.name
 
 
 class OtherExperience(TimeStampedModel):

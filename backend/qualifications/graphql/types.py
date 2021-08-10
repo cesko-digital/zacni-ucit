@@ -8,7 +8,7 @@ from qualifications.models import (
     EducationArea,
     SubjectType,
     EducationType,
-    OtherOption,
+    OtherExperience,
 )
 
 
@@ -48,7 +48,7 @@ class EducationTypeObjectType(DjangoObjectType):
         fields = ALL_FIELDS
 
 
-class OtherOptionObjectType(DjangoObjectType):
+class OtherExperienceObjectType(DjangoObjectType):
     class Meta:
-        model = OtherOption
+        model = OtherExperience
         fields = ALL_FIELDS

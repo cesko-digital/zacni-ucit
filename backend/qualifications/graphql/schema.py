@@ -4,10 +4,9 @@ from qualifications.graphql.types import (
     CollegeAreaObjectType,
     CollegeProgrammeObjectType,
     EducationAreaObjectType,
-    PreparationTypeObjectType,
     SubjectTypeObjectType,
     EducationTypeObjectType,
-    OtherOptionObjectType,
+    OtherExperienceObjectType,
 )
 from qualifications.models import (
     Title,
@@ -16,7 +15,7 @@ from qualifications.models import (
     EducationArea,
     SubjectType,
     EducationType,
-    OtherOption,
+    OtherExperience,
 )
 
 
@@ -45,9 +44,9 @@ class Query(graphene.ObjectType):
     education_types = graphene.List(EducationTypeObjectType)
     education_type = graphene.Field(EducationTypeObjectType, pk=graphene.Int(required=True))
 
-    # Other option queries
-    other_options = graphene.List(OtherOptionObjectType)
-    other_option = graphene.List(OtherOptionObjectType, pk=graphene.Int(required=True))
+    # Other experience queries
+    other_experiences = graphene.List(OtherExperienceObjectType)
+    other_experience = graphene.Field(OtherExperienceObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
     def resolve_titles(root, info):
@@ -98,9 +97,9 @@ class Query(graphene.ObjectType):
         return EducationType.objects.get(pk=pk)
 
     @staticmethod
-    def resolve_other_options(root, info):
-        return OtherOption.objects.all()
+    def resolve_other_experience(root, info):
+        return OtherExperience.objects.all()
 
     @staticmethod
-    def resolve_other_option(root, info, pk: int):
-        return OtherOption.objects.get(pk=pk)
+    def resolve_other_experience(root, info, pk: int):
+        return OtherExperience.objects.get(pk=pk)
