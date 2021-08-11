@@ -1,9 +1,8 @@
-import Link from 'next/link';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import { Wrapper, Logo, List, Item, NavLink, Burger } from './styled';
-import Button from '@components/Button/Button';
+import Link from '@components/Button/Link';
 import { routes } from '@routes';
 
 import BurgerIcon from '@icons/burger.svg';
@@ -40,9 +39,9 @@ export const Navbar: FC = () => {
         <Burger type="button" onClick={() => setIsListOpen(!isListOpen)}>
           <BurgerIcon />
         </Burger>
-        <Button href={routes.homepage}>
+        <Link href={routes.homepage}>
           <Logo>ZačniUČIT</Logo>
-        </Button>
+        </Link>
         <List listOpened={isListOpen}>
           {items.map(({ route, label }) => (
             <Item key={route}>

@@ -1,10 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
 
-import Input from '@components/Input/Input';
+import { Title } from './styled';
+import Button from '@components/Button/Button';
 import Meta from '@components/Meta/Meta';
 import StyleWrapper from '@components/StyledWrapper';
-import { H2 } from '@components/Typography';
+
+import ChevronIcon from '@icons/chevron-right.svg';
 
 type Props = {
   title: string;
@@ -15,16 +17,17 @@ type Props = {
 const ConfiguratorStep: FC<Props> = ({ children, title, isContinueDisabled, onNextStep }) => (
   <div>
     <Meta title={title} />
-    <H2>{title}</H2>
+    <Title>{title}</Title>
     {children}
-    <StyleWrapper margin="0 auto" padding="0 0 5rem 0">
-      <Input
+    <StyleWrapper padding="0 0 5rem 0">
+      <Button
         disabled={isContinueDisabled}
-        padding="1.5rem 2rem"
+        endIcon={<ChevronIcon />}
         type="button"
-        value="Pokračovat"
         onClick={() => onNextStep()}
-      />
+      >
+        Pokračovat
+      </Button>
     </StyleWrapper>
   </div>
 );
