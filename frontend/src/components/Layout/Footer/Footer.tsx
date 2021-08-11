@@ -18,11 +18,34 @@ import StyleWrapper from '../../StyledWrapper';
 import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
 import TwitterIcon from '@icons/twitter.svg';
+import { menu_items } from '../Menu/Menu';
+import Link from '@components/Button/Link';
+
+const links = [
+  {
+    label: 'Můžu učit?',
+    route: '/muzu-ucit',
+  },
+];
 
 const Footer: FC = () => (
   <FooterWrap>
     <FooterSection className="footer_section1">
       <FlexRowSB>
+        {menu_items.map(item => (
+          <FlexColumn key={item.id}>
+            <Link href={item.route}>
+              <LinkRegular footer>{item.label}</LinkRegular>
+            </Link>
+            {item.lights?.map(light => (
+              <Link key={light.route} href={light.route}>
+                <LinkLight footer>{light.label}</LinkLight>
+              </Link>
+            ))}
+          </FlexColumn>
+        ))}
+      </FlexRowSB>
+      {/* <FlexRowSB>
         <FlexColumn>
           <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
             Můžu učit?
@@ -84,7 +107,7 @@ const Footer: FC = () => (
       <br></br>
       <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
         Naši partneři a přispějte
-      </LinkRegular>
+      </LinkRegular> */}
     </FooterSection>
     <FooterSection className="footer_section2">
       <H2>Výluka, z.s</H2>

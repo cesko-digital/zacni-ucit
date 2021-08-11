@@ -95,10 +95,12 @@ export const FlexRowSB = styled.div`
   flex-wrap: wrap;
   padding: 2rem 0;
 `;
+
 export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem 0;
+  margin-right: 1rem;
 `;
 
 export const FooterText = styled.p`

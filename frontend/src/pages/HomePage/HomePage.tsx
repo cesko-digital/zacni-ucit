@@ -152,7 +152,7 @@ const HomePage: FC = () => (
         <LinkRegular>Přispějte jinak</LinkRegular>
       </GridS5>
     </Section>
-    <Section className="section_6">
+    <Section id="partners" className="section_6">
       <H2 padding="2rem 0 0 0">Naši partneři</H2>
       <LightText>
         Děkujeme <LinkRegular margin="0"> všem našim partnerům </LinkRegular>

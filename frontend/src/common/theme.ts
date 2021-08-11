@@ -2,9 +2,9 @@ import baseStyled, { ThemedStyledInterface } from 'styled-components';
 
 export const theme = {
   color: {
-    primary: '#5227CC' /* violet */,
+    primary: '#7F50FF' /* violet */,
     secondary: '#0C0807' /* dark black */,
-    green: '#54C176' /* green */,
+    green: '#AAEC8B' /* green '#54C176' */,
     error: '#EA4435' /* red */,
     gray: '#e5e5e5',
   },
