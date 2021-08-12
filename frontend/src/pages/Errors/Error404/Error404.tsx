@@ -1,8 +1,7 @@
-import StyleWrapper from '@components/StyledWrapper';
 import { H1, H3, LightText, LinkRegular } from '@components/Typography';
 import { routes } from '@routes';
 import { theme } from 'src/common/theme';
-import ErrorImg from '../../../public/images/404.svg';
+import ErrorImg from '../../../../public/images/404.svg';
 import { Wrap } from './styled';
 
 const Error404 = () => {
