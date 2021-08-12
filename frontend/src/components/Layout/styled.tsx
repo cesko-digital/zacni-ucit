@@ -27,6 +27,6 @@ import { mediaQueries } from '../../common/mediaQueries';
 export const MainWrap = styled.main``;
 
 export const Wrap = styled.div`
-  padding: 0 1rem;
+  padding: 0 0;
   margin: 0 auto;
 `;

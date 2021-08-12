@@ -21,12 +21,16 @@ export const routes = {
 
   pedagogicMinimum: '/pedagogicke-minimum',
   missedTeachers: '/jaci-ucitele-chybi',
+  isTeachingForMe: 'je-ucitelstvi-pro-me',
+  completeQualification: 'chci-si-doplnit-kvalifikaci',
+  chooseSchool: '/vybiram-skolu',
   pedagogicalLaw: '/zakon-o-ped-pracovnicich',
-  dayForSchool: '/den-rpo-skolu',
+  dayForSchool: '/den-pro-skolu',
   teachersStories: '/pribehy-ucitelu',
   sallary: '/platy-ucitelu',
   canDoAtSchool: '/co-muzete-delat-ve-skole',
   jobs: '/volna-mista-ve-skolstvi',
   teachersTips: '/tipy-pro-zacinajici-ucitele',
+  donate: '/pripejte-jinak',
   vyluka: '/vyluka',
 };

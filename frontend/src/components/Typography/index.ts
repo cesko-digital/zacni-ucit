@@ -10,10 +10,12 @@ const headerFonts = css`
 export const H1 = styled.h1<{
   bold?: boolean;
   padding?: string;
+  color?: string;
 }>`
   font-weight: ${({ bold }) => (!!bold ? '700' : '400')};
   margin: 0;
   padding: ${({ padding }) => (padding ? padding : '0')};
+  color: ${({ color }) => (color ? color : theme.color.secondary)};
   font-size: ${theme.fontSize.xxxLarge};
   line-height: 38px;
   ${headerFonts}
@@ -82,6 +84,8 @@ export const LinkRegular = styled.a<{
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;
   margin: ${({ margin }) => (!!margin ? margin : '0 1rem 0 0')};
+  cursor: pointer;
+
   &:hover {
     color: inherit;
   }
@@ -96,6 +100,8 @@ export const LinkLight = styled.a<{
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;
   margin-right: 1rem;
+  cursor: pointer;
+
   &:hover {
     color: inherit;
   }

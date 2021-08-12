@@ -6,7 +6,7 @@ export const MenuTag = styled.menu<{ listOpened: boolean }>`
   ${({ listOpened }) => (!listOpened ? 'display: none;' : null)};
   width: 80%;
   background: white;
-  border-bottom-left-radius: 24px;
+  border-bottom-left-radius: 60px;
   position: absolute;
   right: 0;
   margin-top: 0;

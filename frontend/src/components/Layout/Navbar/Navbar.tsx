@@ -1,12 +1,11 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
-
 import { Wrapper, Logo, List, Item, NavLink, Burger } from './styled';
 import Link from '@components/Button/Link';
 import { routes } from '@routes';
 import ZacniUcitLogo from '../../../../public/images/Logotype.svg';
-
 import BurgerIcon from '@icons/burger.svg';
+import CrossIcon from '@icons/cross.svg';
 import { Menu } from '../Menu/Menu';
 import { PrimaryText } from '@components/Typography';
 
@@ -51,7 +50,7 @@ export const Navbar: FC = () => {
           }}
         >
           <PrimaryText>Menu</PrimaryText>
-          <BurgerIcon height="14" />
+          {isListOpen ? <CrossIcon /> : <BurgerIcon height="14" />}
         </Burger>
         <Link href={routes.homepage}>
           <Logo>

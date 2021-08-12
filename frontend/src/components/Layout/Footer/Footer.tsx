@@ -45,70 +45,8 @@ const Footer: FC = () => (
           </FlexColumn>
         ))}
       </FlexRowSB>
-      {/* <FlexRowSB>
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Můžu učit?
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Pedagogické minimum
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Jací učitelé chybí
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Zákon o ped.pracovnících
-          </LinkLight>
-        </FlexColumn>
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Proč jít učit?
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Příběhy učitelů
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Platy učitelů
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Co můžete dělat ve škole?
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Volná místa ve školství
-          </LinkLight>
-        </FlexColumn>
-
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Chci zkusit učit
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Zkus učit!
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Den pro školu
-          </LinkLight>
-        </FlexColumn>
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Chci se zaučit
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Zauč se!
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Tipy pro začínající učitele
-          </LinkLight>
-        </FlexColumn>
-      </FlexRowSB>
-      <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-        Začni učit!je projektem spolku Výluka
-      </LinkRegular>
-      <br></br>
-      <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-        Naši partneři a přispějte
-      </LinkRegular> */}
     </FooterSection>
+
     <FooterSection className="footer_section2">
       <H2>Výluka, z.s</H2>
       <FooterText>
@@ -119,27 +57,108 @@ const Footer: FC = () => (
       <LinkRegular footer href="mailto:info@vyluka.org">
         info@vyluka.org
       </LinkRegular>
-      <FooterBTN>
+      <FooterBTN onClick={() => window.open('https://www.facebook.com/spolekvyluka/', '_blank')}>
         <FacebookIcon />
         Facebook
       </FooterBTN>
-      <FooterBTN>
+      <FooterBTN onClick={() => window.open('https://www.instagram.com/vyluka_/?hl=en', '_blank')}>
         <InstagramIcon /> Instagram
       </FooterBTN>
-      <FooterBTN>
+      <FooterBTN onClick={() => window.open('https://twitter.com/vyluka_?lang=en', '_blank')}>
         <TwitterIcon /> Twitter
       </FooterBTN>
     </FooterSection>
     <FooterSection className="footer_section3">
-      <H3>Newsletter jednou měsíčně</H3>
+      {/* <H3>Newsletter jednou měsíčně</H3> */}
+      <link
+        href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <label htmlFor="mce-EMAIL" style={{ fontWeight: 'bold' }}>
+        Newsletter jednou měsíčně
+      </label>
       <FooterText>
         Novinky pro budoucí i začínající učitele, tipy na zajímavé akce o vzdělávání či na nástroje
         do výuky.
       </FooterText>
-      <form action="">
+      {/*} <style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+        {/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */}
+      {/* </style> */}
+      <div id="mc_embed_signup">
+        <form
+          action="https://vyluka.us19.list-manage.com/subscribe/post?u=3de897b21700c27eefbd0bf7d&amp;id=a1ece305d1"
+          method="post"
+          id="mc-embedded-subscribe-form"
+          name="mc-embedded-subscribe-form"
+          className="validate"
+          target="_blank"
+          noValidate
+          style={{ paddingLeft: '0', position: 'relative' }}
+        >
+          <div id="mc_embed_signup_scroll">
+            <FooterInput
+              type="email"
+              value=""
+              name="EMAIL"
+              className="email"
+              id="mce-EMAIL"
+              placeholder="e-mail"
+              required
+              style={{
+                backgroundColor: 'white',
+                border: 'none',
+                borderRadius: '40px',
+                fontSize: '14px',
+                padding: ' 0.5rem 1rem',
+                lineHeight: '2rem',
+                width: '80%',
+                outline: 'none',
+              }}
+            />
+
+            <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+              <input
+                type="text"
+                name="b_3de897b21700c27eefbd0bf7d_a1ece305d1"
+                tabIndex={-1}
+                value=""
+              />
+            </div>
+            <div className="clear">
+              <FooterInput
+                type="submit"
+                value="Odebírat"
+                name="subscribe"
+                id="mc-embedded-subscribe"
+                className="button"
+                style={{
+                  position: 'absolute',
+                  background: '#7F50FF',
+                  color: 'white',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  width: '20%',
+                  height: '3rem',
+                  textAlign: 'center',
+                  padding: '0.5rem',
+                  display: 'block',
+                  lineHeight: '28px',
+                  transform: 'translateX(300%) translateY(-120%)',
+                }}
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      {/* <form action="">
         <FooterInput type="email" placeholder="e-mail" />
         <FooterLabel htmlFor="">Odebírat</FooterLabel>
-      </form>
+      </form> */}
       <SmallText>Posláním adresy souhlasíte se </SmallText>{' '}
       <LinkSmall>zpracováním osobních údajů.</LinkSmall>
     </FooterSection>
@@ -147,9 +166,8 @@ const Footer: FC = () => (
       <SmallText>
         <b>Začni učit! </b>je projektem neziskové organizace Výluka.
       </SmallText>
-      <StyleWrapper>
-        <SmallText>© 2021 Výluka, z.s. PROTOTYP</SmallText>
-      </StyleWrapper>
+      <br></br>
+      <SmallText> © 2021 Výluka, z.s. PROTOTYP</SmallText>
     </FooterSection>
   </FooterWrap>
 );
