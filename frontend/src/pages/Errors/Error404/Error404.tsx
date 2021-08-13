@@ -1,4 +1,4 @@
-import { H1, H3, LightText, LinkRegular } from '@components/Typography';
+import { H1, H2, LightText, LinkRegular } from '@components/Typography';
 import { routes } from '@routes';
 import { theme } from 'src/common/theme';
 import ErrorImg from '../../../../public/images/404.svg';
@@ -7,9 +7,9 @@ import { Wrap } from './styled';
 const Error404 = () => {
   return (
     <Wrap>
-      <H1 color={theme.color.primary}>jej, tady nic není</H1>
+      <H1 color={theme.color.primary}>Jej, tady nic není</H1>
 
-      <H3>Omlouváme se, ale tady nic není.</H3>
+      <H2>Omlouváme se, ale tady nic není.</H2>
 
       <ErrorImg />
 

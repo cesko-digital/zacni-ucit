@@ -32,7 +32,6 @@ export const Burger = styled.button`
   right: 20px;
   cursor: pointer;
   width: 7rem;
-  /* height: 2.5rem; */
   color: ${({ theme }) => theme.color.primary};
   border: 1px solid #ecebeb;
   background: transparent;
@@ -43,9 +42,7 @@ export const Burger = styled.button`
 `;
 
 export const List = styled.ul`
-  /* display: none; */
   list-style-type: none;
-
   display: flex;
   margin-right: 10rem;
   flex-direction: row;
@@ -73,9 +70,9 @@ export const NavLink = styled.a<{ color?: string }>`
 
   ${mediaQueriesUp('lg')`
     display:inline-block;
-    `};
+  `};
 
-  &#muzu-ucit {
+  &.muzu-ucit {
     color: ${({ theme }) => theme.color.primary};
     display: inline-block;
     border-radius: 40px;
@@ -92,13 +89,11 @@ export const NavLink = styled.a<{ color?: string }>`
     `};
   }
 
-  &#zkus-ucit {
+  &.zkus-ucit {
     color: #ff2f5b;
   }
 
-  &#zauc-se {
+  &.zauc-se {
     color: #ffb60b;
   }
 `;
-
-export const MenuList = styled.ul;

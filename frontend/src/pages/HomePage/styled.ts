@@ -44,7 +44,7 @@ export const Wrap = styled.main`
     grid-column: 1/3;
     grid-row:4/4;
     justify-self:stretch;
-    border-top: none;
+    
   }
 
   `}
@@ -61,35 +61,35 @@ export const GridS1Path = styled.div`
   margin: 3rem 0;
   width: 100%;
 
-  & a#isTeachingForMe {
+  & a.isTeachingForMe {
     grid-column: 1/1;
     grid-row: 1;
     align-self: start;
     justify-self: end;
   }
 
-  & a#completeQualification {
+  & a.completeQualification {
     grid-column: 1/1;
     grid-row: 1/1;
     align-self: center;
     justify-self: end;
   }
 
-  & a#startTeaching {
+  & a.startTeaching {
     grid-column: 1/1;
     grid-row: 1/1;
     align-self: end;
     justify-self: end;
   }
 
-  & a#tryTeaching {
+  & a.tryTeaching {
     grid-column: 3/3;
     grid-row: 1/1;
     align-self: start;
     justify-self: start;
   }
 
-  & a#chooseSchool {
+  & a.chooseSchool {
     grid-column: 3/3;
     grid-row: 1/1;
     align-self: end;
@@ -107,13 +107,13 @@ export const GridS1Path = styled.div`
 export const GridforImg = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
   column-gap: 0.5rem;
   row-gap: 0.5rem;
   margin-bottom: 2rem;
 
   & H1 {
-    grid-column: 1;
+    grid-column: 1/1;
     grid-row: 1/1;
     align-self: start;
   }
@@ -126,38 +126,37 @@ export const GridforImg = styled.div`
   & div > p {
     grid-column: 1;
     grid-row: 2/2;
-
     align-self: end;
   }
 
-  & Input {
-    grid-column: 1;
+  & a.button {
+    grid-column: 1/1;
     grid-row: 3/3;
-    justify-self: center;
+    justify-self: start;
+    align-self: flex-start;
   }
 
-  & a:nth-child(1) {
+  & a.first {
     grid-column: 1/1;
     align-self: end;
-    grid-row: 3/3;
-    margin-left: 1rem;
+    grid-row: 4/4;
   }
 
-  & a:nth-child(2) {
+  & a.second {
     grid-column: 2/2;
-    grid-row: 3/3;
+    grid-row: 4/4;
   }
 
   & div.section_img {
     grid-column: 2/2;
-    grid-row: 1/3;
+    grid-row: 1/4;
     justify-self: end;
     align-self: start;
   }
 
   & div.section1_path {
     grid-column: 1/3;
-    grid-row: 4/4;
+    grid-row: 5/5;
     align-self: stretch;
     z-index: 5;
   }
@@ -165,51 +164,56 @@ export const GridforImg = styled.div`
   &.section1_grid {
     ${mediaQueriesUp('md')`
       grid-template-columns: 1fr 1fr 0.5fr;
-      grid-template-rows:  auto auto;
+      grid-template-rows:  auto auto auto auto;
       column-gap: 0;
       
 
     & H1 {
-    grid-column: 1;
-    grid-row: 1/1;
-    align-self: start;
-    padding: 0;
+      grid-column: 1;
+      grid-row: 1/1;
+      align-self: start;
+      padding: 0;
     }
 
-    & div#inputAndP {
-    grid-column: 1;
-    grid-row: 1/1;
-    align-self: center;
-    padding-right: 2rem;
+    & a.button {
+      grid-column: 1;
+      grid-row:3/3;
+      justify-self: start;
     }
 
-    & a#pedagogicMinimum {
-    grid-column: 1/1;
-    align-self: end;
-    grid-row:2/2;
-    margin-left: 1rem;
-    justify-self: start;
+    & p {
+      grid-column: 1/1;
+      grid-row: 2/2;
     }
 
-    & a#missedTeacher {
-    grid-column: 1/1;
-    grid-row: 2/2;
-    justify-self: end;
+
+    & a.first {
+      grid-column: 1/1;
+      grid-row:4/4;
+      justify-self: start;
+      align-self: center;
+    }
+
+    & a.second {
+      grid-column: 1/1;
+      grid-row: 4/4;
+      justify-self: end;
+      align-self: center;
     }
 
     & div.section_img {
       grid-column: 3/3;
-      grid-row: 1/2;
+      grid-row: 1/4;
       justify-self: end;
       align-self: start;
     
     }
 
     & div.section1_path {
-    grid-column: 2/2;
-    grid-row: 1/2;
-    align-self: center;
-    z-index: 5;
+      grid-column: 2/2;
+      grid-row: 1/4;
+      align-self: center;
+      z-index: 5;
     }
 
   `}
@@ -217,9 +221,9 @@ export const GridforImg = styled.div`
 
   &.section2_grid {
     ${mediaQueriesUp('md')`
-    grid-template-columns: 15vw 2fr;
-    grid-template-rows: 30vh auto auto;
-    column-gap: 2rem;
+      grid-template-columns: 15vw 2fr;
+      grid-template-rows: 35vh auto auto;
+      column-gap: 2rem;
    
     
     & div > p {
@@ -229,26 +233,18 @@ export const GridforImg = styled.div`
       padding-right: 5rem;
     }
   
-    &#tryToTeach {
-      grid-column: 2/2;
-      grid-row: 3/3;
-      justify-self: center;
-    }
-
-    & input#trytoTeach {
-      grid-column: 2/2;
-      grid-row: 2/2;
-      justify-self: end;
-      
-    }
   
-
     & a {
       grid-column: 2/2;
       grid-row: 3/3;
-      margin-left: 4rem;
+      justify-self:center;
     }
 
+    & a.button {
+      grid-column:2/2;
+      grid-row: 2/2;
+      
+    }
 
     & div.section_img {
       grid-column: 1/1;
@@ -262,14 +258,19 @@ export const GridforImg = styled.div`
 
   &.section4_grid {
     ${mediaQueriesUp('md')`
-    grid-template-columns: 2fr 15vw;
-    grid-template-rows: 30vh auto auto;
-    column-gap: 2rem;
+      grid-template-columns: 2fr 15vw;
+      grid-template-rows: 35vh auto auto;
+      column-gap: 2rem;
 
     & a {
       grid-column:1/1;
       grid-row: 3/3;
-      margin-left: 4rem;
+      justify-self:center;
+    }
+
+    & a.button {
+      grid-column:1/1;
+      grid-row: 2/2;
     }
 
     `}
@@ -286,21 +287,27 @@ export const Section = styled.section`
   &.section_5,
   &.section_6 {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+
     ${mediaQueriesUp('md')`
-    border:none;
+      border:none;
   `}
   }
 
   &.section_3 {
     background: ${theme.color.primary};
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    & a.button {
+      max-width: 15rem;
+    }
 
     ${mediaQueriesUp('md')`
-    display:flex;
-    flex-direction: column;
-    align-items:center;
+      align-items: center;
 
-    & div {
+      & div {
       display:flex;
       align-items: center;
       justify-content: space-evenly
@@ -315,9 +322,9 @@ export const Section = styled.section`
     }
 
     ${mediaQueriesUp('md')`
-    display:flex;
-    flex-direction: column;
-    align-items:center;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
 
     & div {
       display:flex;
@@ -354,7 +361,7 @@ export const Section = styled.section`
 
   &.section_4 {
     ${mediaQueriesUp('lg')`
- padding-right: 10vw;
+      padding-right: 10vw;
   `}
   }
 `;
@@ -369,7 +376,7 @@ export const Img = styled.div`
   background-size: cover;
 
   ${mediaQueries('sm')`
-   width: 40vw;
+    width: 40vw;
     aspect-ratio: 1/1.5;
   `}
 
@@ -382,15 +389,15 @@ export const Img = styled.div`
     background-position: 25% 0;
 
     ${mediaQueriesUp('md')`
-    border-bottom-left-radius: 90%;
-    border-bottom-right-radius: 0%;
+      border-bottom-left-radius: 90%;
+      border-bottom-right-radius: 0%;
    `}
 
     & ::after {
       ${mediaQueriesUp('md')`
-      right:0;
-      border-bottom-left-radius: 60px;
-      border-bottom-right-radius: 0;
+        right:0;
+        border-bottom-left-radius: 60px;
+        border-bottom-right-radius: 0;
       `}
     }
   }
@@ -400,15 +407,15 @@ export const Img = styled.div`
     background-position: 50% 0;
 
     ${mediaQueriesUp('md')`
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 90%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 90%;
    `}
 
     & ::after {
       ${mediaQueriesUp('md')`
-      left:0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 60px;
+       left:0;
+       border-bottom-left-radius: 0;
+       border-bottom-right-radius: 60px;
       `}
     }
   }
@@ -428,7 +435,6 @@ export const GridS5 = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr auto auto;
-  column-gap: 0.5rem;
   margin-bottom: 2rem;
   margin-top: 2rem;
 
@@ -437,7 +443,7 @@ export const GridS5 = styled.div`
     grid-row: 1/1;
   }
 
-  &#bePartner {
+  & a.button {
     grid-column: 1/2;
     grid-row: 2/2;
     justify-self: stretch;
@@ -450,42 +456,45 @@ export const GridS5 = styled.div`
     margin-left: 1rem;
   }
 
-  & img {
+  & svg {
     grid-column: 2/2;
     grid-row: 1/3;
     justify-self: start;
     align-self: center;
   }
 
+  ${mediaQueries('xs')`
+      & svg {
+      transform: scale(0.5);
+    }
+  `}
+
   ${mediaQueriesUp('md')`
- grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 2fr;
 
+    & H2 {
+      grid-column: 2/2;
+      grid-row: 1/1;
+    }
 
-  & H2 {
-  grid-column: 2/2;
-  grid-row: 1/1;
-  }
+    & a.button {
+      grid-column: 2/2;
+      grid-row: 2/2;
+      justify-self: start;
+    }
 
-  &#bePartner {
-  grid-column: 2/2;
-  grid-row: 2/2;
-  justify-self: center;
-  }
+    & a {
+      grid-column: 2/2;
+      align-self: end;
+      grid-row: 3/3;
+      margin-left: 1rem;
+    }
 
-  & a {
-  grid-column: 2/2;
-  align-self: end;
-
-  grid-row: 3/3;
-  margin-left: 1rem;
-  }
-
-   & img {
-    grid-column: 1/1;
-    grid-row: 1/3;
-    justify-self: center;
-    align-self:start;
-    width: 20%;
+    & svg {
+      grid-column: 1/1;
+      grid-row: 1/3;
+      justify-self: center;
+      align-self:start;
    }
 
    `}

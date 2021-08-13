@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { Wrapper, Logo, List, Item, NavLink, Burger } from './styled';
-import Link from '@components/Button/Link';
+import Link from '@components/Link/Link';
 import { routes } from '@routes';
-import ZacniUcitLogo from '../../../../public/images/Logotype.svg';
+import ZacniUcitLogo from '../../../../public/images/zacniucit-logo.svg';
 import BurgerIcon from '@icons/burger.svg';
 import CrossIcon from '@icons/cross.svg';
 import { Menu } from '../Menu/Menu';
@@ -26,10 +26,6 @@ const items = [
     label: 'Chci se zaučit',
     route: routes.wantToLearn,
   },
-  // {
-  //   label: 'O nás',
-  //   route: routes.aboutUs,
-  // },
   {
     label: 'Partneři',
     route: routes.partners,
@@ -37,7 +33,7 @@ const items = [
 ];
 
 export const Navbar: FC = () => {
-  const [isListOpen, setIsListOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <nav>
@@ -45,12 +41,11 @@ export const Navbar: FC = () => {
         <Burger
           type="button"
           onClick={() => {
-            setIsListOpen(!isListOpen);
-            console.log(isListOpen);
+            setIsMenuOpen(!isMenuOpen);
           }}
         >
           <PrimaryText>Menu</PrimaryText>
-          {isListOpen ? <CrossIcon /> : <BurgerIcon height="14" />}
+          {isMenuOpen ? <CrossIcon /> : <BurgerIcon height="14" />}
         </Burger>
         <Link href={routes.homepage}>
           <Logo>
@@ -62,13 +57,13 @@ export const Navbar: FC = () => {
           {items.map(({ route, label }) => (
             <Item key={route}>
               <Link href={route}>
-                <NavLink id={route.slice(1, 10)}>{label}</NavLink>
+                <NavLink className={route.slice(1, 10)}>{label}</NavLink>
               </Link>
             </Item>
           ))}
         </List>
       </Wrapper>
-      <Menu listOpened={isListOpen} />
+      <Menu listOpened={isMenuOpen} />
     </nav>
   );
 };

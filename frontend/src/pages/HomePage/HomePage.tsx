@@ -3,14 +3,15 @@ import { theme } from '../../common/theme';
 import StyleWrapper from '../../components/StyledWrapper';
 import { Wrap, Section, Img, GridforImg, GridS1Path, GridS5 } from './styled';
 import Input from '../../components/Input/Input';
-import { H1, H2, LightText, LinkRegular } from '../../components/Typography';
-import vyluka_logo from '../../../public/images/homepage/vyluka_logo.png';
+import { H1, H2, LightText, LinkRegular, LinkToExtPage } from '../../components/Typography';
+import VylukaLogo from '../../../public/images/homepage/vyluka_logo.svg';
 import HomepageS1Path from '../../../public/images/homepage/homepage_s1_path.svg';
 import msmt_logo from '../../../public/images/homepage/msmt_logo.png';
 import cd_logo from '../../../public/images/homepage/cd_logo.png';
 import cs_logo from '../../../public/images/homepage/cs_logo.png';
 import vodafone_logo from '../../../public/images/homepage/vodafone_logo.png';
 import { routes } from '@routes';
+import Link from '@components/Link/Link';
 
 const HomePage: FC = () => (
   <Wrap>
@@ -21,46 +22,39 @@ const HomePage: FC = () => (
         <H1 bold padding="2rem 0 0 0">
           Začni učit!
         </H1>
-        <StyleWrapper id="inputAndP" padding="1rem 0 1rem 0">
-          <LightText>
-            Provádíme zájemce o učitelství vším, co potřebují znát, aby se mohli stát spokojenými
-            pedagogy.
-          </LightText>
 
-          <Input
-            value="Můžu učit?"
-            type="button"
-            padding="1rem 2rem"
-            margin="2.5rem 0 1rem 0"
-            bgColor={theme.color.primary}
-            onClick={() => (window.location.href = routes.canITeach)}
-          />
-        </StyleWrapper>
+        <LightText>
+          Provádíme zájemce o učitelství vším, co potřebují znát, aby se mohli stát spokojenými
+          pedagogy.
+        </LightText>
+        <Link className="button primaryBgr" href={routes.canITeach}>
+          Můžu učit?
+        </Link>
 
-        <LinkRegular id="pedagogicMinimum" href={routes.pedagogicMinimum}>
+        <LinkRegular className="pedagogicMinimum first" href={routes.pedagogicMinimum}>
           Pedagogické minimum
         </LinkRegular>
 
-        <LinkRegular id="missedTeacher" href={routes.missedTeachers}>
+        <Link className="linkRegular missedTeacher second" href={routes.missedTeachers}>
           Jací učitelé chybí?
-        </LinkRegular>
+        </Link>
         <GridS1Path className="section1_path">
-          <LinkRegular id="isTeachingForMe" href={routes.isTeachingForMe}>
+          <Link className="linkRegular isTeachingForMe" href={routes.isTeachingForMe}>
             Je učitelství pro mě?
-          </LinkRegular>
-          <LinkRegular id="completeQualification" href={routes.completeQualification}>
+          </Link>
+          <Link className="linkRegular completeQualification" href={routes.completeQualification}>
             Chci si doplnit kvalifikaci
-          </LinkRegular>
-          <LinkRegular id="startTeaching" href={routes.teachingStart}>
+          </Link>
+          <Link className="linkRegular startTeaching" href={routes.teachingStart}>
             Začínám učit
-          </LinkRegular>
+          </Link>
           <HomepageS1Path />
-          <LinkRegular id="tryTeaching" href={routes.tryToTeach}>
+          <Link className="linkRegular tryTeaching" href={routes.tryToTeach}>
             Chci si zkusit učení
-          </LinkRegular>
-          <LinkRegular id="chooseSchool" href={routes.chooseSchool}>
+          </Link>
+          <Link className="linkRegular chooseSchool" href={routes.chooseSchool}>
             Vybírám školu, kde budu učit
-          </LinkRegular>
+          </Link>
         </GridS1Path>
       </GridforImg>
     </Section>
@@ -72,29 +66,25 @@ const HomePage: FC = () => (
           <H2 padding="2rem 0 0 0">Vyzkoušejte si učení</H2>
           <StyleWrapper padding="1rem 0 1rem 0">
             <LightText>
-              Nevíte, zda je učitelství pro vás? S naším programem <b>Zkus učit!</b> se na týden
-              stanete učitelem.
+              Nevíte, zda je učitelství pro vás? S naším programem <strong>Zkus učit!</strong> se na
+              týden stanete učitelem.
             </LightText>
           </StyleWrapper>
           <StyleWrapper>
             <LightText>
-              Učení vás láká, ale máte málo času? Zúčastněte se <b>Dne pro školu</b> a předejte své
-              odborné znalosti během jednoho dne.
+              Učení vás láká, ale máte málo času? Zúčastněte se <strong>Dne pro školu</strong> a
+              předejte své odborné znalosti během jednoho dne.
             </LightText>
           </StyleWrapper>
         </div>
 
-        <Input
-          value="Chci zkusit učit"
-          type="button"
-          padding="1rem 2rem"
-          margin="2.5rem 0 1rem 0"
-          bgColor="#FF2F5B"
-          onClick={() => (window.location.href = routes.tryToTeach)}
-          id="tryToTeach"
-        />
+        <Link className="button redBgr" href={routes.tryToTeach}>
+          Chci zkusit učit
+        </Link>
 
-        <LinkRegular href={routes.dayForSchool}>Věnujte 1 den škole</LinkRegular>
+        <Link className="linkRegular first" href={routes.dayForSchool}>
+          Věnujte 1 den škole
+        </Link>
       </GridforImg>
     </Section>
     <Section className="section_3">
@@ -110,19 +100,18 @@ const HomePage: FC = () => (
           650 <span>dětí učitel ovlivní za deset let</span>
         </H1>
       </StyleWrapper>
-      <StyleWrapper>
-        <Input
-          value="Příběhy učitelů"
-          type="button"
-          padding="1rem 2rem"
-          margin="2.5rem 0 1rem 0"
-          bgColor="#FFB60B"
-          onClick={() => (window.location.href = routes.teachersStories)}
-        />
-      </StyleWrapper>
+
+      <Link className="button yellowBgr" href={routes.teachersStories}>
+        Příběhy učitelů
+      </Link>
+
       <div>
-        <LinkRegular href={routes.sallary}>Platy učitelů</LinkRegular>
-        <LinkRegular href={routes.jobs}>Volná místa ve školství</LinkRegular>
+        <Link className="linkRegular" href={routes.sallary}>
+          Platy učitelů
+        </Link>
+        <Link className="linkRegular" href={routes.jobs}>
+          Volná místa ve školství
+        </Link>
       </div>
     </Section>
     <Section className="section_4">
@@ -136,19 +125,18 @@ const HomePage: FC = () => (
           <StyleWrapper padding="1rem 0">
             <LightText>
               Nejste na to ale sami – můžete se zapojit do našeho rozvojového programu{' '}
-              <b>Zauč se!</b> nebo se inspirovat tipy kolegyň a kolegů.
+              <strong>Zauč se!</strong> nebo se inspirovat tipy kolegyň a kolegů.
             </LightText>
           </StyleWrapper>
         </div>
-        <Input
-          value="Chci se zaučit"
-          type="button"
-          padding="1rem 2rem"
-          margin="2.5rem 0 1rem 0"
-          bgColor="#FFB60B"
-          onClick={() => (window.location.href = routes.wantToLearn)}
-        />
-        <LinkRegular href={routes.teachersTips}>Tipy pro začínající učitele</LinkRegular>
+
+        <Link className="button yellowBgr" href={routes.wantToLearn}>
+          Chci se zaučit
+        </Link>
+
+        <Link className="linkRegular first" href={routes.teachersTips}>
+          Tipy pro začínající učitele
+        </Link>
       </GridforImg>
     </Section>
     <Section className="section_5">
@@ -157,23 +145,28 @@ const HomePage: FC = () => (
           <span>Začni učit!</span> <br></br>je projektem organizace Výluka
         </H2>
 
-        <img className="vylukaLogo" src={vyluka_logo} alt="Logo Výluka" />
+        <VylukaLogo />
 
-        <Input
-          value="Podpořete nás na Darujme.cz"
-          type="button"
-          padding="1rem 2rem"
-          margin="2.5rem 0 1rem 0"
-          bgColor={theme.color.primary}
-          onClick={() => window.open('https://www.darujme.cz/projekt/1203276', '_blank')}
-        />
-        <LinkRegular href={routes.donate}>Přispějte jinak</LinkRegular>
+        <LinkToExtPage
+          className="button primaryBgr"
+          href="https://www.darujme.cz/projekt/1203276"
+          target="_blank"
+        >
+          Podpořte nás na Darujme.cz
+        </LinkToExtPage>
+
+        <Link className="linkRegular" href={routes.donate}>
+          Přispějte jinak
+        </Link>
       </GridS5>
     </Section>
     <Section id="partners" className="section_6">
       <H2 padding="2rem 0 0 0">Naši partneři</H2>
       <LightText>
-        Děkujeme <LinkRegular margin="0"> všem našim partnerům </LinkRegular>
+        Děkujeme{' '}
+        <u>
+          <strong>všem našim partnerům</strong>{' '}
+        </u>
         a podporovatelům za to, že při nás stojí.
       </LightText>
       <StyleWrapper>
@@ -182,15 +175,11 @@ const HomePage: FC = () => (
         <img src={cs_logo} alt="Logo Česká spořitelna" />
         <img src={vodafone_logo} alt="Logo Vodafone" />
       </StyleWrapper>
-      <Input
-        value="Chci se stát partnerem"
-        type="button"
-        padding="1rem 2rem"
-        margin="2.5rem 0 1rem 0"
-        bgColor={theme.color.primary}
-        onClick={() => (window.location.href = routes.donate)}
-        id="bePartner"
-      />
+      <StyleWrapper margin="1rem 0">
+        <Link className="button primaryBgr" href={routes.donate}>
+          Chci se stát partnerem
+        </Link>
+      </StyleWrapper>
     </Section>
   </Wrap>
 );

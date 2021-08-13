@@ -9,11 +9,13 @@ interface ILinkProps {
   children: string | JSX.Element;
   title?: string;
   className?: string;
+  id?: string;
+  target?: string;
 }
 
-const Link: FC<ILinkProps> = React.forwardRef(({ href, title, children }, ref: any) => (
+const Link: FC<ILinkProps> = React.forwardRef(({ href, title, children, className }, ref: any) => (
   <ReactLink href={href} prefetch={false}>
-    <ALink ref={ref} title={title}>
+    <ALink className={className} ref={ref} title={title}>
       {children}
     </ALink>
   </ReactLink>

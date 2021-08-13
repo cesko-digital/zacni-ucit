@@ -1,6 +1,7 @@
 import { mediaQueriesUp } from 'src/common/mediaQueries';
 import { theme } from 'src/common/theme';
 import styled from 'styled-components';
+import Link from '@components/Link/Link';
 
 export const FooterWrap = styled.footer`
   display: flex;
@@ -47,15 +48,16 @@ export const FooterSection = styled.section`
   padding: 2rem 2rem;
 
   ${mediaQueriesUp('lg')`
-    ppadding-top: 2rem;
-    padding-bottom: 2rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
     `};
 
   &.footer_section1 {
     background: rgba(127, 80, 255, 0.08);
+
     ${mediaQueriesUp('lg')`
-    padding-left: 10vw;
-    padding-right: 10vw;
+      padding-left: 10vw;
+      padding-right: 10vw;
     `};
   }
 
@@ -63,7 +65,7 @@ export const FooterSection = styled.section`
     background: rgba(127, 80, 255, 0.16);
 
     ${mediaQueriesUp('lg')`
-    padding-left: 10vw;
+      padding-left: 10vw;
     `};
   }
 
@@ -71,7 +73,7 @@ export const FooterSection = styled.section`
     background: rgba(127, 80, 255, 0.24);
 
     ${mediaQueriesUp('lg')`
-    padding-right: 10vw;
+      padding-right: 10vw;
     `};
   }
 
@@ -87,6 +89,12 @@ export const FlexRowSB = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 2rem 0;
+`;
+
+export const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const FlexColumn = styled.div`
@@ -110,21 +118,6 @@ export const SmallText = styled.p`
 export const LinkSmall = styled.a`
   font-size: ${theme.fontSize.small};
   font-weight: 700;
-`;
-
-export const FooterBTN = styled.button`
-  background: transparent;
-  border: 2px solid ${theme.color.primary};
-  border-radius: ${theme.radius.max};
-  line-height: 1.25rem;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
-  font-size: ${theme.fontSize.normal};
-  cursor: pointer;
-
-  & svg {
-    margin-right: 0.5rem;
-  }
 `;
 
 export const FooterInput = styled.input`

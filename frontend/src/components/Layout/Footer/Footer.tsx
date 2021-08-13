@@ -9,17 +9,16 @@ import {
   LinkSmall,
   FooterWrap,
   FooterText,
-  FooterBTN,
   FooterInput,
-  FooterLabel,
+  FlexRow,
 } from './styled';
-import { H2, H3, LinkLight, LinkRegular } from '../../Typography';
-import StyleWrapper from '../../StyledWrapper';
+import { H2, LinkLight, LinkRegular, LinkToExtPage } from '../../Typography';
 import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
 import TwitterIcon from '@icons/twitter.svg';
-import { menu_items } from '../Menu/Menu';
-import Link from '@components/Button/Link';
+import { menuItems } from '../Menu/Menu';
+import Link from '@components/Link/Link';
+import NextHead from 'next/head';
 
 const links = [
   {
@@ -32,14 +31,14 @@ const Footer: FC = () => (
   <FooterWrap>
     <FooterSection className="footer_section1">
       <FlexRowSB>
-        {menu_items.map(item => (
-          <FlexColumn key={item.id}>
-            <Link href={item.route}>
-              <LinkRegular footer>{item.label}</LinkRegular>
+        {menuItems.map(item => (
+          <FlexColumn key={item.label}>
+            <Link className="linkRegular footer bold" href={item.route}>
+              {item.label}
             </Link>
             {item.lights?.map(light => (
-              <Link key={light.route} href={light.route}>
-                <LinkLight footer>{light.label}</LinkLight>
+              <Link className="linkRegular footer light" key={light.route} href={light.route}>
+                {light.label}
               </Link>
             ))}
           </FlexColumn>
@@ -57,24 +56,41 @@ const Footer: FC = () => (
       <LinkRegular footer href="mailto:info@vyluka.org">
         info@vyluka.org
       </LinkRegular>
-      <FooterBTN onClick={() => window.open('https://www.facebook.com/spolekvyluka/', '_blank')}>
-        <FacebookIcon />
-        Facebook
-      </FooterBTN>
-      <FooterBTN onClick={() => window.open('https://www.instagram.com/vyluka_/?hl=en', '_blank')}>
-        <InstagramIcon /> Instagram
-      </FooterBTN>
-      <FooterBTN onClick={() => window.open('https://twitter.com/vyluka_?lang=en', '_blank')}>
-        <TwitterIcon /> Twitter
-      </FooterBTN>
+      <FlexRow>
+        <LinkToExtPage
+          className="footerBtn"
+          href="https://www.facebook.com/spolekvyluka/"
+          target="_blank"
+        >
+          <FacebookIcon />
+          Facebook
+        </LinkToExtPage>
+        <LinkToExtPage
+          className="footerBtn"
+          href="https://www.instagram.com/vyluka_/?hl=en"
+          target="_blank"
+        >
+          <InstagramIcon />
+          Instagram
+        </LinkToExtPage>
+        <LinkToExtPage
+          className="footerBtn"
+          href="https://twitter.com/vyluka_?lang=en"
+          target="_blank"
+        >
+          <TwitterIcon /> Twitter
+        </LinkToExtPage>
+      </FlexRow>
     </FooterSection>
     <FooterSection className="footer_section3">
-      {/* <H3>Newsletter jednou měsíčně</H3> */}
-      <link
-        href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css"
-        rel="stylesheet"
-        type="text/css"
-      />
+      {/* mailchimp form*/}
+      <NextHead>
+        <link
+          href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+      </NextHead>
       <label htmlFor="mce-EMAIL" style={{ fontWeight: 'bold' }}>
         Newsletter jednou měsíčně
       </label>
@@ -82,11 +98,6 @@ const Footer: FC = () => (
         Novinky pro budoucí i začínající učitele, tipy na zajímavé akce o vzdělávání či na nástroje
         do výuky.
       </FooterText>
-      {/*} <style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-        {/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */}
-      {/* </style> */}
       <div id="mc_embed_signup">
         <form
           action="https://vyluka.us19.list-manage.com/subscribe/post?u=3de897b21700c27eefbd0bf7d&amp;id=a1ece305d1"
@@ -114,7 +125,7 @@ const Footer: FC = () => (
                 fontSize: '14px',
                 padding: ' 0.5rem 1rem',
                 lineHeight: '2rem',
-                width: '80%',
+                width: '300px',
                 outline: 'none',
               }}
             />
@@ -142,23 +153,19 @@ const Footer: FC = () => (
                   borderRadius: '40px',
                   fontSize: '14px',
                   fontWeight: 'bold',
-                  width: '20%',
+                  width: '100px',
                   height: '3rem',
                   textAlign: 'center',
                   padding: '0.5rem',
                   display: 'block',
                   lineHeight: '28px',
-                  transform: 'translateX(300%) translateY(-120%)',
+                  transform: 'translateX(220px) translateY(-120%)',
                 }}
               />
             </div>
           </div>
         </form>
       </div>
-      {/* <form action="">
-        <FooterInput type="email" placeholder="e-mail" />
-        <FooterLabel htmlFor="">Odebírat</FooterLabel>
-      </form> */}
       <SmallText>Posláním adresy souhlasíte se </SmallText>{' '}
       <LinkSmall>zpracováním osobních údajů.</LinkSmall>
     </FooterSection>

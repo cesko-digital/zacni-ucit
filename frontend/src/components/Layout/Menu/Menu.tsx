@@ -2,15 +2,13 @@ import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import { ListMenu, Item, MenuTag, MenuLink } from './styled';
-import Link from '@components/Button/Link';
+import Link from '@components/Link/Link';
 import { routes } from '@routes';
 import HomeIcon from '@icons/home.svg';
-import { LightText, LinkLight, LinkRegular, PrimaryText } from '@components/Typography';
 import StyleWrapper from '@components/StyledWrapper';
 
-export const menu_items = [
+export const menuItems = [
   {
-    id: 1,
     label: 'Můžu učit?',
     route: routes.canITeach,
     lights: [
@@ -30,7 +28,6 @@ export const menu_items = [
   },
 
   {
-    id: 2,
     label: 'Proč jít učit?',
     route: routes.whyToTeach,
     lights: [
@@ -54,7 +51,6 @@ export const menu_items = [
   },
 
   {
-    id: 3,
     label: 'Chci zkusit učit',
     route: routes.tryToTeach,
     lights: [
@@ -70,7 +66,6 @@ export const menu_items = [
   },
 
   {
-    id: 4,
     label: 'Chci se zaučit',
     route: routes.wantToLearn,
     lights: [
@@ -86,13 +81,11 @@ export const menu_items = [
   },
 
   {
-    id: 5,
     label: 'Začni učit! je projektem spolku Výluka',
     route: routes.vyluka,
   },
 
   {
-    id: 6,
     label: 'Naši partneři a přispějte',
     route: routes.partners,
   },
@@ -114,15 +107,15 @@ export const Menu: FC<Props> = ({ listOpened }) => {
             </MenuLink>
           </Link>
         </Item>
-        {menu_items.map(item => (
-          <Item key={item.id}>
-            <Link href={item.route}>
-              <MenuLink>{item.label}</MenuLink>
+        {menuItems.map(item => (
+          <Item key={item.label}>
+            <Link className="bold" href={item.route}>
+              {item.label}
             </Link>
             {item.lights?.map(light => (
               <StyleWrapper key={light.route} margin="1rem 0 0 0">
-                <Link href={light.route}>
-                  <MenuLink lightLink>{light.label}</MenuLink>
+                <Link className="light" href={light.route}>
+                  {light.label}
                 </Link>
               </StyleWrapper>
             ))}
