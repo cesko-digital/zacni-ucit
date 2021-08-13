@@ -24,8 +24,6 @@ import { mediaQueries } from '../../common/mediaQueries';
 //   ${({ homePage }) => (homePage ? withBgImageStyle : null)}
 // `;
 
-export const MainWrap = styled.main``;
-
 export const Wrap = styled.div`
   padding: 0 1rem;
   margin: 0 auto;

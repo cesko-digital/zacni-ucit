@@ -7,7 +7,7 @@ interface UserExtended extends User {
   lastName?: string | null;
 }
 
-export default (req, res) =>
+export default (req: any, res: any) =>
   NextAuth(req, res, {
     providers: [
       Providers.Credentials({
@@ -16,7 +16,7 @@ export default (req, res) =>
           email: { label: 'Username', type: 'text', placeholder: 'jsmith' },
           password: { label: 'Password', type: 'password' },
         },
-        authorize: async (credentials) => {
+        authorize: async credentials => {
           try {
             const data = {
               email: credentials.email,
@@ -33,9 +33,7 @@ export default (req, res) =>
             }
           } catch (error) {
             if (error.response) {
-              Promise.reject(
-                new Error('Invalid Username and Password combination')
-              );
+              Promise.reject(new Error('Invalid Username and Password combination'));
             }
           }
         },
@@ -49,7 +47,7 @@ export default (req, res) =>
       jwt: async (token, user: UserExtended, account, profile, isNewUser) => {
         // append user info into token
         user && (token.user = user);
-        user && (token.user.name = user.firstName + ' ' + user.lastName);
+        user && ((token.user as any).name = user.firstName + ' ' + user.lastName);
         return Promise.resolve(token); // ...here
       },
       session: async (session, user) => {
@@ -71,7 +69,7 @@ export default (req, res) =>
     },
   });
 
-const login = async (data) => {
+const login = async data => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
