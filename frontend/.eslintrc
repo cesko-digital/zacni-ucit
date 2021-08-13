@@ -1,0 +1,190 @@
+{
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
+  ],
+  "plugins": ["react", "@typescript-eslint", "import", "react-hooks", "jsx-a11y"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json", "./tsconfig.server.json"],
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "esModuleInterop": true
+  },
+  "rules": {
+    "no-use-before-define": "off",
+
+    "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/consistent-type-assertions": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/method-signature-style": "error",
+    "@typescript-eslint/no-confusing-non-null-assertion": "error",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/prefer-literal-enum-member": "error",
+    "@typescript-eslint/prefer-reduce-type-parameter": "error",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/default-param-last": ["error"],
+    "@typescript-eslint/no-base-to-string": ["warn", { "ignoredTypeNames": ["RegExp"] }],
+    "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
+    "@typescript-eslint/no-unsafe-argument": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "@typescript-eslint/prefer-optional-chain": "warn",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-var-requires": "off",
+
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-cycle": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": ["builtin", "external", ["parent", "internal", "sibling"], "index"],
+        "alphabetize": { "order": "asc" },
+        "pathGroups": [
+          {
+            "pattern": "{.,..,@*}/**/*.*",
+            "group": "index",
+            "position": "after"
+          }
+        ]
+      }
+    ],
+
+    // React rules
+    "react/jsx-pascal-case": ["error", { "allowNamespace": true }],
+    "react/jsx-no-useless-fragment": "error",
+    "react/jsx-no-script-url": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "shorthandLast": true,
+        "reservedFirst": true,
+        "callbacksLast": true
+      }
+    ],
+    "react/void-dom-elements-no-children": "error",
+    "react/prefer-stateless-function": "error",
+    "react/prop-types": "off",
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off",
+
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+
+    // can be remove
+    "react/boolean-prop-naming": "error",
+    "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
+
+    "no-unused-vars": "off",
+    "no-useless-backreference": "error",
+    "no-unreachable-loop": "error",
+    "no-template-curly-in-string": "error",
+    "no-await-in-loop": "error",
+    "no-loss-of-precision": "error",
+    "no-promise-executor-return": "error",
+    "no-unsafe-optional-chaining": "error",
+    "array-callback-return": "error",
+    "default-case": "error",
+    "default-case-last": "error",
+    "default-param-last": "error",
+    "eqeqeq": "error",
+    "dot-notation": "error",
+    "no-alert": "error",
+    "no-else-return": "error",
+    "no-eval": "error",
+    "no-extend-native": "error",
+    "no-floating-decimal": "error",
+    "no-lone-blocks": "error",
+    "no-new": "error",
+    "no-new-wrappers": "error",
+    "no-param-reassign": "error",
+    "no-return-assign": "error",
+    "no-throw-literal": "error",
+    "no-useless-return": "error",
+    "require-await": "error",
+    "yoda": "error",
+    "wrap-iife": "error",
+    "arrow-body-style": "error",
+    "no-confusing-arrow": "error",
+    "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "prefer-template": "error",
+    "symbol-description": "error",
+    "prefer-destructuring": "error",
+
+    // a11y rules
+    "jsx-a11y/aria-props": "error",
+    "jsx-a11y/aria-proptypes": "error",
+    "jsx-a11y/aria-unsupported-elements": "error",
+    "jsx-a11y/html-has-lang": "error",
+    "jsx-a11y/iframe-has-title": "error",
+    "jsx-a11y/lang": "error",
+    "jsx-a11y/no-access-key": "error",
+    "jsx-a11y/no-autofocus": "error",
+    "jsx-a11y/no-distracting-elements": "error",
+    "jsx-a11y/no-noninteractive-tabindex": "error",
+    "jsx-a11y/no-redundant-roles": "error",
+    "jsx-a11y/role-has-required-aria-props": "error",
+    "jsx-a11y/role-supports-aria-props": "error",
+    "jsx-a11y/tabindex-no-positive": "error",
+    "jsx-a11y/aria-role": ["error", { "ignoreNonDOM": true }],
+    "jsx-a11y/alt-text": [
+      "error",
+      {
+        "elements": ["img"],
+        "img": ["Image"]
+      }
+    ],
+    "jsx-a11y/no-noninteractive-element-interactions": [
+      "error",
+      {
+        "handlers": ["onClick", "onMouseDown", "onMouseUp", "onKeyPress", "onKeyDown", "onKeyUp"]
+      }
+    ]
+  },
+  "settings": {
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".js", ".ts", ".tsx"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  }
+}

@@ -14,8 +14,8 @@ from qualifications.models import (
     CollegeArea,
     CollegeProgramme,
     EducationArea,
-    PreparationType,
     SubjectType,
+    EducationType,
     OtherOption,
 )
 
@@ -37,10 +37,6 @@ class Query(graphene.ObjectType):
     education_areas = graphene.List(EducationAreaObjectType)
     education_area = graphene.Field(EducationAreaObjectType, pk=graphene.Int(required=True))
 
-    # Preparation type queries
-    preparation_types = graphene.List(PreparationTypeObjectType)
-    preparation_type = graphene.Field(PreparationTypeObjectType, pk=graphene.Int(required=True))
-
     # Subject type queries
     subject_types = graphene.List(SubjectTypeObjectType)
     subject_type = graphene.Field(SubjectTypeObjectType, pk=graphene.Int(required=True))
@@ -55,7 +51,7 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_titles(root, info):
-        return Title.objects.all()
+        return Title.objects.filter(visible_in_form=True)
 
     @staticmethod
     def resolve_title(root, info, pk: int):
@@ -86,14 +82,6 @@ class Query(graphene.ObjectType):
         return EducationArea.objects.get(pk=pk)
 
     @staticmethod
-    def resolve_preparation_types(root, info):
-        return PreparationType.objects.all()
-
-    @staticmethod
-    def resolve_preparation_type(root, info, pk: int):
-        return PreparationType.objects.get(pk=pk)
-
-    @staticmethod
     def resolve_subject_types(root, info):
         return SubjectType.objects.all()
 
@@ -103,11 +91,11 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_education_types(root, info):
-        return SubjectType.objects.all()
+        return EducationType.objects.all()
 
     @staticmethod
     def resolve_education_type(root, info, pk: int):
-        return SubjectType.objects.get(pk=pk)
+        return EducationType.objects.get(pk=pk)
 
     @staticmethod
     def resolve_other_options(root, info):

@@ -51,7 +51,8 @@ MERGE (qualification)-[:QUALIFIES_FOR]->(teachingLevel)
 MERGE (qualification)-[:QUALIFIES_FOR]->(teachingSubject);
 
 
-
+MATCH (exp:OtherExperience)
+SET exp:EducationType;
 
 MATCH (subject:Subject) WHERE
 subject.name CONTAINS 'předměty' OR subject.name CONTAINS 'cizí jazyk' OR subject.name CONTAINS 'tělesná výchova' OR subject.name CONTAINS 'výcvik' OR subject.name CONTAINS 'konverzace'

@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "accounts",
     "anymail",
+    "content_management",
 ]
 
 MIDDLEWARE = [
