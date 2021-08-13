@@ -31,9 +31,9 @@ const HomePage: FC = () => (
           Můžu učit?
         </Link>
 
-        <LinkRegular className="pedagogicMinimum first" href={routes.pedagogicMinimum}>
+        <Link className="linkRegular first" href={routes.pedagogicMinimum}>
           Pedagogické minimum
-        </LinkRegular>
+        </Link>
 
         <Link className="linkRegular missedTeacher second" href={routes.missedTeachers}>
           Jací učitelé chybí?

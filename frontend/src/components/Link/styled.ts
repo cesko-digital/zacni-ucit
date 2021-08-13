@@ -6,6 +6,12 @@ export const ALink = styled.a`
   font-weight: 'bold';
   cursor: pointer;
 
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 3px;
+  }
+
   & svg {
     margin-right: 0.5rem;
   }
@@ -16,6 +22,12 @@ export const ALink = styled.a`
     color: inherit;
     text-decoration: underline;
     margin: 0 1rem 0 0;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: red;
+      text-decoration-thickness: 3px;
+    }
   }
 
   &.bold {

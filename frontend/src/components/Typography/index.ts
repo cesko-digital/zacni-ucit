@@ -111,6 +111,12 @@ export const LinkToExtPage = styled.a`
   text-decoration: none;
   white-space: nowrap;
 
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 3px;
+  }
+
   &.button {
     padding: 1rem 2rem;
     margin: 2.5rem 0 1rem 0;
@@ -138,6 +144,12 @@ export const LinkToExtPage = styled.a`
     width: 10rem;
     display: flex;
     align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: red;
+      text-decoration-thickness: 3px;
+    }
   }
 
   & svg {
