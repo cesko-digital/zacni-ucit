@@ -10,6 +10,7 @@ import msmt_logo from '../../../public/images/homepage/msmt_logo.png';
 import cd_logo from '../../../public/images/homepage/cd_logo.png';
 import cs_logo from '../../../public/images/homepage/cs_logo.png';
 import vodafone_logo from '../../../public/images/homepage/vodafone_logo.png';
+import DarujmeIcon from '@icons/darujme-icon.svg';
 import { routes } from '@routes';
 import Link from '@components/Link/Link';
 
@@ -152,6 +153,7 @@ const HomePage: FC = () => (
           href="https://www.darujme.cz/projekt/1203276"
           target="_blank"
         >
+          <DarujmeIcon />
           Podpořte nás na Darujme.cz
         </LinkToExtPage>
 
