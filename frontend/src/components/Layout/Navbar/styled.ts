@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { mediaQueries, mediaQueriesUp } from 'src/common/mediaQueries';
 import { theme } from 'src/common/theme';
+import ButtonComponent from '@components/Button/Button';
 
 export const Wrapper = styled.nav`
   font-size: 18px;
@@ -16,7 +17,7 @@ export const Wrapper = styled.nav`
   position: relative;
   z-index: 20;
 `;
-export const Logo = styled.span`
+export const Logo = styled.img`
   text-decoration: none;
   display: inline-block;
   color: ${({ theme }) => theme.color.secondary};
@@ -61,7 +62,7 @@ export const Item = styled.li`
   `}
 `;
 
-export const NavLink = styled.a<{ color?: string }>`
+export const NavLink = styled(ButtonComponent)<{ color?: string }>`
   text-decoration: none;
   color: ${({ theme }) => theme.color.secondary};
   font-weight: 700;
@@ -91,11 +92,11 @@ export const NavLink = styled.a<{ color?: string }>`
     `};
   }
 
-  &.zkus-ucit {
+  &.chci-zkusit-ucit {
     color: #ff2f5b;
   }
 
-  &.zauc-se {
+  &.chci-se-zaucit {
     color: #ffb60b;
   }
 `;

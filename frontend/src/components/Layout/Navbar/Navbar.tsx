@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 
 import { Menu } from '../Menu/Menu';
 import { Wrapper, Logo, List, Item, NavLink, Burger } from './styled';
-import Link from '@components/Link/Link';
 import { PrimaryText } from '@components/Typography';
 import { routes } from '@routes';
+import Button from '@components/Button/Button';
 
 import zacniUcitLogo from './zacniucit-logo.svg';
 import BurgerIcon from '@icons/burger.svg';
 import CrossIcon from '@icons/cross.svg';
+import { convertToUrl } from '@pages/StartTeachingPage/StartTeachingPage';
 
 const items = [
   {
@@ -49,18 +50,16 @@ export const Navbar: FC = () => {
           <PrimaryText>Menu</PrimaryText>
           {isMenuOpen ? <CrossIcon /> : <BurgerIcon height="14" />}
         </Burger>
-        <Link href={routes.homepage}>
-          <Logo>
-            <img alt="Začni učit logo" height="50" src={zacniUcitLogo} width="80" />
-          </Logo>
-        </Link>
+        <Button href={routes.homepage}>
+          <Logo alt="Začni učit logo" height="50" src={zacniUcitLogo} width="80"></Logo>
+        </Button>
 
         <List>
           {items.map(({ route, label }) => (
             <Item key={route}>
-              <Link href={route}>
-                <NavLink className={route.slice(1, 10)}>{label}</NavLink>
-              </Link>
+              <NavLink href={route} className={convertToUrl(label)}>
+                {label}
+              </NavLink>
             </Item>
           ))}
         </List>
