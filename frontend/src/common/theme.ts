@@ -1,4 +1,4 @@
-import baseStyled, { ThemedStyledInterface } from 'styled-components';
+import baseStyled from 'styled-components';
 
 export const theme = {
   color: {
@@ -24,4 +24,4 @@ export const theme = {
 };
 
 export type Theme = typeof theme;
-export const styled = baseStyled as ThemedStyledInterface<Theme>;
+export const styled = baseStyled;
