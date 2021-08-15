@@ -12,15 +12,16 @@ import {
   SignUpButtonWrapper,
   Link,
 } from './styled';
-import logoImage from './learn.svg';
+import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
 import Button from '@components/Button/Button';
-import ChevronIcon from '@icons/chevron-right.svg';
+import Container from '@components/Container/Container';
+import Meta from '@components/Meta/Meta';
 import BackButton from '@pages/BackButton/BackButton';
 import { routes } from '@routes';
 import { VYLUKA_MAIL } from '@siteData';
-import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
-import Container from '@components/Container/Container';
-import Meta from '@components/Meta/Meta';
+
+import logoImage from './learn.svg';
+import ChevronIcon from '@icons/chevron-right.svg';
 
 const LearnPage: React.FC = () => (
   <Container>
@@ -30,7 +31,7 @@ const LearnPage: React.FC = () => (
     </BackButton>
     <TopWrapper>
       <MainTitle>Chci se zaučit</MainTitle>
-      <Logo src={logoImage} alt="Chci se zaučit logo" width={248} height={149} />
+      <Logo alt="Chci se zaučit logo" height={149} src={logoImage} width={248} />
     </TopWrapper>
     <p>
       Začátky jsou v učitelství mimořádně náročné. Podporu a možnost rozvíjet se na startu této
@@ -73,14 +74,14 @@ const LearnPage: React.FC = () => (
         </List>
         <ButtonsWrapper>
           <SignUpButtonWrapper>
-            <Button href="#" endIcon={<ChevronIcon />} buttonStyle="button">
+            <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
               Přihlaste se
             </Button>
           </SignUpButtonWrapper>
           <Button
-            href={routes.learn.howItWorks}
-            endIcon={<ChevronIcon />}
             buttonStyle="button"
+            endIcon={<ChevronIcon />}
+            href={routes.learn.howItWorks}
             variant="secondary"
           >
             Jak program probíhá

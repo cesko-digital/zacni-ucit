@@ -15,7 +15,7 @@ interface ILinkProps {
 
 const Link: FC<ILinkProps> = React.forwardRef(({ href, title, children, className }, ref: any) => (
   <ReactLink href={href} prefetch={false}>
-    <ALink className={className} ref={ref} title={title}>
+    <ALink ref={ref} className={className} title={title}>
       {children}
     </ALink>
   </ReactLink>

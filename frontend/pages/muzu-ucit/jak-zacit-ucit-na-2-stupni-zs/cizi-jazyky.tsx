@@ -1,22 +1,28 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 
-import zsImage from '@pages/CanITeachPage/zs2.svg';
+
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import zsImage from '@pages/CanITeachPage/zs2.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title={<>Jak začít učit na 2.&nbsp;stupni ZŠ</>}
-    metaTitle="Cizí jazyky - Jak začít učit na 2. stupni ZŠ"
-    subtitle="Cizí jazyky"
-    logo={zsImage}
+    additionalInfo={
+      <p>
+          Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit, případně se
+          kvalifikovat v jiném předmětu a aprobaci pro jazyk si doplnit v rámci dalšího vzdělávání
+          pedagogických pracovníků (DVPP).
+        </p>
+    }
     backButton={{
       href: routes.startTeaching.secondGrade.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na 2. stupni ZŠ',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
+    logo={zsImage}
     mainInfo={
       <>
         <p>
@@ -32,15 +38,7 @@ const Page: React.FC = () => (
         </p>
       </>
     }
-    additionalInfo={
-      <>
-        <p>
-          Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit, případně se
-          kvalifikovat v jiném předmětu a aprobaci pro jazyk si doplnit v rámci dalšího vzdělávání
-          pedagogických pracovníků (DVPP).
-        </p>
-      </>
-    }
+    metaTitle="Cizí jazyky - Jak začít učit na 2. stupni ZŠ"
     sections={[
       {
         title: 'Mgr. z učitelství příslušného cizího jazyka',
@@ -244,6 +242,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Cizí jazyky"
+    title={<>Jak začít učit na 2.&nbsp;stupni ZŠ</>}
   />
 );
 

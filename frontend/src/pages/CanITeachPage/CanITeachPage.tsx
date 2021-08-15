@@ -1,7 +1,5 @@
-import { routes } from '@routes';
 import React from 'react';
 
-import Button from '@components/Button/Button';
 import {
   ButtonWrapper,
   MainTitle,
@@ -12,18 +10,19 @@ import {
   List,
   CrossroadList,
 } from './styled';
-
-import ListIcon from '@icons/list.svg';
-import ChevronIcon from '@icons/chevron-right.svg';
+import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
+import Button from '@components/Button/Button';
+import Container from '@components/Container/Container';
 import CrossroadItem from '@components/CrossroadItem/CrossroadItem';
+import { routes } from '@routes';
+
+import asImage from './as.svg';
 import msImage from './ms.svg';
+import ssImage from './ss.svg';
 import zs1Image from './zs1.svg';
 import zs2Image from './zs2.svg';
-import ssImage from './ss.svg';
-import asImage from './as.svg';
-// import spsImage from './sps.svg';
-import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
-import Container from '@components/Container/Container';
+import ChevronIcon from '@icons/chevron-right.svg';
+import ListIcon from '@icons/list.svg';
 
 const CanITeachPage: React.FC = () => (
   <Container>
@@ -54,9 +53,9 @@ const CanITeachPage: React.FC = () => (
       </Paragraph>
       <ButtonWrapper>
         <Button
-          href={routes.startTeaching.completeYourQualification}
-          endIcon={<ChevronIcon />}
           buttonStyle="button"
+          endIcon={<ChevronIcon />}
+          href={routes.startTeaching.completeYourQualification}
         >
           Podívejte se na jejich seznam
         </Button>
@@ -143,7 +142,7 @@ const CanITeachPage: React.FC = () => (
       <Paragraph>
         Pokud vás zajímá, jaká je situace s nedostatkem pedagogů ve vašem kraji:
       </Paragraph>
-      <Button href="#" startIcon={<ListIcon />} buttonStyle="link">
+      <Button buttonStyle="link" href="#" startIcon={<ListIcon />}>
         Zpráva MŠMT o učitelích v regionech
       </Button>
     </Section>

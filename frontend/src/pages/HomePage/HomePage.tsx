@@ -1,15 +1,16 @@
 import React from 'react';
-import { routes } from '@routes';
-import WhyTeach from './WhyTeach/WhyTeach';
-import CtaSection from './CtaSection/CtaSection';
 
-import tryTeachingImage from './tryTeaching.png';
-import startTeachingImage from './startTeaching.png';
-import VylukaSection from './VylukaSection/VylukaSection';
+import CtaSection from './CtaSection/CtaSection';
 import Header from './Header/Header';
-import Meta from '@components/Meta/Meta';
 import PartnersSection from './PartnersSection/PartnersSection';
 import PathSection from './PathSection/PathSection';
+import VylukaSection from './VylukaSection/VylukaSection';
+import WhyTeach from './WhyTeach/WhyTeach';
+import Meta from '@components/Meta/Meta';
+import { routes } from '@routes';
+
+import startTeachingImage from './startTeaching.png';
+import tryTeachingImage from './tryTeaching.png';
 
 const HomePage: React.FC = () => (
   <>
@@ -19,8 +20,9 @@ const HomePage: React.FC = () => (
     <PathSection />
 
     <CtaSection
-      title="Vyzkoušejte si učení"
+      button={{ text: 'Chci zkusit učit', href: routes.tryTeaching.main, color: '#FF2F5B' }}
       image={tryTeachingImage}
+      link={{ text: 'Věnujte 1 den škole', href: routes.dayForSchool }}
       text={
         <>
           <p>
@@ -33,13 +35,13 @@ const HomePage: React.FC = () => (
           </p>
         </>
       }
-      button={{ text: 'Chci zkusit učit', href: routes.tryTeaching.main, color: '#FF2F5B' }}
-      link={{ text: 'Věnujte 1 den škole', href: routes.dayForSchool }}
+      title="Vyzkoušejte si učení"
     />
     <WhyTeach />
     <CtaSection
-      title="Začínám učit"
+      button={{ text: 'Chci se zaučit', href: routes.learn.main, color: '#FFB60B' }}
       image={startTeachingImage}
+      link={{ text: 'Tipy pro začínající učitele', href: routes.teachersTips }}
       text={
         <>
           <p>Začátky za katedrou jsou velkou výzvou.</p>
@@ -49,8 +51,7 @@ const HomePage: React.FC = () => (
           </p>
         </>
       }
-      button={{ text: 'Chci se zaučit', href: routes.learn.main, color: '#FFB60B' }}
-      link={{ text: 'Tipy pro začínající učitele', href: routes.teachersTips }}
+      title="Začínám učit"
     />
     <VylukaSection />
     <PartnersSection />

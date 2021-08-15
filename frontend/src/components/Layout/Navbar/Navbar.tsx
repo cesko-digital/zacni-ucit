@@ -1,13 +1,15 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
+
+import { Menu } from '../Menu/Menu';
 import { Wrapper, Logo, List, Item, NavLink, Burger } from './styled';
 import Link from '@components/Link/Link';
+import { PrimaryText } from '@components/Typography';
 import { routes } from '@routes';
+
 import zacniUcitLogo from './zacniucit-logo.svg';
 import BurgerIcon from '@icons/burger.svg';
 import CrossIcon from '@icons/cross.svg';
-import { Menu } from '../Menu/Menu';
-import { PrimaryText } from '@components/Typography';
 
 const items = [
   {
@@ -49,7 +51,7 @@ export const Navbar: FC = () => {
         </Burger>
         <Link href={routes.homepage}>
           <Logo>
-            <img src={zacniUcitLogo} width="80" height="50" alt="Začni učit logo" />
+            <img alt="Začni učit logo" height="50" src={zacniUcitLogo} width="80" />
           </Logo>
         </Link>
 

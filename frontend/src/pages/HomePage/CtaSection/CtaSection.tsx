@@ -1,8 +1,9 @@
-import Button from '@components/Button/Button';
-import Container from '@components/Container/Container';
 import React from 'react';
 
 import { Wrapper, Image, Title, ButtonWrapper } from './styled';
+import Button from '@components/Button/Button';
+import Container from '@components/Container/Container';
+
 
 interface Props {
   title: string;
@@ -22,11 +23,11 @@ interface Props {
 const CtaSection: React.FC<Props> = ({ title, image, text, button, link }) => (
   <Container withPaddingBottom={false}>
     <Wrapper>
-      <Image src={image} alt="" width={132} height={237} />
+      <Image alt="" height={237} src={image} width={132} />
       <Title>{title}</Title>
       {text}
       <ButtonWrapper>
-        <Button href={button.href} buttonStyle="button" color={button.color}>
+        <Button buttonStyle="button" color={button.color} href={button.href}>
           {button.text}
         </Button>
       </ButtonWrapper>

@@ -1,11 +1,13 @@
+import React from 'react';
+
+import { Wrap, Subtitle, Image, Content, ListWrapper } from './styled';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
 import Container from '@components/Container/Container';
 import Meta from '@components/Meta/Meta';
-import { H1, H2, LightText, LinkRegular } from '@components/Typography';
+import { H1, LightText, LinkRegular } from '@components/Typography';
 import BackButton from '@pages/BackButton/BackButton';
 import { routes } from '@routes';
 import { theme } from 'src/common/theme';
-import { Wrap, Subtitle, Image, Content, ListWrapper } from './styled';
 
 interface Props {
   title: string;
@@ -22,13 +24,13 @@ const ErrorPage: React.FC<Props> = ({ title, text, image, withCheckOtherPages })
     </BackButton>
     <Wrap>
       <Content>
-        <H1 bold color={theme.color.primary}>
+        <H1 color={theme.color.primary} bold>
           {title}
         </H1>
 
         <Subtitle>{text}</Subtitle>
 
-        <Image src={image} alt="" width={360} height={107} />
+        <Image alt="" height={107} src={image} width={360} />
 
         {withCheckOtherPages && (
           <>

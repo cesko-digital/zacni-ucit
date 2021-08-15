@@ -15,7 +15,7 @@ const CrossroadItem: React.FC<Props> = ({ icon, size = 'sm', button }) => (
   <Item>
     <Link href={button.href}>
       <Content>
-        <Image src={icon} alt="" size={size} />
+        <Image alt="" size={size} src={icon} />
         <TextLink>{button.text}</TextLink>
       </Content>
     </Link>

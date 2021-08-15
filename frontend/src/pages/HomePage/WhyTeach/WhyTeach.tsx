@@ -1,6 +1,3 @@
-import ButtonComponent from '@components/Button/Button';
-import Container from '@components/Container/Container';
-import { routes } from '@routes';
 import React from 'react';
 
 import {
@@ -14,6 +11,10 @@ import {
   ButtonWrapper,
   MainButtonWrapper,
 } from './styled';
+import ButtonComponent from '@components/Button/Button';
+import Container from '@components/Container/Container';
+import { routes } from '@routes';
+
 
 const data = [
   { value: 6000, text: 'učitelů chybí' },
@@ -34,7 +35,7 @@ const WhyTeach: React.FC = () => (
         ))}
       </List>
       <MainButtonWrapper>
-        <Button href={routes.teachersStories} buttonStyle="button" variant="secondary">
+        <Button buttonStyle="button" href={routes.teachersStories} variant="secondary">
           Příběhy učitelů
         </Button>
       </MainButtonWrapper>

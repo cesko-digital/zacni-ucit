@@ -1,5 +1,3 @@
-import BackButton from '@pages/BackButton/BackButton';
-import { routes } from '@routes';
 import React from 'react';
 
 import {
@@ -17,12 +15,15 @@ import {
   EventDescription,
   TopWrapper,
 } from '../styled';
-import logoImage from '../learn.svg';
-import Button from '@components/Button/Button';
-import ChevronIcon from '@icons/chevron-right.svg';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
+import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 import Meta from '@components/Meta/Meta';
+import BackButton from '@pages/BackButton/BackButton';
+import { routes } from '@routes';
+
+import logoImage from '../learn.svg';
+import ChevronIcon from '@icons/chevron-right.svg';
 
 type Event = {
   date: string;
@@ -91,7 +92,7 @@ const LearnHowItWorksPage: React.FC = () => (
     </BackButton>
     <TopWrapper>
       <MainTitle>Jak probíhá program</MainTitle>
-      <Logo src={logoImage} alt="Chci se zaučit logo" width={248} height={149} />
+      <Logo alt="Chci se zaučit logo" height={149} src={logoImage} width={248} />
     </TopWrapper>
     <div>
       <Section>
@@ -123,7 +124,7 @@ const LearnHowItWorksPage: React.FC = () => (
           na jednoho účastníka totiž činí více než 20 000 Kč.
         </p>
         <SignUpButtonWrapper>
-          <Button href="#" endIcon={<ChevronIcon />} buttonStyle="button">
+          <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
             Přihlaste se
           </Button>
         </SignUpButtonWrapper>

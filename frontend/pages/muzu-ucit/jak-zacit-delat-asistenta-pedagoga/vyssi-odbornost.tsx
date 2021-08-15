@@ -1,22 +1,27 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 
-import asImage from '@pages/CanITeachPage/as.svg';
+
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import asImage from '@pages/CanITeachPage/as.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title="Jak začít dělat asistenta pedagoga"
-    metaTitle="Vyšší odbornost - Jak začít dělat asistenta pedagoga"
-    subtitle="Vyšší odbornost"
-    logo={asImage}
+    additionalInfo={
+      <p>
+        Pokud nemáte alespoň maturitu, podívejte se na kvalifikaci pro{' '}
+        <strong>nižší odbornost</strong> ("nižší" úroveň činnosti) <strong>AP</strong>.
+      </p>
+    }
     backButton={{
       href: routes.startTeaching.teacherAssistant.crossroad,
       topButtonText: 'Zpátky na výběr kde chci učit',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
+    logo={asImage}
     mainInfo={
       <>
         <p>
@@ -30,12 +35,7 @@ const Page: React.FC = () => (
         </p>
       </>
     }
-    additionalInfo={
-      <p>
-        Pokud nemáte alespoň maturitu, podívejte se na kvalifikaci pro{' '}
-        <strong>nižší odbornost</strong> ("nižší" úroveň činnosti) <strong>AP</strong>.
-      </p>
-    }
+    metaTitle="Vyšší odbornost - Jak začít dělat asistenta pedagoga"
     sections={[
       {
         title: 'Bc. v oblasti pedagogických věd',
@@ -213,6 +213,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Vyšší odbornost"
+    title="Jak začít dělat asistenta pedagoga"
   />
 );
 

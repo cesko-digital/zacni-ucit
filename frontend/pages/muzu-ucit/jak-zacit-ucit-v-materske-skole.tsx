@@ -1,29 +1,16 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
+
 
 import Button from '@components/Button/Button';
-
-import msImage from '@pages/CanITeachPage/ms.svg';
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import msImage from '@pages/CanITeachPage/ms.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title="Jak začít učit v mateřské škole"
-    metaTitle="Jak začít učit v mateřské škole"
-    logo={msImage}
-    backButton={{
-      href: routes.startTeaching.crossroad,
-      topButtonText: 'Výběr nejvyššího vzdělání',
-      bottomButtonText: 'Zpátky na výběr kde chci učit',
-    }}
-    mainInfo={
-      <p>
-        Pokud chcete učit v mateřské škole, budete (případně nebudete) si{' '}
-        <strong>doplňovat kvalifikaci</strong> podle toho, zda máte:
-      </p>
-    }
     additionalInfo={
       <>
         <strong>Pokud nemáte ani jedno</strong> z toho, budete si muset některou z těchto věcí
@@ -36,6 +23,19 @@ const Page: React.FC = () => (
         zjistíte <Button href="#">tady</Button>.
       </>
     }
+    backButton={{
+      href: routes.startTeaching.crossroad,
+      topButtonText: 'Výběr nejvyššího vzdělání',
+      bottomButtonText: 'Zpátky na výběr kde chci učit',
+    }}
+    logo={msImage}
+    mainInfo={
+      <p>
+        Pokud chcete učit v mateřské škole, budete (případně nebudete) si{' '}
+        <strong>doplňovat kvalifikaci</strong> podle toho, zda máte:
+      </p>
+    }
+    metaTitle="Jak začít učit v mateřské škole"
     recommendation={
       <>
         Malé doporučení: Pokud tušíte, že byste rádi v budoucnu učili na 1. stupni ZŠ, je
@@ -196,6 +196,7 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    title="Jak začít učit v mateřské škole"
   />
 );
 

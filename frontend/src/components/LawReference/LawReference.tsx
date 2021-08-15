@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Wrapper, Title, Text, Link, IconWrapper } from './styled';
+
 import ExportIcon from '@icons/export.svg';
 
 interface ISingleLink {

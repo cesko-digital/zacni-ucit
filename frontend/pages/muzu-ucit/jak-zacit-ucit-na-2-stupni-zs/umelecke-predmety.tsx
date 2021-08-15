@@ -1,21 +1,19 @@
 import React from 'react';
+
+import LawReference from '@components/LawReference/LawReference';
 import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
+import { routes } from '@routes';
 
 import zsImage from '@pages/CanITeachPage/zs2.svg';
-import LawReference from '@components/LawReference/LawReference';
-import { routes } from '@routes';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title={<>Jak začít učit na 2.&nbsp;stupni ZŠ</>}
-    metaTitle="Umělecké předměty - Jak začít učit na 2. stupni ZŠ"
-    subtitle="Umělecké předměty"
-    logo={zsImage}
     backButton={{
       href: routes.startTeaching.secondGrade.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na 2. stupni ZŠ',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
+    logo={zsImage}
     mainInfo={
       <>
         <p>
@@ -28,6 +26,7 @@ const Page: React.FC = () => (
         </p>
       </>
     }
+    metaTitle="Umělecké předměty - Jak začít učit na 2. stupni ZŠ"
     sections={[
       {
         title: 'Mgr. z učitelství pro ZUŠ toho oboru, který budete učit',
@@ -101,6 +100,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Umělecké předměty"
+    title={<>Jak začít učit na 2.&nbsp;stupni ZŠ</>}
   />
 );
 

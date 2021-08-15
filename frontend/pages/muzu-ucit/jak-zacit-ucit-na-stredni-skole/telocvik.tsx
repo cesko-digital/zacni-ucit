@@ -1,21 +1,19 @@
 import React from 'react';
+
+import LawReference from '@components/LawReference/LawReference';
 import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
+import { routes } from '@routes';
 
 import ssImage from '@pages/CanITeachPage/ss.svg';
-import LawReference from '@components/LawReference/LawReference';
-import { routes } from '@routes';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title="Jak začít učit na střední škole"
-    metaTitle="Tělesná výchova - Jak začít učit na střední škole"
-    logo={ssImage}
     backButton={{
       href: routes.startTeaching.highSchool.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na SŠ',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
-    subtitle="Tělesná výchova"
+    logo={ssImage}
     mainInfo={
       <p>
         Požadavky na vyučující tělesné výchovy jsou shodné pro učitelství na 2. stupni ZŠ i pro SŠ.
@@ -23,6 +21,7 @@ const Page: React.FC = () => (
         musíte mít vystudovaného
       </p>
     }
+    metaTitle="Tělesná výchova - Jak začít učit na střední škole"
     sections={[
       {
         title: 'Mgr. se zaměřením na tělesnou výchovu a sport',
@@ -50,6 +49,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Tělesná výchova"
+    title="Jak začít učit na střední škole"
   />
 );
 

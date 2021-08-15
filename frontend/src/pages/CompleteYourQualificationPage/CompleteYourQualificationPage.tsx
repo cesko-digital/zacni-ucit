@@ -1,7 +1,5 @@
-import Button from '@components/Button/Button';
-import BackButton from '@pages/BackButton/BackButton';
-import { routes } from '@routes';
 import React from 'react';
+
 import {
   MainTitle,
   Cities,
@@ -14,7 +12,10 @@ import {
   Link,
 } from './styled';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
+import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
+import BackButton from '@pages/BackButton/BackButton';
+import { routes } from '@routes';
 
 type City = {
   name: string;

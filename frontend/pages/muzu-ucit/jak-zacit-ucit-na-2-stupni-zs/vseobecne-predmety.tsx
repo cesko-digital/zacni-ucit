@@ -1,22 +1,21 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 
-import zsImage from '@pages/CanITeachPage/zs2.svg';
+
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import zsImage from '@pages/CanITeachPage/zs2.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title={<>Jak začít učit na 2.&nbsp;stupni ZŠ</>}
-    metaTitle="Všeobecné předměty - Jak začít učit na 2. stupni ZŠ"
-    subtitle="Všeobecné předměty"
-    logo={zsImage}
     backButton={{
       href: routes.startTeaching.secondGrade.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na 2. stupni ZŠ',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
+    logo={zsImage}
     mainInfo={
       <>
         <p>
@@ -36,6 +35,7 @@ const Page: React.FC = () => (
         </p>
       </>
     }
+    metaTitle="Všeobecné předměty - Jak začít učit na 2. stupni ZŠ"
     sections={[
       {
         title: 'Mgr. z učitelství všeobecně-vzdělávacích předmětů 2. stupně ZŠ',
@@ -265,6 +265,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Všeobecné předměty"
+    title={<>Jak začít učit na 2.&nbsp;stupni ZŠ</>}
   />
 );
 

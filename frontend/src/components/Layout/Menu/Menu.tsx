@@ -1,11 +1,12 @@
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ListMenu, Item, MenuTag, MenuLink, IconWrapper } from './styled';
 import Link from '@components/Link/Link';
-import { routes } from '@routes';
-import HomeIcon from '@icons/home.svg';
 import StyleWrapper from '@components/StyledWrapper';
+import { routes } from '@routes';
+
+import HomeIcon from '@icons/home.svg';
 
 export const menuItems = [
   {
@@ -95,35 +96,33 @@ type Props = {
   listOpened: boolean;
 };
 
-export const Menu: FC<Props> = ({ listOpened }) => {
-  return (
-    <MenuTag listOpened={listOpened}>
-      <ListMenu>
-        <Item greenBgr>
-          <Link href="/">
-            <MenuLink>
-              <IconWrapper>
-                <HomeIcon />
-              </IconWrapper>
-              Začni učit!
-            </MenuLink>
+export const Menu: FC<Props> = ({ listOpened }) => (
+  <MenuTag listOpened={listOpened}>
+    <ListMenu>
+      <Item greenBgr>
+        <Link href="/">
+          <MenuLink>
+            <IconWrapper>
+              <HomeIcon />
+            </IconWrapper>
+            Začni učit!
+          </MenuLink>
+        </Link>
+      </Item>
+      {menuItems.map(item => (
+        <Item key={item.label}>
+          <Link className="bold" href={item.route}>
+            {item.label}
           </Link>
+          {item.lights?.map(light => (
+            <StyleWrapper key={light.route} margin="1rem 0 0 0">
+              <Link className="light" href={light.route}>
+                {light.label}
+              </Link>
+            </StyleWrapper>
+          ))}
         </Item>
-        {menuItems.map(item => (
-          <Item key={item.label}>
-            <Link className="bold" href={item.route}>
-              {item.label}
-            </Link>
-            {item.lights?.map(light => (
-              <StyleWrapper key={light.route} margin="1rem 0 0 0">
-                <Link className="light" href={light.route}>
-                  {light.label}
-                </Link>
-              </StyleWrapper>
-            ))}
-          </Item>
-        ))}
-      </ListMenu>
-    </MenuTag>
-  );
-};
+      ))}
+    </ListMenu>
+  </MenuTag>
+);

@@ -1,22 +1,28 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 
-import asImage from '@pages/CanITeachPage/as.svg';
+
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import asImage from '@pages/CanITeachPage/as.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title="Jak začít dělat asistenta pedagoga"
-    metaTitle="Nižší odbornost - Jak začít dělat asistenta pedagoga"
-    subtitle="Nižší odbornost"
-    logo={asImage}
+    additionalInfo={
+      <p>
+        Pokud máte maturitu nebo vyšší vzdělání, podívejte se na kvalifikaci pro vyšší odbornost
+        ("vyšší" úroveň činnosti) AP – požadavky na doplnění kvalifikace jsou stejné (máte více
+        možností) a budete kvalifikováni pro výkon obou úrovní činnosti AP.
+      </p>
+    }
     backButton={{
       href: routes.startTeaching.teacherAssistant.crossroad,
       topButtonText: 'Zpátky na výběr kde chci učit',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
+    logo={asImage}
     mainInfo={
       <>
         <p>
@@ -34,13 +40,7 @@ const Page: React.FC = () => (
         </p>
       </>
     }
-    additionalInfo={
-      <p>
-        Pokud máte maturitu nebo vyšší vzdělání, podívejte se na kvalifikaci pro vyšší odbornost
-        ("vyšší" úroveň činnosti) AP – požadavky na doplnění kvalifikace jsou stejné (máte více
-        možností) a budete kvalifikováni pro výkon obou úrovní činnosti AP.
-      </p>
-    }
+    metaTitle="Nižší odbornost - Jak začít dělat asistenta pedagoga"
     sections={[
       {
         title: 'Výuční list',
@@ -130,6 +130,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Nižší odbornost"
+    title="Jak začít dělat asistenta pedagoga"
   />
 );
 

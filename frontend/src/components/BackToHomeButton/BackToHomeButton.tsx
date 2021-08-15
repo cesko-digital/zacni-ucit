@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Button from '@components/Button/Button';
 import { BackButtonWrapper } from './styled';
+import Button from '@components/Button/Button';
+import { routes } from '@routes';
 
 import ArrowIcon from '@icons/arrow.svg';
-import { routes } from '@routes';
 
 interface Props {
   href?: string;
@@ -14,10 +14,10 @@ interface Props {
 const BackToHomeButton: React.FC<Props> = ({ href, children }) => (
   <BackButtonWrapper>
     <Button
+      buttonStyle="button"
       href={href ?? routes.homepage}
       startIcon={<ArrowIcon />}
       variant="secondary"
-      buttonStyle="button"
     >
       {children ?? 'Zpátky domů'}
     </Button>

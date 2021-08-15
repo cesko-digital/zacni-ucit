@@ -1,13 +1,4 @@
-import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
-import Container from '@components/Container/Container';
-import Meta from '@components/Meta/Meta';
-import BackButton from '@pages/BackButton/BackButton';
-import { routes } from '@routes';
 import React from 'react';
-
-import image1 from './image1.jpeg';
-import image2 from './image2.jpeg';
-import image3 from './image3.jpeg';
 
 import {
   TopWrapper,
@@ -23,7 +14,17 @@ import {
   TitleText,
   SectionPart,
 } from '../styled';
+import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
+import Container from '@components/Container/Container';
+import Meta from '@components/Meta/Meta';
+import BackButton from '@pages/BackButton/BackButton';
+import { routes } from '@routes';
+
 import logoImage from '../teach.svg';
+import image1 from './image1.jpeg';
+import image2 from './image2.jpeg';
+import image3 from './image3.jpeg';
+
 
 const HowTeachingProgramWorks: React.FC = () => (
   <Container>
@@ -33,7 +34,7 @@ const HowTeachingProgramWorks: React.FC = () => (
     </BackButton>
     <TopWrapper>
       <MainTitle>Jak probíhá program</MainTitle>
-      <Logo src={logoImage} alt="Chci se zaučit logo" width={248} height={149} />
+      <Logo alt="Chci se zaučit logo" height={149} src={logoImage} width={248} />
     </TopWrapper>
     <Section withOffset>
       <SectionPart>
@@ -63,7 +64,7 @@ const HowTeachingProgramWorks: React.FC = () => (
           <Number>3</Number>
           <TitleText>Týdenní stáž</TitleText>
         </SectionTitle>
-        <Image src={image1} alt="" width={328} height={193} />
+        <Image alt="" height={193} src={image1} width={328} />
         <p>
           Seznámíte se s prostředím naší partnerské základní školy, ředitelem či ředitelkou, svým
           partnerským učitelem a žáky.
@@ -119,7 +120,7 @@ const HowTeachingProgramWorks: React.FC = () => (
     </Section>
     <Section withOffset>
       <SectionTitle>Kdy a kde tento program proběhne a kolik stojí?</SectionTitle>
-      <Image src={image2} alt="" width={328} height={164} />
+      <Image alt="" height={164} src={image2} width={328} />
       <List>
         <ListItem>
           Víkendové soustředění proběhne od pátečního odpoledne 12. 11. do sobotního večera 13. 11.
@@ -145,7 +146,7 @@ const HowTeachingProgramWorks: React.FC = () => (
         působí na základních a středních školách už při studiu nebo na plný úvazek. Ostatní často
         přispívají ke vzdělávání veřejnosti při volnočasových aktivitách.
       </p>
-      <Image src={image3} alt="" width={328} height={164} />
+      <Image alt="" height={164} src={image3} width={328} />
       <p>
         Zkus učit! je tak pomyslnou vstupní branou do světa učení –⁠ máte možnost nejen správně
         nastavit svou motivaci a rozvíjet své schopnosti, ale i poznat základní kompetence pedagoga.

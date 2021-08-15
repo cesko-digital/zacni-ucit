@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Logo,
   MainTitle,
@@ -19,14 +20,13 @@ import {
   ButtonWrapper,
   ChevronWrapper,
 } from './styled';
-
-import ScrollIcon from '@icons/scroll.svg';
-
-import ChevronIcon from '@icons/chevron-right.svg';
-import BackButton from '@pages/BackButton/BackButton';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
 import Container from '@components/Container/Container';
 import Meta from '@components/Meta/Meta';
+import BackButton from '@pages/BackButton/BackButton';
+
+import ChevronIcon from '@icons/chevron-right.svg';
+import ScrollIcon from '@icons/scroll.svg';
 
 interface Props {
   logo: string;
@@ -48,14 +48,14 @@ interface Props {
 }
 
 export const convertToUrl = (text: string) =>
-  text
+  (text
     ? text
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
         .replace(/[^a-z0-9_]+/gi, '-')
         .replace(/^-|-$/g, '')
         .toLowerCase()
-    : '';
+    : '');
 
 export const scrollToElement = (element: React.RefObject<HTMLElement>) => {
   const y = (element?.current?.getBoundingClientRect().top ?? 0) + window.pageYOffset;
@@ -87,7 +87,7 @@ const StartTeachingPage: React.FC<Props> = ({
         {backButton.topButtonText}
       </BackButton>
       <TopWrapper ref={topRef}>
-        <Logo src={logo} alt="" />
+        <Logo alt="" src={logo} />
         <div>
           <MainTitle>{title}</MainTitle>
           {subtitle && <Subtitle>{subtitle}</Subtitle>}
@@ -127,8 +127,8 @@ const StartTeachingPage: React.FC<Props> = ({
                       <ChevronIcon />
                     </ChevronWrapper>
                   }
-                  onClick={() => scrollToElement(topRef)}
                   variant="secondary"
+                  onClick={() => scrollToElement(topRef)}
                 >
                   Zpátky na výběr kvalifikace
                 </ToTopButton>

@@ -1,22 +1,28 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 
-import ssImage from '@pages/CanITeachPage/ss.svg';
+
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import ssImage from '@pages/CanITeachPage/ss.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title="Jak začít učit na střední škole"
-    metaTitle="Cizí jazyky - Jak začít učit na střední škole"
-    subtitle="Cizí jazyky"
-    logo={ssImage}
+    additionalInfo={
+      <p>
+        Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit, případně se
+        kvalifikovat v jiném předmětu a aprobaci pro jazyk si doplnit v rámci dalšího vzdělávání
+        pedagogických pracovníků (DVPP).
+      </p>
+    }
     backButton={{
       href: routes.startTeaching.highSchool.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na SŠ',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
+    logo={ssImage}
     mainInfo={
       <>
         <p>
@@ -32,13 +38,7 @@ const Page: React.FC = () => (
         </p>
       </>
     }
-    additionalInfo={
-      <p>
-        Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit, případně se
-        kvalifikovat v jiném předmětu a aprobaci pro jazyk si doplnit v rámci dalšího vzdělávání
-        pedagogických pracovníků (DVPP).
-      </p>
-    }
+    metaTitle="Cizí jazyky - Jak začít učit na střední škole"
     sections={[
       {
         title: 'Mgr. z učitelství příslušného cizího jazyka',
@@ -242,6 +242,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Cizí jazyky"
+    title="Jak začít učit na střední škole"
   />
 );
 

@@ -1,22 +1,21 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 
-import ssImage from '@pages/CanITeachPage/ss.svg';
+
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import ssImage from '@pages/CanITeachPage/ss.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title="Jak začít učit na střední škole"
-    metaTitle="Všeobecné předměty - Jak začít učit na střední škole"
-    logo={ssImage}
     backButton={{
       href: routes.startTeaching.highSchool.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na SŠ',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
-    subtitle="Všeobecné předměty"
+    logo={ssImage}
     mainInfo={
       <>
         <p>
@@ -37,6 +36,7 @@ const Page: React.FC = () => (
         </p>
       </>
     }
+    metaTitle="Všeobecné předměty - Jak začít učit na střední škole"
     sections={[
       {
         title: 'Mgr. z učitelství všeobecně-vzdělávacích předmětů SŠ',
@@ -211,6 +211,8 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    subtitle="Všeobecné předměty"
+    title="Jak začít učit na střední škole"
   />
 );
 

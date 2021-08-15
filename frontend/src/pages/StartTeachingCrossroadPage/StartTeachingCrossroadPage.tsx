@@ -1,13 +1,13 @@
-import type { ICrossroadItem } from '@components/CrossroadItem/CrossroadItem';
-import CrossroadItem from '@components/CrossroadItem/CrossroadItem';
-import { routes } from '@routes';
 import React from 'react';
 
 import { TopWrapper, Logo, MainTitle, CrossroadList } from './styled';
-import BackButton from '@pages/BackButton/BackButton';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
 import Container from '@components/Container/Container';
+import CrossroadItem from '@components/CrossroadItem/CrossroadItem';
+import type { ICrossroadItem } from '@components/CrossroadItem/CrossroadItem';
 import Meta from '@components/Meta/Meta';
+import BackButton from '@pages/BackButton/BackButton';
+import { routes } from '@routes';
 
 interface Props {
   logo: string;
@@ -24,7 +24,7 @@ const StartTeachingCrossroadPage: React.FC<Props> = ({ logo, title, metaTitle, t
       Zpátky na výběr kde chci učit
     </BackButton>
     <TopWrapper>
-      <Logo src={logo} alt="" />
+      <Logo alt="" src={logo} />
       <div>
         <MainTitle>{title}</MainTitle>
       </div>

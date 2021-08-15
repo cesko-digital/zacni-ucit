@@ -1,6 +1,9 @@
+import NextHead from 'next/head';
 import type { FC } from 'react';
 import React from 'react';
 
+import { H2, LinkRegular, LinkToExtPage } from '../../Typography';
+import { menuItems } from '../Menu/Menu';
 import {
   FooterSection,
   FlexRowSB,
@@ -12,20 +15,11 @@ import {
   FooterInput,
   FlexRow,
 } from './styled';
-import { H2, LinkLight, LinkRegular, LinkToExtPage } from '../../Typography';
+import Link from '@components/Link/Link';
+
 import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
 import TwitterIcon from '@icons/twitter.svg';
-import { menuItems } from '../Menu/Menu';
-import Link from '@components/Link/Link';
-import NextHead from 'next/head';
-
-const links = [
-  {
-    label: 'Můžu učit?',
-    route: '/muzu-ucit',
-  },
-];
 
 const Footer: FC = () => (
   <FooterWrap>
@@ -37,7 +31,7 @@ const Footer: FC = () => (
               {item.label}
             </Link>
             {item.lights?.map(light => (
-              <Link className="linkRegular footer light" key={light.route} href={light.route}>
+              <Link key={light.route} className="linkRegular footer light" href={light.route}>
                 {light.label}
               </Link>
             ))}
@@ -53,7 +47,7 @@ const Footer: FC = () => (
       </FooterText>
       <FooterText>Hybernská 4</FooterText>
       <FooterText>110 00 Praha 1</FooterText>
-      <LinkRegular footer href="mailto:info@vyluka.org">
+      <LinkRegular href="mailto:info@vyluka.org" footer>
         info@vyluka.org
       </LinkRegular>
       <FlexRow>
@@ -101,23 +95,20 @@ const Footer: FC = () => (
       <div id="mc_embed_signup">
         <form
           action="https://vyluka.us19.list-manage.com/subscribe/post?u=3de897b21700c27eefbd0bf7d&amp;id=a1ece305d1"
-          method="post"
-          id="mc-embedded-subscribe-form"
-          name="mc-embedded-subscribe-form"
           className="validate"
+          id="mc-embedded-subscribe-form"
+          method="post"
+          name="mc-embedded-subscribe-form"
+          style={{ paddingLeft: '0', position: 'relative' }}
           target="_blank"
           noValidate
-          style={{ paddingLeft: '0', position: 'relative' }}
         >
           <div id="mc_embed_signup_scroll">
             <FooterInput
-              type="email"
-              value=""
-              name="EMAIL"
               className="email"
               id="mce-EMAIL"
+              name="EMAIL"
               placeholder="e-mail"
-              required
               style={{
                 backgroundColor: 'white',
                 border: 'none',
@@ -128,23 +119,24 @@ const Footer: FC = () => (
                 width: '300px',
                 outline: 'none',
               }}
+              type="email"
+              value=""
+              required
             />
 
-            <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+            <div aria-hidden="true" style={{ position: 'absolute', left: '-5000px' }}>
               <input
-                type="text"
                 name="b_3de897b21700c27eefbd0bf7d_a1ece305d1"
                 tabIndex={-1}
+                type="text"
                 value=""
               />
             </div>
             <div className="clear">
               <FooterInput
-                type="submit"
-                value="Odebírat"
-                name="subscribe"
-                id="mc-embedded-subscribe"
                 className="button"
+                id="mc-embedded-subscribe"
+                name="subscribe"
                 style={{
                   position: 'absolute',
                   background: '#7F50FF',
@@ -161,6 +153,8 @@ const Footer: FC = () => (
                   lineHeight: '28px',
                   transform: 'translateX(220px) translateY(-120%)',
                 }}
+                type="submit"
+                value="Odebírat"
               />
             </div>
           </div>

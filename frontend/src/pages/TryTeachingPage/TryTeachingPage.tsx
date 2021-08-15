@@ -1,13 +1,5 @@
-import Container from '@components/Container/Container';
-import Meta from '@components/Meta/Meta';
-import BackButton from '@pages/BackButton/BackButton';
-import { routes } from '@routes';
 import React from 'react';
 
-import Button from '@components/Button/Button';
-import ChevronIcon from '@icons/chevron-right.svg';
-
-import logoImage from './teach.svg';
 import {
   TopWrapper,
   MainTitle,
@@ -20,6 +12,16 @@ import {
   ListItem,
 } from './styled';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
+import Button from '@components/Button/Button';
+import Container from '@components/Container/Container';
+import Meta from '@components/Meta/Meta';
+import BackButton from '@pages/BackButton/BackButton';
+import { routes } from '@routes';
+
+
+import logoImage from './teach.svg';
+import ChevronIcon from '@icons/chevron-right.svg';
+
 
 const TryTeachingPage: React.FC = () => (
   <Container>
@@ -29,7 +31,7 @@ const TryTeachingPage: React.FC = () => (
     </BackButton>
     <TopWrapper>
       <MainTitle>Chci si zkusit učení</MainTitle>
-      <Logo src={logoImage} alt="Zkus učit logo" width={248} height={149} />
+      <Logo alt="Zkus učit logo" height={149} src={logoImage} width={248} />
     </TopWrapper>
 
     <Section>
@@ -51,14 +53,14 @@ const TryTeachingPage: React.FC = () => (
       </List>
       <ButtonsWrapper>
         <SignUpButtonWrapper>
-          <Button href="#" endIcon={<ChevronIcon />} buttonStyle="button">
+          <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
             Přihlaste se
           </Button>
         </SignUpButtonWrapper>
         <Button
-          href={routes.tryTeaching.howItWorks}
-          endIcon={<ChevronIcon />}
           buttonStyle="button"
+          endIcon={<ChevronIcon />}
+          href={routes.tryTeaching.howItWorks}
           variant="secondary"
         >
           Jak program probíhá
@@ -73,7 +75,7 @@ const TryTeachingPage: React.FC = () => (
         <strong>věnujte jeden den vybrané škole a jejím žákům</strong>!
       </p>
       <SignUpButtonWrapper>
-        <Button href="#" endIcon={<ChevronIcon />} buttonStyle="button">
+        <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
           Přihlaste se
         </Button>
       </SignUpButtonWrapper>

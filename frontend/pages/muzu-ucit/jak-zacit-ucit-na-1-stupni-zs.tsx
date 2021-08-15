@@ -1,34 +1,32 @@
 import React from 'react';
-import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 
-import zsImage from '@pages/CanITeachPage/zs1.svg';
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
+import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
 import { routes } from '@routes';
+
+import zsImage from '@pages/CanITeachPage/zs1.svg';
 
 const Page: React.FC = () => (
   <StartTeachingPage
-    title={<>Jak začít učit na 1.&nbsp;stupni ZŠ</>}
-    metaTitle="Jak začít učit na 1. stupni ZŠ"
-    logo={zsImage}
+    additionalInfo={
+      <strong>
+        Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit.
+      </strong>
+    }
     backButton={{
       href: routes.startTeaching.crossroad,
       topButtonText: 'Výběr nejvyššího vzdělání',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
+    logo={zsImage}
     mainInfo={
       <p>
         Pokud chcete učit na 1. stupni základní škol, budete (případně nebudete) si{' '}
         <strong>doplňovat kvalifikaci</strong> podle toho, zda máte:
       </p>
     }
-    additionalInfo={
-      <>
-        <strong>
-          Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit.
-        </strong>
-      </>
-    }
+    metaTitle="Jak začít učit na 1. stupni ZŠ"
     recommendation={
       <>
         Malé doporučení: Pokud tušíte, že byste ráda*a v budoucnu učil*a ve školce, je nejvýhodnější
@@ -229,6 +227,7 @@ const Page: React.FC = () => (
         ),
       },
     ]}
+    title={<>Jak začít učit na 1.&nbsp;stupni ZŠ</>}
   />
 );
 
