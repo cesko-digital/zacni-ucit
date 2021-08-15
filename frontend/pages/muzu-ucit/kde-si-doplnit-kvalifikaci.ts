@@ -1,0 +1,3 @@
+import CompleteYourQualificationPage from '@pages/CompleteYourQualificationPage/CompleteYourQualificationPage';
+
+export default CompleteYourQualificationPage;

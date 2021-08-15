@@ -9,7 +9,6 @@ export const routes = {
   canITeach: '/muzu-ucit',
   tryToTeach: '/zkus-ucit',
   whyToTeach: '/proc-jit-ucit',
-  wantToLearn: '/zauc-se',
   motivation: '/motivace',
   aboutUs: '/o-nas',
   partners: '/#partners',
@@ -22,7 +21,6 @@ export const routes = {
   pedagogicMinimum: '/pedagogicke-minimum',
   missedTeachers: '/jaci-ucitele-chybi',
   isTeachingForMe: 'je-ucitelstvi-pro-me',
-  completeQualification: 'chci-si-doplnit-kvalifikaci',
   chooseSchool: '/vybiram-skolu',
   pedagogicalLaw: '/zakon-o-ped-pracovnicich',
   dayForSchool: '/den-pro-skolu',
@@ -33,4 +31,41 @@ export const routes = {
   teachersTips: '/tipy-pro-zacinajici-ucitele',
   donate: '/pripejte-jinak',
   vyluka: '/vyluka',
+
+  tryTeaching: {
+    main: '/chci-si-zkusit-uceni',
+    howItWorks: '/chci-si-zkusit-uceni/jak-probiha-program',
+  },
+  learn: {
+    main: '/chci-se-zaucit',
+    howItWorks: '/chci-se-zaucit/jak-probiha-program',
+  },
+  startTeaching: {
+    crossroad: '/muzu-ucit',
+    completeYourQualification: '/muzu-ucit/kde-si-doplnit-kvalifikaci',
+    kindergarten: '/muzu-ucit/jak-zacit-ucit-v-materske-skole',
+    firstGrade: '/muzu-ucit/jak-zacit-ucit-na-1-stupni-zs',
+    secondGrade: {
+      crossroad: '/muzu-ucit/jak-zacit-ucit-na-2-stupni-zs',
+      languages: '/muzu-ucit/jak-zacit-ucit-na-2-stupni-zs/cizi-jazyky',
+      arts: '/muzu-ucit/jak-zacit-ucit-na-2-stupni-zs/umelecke-predmety',
+      generalSubjects: '/muzu-ucit/jak-zacit-ucit-na-2-stupni-zs/vseobecne-predmety',
+      gymnastics: '/muzu-ucit/jak-zacit-ucit-na-2-stupni-zs/telocvik',
+    },
+    highSchool: {
+      crossroad: '/muzu-ucit/jak-zacit-ucit-na-stredni-skole',
+      languages: `/muzu-ucit/jak-zacit-ucit-na-stredni-skole/cizi-jazyky`,
+      arts: '/muzu-ucit/jak-zacit-ucit-na-stredni-skole/umelecke-predmety',
+      generalSubjects: '/muzu-ucit/jak-zacit-ucit-na-stredni-skole/vseobecne-predmety',
+      gymnastics: '/muzu-ucit/jak-zacit-ucit-na-stredni-skole/telocvik',
+      vocationalSubjects: '/muzu-ucit/jak-zacit-ucit-na-stredni-skole/odborne-predmety',
+      practicalSubjects: '/muzu-ucit/jak-zacit-ucit-na-stredni-skole/prakticke-vyucovani',
+      practise: '/muzu-ucit/jak-zacit-ucit-na-stredni-skole/odborny-vycvik',
+    },
+    teacherAssistant: {
+      crossroad: '/muzu-ucit/jak-zacit-delat-asistenta-pedagoga',
+      lowerExpertise: '/muzu-ucit/jak-zacit-delat-asistenta-pedagoga/nizsi-odbornost',
+      higherExpertise: '/muzu-ucit/jak-zacit-delat-asistenta-pedagoga/vyssi-odbornost',
+    },
+  },
 };

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Wrapper, Logo, List, Item, NavLink, Burger } from './styled';
 import Link from '@components/Link/Link';
 import { routes } from '@routes';
-import ZacniUcitLogo from '../../../../public/images/zacniucit-logo.svg';
+import zacniUcitLogo from './zacniucit-logo.svg';
 import BurgerIcon from '@icons/burger.svg';
 import CrossIcon from '@icons/cross.svg';
 import { Menu } from '../Menu/Menu';
@@ -16,7 +16,7 @@ const items = [
   },
   {
     label: 'Chci zkusit učit',
-    route: routes.tryToTeach,
+    route: routes.tryTeaching.main,
   },
   {
     label: 'Proč jít učit?',
@@ -24,7 +24,7 @@ const items = [
   },
   {
     label: 'Chci se zaučit',
-    route: routes.wantToLearn,
+    route: routes.learn.main,
   },
   {
     label: 'Partneři',
@@ -49,7 +49,7 @@ export const Navbar: FC = () => {
         </Burger>
         <Link href={routes.homepage}>
           <Logo>
-            <ZacniUcitLogo width="80" height="50" viewBox="0 0 248 149" />
+            <img src={zacniUcitLogo} width="80" height="50" alt="Začni učit logo" />
           </Logo>
         </Link>
 

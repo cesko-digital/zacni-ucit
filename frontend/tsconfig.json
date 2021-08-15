@@ -18,6 +18,7 @@
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@routes": ["src/routes.ts"],
+      "@siteData": ["src/siteData.ts"],
       "@icons/*": ["src/icons/*"]
     }
   },

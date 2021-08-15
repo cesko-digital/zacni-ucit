@@ -49,3 +49,10 @@ export const LinkLight = styled.a`
   color: ${({ theme }) => theme.color.secondary};
   cursor: pointer;
 `;
+
+export const IconWrapper = styled.span`
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-block;
+`;

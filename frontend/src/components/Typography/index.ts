@@ -1,3 +1,4 @@
+import { mediaQueriesUp } from 'src/common/mediaQueries';
 import styled, { css } from 'styled-components';
 import type { TextAlignProps } from 'styled-system';
 import { textAlign } from 'styled-system';
@@ -17,12 +18,20 @@ export const H1 = styled.h1<{
   padding: ${({ padding }) => (padding ? padding : '0')};
   color: ${({ color }) => (color ? color : 'inherit')};
   font-size: ${theme.fontSize.xxxLarge};
-  line-height: 38px;
   ${headerFonts}
   & span {
     font-size: ${theme.fontSize.large};
     font-weight: 400;
   }
+
+  ${mediaQueriesUp('sm')`
+    font-size: 3rem;
+    margin: 0 0 16px;
+  `}
+
+  ${mediaQueriesUp('md')`
+    font-size: 4rem;
+  `}
 `;
 
 export const H2 = styled.h2<{
@@ -57,7 +66,7 @@ export const H4 = styled.h4`
 export const LightText = styled.p`
   font-size: ${theme.fontSize.large};
   margin: 0;
-  font-family: 'StabilGrotesk-regular', sans-serif;
+  font-family: 'StabilGrotesk', sans-serif;
   font-weight: 400;
   line-height: 1.5;
 `;
@@ -72,6 +81,10 @@ export const PrimaryText = styled.span<{
   display: inline;
   margin: 0;
   margin-left: ${({ marginLeft }) => (!!marginLeft ? marginLeft : 0)};
+`;
+
+export const FocusedParagraph = styled.p`
+  color: #7f50ff;
 `;
 
 export const LinkRegular = styled.a<{

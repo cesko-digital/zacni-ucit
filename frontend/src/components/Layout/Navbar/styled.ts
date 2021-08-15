@@ -13,6 +13,8 @@ export const Wrapper = styled.nav`
   padding-bottom: 0;
   height: 70px;
   align-items: center;
+  position: relative;
+  z-index: 20;
 `;
 export const Logo = styled.span`
   text-decoration: none;

@@ -3,19 +3,19 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'StabilGrotesk-Bold';
+    font-family: 'StabilGrotesk';
     src: url('../fonts/StabilGrotesk-Bold.woff') format('opentype');
-    font-weight: 700;
+    font-weight: bold;
   }
   @font-face {
-    font-family: 'StabilGrotesk-Regular';
+    font-family: 'StabilGrotesk';
     src: url('../fonts/StabilGrotesk-Regular.woff') format('opentype');
-    font-weight: 400;
+    font-weight: normal;
   }
   @font-face {
     font-family: 'Roboto-Light';
     src: url('../fonts/Roboto-Light.ttf') format('opentype');
-    font-weight: 100;
+    font-weight: light;
   }
 
   * {
@@ -38,7 +38,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-size: 1rem;
-    font-family: 'StabilGrotesk-regular', sans-serif;
+    font-family: 'StabilGrotesk', sans-serif;
   }
 
   #root {

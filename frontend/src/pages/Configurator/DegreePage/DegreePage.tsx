@@ -3,7 +3,7 @@ import React from 'react';
 import type { FC } from 'react';
 
 import type { ConfiguratorValues } from '../Configurator';
-import Link from '@components/Button/Link';
+import Button from '@components/Button/Button';
 import Hint from '@components/Hint/Hint';
 import Input from '@components/Input/Input';
 import StyleWrapper from '@components/StyledWrapper';
@@ -37,8 +37,8 @@ const DegreePage: FC = () => {
       <StyleWrapper margin="2rem 0">
         <LightText>
           Nenašli jste vámi zvolený stupeň nebo vás zajímá jiná pedagogická profese?{' '}
-          <Link href="#">Napište nám</Link> nebo se podívejte na{' '}
-          <Link href="#">přehled zákona o ped. pracovnících</Link>.
+          <Button href="#">Napište nám</Button> nebo se podívejte na{' '}
+          <Button href="#">přehled zákona o ped. pracovnících</Button>.
         </LightText>
       </StyleWrapper>
     </>

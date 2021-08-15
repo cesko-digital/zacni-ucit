@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import { ListMenu, Item, MenuTag, MenuLink } from './styled';
+import { ListMenu, Item, MenuTag, MenuLink, IconWrapper } from './styled';
 import Link from '@components/Link/Link';
 import { routes } from '@routes';
 import HomeIcon from '@icons/home.svg';
@@ -67,11 +67,11 @@ export const menuItems = [
 
   {
     label: 'Chci se zaučit',
-    route: routes.wantToLearn,
+    route: routes.learn.main,
     lights: [
       {
         label: 'Zauč se!',
-        route: routes.wantToLearn,
+        route: routes.learn.main,
       },
       {
         label: 'Tipy pro začínající učitele',
@@ -102,7 +102,9 @@ export const Menu: FC<Props> = ({ listOpened }) => {
         <Item greenBgr>
           <Link href="/">
             <MenuLink>
-              <HomeIcon />
+              <IconWrapper>
+                <HomeIcon />
+              </IconWrapper>
               Začni učit!
             </MenuLink>
           </Link>

@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { mediaQueries } from '../../common/mediaQueries';
+import styled from 'styled-components';
 
 //Abstract background will be changed
 // const withBgImageStyle = css`
@@ -24,12 +23,7 @@ import { mediaQueries } from '../../common/mediaQueries';
 //   ${({ homePage }) => (homePage ? withBgImageStyle : null)}
 // `;
 
-export const MainWrap = styled.main`
-  overflow-x: hidden;
-`;
-
 export const Wrap = styled.div`
   padding: 0;
   margin: 0 auto;
-  overflow-x: hidden;
 `;

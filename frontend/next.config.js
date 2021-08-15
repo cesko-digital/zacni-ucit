@@ -7,6 +7,7 @@ module.exports = withImages({
       oneOf: [
         {
           test: /\.svg$/,
+          include: /src\/icons/,
           loader: '@svgr/webpack',
         },
         {
