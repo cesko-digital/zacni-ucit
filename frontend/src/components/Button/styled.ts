@@ -30,6 +30,7 @@ const baseStyles = css`
       return variant === 'secondary' ? '#0C0807' : 'white';
     }
   }};
+  text-decoration: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'underline' : 'none')};
   display: inline-flex;
   justify-content: center;
   align-items: center;

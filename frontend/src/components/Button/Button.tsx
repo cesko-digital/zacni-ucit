@@ -31,7 +31,7 @@ const isLink = (item: Props): item is Link => (item as Link).href !== undefined;
 
 const ButtonComponent: React.FC<Props> = props =>
   isLink(props) ? (
-    <ReactLink href={props.href} prefetch={false}>
+    <ReactLink href={props.href} passHref>
       <Link
         buttonStyle={props.buttonStyle ?? 'link'}
         className={props.className}

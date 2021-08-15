@@ -1,3 +1,5 @@
+/// <reference path="../modules.d.ts"/>
+
 import { ApolloProvider } from '@apollo/client';
 import { StylesProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
