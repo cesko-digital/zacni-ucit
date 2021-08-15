@@ -9,83 +9,43 @@ import {
   LinkSmall,
   FooterWrap,
   FooterText,
-  FooterBTN,
   FooterInput,
-  FooterLabel,
+  FlexRow,
 } from './styled';
-import { H2, H3, LinkLight, LinkRegular } from '../../Typography';
-import StyleWrapper from '../../StyledWrapper';
+import { H2, LinkLight, LinkRegular, LinkToExtPage } from '../../Typography';
 import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
 import TwitterIcon from '@icons/twitter.svg';
+import { menuItems } from '../Menu/Menu';
+import Link from '@components/Link/Link';
+import NextHead from 'next/head';
+
+const links = [
+  {
+    label: 'Můžu učit?',
+    route: '/muzu-ucit',
+  },
+];
 
 const Footer: FC = () => (
   <FooterWrap>
     <FooterSection className="footer_section1">
       <FlexRowSB>
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Můžu učit?
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Pedagogické minimum
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Jací učitelé chybí
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Zákon o ped.pracovnících
-          </LinkLight>
-        </FlexColumn>
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Proč jít učit?
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Příběhy učitelů
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Platy učitelů
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Co můžete dělat ve škole?
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Volná místa ve školství
-          </LinkLight>
-        </FlexColumn>
-
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Chci zkusit učit
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Zkus učit!
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Den pro školu
-          </LinkLight>
-        </FlexColumn>
-        <FlexColumn>
-          <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-            Chci se zaučit
-          </LinkRegular>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Zauč se!
-          </LinkLight>
-          <LinkLight footer href="http://" target="_blank" rel="noopener noreferrer">
-            Tipy pro začínající učitele
-          </LinkLight>
-        </FlexColumn>
+        {menuItems.map(item => (
+          <FlexColumn key={item.label}>
+            <Link className="linkRegular footer bold" href={item.route}>
+              {item.label}
+            </Link>
+            {item.lights?.map(light => (
+              <Link className="linkRegular footer light" key={light.route} href={light.route}>
+                {light.label}
+              </Link>
+            ))}
+          </FlexColumn>
+        ))}
       </FlexRowSB>
-      <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-        Začni učit!je projektem spolku Výluka
-      </LinkRegular>
-      <br></br>
-      <LinkRegular footer href="http://" target="_blank" rel="noopener noreferrer">
-        Naši partneři a přispějte
-      </LinkRegular>
     </FooterSection>
+
     <FooterSection className="footer_section2">
       <H2>Výluka, z.s</H2>
       <FooterText>
@@ -96,27 +56,116 @@ const Footer: FC = () => (
       <LinkRegular footer href="mailto:info@vyluka.org">
         info@vyluka.org
       </LinkRegular>
-      <FooterBTN>
-        <FacebookIcon />
-        Facebook
-      </FooterBTN>
-      <FooterBTN>
-        <InstagramIcon /> Instagram
-      </FooterBTN>
-      <FooterBTN>
-        <TwitterIcon /> Twitter
-      </FooterBTN>
+      <FlexRow>
+        <LinkToExtPage
+          className="footerBtn"
+          href="https://www.facebook.com/spolekvyluka/"
+          target="_blank"
+        >
+          <FacebookIcon />
+          Facebook
+        </LinkToExtPage>
+        <LinkToExtPage
+          className="footerBtn"
+          href="https://www.instagram.com/vyluka_/?hl=en"
+          target="_blank"
+        >
+          <InstagramIcon />
+          Instagram
+        </LinkToExtPage>
+        <LinkToExtPage
+          className="footerBtn"
+          href="https://twitter.com/vyluka_?lang=en"
+          target="_blank"
+        >
+          <TwitterIcon /> Twitter
+        </LinkToExtPage>
+      </FlexRow>
     </FooterSection>
     <FooterSection className="footer_section3">
-      <H3>Newsletter jednou měsíčně</H3>
+      {/* mailchimp form*/}
+      <NextHead>
+        <link
+          href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+      </NextHead>
+      <label htmlFor="mce-EMAIL" style={{ fontWeight: 'bold' }}>
+        Newsletter jednou měsíčně
+      </label>
       <FooterText>
         Novinky pro budoucí i začínající učitele, tipy na zajímavé akce o vzdělávání či na nástroje
         do výuky.
       </FooterText>
-      <form action="">
-        <FooterInput type="email" placeholder="e-mail" />
-        <FooterLabel htmlFor="">Odebírat</FooterLabel>
-      </form>
+      <div id="mc_embed_signup">
+        <form
+          action="https://vyluka.us19.list-manage.com/subscribe/post?u=3de897b21700c27eefbd0bf7d&amp;id=a1ece305d1"
+          method="post"
+          id="mc-embedded-subscribe-form"
+          name="mc-embedded-subscribe-form"
+          className="validate"
+          target="_blank"
+          noValidate
+          style={{ paddingLeft: '0', position: 'relative' }}
+        >
+          <div id="mc_embed_signup_scroll">
+            <FooterInput
+              type="email"
+              value=""
+              name="EMAIL"
+              className="email"
+              id="mce-EMAIL"
+              placeholder="e-mail"
+              required
+              style={{
+                backgroundColor: 'white',
+                border: 'none',
+                borderRadius: '40px',
+                fontSize: '14px',
+                padding: ' 0.5rem 1rem',
+                lineHeight: '2rem',
+                width: '300px',
+                outline: 'none',
+              }}
+            />
+
+            <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+              <input
+                type="text"
+                name="b_3de897b21700c27eefbd0bf7d_a1ece305d1"
+                tabIndex={-1}
+                value=""
+              />
+            </div>
+            <div className="clear">
+              <FooterInput
+                type="submit"
+                value="Odebírat"
+                name="subscribe"
+                id="mc-embedded-subscribe"
+                className="button"
+                style={{
+                  position: 'absolute',
+                  background: '#7F50FF',
+                  color: 'white',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  width: '100px',
+                  height: '3rem',
+                  textAlign: 'center',
+                  padding: '0.5rem',
+                  display: 'block',
+                  lineHeight: '28px',
+                  transform: 'translateX(220px) translateY(-120%)',
+                }}
+              />
+            </div>
+          </div>
+        </form>
+      </div>
       <SmallText>Posláním adresy souhlasíte se </SmallText>{' '}
       <LinkSmall>zpracováním osobních údajů.</LinkSmall>
     </FooterSection>
@@ -124,9 +173,8 @@ const Footer: FC = () => (
       <SmallText>
         <b>Začni učit! </b>je projektem neziskové organizace Výluka.
       </SmallText>
-      <StyleWrapper>
-        <SmallText>© 2021 Výluka, z.s. PROTOTYP</SmallText>
-      </StyleWrapper>
+      <br></br>
+      <SmallText> © 2021 Výluka, z.s. PROTOTYP</SmallText>
     </FooterSection>
   </FooterWrap>
 );

@@ -1,18 +1,18 @@
 import styled from 'styled-components';
-import { mediaQueriesUp } from 'src/common/mediaQueries';
+import { mediaQueries, mediaQueriesUp } from 'src/common/mediaQueries';
+import { theme } from 'src/common/theme';
 
 export const Wrapper = styled.nav`
   font-size: 18px;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0.5rem;
-  ${mediaQueriesUp('md')`
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 0;
-    height: 70px;
-    align-items: center;
-  `}
+
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0;
+  height: 70px;
+  align-items: center;
 `;
 export const Logo = styled.span`
   text-decoration: none;
@@ -23,6 +23,7 @@ export const Logo = styled.span`
   font-weight: bold;
   margin-left: 20px;
   padding-bottom: 10px;
+  cursor: pointer;
 `;
 
 export const Burger = styled.button`
@@ -30,26 +31,24 @@ export const Burger = styled.button`
   top: 22px;
   right: 20px;
   cursor: pointer;
-  width: 2rem;
-  height: 2rem;
-  color: ${({ theme }) => theme.color.secondary};
-  border: none;
+  width: 7rem;
+  color: ${({ theme }) => theme.color.primary};
+  border: 1px solid #ecebeb;
   background: transparent;
-  ${mediaQueriesUp('md')`
-    display: none;
-    `};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
 `;
 
-export const List = styled.ul<{ listOpened: boolean }>`
-  ${({ listOpened }) => (!listOpened ? 'display: none;' : null)}
+export const List = styled.ul`
   list-style-type: none;
-  ${mediaQueriesUp('md')`
-    display: flex;
-    margin-right: 30px;
-    flex-direction: row;
-    justify-content: flex-end;
-  `}
+  display: flex;
+  margin-right: 10rem;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
+
 export const Item = styled.li`
   text-decoration: none;
   color: white;
@@ -59,10 +58,42 @@ export const Item = styled.li`
     margin: 0;
   `}
 `;
-export const NavLink = styled.a`
+
+export const NavLink = styled.a<{ color?: string }>`
   text-decoration: none;
   color: ${({ theme }) => theme.color.secondary};
-  ${mediaQueriesUp('md')`
-    margin-left: 40px;
-  `}
+  font-weight: 700;
+  font-size: ${theme.fontSize.medium};
+  cursor: pointer;
+  margin-left: 40px;
+  display: none;
+
+  ${mediaQueriesUp('lg')`
+    display:inline-block;
+  `};
+
+  &.muzu-ucit {
+    color: ${({ theme }) => theme.color.primary};
+    display: inline-block;
+    border-radius: 40px;
+    border: 2px solid #7f50ff;
+    padding: 0.5rem 1rem;
+
+    ${mediaQueriesUp('lg')`
+      padding: 0;
+      border: none;
+    `}
+
+    ${mediaQueries('sm')`
+    display:none;
+    `};
+  }
+
+  &.zkus-ucit {
+    color: #ff2f5b;
+  }
+
+  &.zauc-se {
+    color: #ffb60b;
+  }
 `;

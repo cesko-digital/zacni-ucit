@@ -10,10 +10,12 @@ const headerFonts = css`
 export const H1 = styled.h1<{
   bold?: boolean;
   padding?: string;
+  color?: string;
 }>`
   font-weight: ${({ bold }) => (!!bold ? '700' : '400')};
   margin: 0;
   padding: ${({ padding }) => (padding ? padding : '0')};
+  color: ${({ color }) => (color ? color : 'inherit')};
   font-size: ${theme.fontSize.xxxLarge};
   line-height: 38px;
   ${headerFonts}
@@ -82,6 +84,8 @@ export const LinkRegular = styled.a<{
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;
   margin: ${({ margin }) => (!!margin ? margin : '0 1rem 0 0')};
+  cursor: pointer;
+
   &:hover {
     color: inherit;
   }
@@ -96,7 +100,59 @@ export const LinkLight = styled.a<{
   color: ${({ color }) => (!!color ? color : 'inherit')};
   text-decoration: underline;
   margin-right: 1rem;
+  cursor: pointer;
+
   &:hover {
     color: inherit;
+  }
+`;
+
+export const LinkToExtPage = styled.a`
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 3px;
+  }
+
+  &.button {
+    padding: 1rem 2rem;
+    margin: 2.5rem 0 1rem 0;
+    border-radius: ${theme.radius.max};
+    font-weight: 700;
+    color: white;
+    border: 1px solid white;
+    text-align: center;
+  }
+
+  &.primaryBgr {
+    background: ${theme.color.primary};
+  }
+
+  &.footerBtn {
+    background: transparent;
+    border: 2px solid ${theme.color.primary};
+    border-radius: ${theme.radius.max};
+    padding: 0.5rem 1rem;
+    margin: 1rem 0.5rem;
+    font-size: ${theme.fontSize.normal};
+    font-weight: 700;
+    color: ${theme.color.primary};
+    text-decoration: none;
+    width: 10rem;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: red;
+      text-decoration-thickness: 3px;
+    }
+  }
+
+  & svg {
+    margin-right: 1rem;
   }
 `;

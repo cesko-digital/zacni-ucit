@@ -15,6 +15,7 @@ const baseStyles = css`
   align-items: center;
   font-weight: bold;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  cursor: pointer;
 `;
 
 export const Link = styled(LinkComponent)`
