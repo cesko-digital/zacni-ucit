@@ -7,19 +7,6 @@ export const Wrapper = styled.div`
 
   ${mediaQueriesUp('sm')`
     padding: 80px 130px 80px 0;
-    position: relative;
-
-    &:after {
-      content: '';
-      width: 100%;
-      height: 100%;
-      background: rgba(127, 80, 255, 0.1);
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      transform: scaleX(10) scaleY(1.1) rotate(8deg);
-    }
   `}
 `;
 
