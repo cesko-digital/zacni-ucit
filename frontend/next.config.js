@@ -2,6 +2,7 @@ const withImages = require('next-images');
 
 module.exports = withImages({
   fileExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+  trailingSlash: true,
   webpack: config => {
     config.module.rules.push({
       oneOf: [
