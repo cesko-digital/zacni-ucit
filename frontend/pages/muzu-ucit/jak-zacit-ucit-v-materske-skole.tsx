@@ -18,8 +18,10 @@ const Page: React.FC = () => (
           Další, a pravděpodobně jednodušší cestou do školky pro vás může být práce asistenta
           pedagoga.
         </strong>{' '}
-        Více o ní se dozvíte <Button href="#">zde</Button> a to, jak se asistentem pedagoga stát,
-        zjistíte <Button href="#">tady</Button>.
+        Více o ní se dozvíte{' '}
+        <Button href={routes.startTeaching.teacherAssistant.higherExpertise}>zde</Button> a to, jak
+        se asistentem pedagoga stát, zjistíte{' '}
+        <Button href={routes.startTeaching.teacherAssistant.higherExpertise}>tady</Button>.
       </>
     }
     backButton={{

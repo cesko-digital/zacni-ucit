@@ -110,7 +110,7 @@ const LearnHowItWorksPage: React.FC = () => (
             vizí.
           </ListItem>
           <ListItem>
-            Každý měsíc vás čeká jedno tematické a jedno reflektivní setká+ní, vždy+ pod vedením
+            Každý měsíc vás čeká jedno tematické a jedno reflektivní setkání, vždy pod vedením
             zkušených lektorů a lektorek.
           </ListItem>
           <ListItem>Tempo svého rozvoje si určujete podle vlastní potřeby.</ListItem>

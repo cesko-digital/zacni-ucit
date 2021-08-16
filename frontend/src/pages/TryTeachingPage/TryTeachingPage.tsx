@@ -36,7 +36,6 @@ const TryTeachingPage: React.FC = () => (
     </TopWrapper>
 
     <Section>
-      <SectionTitle>Celoroční program</SectionTitle>
       <p>
         Chcete učit, ale nejste si jistí, zda je učení pro vás to pravé? Nebo přemýšlíte nad změnou
         kariéry, ale nechcete se rozhodnout bez předešlé zkušenosti? Nejen pro vás je určen program

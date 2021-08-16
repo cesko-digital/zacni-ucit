@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
 import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
@@ -12,10 +11,10 @@ const Page: React.FC = () => (
   <StartTeachingPage
     additionalInfo={
       <p>
-          Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit, případně se
-          kvalifikovat v jiném předmětu a aprobaci pro jazyk si doplnit v rámci dalšího vzdělávání
-          pedagogických pracovníků (DVPP).
-        </p>
+        Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit, případně se
+        kvalifikovat v jiném předmětu a aprobaci pro jazyk si doplnit v rámci dalšího vzdělávání
+        pedagogických pracovníků (DVPP).
+      </p>
     }
     backButton={{
       href: routes.startTeaching.secondGrade.crossroad,
@@ -232,7 +231,7 @@ const Page: React.FC = () => (
               dokončil alespoň <strong>střední vzdělání s maturitní zkouškou</strong>.
             </p>
             <p>
-              V případě, že získal*a <strong>vysokoškolské vzdělání</strong>, splňuje předpoklady
+              V případě, že získal*a <strong>vysokoškolské vzdělání</strong>, splňuje předpoklady{' '}
               <strong>pro vyučování tohoto cizího jazyka</strong>.
             </p>
             <LawReference link="zakonyprolidi.cz/cs/2004-563#p22-4">

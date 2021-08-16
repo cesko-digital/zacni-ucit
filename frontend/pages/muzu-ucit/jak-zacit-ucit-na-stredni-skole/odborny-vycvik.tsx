@@ -133,8 +133,8 @@ const Page: React.FC = () => (
               V praxi to znamená, že když budete mít titul DiS. z technologie potravin a budete
               chtít učit odborný výcvik potravinářské výroby, stačí so k tomu doplnit učitelské CŽV
               pro 2. stupeň ZŠ či SŠ na některé vysoké škole. Musíte si ovšem najít studium CŽV, na
-              které se budete moci přihlásit (podmínky pro přijetí najdeš u jednotlivých oborů). Tím
-              se stanete kvalifikovaným pedagogem.
+              které se budete moci přihlásit (podmínky pro přijetí najdete u jednotlivých oborů).
+              Tím se stanete kvalifikovaným pedagogem.
             </p>
             <LawReference link="zakonyprolidi.cz/cs/2004-563#p9-3-b-2">
               § 9 odst. (5) písm. a) a podle něj § 9 odst. (3) písm. b) bod 2. zákona č. 563/2004 o
@@ -202,7 +202,7 @@ const Page: React.FC = () => (
               V praxi to znamená, že když budete mít maturitu z oboru odpovídajícímu tomu, který
               chceš učit, stačí ti doplnit si k tomu učitelské CŽV pro 2. stupeň ZŠ či SŠ na některé
               vysoké škole. Musíte si ovšem najít studium CŽV, na které se budete moci přihlásit
-              (podmínky pro přijetí najdeš u jednotlivých oborů) – je pravděpodobné, že se budete
+              (podmínky pro přijetí najdete u jednotlivých oborů) – je pravděpodobné, že se budete
               muset přihlásit na CŽV na některé z technických VŠ. Tím se stanete kvalifikovaným
               pedagogem.
             </p>
@@ -267,7 +267,7 @@ const Page: React.FC = () => (
             <p>
               V praxi to znamená, že když budete mít výuční list, stačí ti doplnit si k tomu
               učitelské CŽV pro 2. stupeň ZŠ či SŠ na některé vysoké škole. Musíte si ovšem najít
-              studium CŽV, na které se budeš moci přihlásit (podmínky pro přijetí najdeš u
+              studium CŽV, na které se budeš moci přihlásit (podmínky pro přijetí najdete u
               jednotlivých oborů) – je pravděpodobné, že se budete muset přihlásit na CŽV na některé
               z technických VŠ. Tím se stanete kvalifikovaným pedagogem.
             </p>

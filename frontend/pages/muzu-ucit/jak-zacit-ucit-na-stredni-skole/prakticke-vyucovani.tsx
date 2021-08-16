@@ -65,8 +65,8 @@ const Page: React.FC = () => (
               V praxi to znamená, že když budete mít třeba bakaláře z ekonomky a chcete učit předmět
               účetní praktika, stačí si k tomu doplnit učitelské CŽV pro 2. stupeň ZŠ či SŠ na
               některé vysoké škole. Musíš si ovšem najít studium CŽV, na které se budete moci
-              přihlásit (podmínky pro přijetí najdeš u jednotlivých oborů) – je pravděpodobné, že se
-              budete muset přihlásit na CŽV na některé z ekonomických VŠ. Tím se stanete
+              přihlásit (podmínky pro přijetí najdete u jednotlivých oborů) – je pravděpodobné, že
+              se budete muset přihlásit na CŽV na některé z ekonomických VŠ. Tím se stanete
               kvalifikovaným pedagogem.{' '}
             </p>
             <LawReference link="zakonyprolidi.cz/cs/2004-563#p9-3-a-2">
@@ -199,7 +199,7 @@ const Page: React.FC = () => (
               V praxi to znamená, že když budete mít maturitu z ekonomické SŠ a chcete učit předmět
               účetnictví, stačí si k tomu doplnit učitelské CŽV pro 2. stupeň ZŠ či SŠ na některé
               vysoké škole. Musíte si ovšem najít studium CŽV, na které se budete moci přihlásit
-              (podmínky pro přijetí najdeš u jednotlivých oborů) – je pravděpodobné, že se budete
+              (podmínky pro přijetí najdete u jednotlivých oborů) – je pravděpodobné, že se budete
               muset přihlásit na CŽV na některé z ekonomických VŠ. Tím se stante kvalifikovaným
               pedagogem.
             </p>

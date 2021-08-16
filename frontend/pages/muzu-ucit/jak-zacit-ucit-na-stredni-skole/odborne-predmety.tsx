@@ -120,8 +120,8 @@ const Page: React.FC = () => (
               V praxi to znamená, že pokud máte třeba inženýra z informatiky a chcete učit odborný
               předmět počítačové aplikace, stačí si k tomu doplnit učitelské CŽV pro 2. stupeň ZŠ či
               SŠ na některé vysoké škole. Musíte si ovšem najít studium CŽV, na které se budete moci
-              přihlásit (podmínky pro přijetí najdeš u jednotlivých oborů) – je pravděpodobné, že se
-              budete muset přihlásit na CŽV na některé z technických VŠ. Tím se stanete
+              přihlásit (podmínky pro přijetí najdete u jednotlivých oborů) – je pravděpodobné, že
+              se budete muset přihlásit na CŽV na některé z technických VŠ. Tím se stanete
               kvalifikovaným pedagogem.
             </p>
             <LawReference link="zakonyprolidi.cz/cs/2004-563#p9-2-d-2">

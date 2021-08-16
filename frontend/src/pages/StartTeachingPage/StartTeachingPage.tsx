@@ -27,6 +27,7 @@ import BackButton from '@pages/BackButton/BackButton';
 
 import ChevronIcon from '@icons/chevron-right.svg';
 import ScrollIcon from '@icons/scroll.svg';
+import { routes } from '@routes';
 
 interface Props {
   logo: string;
@@ -48,14 +49,14 @@ interface Props {
 }
 
 export const convertToUrl = (text: string) =>
-  (text
+  text
     ? text
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
         .replace(/[^a-z0-9_]+/gi, '-')
         .replace(/^-|-$/g, '')
         .toLowerCase()
-    : '');
+    : '';
 
 export const scrollToElement = (element: React.RefObject<HTMLElement>) => {
   const y = (element?.current?.getBoundingClientRect().top ?? 0) + window.pageYOffset;
@@ -137,7 +138,11 @@ const StartTeachingPage: React.FC<Props> = ({
           </Section>
         ))}
       </SectionsWrapper>
-      <BackToHomeButton href={backButton.href}>{backButton.bottomButtonText}</BackToHomeButton>
+      <BackToHomeButton
+        href={`${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`}
+      >
+        {backButton.bottomButtonText}
+      </BackToHomeButton>
     </Container>
   );
 };

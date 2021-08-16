@@ -35,7 +35,7 @@ const StartTeachingCrossroadPage: React.FC<Props> = ({ logo, title, metaTitle, t
         <CrossroadItem key={item.button.href} size="md" {...item} />
       ))}
     </CrossroadList>
-    <BackToHomeButton href={routes.startTeaching.crossroad}>
+    <BackToHomeButton href={`${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`}>
       Zpátky na výběr, kde chci učit
     </BackToHomeButton>
   </Container>
