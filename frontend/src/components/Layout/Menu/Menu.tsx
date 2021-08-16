@@ -19,7 +19,7 @@ export const menuItems = [
       },
       {
         label: 'Jací učitelé chybí?',
-        route: `${routes.startTeaching.crossroad}#pedagogicke-minimum`,
+        route: `${routes.startTeaching.crossroad}#jaci-ucitele-chybi`,
       },
       {
         label: 'Zákon o pedagogických pracovnících',

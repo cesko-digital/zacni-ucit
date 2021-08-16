@@ -119,7 +119,7 @@ const citiesData: City[] = [
     schools: [
       {
         name: 'Univerzita Palackého v Olomouci',
-        href: 'https://ccv.upol.cz/programy-programy-celozivotniho-vzdelavani',
+        href: 'https://ccv.upol.cz/studijni-programy-czv',
       },
     ],
   },

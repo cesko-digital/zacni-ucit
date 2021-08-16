@@ -14,8 +14,9 @@ import {
   FooterText,
   FooterInput,
   FlexRow,
+  Link,
+  MainLink,
 } from './styled';
-import Link from '@components/Link/Link';
 
 import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
@@ -30,9 +31,9 @@ const Footer: FC = () => {
         <FlexRowSB>
           {menuItems.map(item => (
             <FlexColumn key={item.label}>
-              <Link className="linkRegular footer bold" href={item.route}>
+              <MainLink className="linkRegular footer bold" href={item.route}>
                 {item.label}
-              </Link>
+              </MainLink>
               {item.lights?.map(light => (
                 <Link key={light.route} className="linkRegular footer light" href={light.route}>
                   {light.label}
@@ -175,11 +176,11 @@ const Footer: FC = () => {
         </LinkSmall>
       </FooterSection>
       <FooterSection className="footer_section4">
-        <SmallText>
-          <b>Začni učit! </b>je projektem neziskové organizace Výluka.
-        </SmallText>
+        <Link href="https://vyluka.org/" target="_blank">
+          <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
+        </Link>
         <br></br>
-        <SmallText> © 2021 Výluka, z.s. PROTOTYP</SmallText>
+        <SmallText>© 2021 Výluka, z.s. PROTOTYP</SmallText>
       </FooterSection>
     </FooterWrap>
   );

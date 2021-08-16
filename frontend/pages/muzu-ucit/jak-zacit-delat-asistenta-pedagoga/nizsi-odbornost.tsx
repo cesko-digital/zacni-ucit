@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
 import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
@@ -66,8 +65,8 @@ const Page: React.FC = () => (
           <>
             <p>
               Pokud chcete vykonávat „nižší“ úroveň činnosti AP,{' '}
-              <strong>stačí vám střední vzdělání</strong>
-              (většinou jednoleté či dvouleté bez výučního listu a bez maturity){' '}
+              <strong>stačí vám střední vzdělání</strong> (většinou jednoleté či dvouleté bez
+              výučního listu a bez maturity){' '}
               <strong>v oboru zaměřeném na přípravu asistentů pedagoga</strong>.
             </p>
             <p>
@@ -117,7 +116,7 @@ const Page: React.FC = () => (
         text: (
           <>
             <p>
-              Pokud chcete vykonávat „nižší“ úroveň činnosti AP a máte pouze základní vzdělání,
+              Pokud chcete vykonávat „nižší“ úroveň činnosti AP a máte pouze základní vzdělání,{' '}
               <strong>stačí vám doplnit si</strong>:
             </p>
             <FocusedParagraph>

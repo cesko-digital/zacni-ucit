@@ -31,7 +31,7 @@ const HowTeachingProgramWorks: React.FC = () => (
       title="Nevíte, zda je učení pro vás? Nebo chcete předat svoje znalosti?"
       description="Vyzkoušejte si učení na vlastní kůži v programu Zkus učit!, nebo využijte program Den pro školu a předejte své zkušenosti žákům během jednoho dne. "
     />
-    <BackButton href={routes.tryTeaching.main} icon="home">
+    <BackButton href={routes.tryTeaching.main} icon="arrow">
       Zpátky na chci si zkusit učení
     </BackButton>
     <TopWrapper>

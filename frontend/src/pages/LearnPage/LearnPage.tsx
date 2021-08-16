@@ -123,18 +123,12 @@ const LearnPage: React.FC = () => (
       </Section>
       <Section>
         <SectionTitle>Supervize</SectionTitle>
-        <p>
-          Potřebujete sdílet pedagogické trable, chcete se posouvat v učení nebo hledáte nové
-          podněty pro výuku? Zkuste naši supervizi!
-        </p>
-        <p>
-          Se zkušenou lektorkou Martinou Skalníkovou budeme v bezpečném prostředí v kolektivu i
-          individuálně řešit:
-        </p>
+        <p>Potřebujete sdílet pedagogické trable? Zkuste naši skupinovou supervizi!</p>
+        <p>Se zkušenou supervizorkou Martinou Skalníkovou můžete v bezpečném prostředí řešit:</p>
         <List>
           <ListItem>vztahy s kolegy i rodiči</ListItem>
-          <ListItem>práci s problémovými žáky</ListItem>
-          <ListItem>a spoustu dalšího</ListItem>
+          <ListItem>práci a komunikaci se žáky</ListItem>
+          <ListItem>cokoliv dalšího podle vaší potřeby</ListItem>
         </List>
         <p>Harmonogram podzimních supervizí zveřejníme již brzy!</p>
         <p>
