@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react';
 import React from 'react';
 
 import { Navbar } from './Navbar/Navbar';
-import { Wrap } from './styled';
+import { MainWrapper, Wrapper } from './styled';
 import Footer from '@components/Layout/Footer/Footer';
 import { routes } from '@routes';
 
@@ -17,11 +17,11 @@ const Layout: FC<Props> = ({ children }) => {
   const router = useRouter();
 
   return (
-    <div>
+    <MainWrapper>
       <Navbar />
-      <Wrap>{children}</Wrap>
+      <Wrapper>{children}</Wrapper>
       {!pagesWithoutFooter.includes[router.pathname] && <Footer />}
-    </div>
+    </MainWrapper>
   );
 };
 

@@ -23,7 +23,11 @@ import styled from 'styled-components';
 //   ${({ homePage }) => (homePage ? withBgImageStyle : null)}
 // `;
 
-export const Wrap = styled.div`
+export const MainWrapper = styled.div`
+  padding-top: 70px;
+`;
+
+export const Wrapper = styled.div`
   padding: 0;
   margin: 0 auto;
 `;

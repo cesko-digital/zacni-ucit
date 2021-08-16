@@ -2,18 +2,22 @@ import styled from 'styled-components';
 import { mediaQueriesUp } from 'src/common/mediaQueries';
 import { theme } from 'src/common/theme';
 
-export const MenuTag = styled.menu<{ listOpened: boolean }>`
+export const MenuTag = styled.div<{ listOpened: boolean }>`
   ${({ listOpened }) => (!listOpened ? 'display: none;' : null)};
-  width: 80%;
+  width: 100%;
   background: white;
-  border-bottom-left-radius: 60px;
-  position: absolute;
+  position: fixed;
   right: 0;
+  top: 70px;
   margin-top: 0;
   z-index: 10;
+  padding: 0 30px;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
 
   ${mediaQueriesUp('md')`
     width: 30%;
+    border-bottom-left-radius: 60px;
   `}
 `;
 
@@ -42,6 +46,7 @@ export const Item = styled.li<{ greenBgr?: boolean }>`
   background: ${({ greenBgr }) => (greenBgr ? theme.color.green : 'none')};
   margin: 1rem 0;
   padding: 0.5rem;
+  border-radius: 3px;
 
   a {
     text-decoration: none;

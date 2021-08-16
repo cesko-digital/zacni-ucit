@@ -9,8 +9,11 @@ export const Wrapper = styled.nav`
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 5px 0.5rem;
   height: 70px;
-  position: relative;
+  position: fixed;
   z-index: 20;
+  left: 0;
+  top: 0;
+  width: 100%;
 `;
 export const Logo = styled.img`
   text-decoration: none;

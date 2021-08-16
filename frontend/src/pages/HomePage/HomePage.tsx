@@ -14,7 +14,10 @@ import tryTeachingImage from './tryTeaching.png';
 
 const HomePage: React.FC = () => (
   <>
-    <Meta title="Začni učit! | Pomáháme budoucím i začínajícím učitelům" />
+    <Meta
+      title="Začni učit! | Pomáháme budoucím i začínajícím učitelům"
+      description="Ukazujeme, jak se stát učitelem i jak zvládnout začátky v kariéře pedagoga. "
+    />
     <Header />
 
     <PathSection />
