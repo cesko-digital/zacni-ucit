@@ -25,7 +25,10 @@ import ChevronIcon from '@icons/chevron-right.svg';
 
 const LearnPage: React.FC = () => (
   <Container>
-    <Meta title="Chci se zaučit" />
+    <Meta
+      title="Zauč se! | Pomáháme začínajícím učitelům"
+      description="Získejte podporu a možnost rozvoje ve třech komunitních programech Zauč se! – v celoročním programu, v sérii workshopů a v supervizích."
+    />
     <BackButton href={routes.homepage} icon="home">
       Zpátky domů
     </BackButton>

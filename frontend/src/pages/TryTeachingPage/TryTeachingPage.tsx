@@ -23,7 +23,10 @@ import ChevronIcon from '@icons/chevron-right.svg';
 
 const TryTeachingPage: React.FC = () => (
   <Container>
-    <Meta title="" />
+    <Meta
+      title="Nevíte, zda je učení pro vás? Nebo chcete předat svoje znalosti?"
+      description="Vyzkoušejte si učení na vlastní kůži v programu Zkus učit!, nebo využijte program Den pro školu a předejte své zkušenosti žákům během jednoho dne. "
+    />
     <BackButton href={routes.homepage} icon="home">
       Zpátky domů
     </BackButton>

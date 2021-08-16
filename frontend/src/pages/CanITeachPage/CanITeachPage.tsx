@@ -23,9 +23,14 @@ import zs1Image from './zs1.svg';
 import zs2Image from './zs2.svg';
 import ChevronIcon from '@icons/chevron-right.svg';
 import ListIcon from '@icons/list.svg';
+import Meta from '@components/Meta/Meta';
 
 const CanITeachPage: React.FC = () => (
   <Container>
+    <Meta
+      title="Nevíte, zda můžete učit nebo jak si doplnit kvalifikaci?"
+      description="S našim přehledným shrnutím zjistíte, co potřebujete k tomu, abyste mohli začít učit, a kde si potřebné znalosti a pedagogickou kvalifikaci můžete doplnit."
+    />
     <MainTitle>Můžu učit?</MainTitle>
     {/* <Section>
       <SectionTitle>Interaktivní průvodce</SectionTitle>

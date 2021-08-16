@@ -86,7 +86,10 @@ const events: Event[] = [
 
 const LearnHowItWorksPage: React.FC = () => (
   <Container>
-    <Meta title="Jak probíhá program" />
+    <Meta
+      title="Zauč se! | Pomáháme začínajícím učitelům"
+      description="Získejte podporu a možnost rozvoje ve třech komunitních programech Zauč se! – v celoročním programu, v sérii workshopů a v supervizích."
+    />
     <BackButton href={routes.learn.main} icon="home">
       Zpátky na chci se zaučit
     </BackButton>

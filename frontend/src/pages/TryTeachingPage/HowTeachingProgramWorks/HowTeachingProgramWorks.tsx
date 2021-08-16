@@ -25,10 +25,12 @@ import image1 from './image1.jpeg';
 import image2 from './image2.jpeg';
 import image3 from './image3.jpeg';
 
-
 const HowTeachingProgramWorks: React.FC = () => (
   <Container>
-    <Meta title="Jak probíhá program" />
+    <Meta
+      title="Nevíte, zda je učení pro vás? Nebo chcete předat svoje znalosti?"
+      description="Vyzkoušejte si učení na vlastní kůži v programu Zkus učit!, nebo využijte program Den pro školu a předejte své zkušenosti žákům během jednoho dne. "
+    />
     <BackButton href={routes.tryTeaching.main} icon="home">
       Zpátky na chci si zkusit učení
     </BackButton>
