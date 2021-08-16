@@ -16,7 +16,8 @@ export const MenuTag = styled.div<{ listOpened: boolean }>`
   overflow-y: auto;
 
   ${mediaQueriesUp('md')`
-    width: 30%;
+    width: 50%;
+    max-width: 400px;
     border-bottom-left-radius: 60px;
   `}
 `;
@@ -49,6 +50,7 @@ export const Item = styled.li<{ greenBgr?: boolean }>`
   border-radius: 3px;
 
   a {
+    text-align: left;
     text-decoration: none;
 
     &:hover,
