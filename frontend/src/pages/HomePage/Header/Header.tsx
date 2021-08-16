@@ -11,7 +11,7 @@ const Header: React.FC = () => (
   <Container>
     <Wrapper>
       <Image alt="" height={238} src={heroImage} width={132} />
-      <MainTitle>Začni učit</MainTitle>
+      <MainTitle>Začni učit!</MainTitle>
       <Paragraph>
         Provádíme zájemce o učitelství vším, co potřebují znát, aby se mohli stát spokojenými
         pedagogy.

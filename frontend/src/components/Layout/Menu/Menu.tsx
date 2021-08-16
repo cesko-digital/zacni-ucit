@@ -56,7 +56,7 @@ export const menuItems = [
     route: routes.tryTeaching.main,
     lights: [
       {
-        label: 'Zkus učit',
+        label: 'Zkus učit!',
         route: routes.tryTeaching.main,
       },
       {

@@ -64,8 +64,8 @@ const Page: React.FC = () => (
     text={
       <>
         <p>
-          Pokud chcete učit na 2. stupni ZŠ, budete (případně nebudete) si{' '}
-          <strong>doplňovat kvalifikaci</strong> podle předmětů, které chcete učit.
+          Pokud chcete učit na <strong>střední škole</strong>, budete (případně nebudete) si
+          doplňovat kvalifikaci podle předmětů, které chcete učit.
         </p>
         <p>Vyberte si, co chcete učit, a my vám ukážeme, jak na to.</p>
       </>

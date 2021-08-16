@@ -153,6 +153,10 @@ const Page: React.FC = () => (
               pedagogických pracovníků. V tomto případě hledejte kurzy s názvem Studium pedagogiky
               pro učitele odborných předmětů, praktického vyučování a odborného výcviku SOŠ a SOU.
             </p>
+            <LawReference link="zakonyprolidi.cz/cs/2004-563#p9-3-b-3">
+              § 9 odst. (5) písm. a) a podle něj § 9 odst. (3) písm. b) bod 2. zákona č. 563/2004 o
+              pedagogických pracovnících
+            </LawReference>
           </>
         ),
       },
@@ -250,7 +254,7 @@ const Page: React.FC = () => (
               bakaláře se zaměřením na přípravu učitelů 2. stupně ZŠ nebo SŠ, čímž získáte
               pedagogickou kvalifikaci.
             </p>
-            <LawReference link="zakonyprolidi.cz/cs/2004-563#p9-3-c-1">
+            <LawReference link="zakonyprolidi.cz/cs/2004-563#p9-5-b-1">
               § 9 odst. (5) písm. b) bod 1. zákona č. 563/2004 o pedagogických pracovnících
             </LawReference>
             <p>

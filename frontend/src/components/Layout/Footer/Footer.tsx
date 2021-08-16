@@ -41,7 +41,7 @@ const Footer: FC = () => (
     </FooterSection>
 
     <FooterSection className="footer_section2">
-      <H2>Výluka, z.s</H2>
+      <H2>Výluka, z.s.</H2>
       <FooterText>
         <b>Kampus Hybernská</b>
       </FooterText>

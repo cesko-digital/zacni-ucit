@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
 import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
@@ -248,8 +247,8 @@ const Page: React.FC = () => (
               V praxi to znamená, že když budete chtít učit třeba češtinu a budete mít inženýra z
               informatiky, stačí vám doplnit si k tomu učitelské CŽV pro 2. stupeň ZŠ či SŠ na
               některé vysoké škole. Musíte si ovšem najít studium CŽV, na které se budete moci
-              přihlásit (podmínky pro přijetí najdeš u jednotlivých oborů) – je pravděpodobné, že se
-              budete muset přihlásit na CŽV na některé z technických VŠ. Tím se stanete
+              přihlásit (podmínky pro přijetí najdete u jednotlivých oborů) – je pravděpodobné, že
+              se budete muset přihlásit na CŽV na některé z technických VŠ. Tím se stanete
               kvalifikovaným pedagogem. Spousta ředitelů by vás ale pravděpodobně nechala učit jen
               informatiku, kterou jste vystudoval*a, proto je vhodné si pak už jen doplnit aprobaci
               pro učitelství češtiny.

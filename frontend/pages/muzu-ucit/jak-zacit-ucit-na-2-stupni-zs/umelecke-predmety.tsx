@@ -64,7 +64,7 @@ const Page: React.FC = () => (
               .
             </p>
             <p>
-              Pokud tedy máte „uměleckého“ magistra a zjistíte, že mu můžete prokázat tzv.
+              Pokud tedy máte „uměleckého” magistra a zjistíte, že můžete prokázat tzv.
               umělecko–pedagogické zaměření, <strong>pedagogickou kvalifikaci máte</strong>.
             </p>
 

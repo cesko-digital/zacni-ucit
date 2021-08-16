@@ -107,7 +107,7 @@ const LearnHowItWorksPage: React.FC = () => (
             vizí.
           </ListItem>
           <ListItem>
-            Každý měsíc vás čeká jedno tematické a jedno reflektivní setkání. Vždy pod vedením
+            Každý měsíc vás čeká jedno tematické a jedno reflektivní setká+ní, vždy+ pod vedením
             zkušených lektorů a lektorek.
           </ListItem>
           <ListItem>Tempo svého rozvoje si určujete podle vlastní potřeby.</ListItem>
@@ -120,8 +120,8 @@ const LearnHowItWorksPage: React.FC = () => (
         </p>
         <p>
           Díky finanční podpoře našich dárců MHMP a Nadace České spořitelny je cena celoročního
-          kurzu (včetně ubytování na výjezdním víkendu) je <strong>5 000 Kč</strong>. Skutečná cena
-          na jednoho účastníka totiž činí více než 20 000 Kč.
+          kurzu (včetně ubytování na výjezdním víkendu) <strong>5 000 Kč</strong>. Skutečná cena na
+          jednoho účastníka totiž činí více než 20 000 Kč.
         </p>
         <SignUpButtonWrapper>
           <Button

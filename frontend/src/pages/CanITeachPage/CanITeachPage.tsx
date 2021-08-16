@@ -114,7 +114,7 @@ const CanITeachPage: React.FC = () => (
         V praxi není výjimkou, že ve školách pracují lidé, kteří si kvalifikaci při výkonu
         učitelského povolání teprve dodělávají.{' '}
         <strong>
-          Ředitelé škol, totiž mohou přijmout i člověka bez pedagogického vzdělání, pokud nemají
+          Ředitelé škol totiž mohou přijmout i člověka bez pedagogického vzdělání, pokud nemají
           kvalifikovaného zájemce.
         </strong>
       </Paragraph>

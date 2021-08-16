@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import Button from '@components/Button/Button';
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
@@ -25,7 +24,7 @@ const Page: React.FC = () => (
     }
     backButton={{
       href: routes.startTeaching.crossroad,
-      topButtonText: 'Výběr nejvyššího vzdělání',
+      topButtonText: 'Zpátky na výběr kde učit',
       bottomButtonText: 'Zpátky na výběr kde chci učit',
     }}
     logo={msImage}
