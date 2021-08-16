@@ -42,8 +42,8 @@ const CanITeachPage: React.FC = () => (
         Můžu učit
       </Button>
     </Section> */}
-    <Section>
-      <SectionTitle id="pedagogicke-minimum">„Pedagogické minimum“</SectionTitle>
+    <Section id="pedagogicke-minimum">
+      <SectionTitle>„Pedagogické minimum“</SectionTitle>
       <Paragraph>
         Tento hovorový pojem ve světě učitelství dnes již nenajdete. Pedagogické vzdělání můžete
         získat{' '}
@@ -73,10 +73,8 @@ const CanITeachPage: React.FC = () => (
         Chci si najít kurz
       </Button> */}
     </Section>
-    <Section>
-      <SectionTitle id="zakon-o-pedagogickych-pracovnicich">
-        Zákon o pedagogických pracovnících
-      </SectionTitle>
+    <Section id="zakon-o-pedagogickych-pracovnicich">
+      <SectionTitle>Zákon o pedagogických pracovnících</SectionTitle>
       <Paragraph>
         Podrobné informace o kvalifikačních požadavcích na všechny pedagogické profese naleznete v
         zákoně o pedagogických pracovnících č. 563/2004 Sb. nebo ve{' '}
@@ -128,8 +126,8 @@ const CanITeachPage: React.FC = () => (
         potřebnou kvalifikaci.
       </Paragraph>
     </Section>
-    <Section>
-      <SectionTitle id="jaci-ucitele-chybi">Jací učitelé chybí?</SectionTitle>
+    <Section id="jaci-ucitele-chybi">
+      <SectionTitle>Jací učitelé chybí?</SectionTitle>
       <Paragraph>
         Uvažujete o učitelské profesi a zajímá vás, zda se ve školství uplatníte?
       </Paragraph>

@@ -120,6 +120,20 @@ export const SmallText = styled.p`
   display: inline;
 `;
 
+export const Copy = styled.p`
+  font-size: ${theme.fontSize.small};
+  font-weight: 400;
+  display: inline;
+  margin: 10px 0 0;
+  display: flex;
+  align-items: center;
+  color: #242120;
+
+  ${mediaQueriesUp('md')`
+    margin: 0 0 0 10px;
+  `}
+`;
+
 export const LinkSmall = styled(Button)`
   color: #242120;
   font-size: ${theme.fontSize.small};
@@ -155,6 +169,10 @@ export const Link = styled(Button)`
   color: #4b4848;
   display: inline-block;
   margin: 0 0 8px;
+
+  &:last-of-type {
+    margin: 0;
+  }
 
   ${mediaQueriesUp('md')`
     font-size: 0.875rem;

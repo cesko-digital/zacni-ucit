@@ -16,6 +16,7 @@ import {
   FlexRow,
   Link,
   MainLink,
+  Copy,
 } from './styled';
 
 import FacebookIcon from '@icons/facebook.svg';
@@ -180,7 +181,7 @@ const Footer: FC = () => {
           <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
         </Link>
         <br></br>
-        <SmallText className="vyluka"> © 2021 Výluka, z.s. PROTOTYP</SmallText>
+        <Copy margin={0}> © 2021 Výluka, z.s. PROTOTYP</Copy>
       </FooterSection>
     </FooterWrap>
   );
