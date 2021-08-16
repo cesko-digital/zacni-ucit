@@ -97,7 +97,7 @@ const Footer: FC = () => {
         </FooterText>
         <div id="mc_embed_signup">
           <form
-            action="https://vyluka.us19.list-manage.com/subscribe/post?u=3de897b21700c27eefbd0bf7d&amp;id=a1ece305d1"
+            action="https://vyluka.us19.list-manage.com/subscribe/post?u=3de897b21700c27eefbd0bf7d&id=afd069cda3"
             className="validate"
             id="mc-embedded-subscribe-form"
             method="post"
