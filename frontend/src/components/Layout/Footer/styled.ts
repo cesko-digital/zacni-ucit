@@ -116,6 +116,7 @@ export const SmallText = styled.p`
 `;
 
 export const LinkSmall = styled.a`
+  color: #242120;
   font-size: ${theme.fontSize.small};
   font-weight: 700;
 `;

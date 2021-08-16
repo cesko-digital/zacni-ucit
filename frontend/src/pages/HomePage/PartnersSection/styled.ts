@@ -2,6 +2,8 @@ import { mediaQueriesUp } from 'src/common/mediaQueries';
 import styled from 'styled-components';
 
 export const Section = styled.section`
+  padding-top: 32px;
+
   ${mediaQueriesUp('sm')`
     padding: 60px 0;
     text-align: center;
@@ -38,6 +40,10 @@ export const LogoItem = styled.li`
     padding: 30px;
     width: 25%;
   `}
+`;
+
+export const Link = styled.a`
+  appearance: none;
 `;
 
 export const Logo = styled.img`

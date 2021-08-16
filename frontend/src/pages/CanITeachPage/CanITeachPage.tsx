@@ -38,7 +38,7 @@ const CanITeachPage: React.FC = () => (
       </Button>
     </Section> */}
     <Section>
-      <SectionTitle>„Pedagogické minimum“</SectionTitle>
+      <SectionTitle id="pedagogicke-minimum">„Pedagogické minimum“</SectionTitle>
       <Paragraph>
         Tento hovorový pojem ve světě učitelství dnes již nenajdete. Pedagogické vzdělání můžete
         získat{' '}
@@ -69,7 +69,9 @@ const CanITeachPage: React.FC = () => (
       </Button> */}
     </Section>
     <Section>
-      <SectionTitle>Zákon o pedagogických pracovnících</SectionTitle>
+      <SectionTitle id="zakon-o-pedagogickych-pracovnicich">
+        Zákon o pedagogických pracovnících
+      </SectionTitle>
       <Paragraph>
         Podrobné informace o kvalifikačních požadavcích na všechny pedagogické profese naleznete v
         zákoně o pedagogických pracovnících č. 563/2004 Sb. nebo ve{' '}
@@ -122,7 +124,7 @@ const CanITeachPage: React.FC = () => (
       </Paragraph>
     </Section>
     <Section>
-      <SectionTitle>Jací učitelé chybí?</SectionTitle>
+      <SectionTitle id="jaci-ucitele-chybi">Jací učitelé chybí?</SectionTitle>
       <Paragraph>
         Uvažujete o učitelské profesi a zajímá vás, zda se ve školství uplatníte?
       </Paragraph>
@@ -142,7 +144,12 @@ const CanITeachPage: React.FC = () => (
       <Paragraph>
         Pokud vás zajímá, jaká je situace s nedostatkem pedagogů ve vašem kraji:
       </Paragraph>
-      <Button buttonStyle="link" href="#" startIcon={<ListIcon />}>
+      <Button
+        buttonStyle="link"
+        href="https://www.msmt.cz/file/50371_1_1/"
+        target="_blank"
+        startIcon={<ListIcon />}
+      >
         Zpráva MŠMT o učitelích v regionech
       </Button>
     </Section>

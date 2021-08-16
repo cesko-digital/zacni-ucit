@@ -74,7 +74,12 @@ const LearnPage: React.FC = () => (
         </List>
         <ButtonsWrapper>
           <SignUpButtonWrapper>
-            <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
+            <Button
+              buttonStyle="button"
+              endIcon={<ChevronIcon />}
+              href="https://forms.gle/GqC1ozq9QXUTWPAb8"
+              target="_blank"
+            >
               Přihlaste se
             </Button>
           </SignUpButtonWrapper>

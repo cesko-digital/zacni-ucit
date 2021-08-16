@@ -41,7 +41,9 @@ const ErrorPage: React.FC<Props> = ({ title, text, image, withCheckOtherPages })
                   <LinkRegular href={routes.homepage}>Hlavní stránka</LinkRegular>
                 </li>
                 <li>
-                  <LinkRegular href={routes.pedagogicMinimum}>Pedagogické minimu</LinkRegular>
+                  <LinkRegular href={`${routes.startTeaching.crossroad}#pedagogicke-minimum`}>
+                    Pedagogické minimu
+                  </LinkRegular>
                 </li>
                 <li>
                   <LinkRegular href={routes.whyToTeach}>Proč jít učit?</LinkRegular>

@@ -21,6 +21,7 @@ type Button = BaseProps & {
 
 type Link = BaseProps & {
   href: string;
+  onClick?: () => void;
   target?: string;
   title?: string;
 };
@@ -39,6 +40,7 @@ const ButtonComponent: React.FC<Props> = props =>
         target={props.target}
         title={props.title}
         variant={props.variant ?? 'primary'}
+        onClick={props.onClick}
       >
         {props.startIcon && <IconWrapper>{props.startIcon}</IconWrapper>}
         <Text>{props.children}</Text>

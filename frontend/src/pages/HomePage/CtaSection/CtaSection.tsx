@@ -4,7 +4,6 @@ import { Wrapper, Image, Title, ButtonWrapper } from './styled';
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 
-
 interface Props {
   title: string;
   text: JSX.Element;
@@ -14,7 +13,7 @@ interface Props {
     text: string;
     color: string;
   };
-  link: {
+  link?: {
     href: string;
     text: string;
   };
@@ -31,7 +30,7 @@ const CtaSection: React.FC<Props> = ({ title, image, text, button, link }) => (
           {button.text}
         </Button>
       </ButtonWrapper>
-      <Button href={link.href}>{link.text}</Button>
+      {link && <Button href={link.href}>{link.text}</Button>}
     </Wrapper>
   </Container>
 );

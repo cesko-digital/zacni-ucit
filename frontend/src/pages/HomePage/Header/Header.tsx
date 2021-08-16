@@ -5,7 +5,6 @@ import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 import { routes } from '@routes';
 
-
 import heroImage from './hero.png';
 
 const Header: React.FC = () => (
@@ -22,10 +21,14 @@ const Header: React.FC = () => (
       </Button>
       <LinksWrapper>
         <ButtonWrapper>
-          <Button href={routes.pedagogicMinimum}>Pedagogické minimum</Button>
+          <Button href={`${routes.startTeaching.crossroad}#pedagogicke-minimum`}>
+            Pedagogické minimum
+          </Button>
         </ButtonWrapper>
         <ButtonWrapper>
-          <Button href={routes.missedTeachers}>Jací učitelé chybí?</Button>
+          <Button href={`${routes.startTeaching.crossroad}#jaci-ucitele-chybi`}>
+            Jací učitelé chybí?
+          </Button>
         </ButtonWrapper>
       </LinksWrapper>
     </Wrapper>

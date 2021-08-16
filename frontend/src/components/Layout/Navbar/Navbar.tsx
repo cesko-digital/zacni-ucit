@@ -21,18 +21,18 @@ const items = [
     label: 'Chci zkusit učit',
     route: routes.tryTeaching.main,
   },
-  {
-    label: 'Proč jít učit?',
-    route: routes.whyToTeach,
-  },
+  // {
+  //   label: 'Proč jít učit?',
+  //   route: routes.whyToTeach,
+  // },
   {
     label: 'Chci se zaučit',
     route: routes.learn.main,
   },
-  {
-    label: 'Partneři',
-    route: routes.partners,
-  },
+  // {
+  //   label: 'Partneři',
+  //   route: routes.partners,
+  // },
 ];
 
 export const Navbar: FC = () => {
@@ -64,7 +64,7 @@ export const Navbar: FC = () => {
           ))}
         </List>
       </Wrapper>
-      <Menu listOpened={isMenuOpen} />
+      <Menu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
     </nav>
   );
 };

@@ -99,7 +99,7 @@ const Footer: FC = () => (
           id="mc-embedded-subscribe-form"
           method="post"
           name="mc-embedded-subscribe-form"
-          style={{ paddingLeft: '0', position: 'relative' }}
+          style={{ paddingLeft: '0', position: 'relative', maxWidth: '300px' }}
           target="_blank"
           noValidate
         >
@@ -116,7 +116,8 @@ const Footer: FC = () => (
                 fontSize: '14px',
                 padding: ' 0.5rem 1rem',
                 lineHeight: '2rem',
-                width: '300px',
+                width: '100%',
+                maxWidth: '300px',
                 outline: 'none',
               }}
               type="email"
@@ -151,7 +152,8 @@ const Footer: FC = () => (
                   padding: '0.5rem',
                   display: 'block',
                   lineHeight: '28px',
-                  transform: 'translateX(220px) translateY(-120%)',
+                  transform: 'translateY(-120%)',
+                  right: 0,
                 }}
                 type="submit"
                 value="Odebírat"
@@ -161,7 +163,12 @@ const Footer: FC = () => (
         </form>
       </div>
       <SmallText>Posláním adresy souhlasíte se </SmallText>{' '}
-      <LinkSmall>zpracováním osobních údajů.</LinkSmall>
+      <LinkSmall
+        href="https://vyluka.org/wp-content/uploads/2021/08/Ozn%C3%A1men%C3%AD-o-zpracov%C3%A1n%C3%AD-osobn%C3%ADch-%C3%BAdaj%C5%AF-V%C3%BDluka-2021.pdf"
+        target="_blank"
+      >
+        zpracováním osobních údajů.
+      </LinkSmall>
     </FooterSection>
     <FooterSection className="footer_section4">
       <SmallText>
