@@ -126,7 +126,7 @@ export const LinkToExtPage = styled.a`
 
   &:hover {
     text-decoration: underline;
-    text-decoration-color: red;
+    text-decoration-color: black;
     text-decoration-thickness: 3px;
   }
 

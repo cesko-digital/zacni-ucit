@@ -45,6 +45,11 @@ export const Item = styled.li<{ greenBgr?: boolean }>`
 
   a {
     text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 
   a.light {

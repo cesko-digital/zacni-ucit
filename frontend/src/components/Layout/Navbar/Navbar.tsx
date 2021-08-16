@@ -29,10 +29,10 @@ const items = [
     label: 'Chci se zaučit',
     route: routes.learn.main,
   },
-  {
-    label: 'Partneři',
-    route: routes.partners,
-  },
+  // {
+  //   label: 'Partneři',
+  //   route: routes.partners,
+  // },
 ];
 
 export const Navbar: FC = () => {

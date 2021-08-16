@@ -7,7 +7,7 @@ export const Wrapper = styled.nav`
   font-size: 18px;
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
+  padding: 5px 0.5rem;
   height: 70px;
   position: relative;
   z-index: 20;
@@ -26,7 +26,7 @@ export const Logo = styled.img`
 
 export const Burger = styled.button`
   position: absolute;
-  top: 14px;
+  top: 10px;
   right: 20px;
   cursor: pointer;
   width: 7rem;
