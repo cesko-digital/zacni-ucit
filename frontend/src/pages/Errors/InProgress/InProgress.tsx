@@ -2,9 +2,9 @@ import React from 'react';
 
 import ErrorPage from '../ErrorPage';
 
-import errorImage from './500.svg';
+import errorImage from './inProgress.svg';
 
-const Error500 = () => (
+const InProgressPage = () => (
   <ErrorPage
     image={errorImage}
     text="Omlouváme se, ale na obsahu této stránky pracujeme a ještě není hotová. Zkuste se za námi stavit později."
@@ -12,4 +12,4 @@ const Error500 = () => (
   />
 );
 
-export default Error500;
+export default InProgressPage;

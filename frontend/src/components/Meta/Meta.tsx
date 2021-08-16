@@ -1,14 +1,15 @@
 import Head from 'next/head';
-import type { FC } from 'react';
 import React from 'react';
 
 type Props = {
   title: string;
+  description?: string;
 };
 
-const Meta: FC<Props> = props => (
+const Meta: React.FC<Props> = ({ title, description }) => (
   <Head>
-    <title>{props.title}</title>
+    <title>{title}</title>
+    {description && <meta content={description} name="description"></meta>}
   </Head>
 );
 

@@ -11,11 +11,22 @@ export const MenuTag = styled.menu<{ listOpened: boolean }>`
   right: 0;
   margin-top: 0;
   z-index: 10;
-  filter: drop-shadow(0 0 800vh rgb(0, 0, 0));
 
   ${mediaQueriesUp('md')`
     width: 30%;
   `}
+`;
+
+export const Backdrop = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: block;
+  backdrop-filter: blur(4px);
+  z-index: 5;
 `;
 
 export const ListMenu = styled.ul`
@@ -27,10 +38,23 @@ export const ListMenu = styled.ul`
 
 export const Item = styled.li<{ greenBgr?: boolean }>`
   text-decoration: none;
-  color: white;
+  color: #0c0807;
   background: ${({ greenBgr }) => (greenBgr ? theme.color.green : 'none')};
   margin: 1rem 0;
   padding: 0.5rem;
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  a.light {
+    font-weight: normal;
+  }
 `;
 
 export const MenuLink = styled.a<{ lightLink?: boolean }>`

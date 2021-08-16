@@ -40,7 +40,7 @@ export const LinksWrapper = styled.div`
 export const Image = styled.img`
   position: absolute;
   top: 0;
-  right: -2.5rem;
+  right: -16px;
 
   ${mediaQueriesUp('sm')`
     top: 80px;

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
 import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
@@ -18,8 +17,8 @@ const Page: React.FC = () => (
     }
     backButton={{
       href: routes.startTeaching.teacherAssistant.crossroad,
-      topButtonText: 'Zpátky na výběr kde chci učit',
-      bottomButtonText: 'Zpátky na výběr kde chci učit',
+      topButtonText: 'Zpátky na výběr, kde chci učit',
+      bottomButtonText: 'Zpátky na výběr, kde chci učit',
     }}
     logo={asImage}
     mainInfo={
@@ -165,7 +164,7 @@ const Page: React.FC = () => (
         ),
       },
       {
-        title: 'maturita pedagogického zaměření',
+        title: 'Maturita pedagogického zaměření',
         text: (
           <>
             <p>
@@ -179,7 +178,7 @@ const Page: React.FC = () => (
         ),
       },
       {
-        title: 'maturita jiného než pedagogického zaměření',
+        title: 'Maturita jiného než pedagogického zaměření',
         text: (
           <>
             <p>

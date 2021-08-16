@@ -6,14 +6,9 @@ import ButtonComponent from '@components/Button/Button';
 export const Wrapper = styled.nav`
   font-size: 18px;
   background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
-
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px 0.5rem;
   height: 70px;
-  align-items: center;
   position: relative;
   z-index: 20;
 `;
@@ -31,7 +26,7 @@ export const Logo = styled.img`
 
 export const Burger = styled.button`
   position: absolute;
-  top: 22px;
+  top: 10px;
   right: 20px;
   cursor: pointer;
   width: 7rem;
@@ -50,6 +45,8 @@ export const List = styled.ul`
   margin-right: 10rem;
   flex-direction: row;
   justify-content: flex-end;
+  margin: 0 auto;
+  padding-right: 100px;
 `;
 
 export const Item = styled.li`
@@ -99,4 +96,13 @@ export const NavLink = styled(ButtonComponent)<{ color?: string }>`
   &.chci-se-zaucit {
     color: #ffb60b;
   }
+`;
+
+export const Center = styled.div`
+  margin: 0 auto;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 `;

@@ -86,7 +86,10 @@ const events: Event[] = [
 
 const LearnHowItWorksPage: React.FC = () => (
   <Container>
-    <Meta title="Jak probíhá program" />
+    <Meta
+      title="Zauč se! | Pomáháme začínajícím učitelům"
+      description="Získejte podporu a možnost rozvoje ve třech komunitních programech Zauč se! – v celoročním programu, v sérii workshopů a v supervizích."
+    />
     <BackButton href={routes.learn.main} icon="home">
       Zpátky na chci se zaučit
     </BackButton>
@@ -107,7 +110,7 @@ const LearnHowItWorksPage: React.FC = () => (
             vizí.
           </ListItem>
           <ListItem>
-            Každý měsíc vás čeká jedno tematické a jedno reflektivní setkání. Vždy pod vedením
+            Každý měsíc vás čeká jedno tematické a jedno reflektivní setká+ní, vždy+ pod vedením
             zkušených lektorů a lektorek.
           </ListItem>
           <ListItem>Tempo svého rozvoje si určujete podle vlastní potřeby.</ListItem>
@@ -120,11 +123,16 @@ const LearnHowItWorksPage: React.FC = () => (
         </p>
         <p>
           Díky finanční podpoře našich dárců MHMP a Nadace České spořitelny je cena celoročního
-          kurzu (včetně ubytování na výjezdním víkendu) je <strong>5 000 Kč</strong>. Skutečná cena
-          na jednoho účastníka totiž činí více než 20 000 Kč.
+          kurzu (včetně ubytování na výjezdním víkendu) <strong>5 000 Kč</strong>. Skutečná cena na
+          jednoho účastníka totiž činí více než 20 000 Kč.
         </p>
         <SignUpButtonWrapper>
-          <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
+          <Button
+            buttonStyle="button"
+            endIcon={<ChevronIcon />}
+            href="https://forms.gle/GqC1ozq9QXUTWPAb8"
+            target="_blank"
+          >
             Přihlaste se
           </Button>
         </SignUpButtonWrapper>

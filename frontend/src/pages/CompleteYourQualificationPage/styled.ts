@@ -25,7 +25,8 @@ export const Cities = styled.div`
 `;
 
 export const CityGroup = styled.div`
-  padding: 16px 0 24px;
+  padding: 16px 16px 24px;
+  margin: 0 -16px;
 
   &:nth-child(even) {
     background: rgba(127, 80, 255, 0.05);
@@ -35,6 +36,7 @@ export const CityGroup = styled.div`
     border-radius: 5px;
     display: flex;
     padding: 20px 32px;
+    margin: 0;
   `}
 `;
 

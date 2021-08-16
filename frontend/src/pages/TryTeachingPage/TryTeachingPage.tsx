@@ -18,14 +18,15 @@ import Meta from '@components/Meta/Meta';
 import BackButton from '@pages/BackButton/BackButton';
 import { routes } from '@routes';
 
-
 import logoImage from './teach.svg';
 import ChevronIcon from '@icons/chevron-right.svg';
 
-
 const TryTeachingPage: React.FC = () => (
   <Container>
-    <Meta title="" />
+    <Meta
+      title="Nevíte, zda je učení pro vás? Nebo chcete předat svoje znalosti?"
+      description="Vyzkoušejte si učení na vlastní kůži v programu Zkus učit!, nebo využijte program Den pro školu a předejte své zkušenosti žákům během jednoho dne. "
+    />
     <BackButton href={routes.homepage} icon="home">
       Zpátky domů
     </BackButton>
@@ -53,7 +54,12 @@ const TryTeachingPage: React.FC = () => (
       </List>
       <ButtonsWrapper>
         <SignUpButtonWrapper>
-          <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
+          <Button
+            buttonStyle="button"
+            endIcon={<ChevronIcon />}
+            href="https://forms.gle/L3K9qV7UELiLYQen9"
+            target="_blank"
+          >
             Přihlaste se
           </Button>
         </SignUpButtonWrapper>
@@ -68,14 +74,19 @@ const TryTeachingPage: React.FC = () => (
       </ButtonsWrapper>
     </Section>
     <Section>
-      <SectionTitle>Den pro školu</SectionTitle>
+      <SectionTitle id="den-pro-skolu">Den pro školu</SectionTitle>
       <p>
         Učitelství vás láká, máte spoustu zkušeností z vašeho oboru – zároveň ale máte jen málo
         času? Využijte programu Den pro školu a{' '}
         <strong>věnujte jeden den vybrané škole a jejím žákům</strong>!
       </p>
       <SignUpButtonWrapper>
-        <Button buttonStyle="button" endIcon={<ChevronIcon />} href="#">
+        <Button
+          buttonStyle="button"
+          endIcon={<ChevronIcon />}
+          href="https://www.denproskolu.cz/"
+          target="_blank"
+        >
           Přihlaste se
         </Button>
       </SignUpButtonWrapper>

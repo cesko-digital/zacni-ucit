@@ -138,8 +138,8 @@ export const Section = styled.section`
   `}
 
   :nth-child(odd) {
-    padding: 24px 2.5rem 40px;
-    margin: 0 -2.5rem;
+    padding: 24px 16px 40px;
+    margin: 0 -16px;
     background: rgba(127, 80, 255, 0.05);
     position: relative;
 

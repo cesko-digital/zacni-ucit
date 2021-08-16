@@ -11,7 +11,7 @@ const Page: React.FC = () => (
     backButton={{
       href: routes.startTeaching.highSchool.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na SŠ',
-      bottomButtonText: 'Zpátky na výběr kde chci učit',
+      bottomButtonText: 'Zpátky na výběr, kde chci učit',
     }}
     logo={ssImage}
     mainInfo={
@@ -64,7 +64,7 @@ const Page: React.FC = () => (
               .
             </p>
             <p>
-              Pokud tedy máte „uměleckého“ magistra a zjistíte, že mu můžete prokázat tzv.
+              Pokud tedy máte „uměleckého” magistra a zjistíte, že můžete prokázat tzv.
               umělecko–pedagogické zaměření, <strong>pedagogickou kvalifikaci máte</strong>.
             </p>
 

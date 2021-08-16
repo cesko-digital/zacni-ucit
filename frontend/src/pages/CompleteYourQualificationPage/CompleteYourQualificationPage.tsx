@@ -31,27 +31,44 @@ const citiesData: City[] = [
   {
     name: 'Praha',
     schools: [
-      { name: 'Vysoká škola ekonomická v Praze', href: '#' },
-      { name: 'Univerzita Karlova', href: '#' },
-      { name: 'Česká zemědělská univerzita', href: '#' },
-      { name: 'České vysoké učení technické', href: '#' },
+      {
+        name: 'Vysoká škola ekonomická v Praze',
+        href: 'https://kdep.vse.cz/akce-pro-verejnost/doplnujici-pedagogicke-studium/soucasna-uprava/',
+      },
+      {
+        name: 'Univerzita Karlova',
+        href: 'https://is.cuni.cz/studium/ekczv/index.php?do=seznam&zobraz=1&ffak=&fustav=&fskr=2019&ftyp%5B%5D=P&fkod=&fkeywords=u%C4%8Ditelstv%C3%AD&fkeynames=1&zobraz=Zobraz',
+      },
+      {
+        name: 'Česká zemědělská univerzita',
+        href: 'https://www.ivp.czu.cz/cs/r-6930-studium/r-7469-studijni-programy/r-8776-programy-celozivotniho-vzdelavani/r-8787-studium-ucitelstvi-odbornych-predmetu-doplnujici-pedagogicke-studium-pro-studenty-czu',
+      },
+      {
+        name: 'České vysoké učení technické',
+        href: 'https://www.muvs.cvut.cz/zajemci-o-studium/bakalarske-studium/ucitelstvi-odbornych-predmetu/',
+      },
       {
         name: 'Učitel naživo',
         description: 've spolupráci s Vysokou školou mezinárodních a veřejných vztahů Praha',
-        href: '#',
+        href: 'https://www.ucitelnazivo.cz/',
       },
     ],
   },
   {
     name: 'Brno',
     schools: [
-      { name: 'Masarykova Univerzita', href: '#' },
-      { name: 'Mendelova Univerzita ', href: '#' },
+      { name: 'Masarykova Univerzita', href: 'https://www.ped.muni.cz/czv/pro-zajemce-o-czv' },
+      { name: 'Mendelova Univerzita ', href: 'http://icv.mendelu.cz/32509n-studium-pedagogiky' },
     ],
   },
   {
     name: 'České Budějovice',
-    schools: [{ name: 'Jihočeská Univerzita', href: '#' }],
+    schools: [
+      {
+        name: 'Jihočeská Univerzita',
+        href: 'https://www.pf.jcu.cz/education/department/czv/programy_splneni_kvalifikacnich_predpokladu.php',
+      },
+    ],
   },
   {
     name: 'Hradec Králové',
@@ -59,40 +76,69 @@ const citiesData: City[] = [
       {
         name: 'Univerzita Hradec Králové',
         programs: [
-          { name: 'učitelství MŠ', href: '#' },
-          { name: 'učitelství středních škol', href: '#' },
-          { name: 'pedagog odborného vyučování', href: '#' },
+          {
+            name: 'učitelství MŠ',
+            href: 'https://www.uhk.cz/file/edee/pedagogicka-fakulta/studium/celozivotni-vzdelavani/programy-czv/programy-celozivotniho-vzdelavani-v-ramci-akreditovanych-studijnich-programu/ucitelstvi-pro-ms.pdf',
+          },
+          {
+            name: 'učitelství středních škol',
+            href: 'https://www.uhk.cz/file/edee/pedagogicka-fakulta/studium/celozivotni-vzdelavani/programy-czv/programy-dvpp/studium-ke-splneni-kvalifikacnich-predpokladu/studium-v-oblasti-pedagogickych-ved/cpv-uss.pdf',
+          },
+          {
+            name: 'pedagog odborného vyučování',
+            href: 'https://www.uhk.cz/file/edee/pedagogicka-fakulta/studium/celozivotni-vzdelavani/programy-czv/programy-dvpp/studium-ke-splneni-kvalifikacnich-predpokladu/studium-v-oblasti-pedagogickych-ved/cpv-uov.pdf',
+          },
         ],
       },
     ],
   },
   {
     name: 'Plzeň',
-    schools: [{ name: 'Západočeská Univerzita ', href: '#' }],
+    schools: [{ name: 'Západočeská Univerzita ', href: 'https://www.pc.fpe.zcu.cz/?cat=18' }],
   },
   {
     name: 'Ústí nad Labem',
-    schools: [{ name: 'Univerzita J. E. Purkyně v Ústí nad Labem', href: '#' }],
+    schools: [
+      {
+        name: 'Univerzita J. E. Purkyně v Ústí nad Labem',
+        href: 'https://www.ujep.cz/cs/celozivotni-vzdelavani',
+      },
+    ],
   },
   {
     name: 'Liberec',
-    schools: [{ name: 'Technická univerzita v Liberci', href: '#' }],
+    schools: [
+      {
+        name: 'Technická univerzita v Liberci',
+        href: 'https://www.fp.tul.cz/uchazec/programy-celozivotniho-vzdelavani',
+      },
+    ],
   },
   {
     name: 'Olomouc',
-    schools: [{ name: 'Univerzita Palackého v Olomouci', href: '#' }],
+    schools: [
+      {
+        name: 'Univerzita Palackého v Olomouci',
+        href: 'https://ccv.upol.cz/studijni-programy-czv',
+      },
+    ],
   },
   {
     name: 'Ostrava',
-    schools: [{ name: 'Ostravská univerzita', href: '#' }],
+    schools: [{ name: 'Ostravská univerzita', href: 'https://www.osu.cz/celozivotni-vzdelavani/' }],
   },
   {
     name: 'Pardubice',
-    schools: [{ name: 'Univerzita Pardubice', href: '#' }],
+    schools: [{ name: 'Univerzita Pardubice', href: 'https://www.upce.cz/studium/czv.html' }],
   },
   {
     name: 'Zlín',
-    schools: [{ name: 'Univerzita Tomáše Bati ve Zlíně', href: '#' }],
+    schools: [
+      {
+        name: 'Univerzita Tomáše Bati ve Zlíně',
+        href: 'https://www.utb.cz/uchazec/celozivotni-vzdelavani/nabidka-studia/',
+      },
+    ],
   },
 ];
 

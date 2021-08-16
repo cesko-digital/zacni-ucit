@@ -14,7 +14,7 @@ import tryTeachingImage from './tryTeaching.png';
 
 const HomePage: React.FC = () => (
   <>
-    <Meta title="Začni učit" />
+    <Meta title="Začni učit! | Pomáháme budoucím i začínajícím učitelům" />
     <Header />
 
     <PathSection />
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => (
     <CtaSection
       button={{ text: 'Chci zkusit učit', href: routes.tryTeaching.main, color: '#FF2F5B' }}
       image={tryTeachingImage}
-      link={{ text: 'Věnujte 1 den škole', href: routes.dayForSchool }}
+      link={{ text: 'Věnujte 1 den škole', href: `${routes.tryTeaching.main}#den-pro-skolu` }}
       text={
         <>
           <p>
@@ -41,7 +41,7 @@ const HomePage: React.FC = () => (
     <CtaSection
       button={{ text: 'Chci se zaučit', href: routes.learn.main, color: '#FFB60B' }}
       image={startTeachingImage}
-      link={{ text: 'Tipy pro začínající učitele', href: routes.teachersTips }}
+      // link={{ text: 'Tipy pro začínající učitele', href: '' }}
       text={
         <>
           <p>Začátky za katedrou jsou velkou výzvou.</p>

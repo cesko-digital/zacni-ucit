@@ -1,7 +1,7 @@
 import { mediaQueriesUp } from 'src/common/mediaQueries';
 import { theme } from 'src/common/theme';
 import styled from 'styled-components';
-import Link from '@components/Link/Link';
+import Button from '@components/Button/Button';
 
 export const FooterWrap = styled.footer`
   display: flex;
@@ -120,9 +120,9 @@ export const SmallText = styled.p`
   display: inline;
 `;
 
-export const LinkSmall = styled.a`
+export const LinkSmall = styled(Button)`
+  color: #242120;
   font-size: ${theme.fontSize.small};
-  font-weight: 700;
 `;
 
 export const FooterInput = styled.input`
@@ -148,4 +148,26 @@ export const FooterLabel = styled.label`
   line-height: 28px;
   transform: translateX(300%) translateY(-100%);
   cursor: pointer;
+`;
+
+export const Link = styled(Button)`
+  font-weight: normal;
+  color: #4b4848;
+  display: inline-block;
+  margin: 0 0 8px;
+
+  ${mediaQueriesUp('md')`
+    font-size: 0.875rem;
+  `}
+`;
+
+export const MainLink = styled(Button)`
+  font-weight: bold;
+  color: #4b4848;
+  display: inline-block;
+  margin: 0 0 8px;
+
+  ${mediaQueriesUp('md')`
+    font-size: 0.875rem;
+  `}
 `;

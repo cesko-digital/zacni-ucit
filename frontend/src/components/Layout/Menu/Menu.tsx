@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import { ListMenu, Item, MenuTag, MenuLink, IconWrapper } from './styled';
-import Link from '@components/Link/Link';
+import { ListMenu, Item, MenuTag, MenuLink, IconWrapper, Backdrop } from './styled';
 import StyleWrapper from '@components/StyledWrapper';
+import Button from '@components/Button/Button';
 import { routes } from '@routes';
 
 import HomeIcon from '@icons/home.svg';
@@ -15,53 +15,53 @@ export const menuItems = [
     lights: [
       {
         label: 'Pedagogické minimum',
-        route: routes.pedagogicMinimum,
+        route: `${routes.startTeaching.crossroad}#pedagogicke-minimum`,
       },
       {
         label: 'Jací učitelé chybí?',
-        route: routes.missedTeachers,
+        route: `${routes.startTeaching.crossroad}#jaci-ucitele-chybi`,
       },
       {
         label: 'Zákon o pedagogických pracovnících',
-        route: routes.pedagogicalLaw,
+        route: `${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`,
       },
     ],
   },
 
-  {
-    label: 'Proč jít učit?',
-    route: routes.whyToTeach,
-    lights: [
-      {
-        label: 'Příběhy učitelů',
-        route: routes.teachersStories,
-      },
-      {
-        label: 'Platy učitelů',
-        route: routes.sallary,
-      },
-      {
-        label: 'Co můžete dělat ve škole',
-        route: routes.canDoAtSchool,
-      },
-      {
-        label: 'Volná místa ve školství',
-        route: routes.jobs,
-      },
-    ],
-  },
+  // {
+  //   label: 'Proč jít učit?',
+  //   route: routes.whyToTeach,
+  //   lights: [
+  //     {
+  //       label: 'Příběhy učitelů',
+  //       route: routes.whyToTeach,
+  //     },
+  //     {
+  //       label: 'Platy učitelů',
+  //       route: routes.sallary,
+  //     },
+  //     {
+  //       label: 'Co můžete dělat ve škole',
+  //       route: routes.canDoAtSchool,
+  //     },
+  //     {
+  //       label: 'Volná místa ve školství',
+  //       route: routes.jobs,
+  //     },
+  //   ],
+  // },
 
   {
     label: 'Chci zkusit učit',
-    route: routes.tryToTeach,
+    route: routes.tryTeaching.main,
     lights: [
       {
-        label: 'Zkus učit',
-        route: routes.tryToTeach,
+        label: 'Zkus učit!',
+        route: routes.tryTeaching.main,
       },
       {
         label: 'Den pro školu',
-        route: routes.dayForSchool,
+        route: `${routes.tryTeaching.main}#den-pro-skolu`,
       },
     ],
   },
@@ -74,55 +74,61 @@ export const menuItems = [
         label: 'Zauč se!',
         route: routes.learn.main,
       },
-      {
-        label: 'Tipy pro začínající učitele',
-        route: routes.teachersTips,
-      },
     ],
   },
 
   {
     label: 'Začni učit! je projektem spolku Výluka',
-    route: routes.vyluka,
+    route: 'http://www.vyluka.org/',
+    target: '_blank',
   },
 
-  {
-    label: 'Naši partneři a přispějte',
-    route: routes.partners,
-  },
+  // {
+  //   label: 'Naši partneři a přispějte',
+  //   route: routes.partners,
+  // },
 ];
 
 type Props = {
-  listOpened: boolean;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const Menu: FC<Props> = ({ listOpened }) => (
-  <MenuTag listOpened={listOpened}>
-    <ListMenu>
-      <Item greenBgr>
-        <Link href="/">
-          <MenuLink>
-            <IconWrapper>
-              <HomeIcon />
-            </IconWrapper>
-            Začni učit!
-          </MenuLink>
-        </Link>
-      </Item>
-      {menuItems.map(item => (
-        <Item key={item.label}>
-          <Link className="bold" href={item.route}>
-            {item.label}
-          </Link>
-          {item.lights?.map(light => (
-            <StyleWrapper key={light.route} margin="1rem 0 0 0">
-              <Link className="light" href={light.route}>
-                {light.label}
-              </Link>
-            </StyleWrapper>
-          ))}
+export const Menu: FC<Props> = ({ isOpen, setIsOpen }) => (
+  <>
+    <MenuTag listOpened={isOpen}>
+      <ListMenu>
+        <Item greenBgr>
+          <Button href={routes.homepage} onClick={() => setIsOpen(false)}>
+            <MenuLink>
+              <IconWrapper>
+                <HomeIcon />
+              </IconWrapper>
+              Začni učit!
+            </MenuLink>
+          </Button>
         </Item>
-      ))}
-    </ListMenu>
-  </MenuTag>
+        {menuItems.map(item => (
+          <Item key={item.label}>
+            <Button
+              className="bold"
+              href={item.route}
+              target={item.target}
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </Button>
+            {item.lights?.map(light => (
+              <StyleWrapper key={light.route} margin="1rem 0 0 0">
+                <Button className="light" href={light.route} onClick={() => setIsOpen(false)}>
+                  {light.label}
+                </Button>
+              </StyleWrapper>
+            ))}
+          </Item>
+        ))}
+      </ListMenu>
+    </MenuTag>
+    {isOpen && <Backdrop onClick={() => setIsOpen(false)} />}
+  </>
 );

@@ -20,8 +20,8 @@ interface Props {
 const StartTeachingCrossroadPage: React.FC<Props> = ({ logo, title, metaTitle, text, items }) => (
   <Container>
     <Meta title={metaTitle} />
-    <BackButton href={routes.startTeaching.crossroad} icon="home">
-      Zpátky na výběr kde chci učit
+    <BackButton href={routes.startTeaching.crossroad} icon="arrow">
+      Zpátky na výběr, kde chci učit
     </BackButton>
     <TopWrapper>
       <Logo alt="" src={logo} />

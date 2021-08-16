@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import LawReference from '@components/LawReference/LawReference';
 import { FocusedParagraph } from '@components/Typography';
 import StartTeachingPage from '@pages/StartTeachingPage/StartTeachingPage';
@@ -20,7 +19,7 @@ const Page: React.FC = () => (
     backButton={{
       href: routes.startTeaching.highSchool.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na SŠ',
-      bottomButtonText: 'Zpátky na výběr kde chci učit',
+      bottomButtonText: 'Zpátky na výběr, kde chci učit',
     }}
     logo={ssImage}
     mainInfo={
@@ -232,7 +231,7 @@ const Page: React.FC = () => (
               dokončil alespoň <strong>střední vzdělání s maturitní zkouškou</strong>.
             </p>
             <p>
-              V případě, že získal*a <strong>vysokoškolské vzdělání</strong>, splňuje předpoklady
+              V případě, že získal*a <strong>vysokoškolské vzdělání</strong>, splňuje předpoklady{' '}
               <strong>pro vyučování tohoto cizího jazyka</strong>.
             </p>
             <LawReference link="zakonyprolidi.cz/cs/2004-563#p22-4">
