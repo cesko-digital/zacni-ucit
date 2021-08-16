@@ -52,7 +52,7 @@ const ErrorPage: React.FC<Props> = ({ title, text, image, withCheckOtherPages })
         )}
 
         <LightText>
-          Stále tápete? Mapište nám na{' '}
+          Stále tápete? Napište nám na{' '}
           <LinkRegular href="mailto:info@vyluka.org">info@vyluka.org</LinkRegular>
         </LightText>
         <BackToHomeButton />
