@@ -11,7 +11,7 @@ const Page: React.FC = () => (
     backButton={{
       href: routes.startTeaching.highSchool.crossroad,
       topButtonText: 'Zpátky na výběr předmětů na SŠ',
-      bottomButtonText: 'Zpátky na výběr kde chci učit',
+      bottomButtonText: 'Zpátky na výběr, kde chci učit',
     }}
     logo={ssImage}
     mainInfo={

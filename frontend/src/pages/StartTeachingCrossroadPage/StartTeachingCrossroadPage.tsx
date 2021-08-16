@@ -21,7 +21,7 @@ const StartTeachingCrossroadPage: React.FC<Props> = ({ logo, title, metaTitle, t
   <Container>
     <Meta title={metaTitle} />
     <BackButton href={routes.startTeaching.crossroad} icon="home">
-      Zpátky na výběr kde chci učit
+      Zpátky na výběr, kde chci učit
     </BackButton>
     <TopWrapper>
       <Logo alt="" src={logo} />

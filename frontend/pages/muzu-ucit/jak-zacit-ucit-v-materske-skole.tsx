@@ -24,8 +24,8 @@ const Page: React.FC = () => (
     }
     backButton={{
       href: routes.startTeaching.crossroad,
-      topButtonText: 'Zpátky na výběr kde učit',
-      bottomButtonText: 'Zpátky na výběr kde chci učit',
+      topButtonText: 'Zpátky na výběr, kde učit',
+      bottomButtonText: 'Zpátky na výběr, kde chci učit',
     }}
     logo={msImage}
     mainInfo={
