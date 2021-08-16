@@ -36,11 +36,16 @@ export const FooterWrap = styled.footer`
     grid-column: 1/3;
     grid-row: 3/3;
     display:flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     justify-content:center;
-  }
 
+    & p.vyluka {
+     
+      &:before {
+        content: "•";
+        margin: 0 0.5rem;
+      }
+    }
   `}
 `;
 
@@ -79,7 +84,7 @@ export const FooterSection = styled.section`
 
   &.footer_section4 {
     background: rgba(127, 80, 255, 0.32);
-    text-align: center;
+    text-align: left;
   }
 `;
 

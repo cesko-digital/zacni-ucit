@@ -180,7 +180,7 @@ const Footer: FC = () => {
           <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
         </Link>
         <br></br>
-        <SmallText>© 2021 Výluka, z.s. PROTOTYP</SmallText>
+        <SmallText className="vyluka"> © 2021 Výluka, z.s. PROTOTYP</SmallText>
       </FooterSection>
     </FooterWrap>
   );
