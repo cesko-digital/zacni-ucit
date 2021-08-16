@@ -165,10 +165,10 @@ const Footer: FC = () => (
     </FooterSection>
     <FooterSection className="footer_section4">
       <SmallText>
-        <b>Začni učit! </b>je projektem neziskové organizace Výluka.
+        <b>Začni učit! </b>je projektem neziskové organizace Výluka
       </SmallText>
       <br></br>
-      <SmallText> © 2021 Výluka, z.s. PROTOTYP</SmallText>
+      <SmallText className="vyluka"> © 2021 Výluka, z.s. PROTOTYP</SmallText>
     </FooterSection>
   </FooterWrap>
 );
