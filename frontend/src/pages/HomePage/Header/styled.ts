@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  padding: 32px 100px 32px 0;
+  padding: 32px 130px 32px 0;
 
   ${mediaQueriesUp('sm')`
     padding: 80px 130px 80px 0;
