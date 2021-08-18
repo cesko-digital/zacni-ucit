@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Section, MainTitle, LogosWrapper, LogoItem, Link, Logo } from './styled';
-// import Button from '@components/Button/Button';
+import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
-// import { routes } from '@routes';
+import { routes } from '@routes';
 
 import ceskoDigitalLogo from './cesko-digital.png';
 import laboratorVodafoneLogo from './laborator-vodafone.png';
@@ -22,7 +22,8 @@ const PartnersSection: React.FC = () => (
     <Container>
       <MainTitle>Naši partneři</MainTitle>
       <p>
-        Děkujeme <strong>všem našim partnerům</strong> a podporovatelům za to, že při nás stojí.
+        Děkujeme <Button href={routes.partners}>všem našim partnerům</Button> a podporovatelům za
+        to, že při nás stojí.
       </p>
       <LogosWrapper>
         {logos.map(({ logo, href }) => (
@@ -33,9 +34,10 @@ const PartnersSection: React.FC = () => (
           </LogoItem>
         ))}
       </LogosWrapper>
-      {/* <Button buttonStyle="button" href={routes.donate}>
+      {/* <Button buttonStyle="button" href={routes.donate}> */}
+      <Button buttonStyle="button" href={routes.partners}>
         Chci se stát partnerem
-      </Button> */}
+      </Button>
     </Container>
   </Section>
 );
