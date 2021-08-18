@@ -1,3 +1,4 @@
+const path = require('path');
 const withImages = require('next-images');
 
 module.exports = withImages({
@@ -8,7 +9,7 @@ module.exports = withImages({
       oneOf: [
         {
           test: /\.svg$/,
-          include: /src\/icons/,
+          include: path.resolve('src/icons'),
           loader: '@svgr/webpack',
         },
         {
