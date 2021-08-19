@@ -67,7 +67,7 @@ export const menuItems = [
   },
 
   {
-    label: 'Chci se zaučit',
+    label: 'Začínám učit',
     route: routes.learn.main,
     lights: [
       {
