@@ -19,22 +19,60 @@ export const MainTitle = styled.h1`
 `}
 `;
 
-export const Paragraph = styled.p`
-  font-size: 1rem;
-  margin: 0 0 32px;
+export const Section = styled.section`
+  max-width: 100%;
 
-  &:last-child {
-    margin: 0;
+  padding: 1rem 1rem 2rem 1rem;
+
+  &.bgr {
+    background: rgba(127, 80, 255, 0.05);
   }
 `;
 
-export const MainLink = styled(Button)`
-  font-weight: bold;
-  color: #4b4848;
-  display: inline-block;
-  margin: 0 0 8px;
+export const Paragraph = styled.p`
+  font-size: 1rem;
+  margin: 1rem 0;
+  max-width: 75ch;
+`;
 
-  ${mediaQueriesUp('md')`
-    font-size: 0.875rem;
-  `}
+export const MainLink = styled(Button)`
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 8px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.underline {
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+`;
+
+export const Logo = styled.img`
+  max-width: 50%;
+  height: auto;
+`;
+
+export const Img = styled.img`
+  max-width: 50%;
+  height: auto;
+`;
+
+export const Link = styled.a`
+  appearance: none;
+`;
+
+export const Logowrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  justify-items: stretch;
+  align-items: center;
 `;
