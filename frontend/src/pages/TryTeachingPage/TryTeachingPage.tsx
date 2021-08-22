@@ -72,8 +72,8 @@ const TryTeachingPage: React.FC = () => (
         </Button>
       </ButtonsWrapper>
     </Section>
-    <Section>
-      <SectionTitle id="den-pro-skolu">Den pro školu</SectionTitle>
+    <Section id="den-pro-skolu">
+      <SectionTitle>Den pro školu</SectionTitle>
       <p>
         Učitelství vás láká, máte spoustu zkušeností z vašeho oboru – zároveň ale máte jen málo
         času? Využijte programu Den pro školu a{' '}

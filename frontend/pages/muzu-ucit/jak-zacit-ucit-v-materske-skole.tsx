@@ -25,7 +25,7 @@ const Page: React.FC = () => (
       </>
     }
     backButton={{
-      href: routes.startTeaching.crossroad,
+      href: `${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`,
       topButtonText: 'Zpátky na výběr, kde učit',
       bottomButtonText: 'Zpátky na výběr, kde chci učit',
     }}

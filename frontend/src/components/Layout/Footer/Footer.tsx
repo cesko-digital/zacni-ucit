@@ -17,11 +17,13 @@ import {
   Link,
   MainLink,
   Copy,
+  ButtonContent,
 } from './styled';
 
 import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
 import TwitterIcon from '@icons/twitter.svg';
+import Button from '@components/Button/Button';
 
 const Footer: FC = () => {
   const [inputValue, setInputValue] = React.useState('');
@@ -177,9 +179,11 @@ const Footer: FC = () => {
         </LinkSmall>
       </FooterSection>
       <FooterSection className="footer_section4">
-        <Link href="https://vyluka.org/" target="_blank">
-          <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
-        </Link>
+        <Button href="https://vyluka.org/" target="_blank">
+          <ButtonContent>
+            <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
+          </ButtonContent>
+        </Button>
         <br></br>
         <Copy margin={0}> © 2021 Výluka, z.s.</Copy>
       </FooterSection>

@@ -17,8 +17,8 @@ export const MainTitle = styled.h1`
 `;
 
 export const Section = styled.section`
-  padding: 72px 0 32px;
-  margin-top: -32px;
+  padding: 102px 0 32px;
+  margin-top: -72px;
 `;
 
 export const SectionTitle = styled.h2`

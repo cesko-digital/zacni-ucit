@@ -112,6 +112,7 @@ export const FlexColumn = styled.div`
 export const FooterText = styled.p`
   font-size: ${theme.fontSize.normal};
   font-weight: 400;
+  color: #242120;
 `;
 
 export const SmallText = styled.p`
@@ -121,7 +122,7 @@ export const SmallText = styled.p`
 `;
 
 export const Copy = styled.p`
-  font-size: ${theme.fontSize.small};
+  font-size: ${theme.fontSize.normal};
   font-weight: 400;
   display: inline;
   margin: 10px 0 0;
@@ -184,8 +185,14 @@ export const MainLink = styled(Button)`
   color: #4b4848;
   display: inline-block;
   margin: 0 0 8px;
+  text-align: left;
 
   ${mediaQueriesUp('md')`
     font-size: 0.875rem;
   `}
+`;
+
+export const ButtonContent = styled.span`
+  font-weight: normal;
+  text-align: left;
 `;

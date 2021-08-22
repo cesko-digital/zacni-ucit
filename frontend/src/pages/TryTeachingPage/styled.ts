@@ -40,7 +40,8 @@ export const Logo = styled.img`
 `;
 
 export const Section = styled.section`
-  padding: 32px 0;
+  padding: 102px 0 32px;
+  margin-top: -70px;
   position: relative;
 
   ${mediaQueriesUp('sm')`

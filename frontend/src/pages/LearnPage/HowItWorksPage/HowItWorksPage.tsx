@@ -94,12 +94,11 @@ const LearnHowItWorksPage: React.FC = () => (
       Zpátky na chci se zaučit
     </BackButton>
     <TopWrapper>
-      <MainTitle>Jak probíhá program</MainTitle>
+      <MainTitle>Jak probíhá celoroční program</MainTitle>
       <Logo alt="Chci se zaučit logo" height={149} src={logoImage} width={248} />
     </TopWrapper>
     <div>
       <Section>
-        <SectionTitle>Celoroční program</SectionTitle>
         <List>
           <ListItem>
             Na začátku se seznámíte se skupinou dalších začínajících vyučujících, se kterými se
