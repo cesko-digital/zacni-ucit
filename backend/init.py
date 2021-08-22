@@ -124,7 +124,6 @@ def init():
     init_school_level_2021_02()
     add_missing_subjects()
     init_courses()
-    init_education_type()
     init_other_options()
     init_school_type_2021_02()
     add_missing_language_school()
