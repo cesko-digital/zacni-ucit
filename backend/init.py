@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.core import management
 from common.models import GraphModel
-from qualifications.temp import init_map_2021_01, init_subject_types, init_other_options, init_qualification
+from qualifications.temp import init_map_2021_01, init_other_options, init_qualification
 from colleges.temp import init_courses_2021_01
 from colleges.temp2 import (
     init_courses,
@@ -12,11 +12,7 @@ from colleges.temp2 import (
     add_missing_institute_of_lifelong_learning,
     add_missing_subjects,
 )
-from teaching.temp import (
-    init_subjects_2021_01,
-    init_school_type_2021_02,
-    init_school_level_2021_02,
-)
+from teaching.temp import init_subjects_2021_01, init_school_type_2021_02, init_school_level_2021_02, init_subject_group
 
 
 def init_user():
@@ -72,18 +68,18 @@ def init_user():
                 "change_subjectgroup",
                 "delete_subjectgroup",
                 "view_subjectgroup",
-                "add_educationarea",
-                "change_educationarea",
-                "delete_educationarea",
-                "view_educationarea",
+                "add_educationspecialization",
+                "change_educationspecialization",
+                "delete_educationspecialization",
+                "view_educationspecialization",
                 "add_subjecttype",
                 "change_subjecttype",
                 "delete_subjecttype",
                 "view_subjecttype",
-                "add_otheroption",
-                "change_otheroption",
-                "delete_otheroption",
-                "view_otheroption",
+                "add_otherexperience",
+                "change_otherexperience",
+                "delete_otherexperience",
+                "view_otherexperience",
             ]
         )
     )
@@ -116,7 +112,7 @@ def init():
     init_subjects_2021_01()
     init_map_2021_01()
     init_courses_2021_01()
-    init_subject_types()
+    init_subject_group()
     init_other_options()
     init_school_type_2021_02()
     init_school_level_2021_02()

@@ -1,4 +1,4 @@
-from .models import Subject, SchoolType, SchoolSubType, SchoolLevel
+from .models import Subject, SchoolType, SchoolSubType, SchoolLevel, SubjectGroup
 
 
 def init_subjects_2021_01():
@@ -202,3 +202,23 @@ def init_school_type_2021_02():
     ss_type = SchoolType.objects.get(name="SŠ")
     for name in [i.strip() for i in subtypes.strip().split("\n")]:
         SchoolSubType.objects.get_or_create(name=name, type=ss_type)
+
+
+def init_subject_group():
+    """
+    Init for subject group
+    """
+    SUBJECT_GROUPS = [
+        "cizí jazyk",
+        "všeobecně-vzdělávací předměty",
+        "odborné předměty",
+        "praktické vyučování",
+        "odborný výcvik",
+        "umělecké předměty",
+        "konverzace",
+        "tělesná výchova",
+        "jakýkoli",
+    ]
+
+    for subject_group in SUBJECT_GROUPS:
+        SubjectGroup.objects.get_or_create(name=subject_group)
