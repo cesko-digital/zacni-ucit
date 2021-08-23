@@ -6,24 +6,24 @@ import { routes } from '@routes';
 import { MainTitle, Paragraph, MainLink, Link, Logo, Section, Logowrapper, Img } from './styled';
 import Meta from '@components/Meta/Meta';
 
-import ceskoDigitalLogo from '../../pages/HomePage/PartnersSection/cesko-digital.png';
-import laboratorVodafoneLogo from '../../pages/HomePage/PartnersSection/laborator-vodafone.png';
-import nadaceCsLogo from '../../pages/HomePage/PartnersSection/nadace-cs.png';
-import blizKSobeLogo from './bliz-k-sobe.png';
-import zemeKvetLogo from './zemekvet.png';
-import mhmpLogo from './praha-logo.png';
-import otevrenoLogo from './otevreno.png';
-import ucitelNazivoLogo from './ucitel-nazivo.png';
-import ucitelskaPlatformaLogo from './ucitelska-platforma.png';
-import skavLogo from './skav.png';
-import eduLogo from './edu.png';
-import nadaceKarlaJaneckaLogo from './nadace-karla-janecka.png';
-import euLogo from './european-social-fund.png';
+import CeskoDigitalLogo from './logos/cd.svg';
+import LaboratorVodafoneLogo from './logos/vodafone.svg';
+import NadaceCsLogo from './logos/cs.svg';
+import BlizKSobeLogo from './logos/blizksobe.svg';
+import ZemeKvetLogo from './logos/zemekvet.svg';
+import MhmpLogo from './logos/mhmp.svg';
+import OtevrenoLogo from './logos/otevreno.svg';
+import UcitelNazivoLogo from './logos/ucitelnazivo.svg';
+import UcitelskaPlatformaLogo from './logos/up.svg';
+import SkavLogo from './logos/skav.svg';
+import EduLogo from './logos/edu.svg';
+import NadaceKarlaJaneckaLogo from './logos/nadacekj.svg';
+import EuLogo from './logos/eufund.svg';
 import { VYLUKA_MAIL } from '@siteData';
 
 const data = [
   {
-    logo: ceskoDigitalLogo,
+    logo: CeskoDigitalLogo,
     href: 'https://cesko.digital/',
     text1: 'Dobrovolníci sdružení na platformě',
     text2:
@@ -31,76 +31,76 @@ const data = [
     link: 'Česko.Digital',
   },
   {
-    logo: nadaceCsLogo,
+    logo: NadaceCsLogo,
     href: 'https://www.nadacecs.cz/',
     text2: 'zajistila stabilní vedení organizace. Spolu také realizujeme projekt Den pro školu.',
     link: 'Nadace České spořitelny',
   },
   {
-    logo: blizKSobeLogo,
+    logo: BlizKSobeLogo,
     href: 'https://www.blizksobe.cz/',
     text2: 'je partnerem programu Zkus učit!',
     link: 'Nadace Blížksobě',
   },
   {
-    logo: zemeKvetLogo,
+    logo: ZemeKvetLogo,
     href: 'http://zemekvet.cz/',
     text2: 'přispívá k zajištění chodu organizace Výluka.',
     link: 'Nadační fond Zeměkvět',
   },
   {
-    logo: mhmpLogo,
+    logo: MhmpLogo,
     href: 'https://granty.praha.eu/GrantyPortal/default',
     text1: 'Díky podpoře od',
     text2: 'můžeme realizovat program Zauč se! v Praze.',
     link: 'MHMP',
   },
   {
-    logo: otevrenoLogo,
+    logo: OtevrenoLogo,
     href: 'https://otevreno.org/',
     text1: 'Díky organizaci',
     text2: 'se podílíme na změně vzdělávání pedagogů.',
     link: 'Otevřeno',
   },
   {
-    logo: ucitelNazivoLogo,
+    logo: UcitelNazivoLogo,
     href: 'https://www.ucitelnazivo.cz/',
     text1: 'Spolu s organizací',
     text2: 'se podílíme na změně vzdělávání v České republice.',
     link: 'Učitel naživo',
   },
   {
-    logo: ucitelskaPlatformaLogo,
+    logo: UcitelskaPlatformaLogo,
     href: 'https://www.ucitelskaplatforma.cz/',
     text1: 'Díky',
     text2: 'jsme v kontaktu se zkušenými učiteli a společně měníme pohled na učitelskou profesi.',
     link: 'Učitelské platformě',
   },
   {
-    logo: skavLogo,
+    logo: SkavLogo,
     href: 'https://skav.cz/',
     text2:
       'představuje důležitého partnera, který sdružuje mnoho subjektů s cílem změnit české vzdělávání.',
     link: 'SKAV',
   },
   {
-    logo: eduLogo,
+    logo: EduLogo,
     href: 'https://edu.cz/',
     text1: 'Spolu s',
     text2: 'poskytujeme důležité informace učitelům a o učitelství.',
     link: 'edu.cz',
   },
   {
-    logo: nadaceKarlaJaneckaLogo,
+    logo: NadaceKarlaJaneckaLogo,
     href: 'https://www.nadacekj.cz/',
     text1: 'Díky',
     text2: 'jsme ušli první kroky na cestě ke změně vzdělávání.',
     link: 'Nadaci Karla Janečka',
   },
   {
-    logo: laboratorVodafoneLogo,
+    logo: LaboratorVodafoneLogo,
     href: 'https://www.nadacevodafone.cz/',
-    logo2: euLogo,
+    logo2: EuLogo,
     text2: 'podpořila vývoj první verze webu Začni učit! v programu Laboratoř.',
     link: 'Nadace Vodafone Česká republika',
   },
