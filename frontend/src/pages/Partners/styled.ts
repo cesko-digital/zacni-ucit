@@ -21,10 +21,9 @@ export const MainTitle = styled.h1`
 
 export const Section = styled.section`
   max-width: 100%;
-
   padding: 1rem 1rem 2rem 1rem;
 
-  &.bgr {
+  &:nth-child(2n + 1) {
     background: rgba(127, 80, 255, 0.05);
   }
 `;

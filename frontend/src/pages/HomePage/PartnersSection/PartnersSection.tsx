@@ -34,7 +34,6 @@ const PartnersSection: React.FC = () => (
           </LogoItem>
         ))}
       </LogosWrapper>
-      {/* <Button buttonStyle="button" href={routes.donate}> */}
       <Button buttonStyle="button" href={routes.partners}>
         Chci se stát partnerem
       </Button>
