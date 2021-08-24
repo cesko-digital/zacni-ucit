@@ -21,8 +21,8 @@ class SchoolTypeAdmin(admin.ModelAdmin):
 
 class SubjectGroupAdmin(admin.ModelAdmin):
     list_display = ("name",)
-    list_filter = ("subjects",)
-    filter_horizontal = ("subjects",)
+    # list_filter = ("subjects",)
+    # filter_horizontal = ("subjects",)
 
 
 admin.site.register(Subject, SubjectAdmin)

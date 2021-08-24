@@ -8,6 +8,8 @@ from qualifications.graphql.types import (
     SubjectTypeObjectType,
     EducationTypeObjectType,
     OtherOptionObjectType,
+    QualificationObjectType,
+    SubjectGroupObjectType,
 )
 from qualifications.models import (
     Title,
@@ -17,8 +19,11 @@ from qualifications.models import (
     SubjectType,
     EducationType,
     OtherOption,
+    Qualification,
 )
-
+from teaching.models import (
+    SubjectGroup
+)
 
 class Query(graphene.ObjectType):
     # Titles queries
@@ -48,6 +53,21 @@ class Query(graphene.ObjectType):
     # Other option queries
     other_options = graphene.List(OtherOptionObjectType)
     other_option = graphene.List(OtherOptionObjectType, pk=graphene.Int(required=True))
+
+    # Subject group queries
+    subject_groups = graphene.List(SubjectGroupObjectType)
+    subject_group = graphene.Field(SubjectGroupObjectType, pk=graphene.Int(required=True))
+
+    # Qualification type queries
+    qualifications = graphene.List(QualificationObjectType)
+    qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
+
+    @staticmethod
+    def resolve_qualifications(root, info, subject, school_level):
+        subject_group = SubjectGroup.objects.filter(subject__name=subject)
+        return Qualification.objects.filter(subject_group=subject_group, school_level=school_level).prefetch_related(
+            "education_types"
+        )
 
     @staticmethod
     def resolve_titles(root, info):

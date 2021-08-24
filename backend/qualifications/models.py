@@ -1,6 +1,6 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
-from teaching.models import SchoolLevel
+from teaching.models import SchoolLevel, SubjectGroup
 
 
 class CollegeArea(TimeStampedModel):
@@ -130,6 +130,9 @@ class Qualification(TimeStampedModel):
     row_id = models.SmallIntegerField()
     subject_type = models.ForeignKey(
         SubjectType, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Typ předmětů"
+    )
+    subject_group = models.ForeignKey(
+        SubjectGroup, on_delete=models.SET_NULL, null=True, verbose_name="Předmětové skupiny"
     )
     school_level = models.ForeignKey(
         SchoolLevel, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Stupeň školy"
