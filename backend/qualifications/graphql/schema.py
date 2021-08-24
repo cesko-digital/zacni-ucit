@@ -7,7 +7,7 @@ from qualifications.graphql.types import (
     PreparationTypeObjectType,
     SubjectTypeObjectType,
     EducationTypeObjectType,
-    OtherOptionObjectType,
+    OtherExperienceObjectType,
     QualificationObjectType,
     SubjectGroupObjectType,
 )
@@ -18,7 +18,7 @@ from qualifications.models import (
     EducationArea,
     SubjectType,
     EducationType,
-    OtherOption,
+    OtherExperience,
     Qualification,
 )
 from teaching.models import (
@@ -50,9 +50,9 @@ class Query(graphene.ObjectType):
     education_types = graphene.List(EducationTypeObjectType)
     education_type = graphene.Field(EducationTypeObjectType, pk=graphene.Int(required=True))
 
-    # Other option queries
-    other_options = graphene.List(OtherOptionObjectType)
-    other_option = graphene.List(OtherOptionObjectType, pk=graphene.Int(required=True))
+    # Other experience queries
+    other_experiences = graphene.List(OtherExperienceObjectType)
+    other_experience = graphene.List(OtherExperienceObjectType, pk=graphene.Int(required=True))
 
     # Subject group queries
     subject_groups = graphene.List(SubjectGroupObjectType)
@@ -119,8 +119,8 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_other_options(root, info):
-        return OtherOption.objects.all()
+        return OtherExperience.objects.all()
 
     @staticmethod
     def resolve_other_option(root, info, pk: int):
-        return OtherOption.objects.get(pk=pk)
+        return OtherExperience.objects.get(pk=pk)

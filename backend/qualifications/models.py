@@ -55,10 +55,6 @@ class EducationArea(TimeStampedModel):
         return self.name
 
 
-class SubjectType(TimeStampedModel):
-    name = models.CharField("Název", max_length=512, unique=True)
-
-
 class PreparationType(TimeStampedModel):
     name = models.CharField("Název", max_length=200, unique=True)
 
@@ -69,15 +65,6 @@ class PreparationType(TimeStampedModel):
 
     def __str__(self):
         return self.name
-
-
-class Title(TimeStampedModel):
-    """
-    Titul.
-    """
-
-    name = models.CharField("Název", max_length=100)
-    code = models.CharField("Zkratka", max_length=20, unique=True)
 
 
 class SubjectType(TimeStampedModel):
@@ -91,6 +78,25 @@ class SubjectType(TimeStampedModel):
     def __str__(self):
         return self.code
 
+
+
+class Title(TimeStampedModel):
+    """
+    Titul.
+    """
+
+    name = models.CharField("Název", max_length=100)
+    code = models.CharField("Zkratka", max_length=20, unique=True)
+    visible_in_form = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Kvalifikace"
+        verbose_name_plural = "Kvalifikace"
+        ordering = ("name", "code")
+
+    def __str__(self):
+        return self.name
+        
 
 class EducationType(TimeStampedModel):
     """
@@ -144,23 +150,6 @@ class Qualification(TimeStampedModel):
     )
     note = models.TextField("Poznámka", null=True)
 
-
-class Title(TimeStampedModel):
-    """
-    Titul.
-    """
-
-    name = models.CharField("Název", max_length=100)
-    code = models.CharField("Zkratka", max_length=20, unique=True)
-    visible_in_form = models.BooleanField(default=True)
-
-    class Meta:
-        verbose_name = "Kvalifikace"
-        verbose_name_plural = "Kvalifikace"
-        ordering = ("name", "code")
-
-    def __str__(self):
-        return self.name
 
 
 class OtherExperience(TimeStampedModel):
