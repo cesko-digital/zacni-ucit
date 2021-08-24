@@ -125,15 +125,15 @@ const HowTeachingProgramWorks: React.FC = () => (
       <Image alt="" height={164} src={image2} width={328} />
       <List>
         <ListItem>
-          Víkendové soustředění proběhne od pátečního odpoledne 12. 11. do sobotního večera 13. 11.
+          Víkendové soustředění proběhne od pátečního odpoledne 12.&nbsp;11. do sobotního večera 13.&nbsp;11.&nbsp;2021
           na chatě mimo Prahu, o místě vás budeme včas informovat.
         </ListItem>
         <ListItem>
-          Týdenní stáž se uskuteční v týdnu od 22. do 26. 11. podle zvolené varianty na škole ve
+          Týdenní stáž se uskuteční v týdnu od 22. do 26.&nbsp;11.&nbsp;2021 podle zvolené varianty na škole ve
           vašem okolí, nebo ve vybrané inspirativní škole (v tomto případě budete vyjíždět již v
-          neděli 21. 11.).
+          neděli 21.&nbsp;11.&nbsp;2021).
         </ListItem>
-        <ListItem>Závěrečná reflexe následuje v sobotu 27. 11.</ListItem>
+        <ListItem>Závěrečná reflexe následuje v sobotu 27.&nbsp;11.&nbsp;2021</ListItem>
         <ListItem>
           Díky finanční podpoře našeho dárce Nadace <Uppercase>Blížksobě</Uppercase> vám účast v
           programu nabízíme za skvělou cenu 5 000 Kč. Skutečná cena na jednoho účastníka totiž
