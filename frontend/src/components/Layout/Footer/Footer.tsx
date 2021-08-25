@@ -76,7 +76,7 @@ const Footer: FC = () => {
           </LinkToExtPage>
           <LinkToExtPage
             className="footerBtn"
-            href="https://twitter.com/vyluka_?lang=en"
+            href="https://twitter.com/zacniucit"
             target="_blank"
           >
             <TwitterIcon /> Twitter
