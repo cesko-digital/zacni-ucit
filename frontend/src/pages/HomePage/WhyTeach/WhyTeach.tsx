@@ -7,13 +7,13 @@ import {
   List,
   ListItem,
   ItemValue,
-  // Button,
+  Button,
   // ButtonWrapper,
-  // MainButtonWrapper,
+  MainButtonWrapper,
 } from './styled';
 // import ButtonComponent from '@components/Button/Button';
 import Container from '@components/Container/Container';
-// import { routes } from '@routes';
+import { routes } from '@routes';
 
 const data = [
   { value: 6000, text: 'učitelů chybí' },
@@ -33,11 +33,15 @@ const WhyTeach: React.FC = () => (
           </ListItem>
         ))}
       </List>
-      {/* <MainButtonWrapper>
-        <Button buttonStyle="button" href={routes.whyToTeach} variant="secondary">
+      <MainButtonWrapper>
+        <Button
+          buttonStyle="button"
+          href={`${routes.whyToTeach}#pribehy-ucitelu`}
+          variant="secondary"
+        >
           Příběhy učitelů
         </Button>
-      </MainButtonWrapper> */}
+      </MainButtonWrapper>
 
       {/* <BottomWrapper>
         <ButtonWrapper>

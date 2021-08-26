@@ -120,7 +120,7 @@ const Partners: React.FC = () => (
       <MainTitle>Partneři</MainTitle>
       <Paragraph>
         Za webovou platformou Začni učit! stojí{' '}
-        <MainLink className="underline" href={routes.vyluka}>
+        <MainLink className="underline" href={routes.aboutUs}>
           {' '}
           organizace Výluka, z.s.
         </MainLink>

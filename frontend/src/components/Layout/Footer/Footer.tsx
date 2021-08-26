@@ -24,6 +24,7 @@ import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
 import TwitterIcon from '@icons/twitter.svg';
 import Button from '@components/Button/Button';
+import { routes } from '@routes';
 
 const Footer: FC = () => {
   const [inputValue, setInputValue] = React.useState('');
@@ -179,7 +180,7 @@ const Footer: FC = () => {
         </LinkSmall>
       </FooterSection>
       <FooterSection className="footer_section4">
-        <Button href="https://vyluka.org/" target="_blank">
+        <Button href={routes.aboutUs} target="_blank">
           <ButtonContent>
             <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
           </ButtonContent>

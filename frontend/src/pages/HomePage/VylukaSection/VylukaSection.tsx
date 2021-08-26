@@ -3,7 +3,7 @@ import React from 'react';
 import { Section, Title, TopWrapper, Logo, Buttons, ButtonWrapper, Regular } from './styled';
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
-// import { routes } from '@routes';
+import { routes } from '@routes';
 
 import vylukaLogo from './vyluka.svg';
 import ExternaIcon from '@icons/external.svg';
@@ -29,6 +29,7 @@ const VylukaSection: React.FC = () => (
             Podpořte nás na Darujme.cz
           </Button>
         </ButtonWrapper>
+        <Button href={routes.aboutUs}>O Výluce</Button>
         {/* <Button href={routes.donate}>Přispějte jinak</Button> */}
       </Buttons>
     </Container>

@@ -7,7 +7,6 @@ export const routes = {
   teachingStart: '/zacinam-ucit',
   canITeach: '/muzu-ucit',
   motivation: '/motivace',
-  aboutUs: '/o-nas',
   partners: '/partners',
   contact: '/kontakt',
   signUp: '/registrace',
@@ -22,8 +21,8 @@ export const routes = {
   canDoAtSchool: '/co-muzete-delat-ve-skole',
   jobs: '/volna-mista-ve-skolstvi',
   donate: '/pripejte-jinak',
-  vyluka: '/vyluka',
 
+  aboutUs: '/o-vyluce',
   whyToTeach: '/proc-jit-ucit',
   tryTeaching: {
     main: '/chci-si-zkusit-uceni',
