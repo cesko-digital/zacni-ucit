@@ -7,7 +7,7 @@ export const routes = {
   teachingStart: '/zacinam-ucit',
   canITeach: '/muzu-ucit',
   motivation: '/motivace',
-  partners: '/partners',
+  partners: '/partneri',
   contact: '/kontakt',
   signUp: '/registrace',
   login: '/login',
