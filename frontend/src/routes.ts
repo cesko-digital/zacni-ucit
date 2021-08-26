@@ -8,7 +8,7 @@ export const routes = {
   canITeach: '/muzu-ucit',
   motivation: '/motivace',
   aboutUs: '/o-nas',
-  partners: '/#partners',
+  partners: '/partners',
   contact: '/kontakt',
   signUp: '/registrace',
   login: '/login',

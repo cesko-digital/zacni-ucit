@@ -83,10 +83,10 @@ export const menuItems = [
     target: '_blank',
   },
 
-  // {
-  //   label: 'Naši partneři a přispějte',
-  //   route: routes.partners,
-  // },
+  {
+    label: 'Naši partneři a přispějte',
+    route: routes.partners,
+  },
 ];
 
 type Props = {
