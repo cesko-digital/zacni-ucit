@@ -25,7 +25,6 @@ import zs2Image from './zs2.svg';
 import ChevronIcon from '@icons/chevron-right.svg';
 import ListIcon from '@icons/list.svg';
 import Meta from '@components/Meta/Meta';
-import subjects from './subjects.pdf';
 
 const CanITeachPage: React.FC = () => (
   <Container>
@@ -86,7 +85,7 @@ const CanITeachPage: React.FC = () => (
       <Paragraph>
         Vyberte si, kde chcete učit, a my vám ukážeme, jak na to. Pokud si nejste jistí, jaké
         předměty se svým vzděláním můžete vyučovat, podívejte se do naší{' '}
-        <MainLink href={subjects} download>
+        <MainLink href="./subjects.pdf" target="_blank" download>
           tabulky
         </MainLink>
         .
