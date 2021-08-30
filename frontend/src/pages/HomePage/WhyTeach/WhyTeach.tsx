@@ -3,15 +3,15 @@ import React from 'react';
 import {
   Section,
   MainTitle,
-  // BottomWrapper,
+  BottomWrapper,
   List,
   ListItem,
   ItemValue,
   Button,
-  // ButtonWrapper,
+  ButtonWrapper,
   MainButtonWrapper,
 } from './styled';
-// import ButtonComponent from '@components/Button/Button';
+import ButtonComponent from '@components/Button/Button';
 import Container from '@components/Container/Container';
 import { routes } from '@routes';
 
@@ -43,14 +43,14 @@ const WhyTeach: React.FC = () => (
         </Button>
       </MainButtonWrapper>
 
-      {/* <BottomWrapper>
+      <BottomWrapper>
         <ButtonWrapper>
           <ButtonComponent href={routes.sallary}>Platy učitelů</ButtonComponent>
         </ButtonWrapper>
         <ButtonWrapper>
           <ButtonComponent href={routes.jobs}>Volná místa ve školství</ButtonComponent>
         </ButtonWrapper>
-      </BottomWrapper> */}
+      </BottomWrapper>
     </Container>
   </Section>
 );

@@ -43,10 +43,10 @@ export const menuItems = [
         label: 'Co můžete dělat ve škole',
         route: `${routes.whyToTeach}#co-muzete-delat-ve-skole`,
       },
-      // {
-      //   label: 'Volná místa ve školství',
-      //   route: routes.jobs,
-      // },
+      {
+        label: 'Volná místa ve školství',
+        route: routes.jobs,
+      },
     ],
   },
   {

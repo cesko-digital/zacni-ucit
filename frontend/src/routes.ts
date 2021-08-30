@@ -17,13 +17,14 @@ export const routes = {
   isTeachingForMe: 'je-ucitelstvi-pro-me',
   chooseSchool: '/vybiram-skolu',
   pedagogicalLaw: '/zakon-o-ped-pracovnicich',
-  sallary: '/platy-ucitelu',
+  sallary: '/proc-jit-ucit#platy-ucitelu',
   canDoAtSchool: '/co-muzete-delat-ve-skole',
-  jobs: '/volna-mista-ve-skolstvi',
+
   donate: '/pripejte-jinak',
 
   aboutUs: '/o-vyluce',
   whyToTeach: '/proc-jit-ucit',
+  jobs: '/proc-jit-ucit/volna-mista-ve-skolstvi',
   tryTeaching: {
     main: '/chci-si-zkusit-uceni',
     howItWorks: '/chci-si-zkusit-uceni/jak-probiha-program',
