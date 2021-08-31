@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('qualifications', '0005_otheroption'),
+        
         ('colleges', '0003_auto_20210622_0931'),
     ]
 
