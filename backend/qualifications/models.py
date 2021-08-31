@@ -79,7 +79,6 @@ class SubjectType(TimeStampedModel):
         return self.code
 
 
-
 class Title(TimeStampedModel):
     """
     Titul.
@@ -96,7 +95,7 @@ class Title(TimeStampedModel):
 
     def __str__(self):
         return self.name
-        
+
 
 class EducationType(TimeStampedModel):
     """
@@ -117,6 +116,9 @@ class EducationType(TimeStampedModel):
     area = models.ForeignKey(EducationArea, on_delete=models.SET_NULL, null=True, verbose_name="Oblast VŠ vzdělávání")
     character = models.CharField("Charakter", max_length=100)
     subject_type = models.ForeignKey(SubjectType, on_delete=models.SET_NULL, null=True, verbose_name="Typ předmětů")
+    subject_group = models.ForeignKey(
+        SubjectGroup, on_delete=models.SET_NULL, null=True, verbose_name="Předmětové skupiny"
+    )
     school_levels = models.ManyToManyField(
         "teaching.SchoolLevel", related_name="education_types", verbose_name="Stupeň školy"
     )
@@ -149,7 +151,6 @@ class Qualification(TimeStampedModel):
         help_text="Typ vzdělání z hlediska zákona",
     )
     note = models.TextField("Poznámka", null=True)
-
 
 
 class OtherExperience(TimeStampedModel):
