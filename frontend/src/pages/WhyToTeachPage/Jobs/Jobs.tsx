@@ -1,9 +1,11 @@
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
+
 import Container from '@components/Container/Container';
 import { H2 } from '@components/Typography';
 import BackButton from '@pages/BackButton/BackButton';
 import { routes } from '@routes';
-import { MainLink, MainTitle, Paragraph, Section } from './styled';
+import { MainTitle, Paragraph, Section } from './styled';
+import Button from '@components/Button/Button';
 
 const links = [
   {
@@ -58,11 +60,11 @@ const Partners: React.FC = () => (
     </Section>
     <Section withBackground>
       <H2>Volná místa ve školství</H2>
-      {links.map(link => (
+      {links.map(({ link, name }) => (
         <Paragraph>
-          <MainLink href={link.link} className="underline" target="_blank">
-            {link.name}
-          </MainLink>
+          <Button href={link} buttonStyle="link">
+            {name}
+          </Button>
           <br />
         </Paragraph>
       ))}

@@ -58,15 +58,3 @@ export const Paragraph = styled.p`
   margin: 1rem 0;
   max-width: 75ch;
 `;
-
-export const MainLink = styled(Button)`
-  display: inline-block;
-  font-weight: 700;
-  font-size: 1rem;
-  margin: 0 0 8px;
-  text-decoration: underline;
-
-  &:hover {
-    text-decoration: none;
-  }
-`;
