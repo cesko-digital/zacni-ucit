@@ -57,7 +57,10 @@ const HowTeachingProgramWorks: React.FC = () => (
           Jde o nadšené profíky z praxe, lidi na rodičovské dovolené, studenty nejrůznějších oborů…
         </strong>
         . Jak takové příběhy vypadají, vypráví absolventi našeho oblíbeného programu{' '}
-        <Button href="https://www.ucitelnazivo.cz/">Učitel naživo</Button>.
+        <Button href="https://www.ucitelnazivo.cz/" target="_blank">
+          Učitel naživo
+        </Button>
+        .
       </p>
       <p>
         Prohlédnout si můžete, jak se za katedru dostala 🐛{' '}
