@@ -70,10 +70,10 @@ class Query(graphene.ObjectType):
         # query na vyfiltrovani cest + join s education types
         subject_group = SubjectGroup.objects.filter(subject__name=subject)
         paths = Qualification.objects.filter(subject_group=subject_group, school_level=school_level).prefetch_related(
-            "education_types")
+            "education_types").values()
 
         # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
-        df = pd.DataFrame(paths)
+        df = pd.DataFrame(list(paths))
         for index, row in df.iterrows():
             for edu_type in row["education_types"]:
 
