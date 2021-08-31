@@ -109,17 +109,12 @@ const LearnHowItWorksPage: React.FC = () => (
             vizí.
           </ListItem>
           <ListItem>
-            Každý měsíc vás čeká jedno tematické a jedno reflektivní setkání, vždy pod vedením
-            zkušených lektorů a lektorek.
+            Čeká vás 10 tematických a 5 reflektivních setkání, vždy pod vedením zkušených lektorů a lektorek.
           </ListItem>
           <ListItem>Tempo svého rozvoje si určujete podle vlastní potřeby.</ListItem>
           <ListItem>Setkání probíhají v Praze.</ListItem>
           <ListItem>Po celou dobu trvání programu je vám k dispozici zkušená průvodkyně.</ListItem>
         </List>
-        <p>
-          Vyzkoušíte si přípravu učiva na hodinu podle materiálů s metodickými základy od zkušených
-          lektorů.
-        </p>
         <p>
           Díky finanční podpoře našich dárců MHMP a Nadace České spořitelny je cena celoročního
           kurzu (včetně ubytování na výjezdním víkendu) <strong>5 000 Kč</strong>. Skutečná cena na
