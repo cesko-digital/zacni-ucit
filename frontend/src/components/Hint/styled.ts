@@ -1,3 +1,4 @@
+import { mediaQueriesUp } from 'src/common/mediaQueries';
 import styled from 'styled-components';
 
 export const Button = styled.button`
@@ -12,6 +13,10 @@ export const Button = styled.button`
   margin-bottom: 16px;
   padding: 5px 0;
   text-align: left;
+
+  ${mediaQueriesUp('sm')`
+    font-size: 14px;
+  `}
 `;
 
 export const IconWrapper = styled.span`

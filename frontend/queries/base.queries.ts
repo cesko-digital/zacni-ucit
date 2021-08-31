@@ -27,25 +27,6 @@ export const allTitlesQuery = gql`
   }
 `;
 
-export const allSchoolLevelsQuery = gql`
-  query allSchoolLevelsQuery {
-    schoolLevels {
-      id
-      name
-    }
-  }
-`;
-
-export const allSubjectsQuery = gql`
-  query allSubjectsQuery {
-    subjects {
-      id
-      code
-      name
-    }
-  }
-`;
-
 export const titleQuery = gql`
   query title($id: Integer!) {
     title(id: $id) {
