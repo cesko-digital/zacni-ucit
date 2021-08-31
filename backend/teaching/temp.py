@@ -1,4 +1,5 @@
 from .models import Subject, SchoolType, SchoolSubType, SchoolLevel, SubjectGroup
+import os
 
 
 def init_subjects_2021_01():
@@ -207,18 +208,27 @@ def init_school_type_2021_02():
 def init_subject_group():
     """
     Init for subject group
+    Data source: https://docs.google.com/spreadsheets/d/1msJu1AX_-wYLbhvz8rqsZxFMBwX7-xzghCAFHeeBQEI/edit#gid=443235263
+    List Skupiny předmětů
+    First row removed
     """
-    SUBJECT_GROUPS = [
-        "cizí jazyk",
-        "všeobecně-vzdělávací předměty",
-        "odborné předměty",
-        "praktické vyučování",
-        "odborný výcvik",
-        "umělecké předměty",
-        "konverzace",
-        "tělesná výchova",
-        "jakýkoli",
-    ]
 
-    for subject_group in SUBJECT_GROUPS:
-        SubjectGroup.objects.get_or_create(name=subject_group)
+    SubjectGroup.objects.get_or_create(name="jakýkoli")
+    SubjectGroup.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
+
+    filepath = os.path.join(os.getcwd(), "data_init", "subject_groups.csv")
+    with open(filepath, "r", encoding="utf-8") as csvfile:
+        data = csvfile.read().strip()
+
+        dict = {}
+        for group_name, subject in [i.split(",") for i in data.split("\n")]:
+            if group_name in dict:
+                subj, _ = Subject.objects.get_or_create(code=subject)
+                dict[group_name].append(subj)
+            else:
+                subj, _ = Subject.objects.get_or_create(code=subject)
+                dict[group_name] = [subj]
+
+        for key in dict:
+            subj_group, _ = SubjectGroup.objects.get_or_create(name=key)
+            subj_group.subjects.add(*dict[key])
