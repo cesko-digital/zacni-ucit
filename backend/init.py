@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.core import management
 from common.models import GraphModel
-from qualifications.temp import init_map_2021_01, init_other_options, init_qualification
+from qualifications.temp import init_map_2021_01, init_other_options, init_qualification, init_education_specialization
 from colleges.temp import init_courses_2021_01
 from colleges.temp2 import (
     init_courses,
@@ -116,6 +116,7 @@ def init():
     init_other_options()
     init_school_type_2021_02()
     init_school_level_2021_02()
+    init_education_specialization()
     init_qualification()
     import_colleges()
     if neo4j:

@@ -310,9 +310,24 @@ Zemědělství		PŘ	F	ENV
                 programme.subjects.add(*subjects)
 
 
+def init_education_specialization():
+    """
+    Data Source: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=254445099
+    List Číselník oblastí VŠ studia
+    First row removed
+    """
+
+    filepath = os.path.join(os.getcwd(), "data_init", "education_specialization.csv")
+    with open(filepath, "r", encoding="utf-8") as csvfile:
+        data = csvfile.readlines()
+        for i in range(len(data)):
+            data[i] = data[i].replace("\n", "").replace('"', "").strip()
+            education_specialization, _ = EducationSpecialization.objects.get_or_create(name=data[i])
+
+
 def init_qualification():
     """
-    Zdroj dat: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=645564954
+    Data source: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=645564954
     csv file - removed first rows (headers)
     There are also initial data for Title, EducationSpecialization and EducationType
     Adds missing SubjectGroup - Jakýkoli kromě cizího jazyka
