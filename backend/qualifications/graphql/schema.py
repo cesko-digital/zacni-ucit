@@ -110,7 +110,7 @@ class Query(graphene.ObjectType):
         # vsechny relevantni sloupce pro danou EduType do json sloupce
         for index, row in df.iterrows():
             for edu_type in row["education_types"]:
-                columns = df.loc[:0, "name", "title", "area", "subject_group", "school_levels", "completed"] # check :0
+                columns = edu_type.loc[:0, "name", "title", "area", "subject_group", "school_levels", "completed"] # check :0
                 json = columns.to_json()  
                 edu_type["edu_type_json"] = json
 
