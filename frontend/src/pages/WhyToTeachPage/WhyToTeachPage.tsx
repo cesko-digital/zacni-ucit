@@ -57,19 +57,31 @@ const HowTeachingProgramWorks: React.FC = () => (
           Jde o nadšené profíky z praxe, lidi na rodičovské dovolené, studenty nejrůznějších oborů…
         </strong>
         . Jak takové příběhy vypadají, vypráví absolventi našeho oblíbeného programu{' '}
-        <Button href="https://www.ucitelnazivo.cz/">Učitel naživo</Button>.
+        <Button href="https://www.ucitelnazivo.cz/" target="_blank">
+          Učitel naživo
+        </Button>
+        .
       </p>
       <p>
         Prohlédnout si můžete, jak se za katedru dostala 🐛{' '}
-        <Button href="https://www.ucitelnazivo.cz/blog/jako-ucitel-nejsem-ten-kdo-detem-rika-tu-pravdu-objevuji-ji-samy">
+        <Button
+          href="https://www.ucitelnazivo.cz/blog/jako-ucitel-nejsem-ten-kdo-detem-rika-tu-pravdu-objevuji-ji-samy"
+          target="_blank"
+        >
           bioložka
         </Button>
         , 💾{' '}
-        <Button href="https://www.ucitelnazivo.cz/blog/energie-kterou-do-uceni-davam-se-mi-okamzite-vraci">
+        <Button
+          href="https://www.ucitelnazivo.cz/blog/energie-kterou-do-uceni-davam-se-mi-okamzite-vraci"
+          target="_blank"
+        >
           informatik
         </Button>{' '}
         nebo 👶{' '}
-        <Button href="https://www.ucitelnazivo.cz/blog/mistrovstvim-ucitele-je-vytvaret-prilezitosti-pro-vsechny-zaky-ve-tride">
+        <Button
+          href="https://www.ucitelnazivo.cz/blog/mistrovstvim-ucitele-je-vytvaret-prilezitosti-pro-vsechny-zaky-ve-tride"
+          target="_blank"
+        >
           inženýrka po mateřské
         </Button>
         .
@@ -107,12 +119,22 @@ const HowTeachingProgramWorks: React.FC = () => (
         dvěma póly. (Ale pozor, většina asistentů je zaměstnána jen na částečný úvazek.)
       </p>
       <Source>
-        Zdroje: <Button href="https://www.ucitelskaplatforma.cz/2021/06/03/13362/">UP</Button>,{' '}
-        <Button href="https://www.ceskenoviny.cz/zpravy/msmt-plat-ucitelu-loni-stoupl-o-10-2-procenta-na-44-202-kc/2025721">
+        Zdroje:{' '}
+        <Button href="https://www.ucitelskaplatforma.cz/2021/06/03/13362/" target="_blank">
+          UP
+        </Button>
+        ,{' '}
+        <Button
+          href="https://www.ceskenoviny.cz/zpravy/msmt-plat-ucitelu-loni-stoupl-o-10-2-procenta-na-44-202-kc/2025721"
+          target="_blank"
+        >
           ČTK
         </Button>
         ,{' '}
-        <Button href="https://www.asistentpedagoga.cz/asistent-pedagoga/zakony-vyhlasky/plat-asistenta-pedagoga">
+        <Button
+          href="https://www.asistentpedagoga.cz/asistent-pedagoga/zakony-vyhlasky/plat-asistenta-pedagoga"
+          target="_blank"
+        >
           asistentpedagoga.cz
         </Button>
       </Source>
@@ -147,8 +169,10 @@ const HowTeachingProgramWorks: React.FC = () => (
       <p>
         Pro přehled o každodenních tématech učitelů z praxe mrkněte na facebookovou skupinu naší
         spřátelené Učitelské platformy{' '}
-        <Button href="https://www.facebook.com/groups/uciteleplus">Učitelé+</Button>! (Skupina je
-        uzavřená, ale obsah je viditelný pro všechny.)
+        <Button href="https://www.facebook.com/groups/uciteleplus" target="_blank">
+          Učitelé+
+        </Button>
+        ! (Skupina je uzavřená, ale obsah je viditelný pro všechny.)
       </p>
     </Section>
     <BackToHomeButton href={routes.homepage}>Zpátky domů</BackToHomeButton>

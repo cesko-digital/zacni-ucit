@@ -140,7 +140,7 @@ const Partners: React.FC = () => (
     </Section>
 
     {data.map(item => (
-      <Section key={item.logo}>
+      <Section key={item.href}>
         {item.logo2 ? (
           <Logowrapper>
             <Link href={item.href} target="_blank">

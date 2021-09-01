@@ -19,9 +19,9 @@ const PathSection: React.FC = () => (
         <Button align="right" href={routes.canITeach} left={-100} top={70}>
           Chci si doplnit kvalifikaci
         </Button>
-        <Text align="left" href="#" right={-100} top={115}>
+        <Button align="left" href={routes.jobs} right={-100} top={115}>
           Vybírám si školu, kde budu učit
-        </Text>
+        </Button>
         <Button href={routes.learn.main} align="right" left={-100} top={165}>
           Začínám učit
         </Button>

@@ -1,5 +1,6 @@
 import { mediaQueriesUp } from 'src/common/mediaQueries';
 import styled from 'styled-components';
+import Button from '@components/Button/Button';
 
 export const MainTitle = styled.h1`
   text-align: center;
@@ -64,4 +65,16 @@ export const BackButtonWrapper = styled.div`
   padding: 16px 0 32px;
   display: flex;
   justify-content: center;
+`;
+
+export const MainLink = styled(Button)`
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 8px;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
 `;
