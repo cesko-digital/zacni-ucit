@@ -125,6 +125,20 @@ const LearnHowItWorksPage: React.FC = () => (
           kurzu (včetně ubytování na výjezdním víkendu) <strong>5 000 Kč</strong>. Skutečná cena na
           jednoho účastníka totiž činí více než 20 000 Kč.
         </p>
+        <p>
+          Deadline přihlášek je <strong>23. 9. 2021 do 23:59</strong> (můžete se tedy přihlásit i na
+          prvním ochutnávkovém setkání).
+        </p>
+        <p>
+          * <strong>Ve dvou se to lépe učí:</strong> Pokud se přihlásíte s kolegou/kolegyní nebo s
+          kamarádem/kamarádkou, napište jeho jméno a příjmení nakonec do "Máte pro nás nějaký vzkaz
+          nebo podnět". <strong>Dáme každému slevu 500 Kč</strong>.
+        </p>
+        <p>
+          * Pokud jste se už v minulosti zúčastnili některého z programů Výluky, dáme vám slevu 500
+          Kč. Pro uplatnění slevy napište nakonec do "Máte pro nás nějaký vzkaz nebo podnět" heslo
+          Výluka.
+        </p>
         <SignUpButtonWrapper>
           <Button
             buttonStyle="button"
