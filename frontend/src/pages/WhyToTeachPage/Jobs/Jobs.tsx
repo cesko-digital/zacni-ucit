@@ -35,7 +35,7 @@ const links = [
   },
 ];
 
-const Partners: React.FC = () => (
+const Jobs: React.FC = () => (
   <Container>
     <Meta
       title="Proč jít učit? | Nejste si jistí vstupem do učitelské profese?"
@@ -78,4 +78,4 @@ const Partners: React.FC = () => (
     <BackToHomeButton />
   </Container>
 );
-export default Partners;
+export default Jobs;
