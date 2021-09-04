@@ -118,7 +118,7 @@ export const Event = styled.div`
     background: rgba(127, 80, 255, 0.05);
   }
 
-  ${mediaQueriesUp('sm')`
+  ${mediaQueriesUp('md')`
     border-radius: 5px;
     display: flex;
     padding: 20px 32px;
@@ -127,14 +127,20 @@ export const Event = styled.div`
 
 export const EventDate = styled.span`
   display: block;
-  font-weight: bold;
+  font-weight: ${({ time }) => (time ? '400' : '700')};
+  font-family: ${({ time }) => (time ? 'Arial, Helvetica, sans-serif' : 'inherit')};
   margin-bottom: 16px;
+  margin-top: ${({ time }) => (time ? '0' : '16px')};
 
-  ${mediaQueriesUp('sm')`
+  ${mediaQueriesUp('md')`
     margin: 0 32px 0 0;
     min-width: 20%;
     font-size: 1.25rem;
   `}
+
+  &.time {
+    font-size: 1rem;
+  }
 `;
 
 export const EventContent = styled.div`
@@ -144,12 +150,28 @@ export const EventContent = styled.div`
 `;
 
 export const EventTitle = styled.strong`
-  font-weight: normal;
+  font-weight: ${({ selfContained }) => (selfContained ? '700' : '400')};
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: ${({ selfContained }) => (selfContained ? '0' : '16px')};
+  font-size: ${({ selfContained }) => (selfContained ? '1.25rem' : '1rem')};
 `;
 
 export const EventDescription = styled.p`
   font-size: 0.875rem;
   margin: 0;
+`;
+
+export const Paragraph = styled.p`
+  font-size: 1rem;
+  margin: 1rem 0;
+  max-width: 76ch;
+`;
+
+export const EventDateContainer = styled.div`
+  min-width: 20%;
+
+  ${mediaQueriesUp('sm')`
+    display:flex;
+    flex-direction: column;
+  `}
 `;

@@ -115,11 +115,31 @@ const LearnPage: React.FC = () => (
           </ListItem>
           <ListItem>a spoustu dalšího</ListItem>
         </List>
-        <p>Další informace zveřejníme v průběhu srpna.</p>
+        {/* <p>Další informace zveřejníme v průběhu srpna.</p>
         <p>
           Pokud už nyní máte zájem o účast, napište nám na{' '}
           <Link href={`mailto:${VYLUKA_MAIL}`}>{VYLUKA_MAIL}</Link>.
-        </p>
+        </p> */}
+        <ButtonsWrapper>
+          <SignUpButtonWrapper>
+            <Button
+              buttonStyle="button"
+              endIcon={<ChevronIcon />}
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdlr30v9P4rNQXK83fPEWMR2TaIPG08won9ueIk2PSIvHt1xg/viewform"
+              target="_blank"
+            >
+              Přihlaste se
+            </Button>
+          </SignUpButtonWrapper>
+          <Button
+            buttonStyle="button"
+            endIcon={<ChevronIcon />}
+            href={routes.learn.workshops}
+            variant="secondary"
+          >
+            Jak probíhá série workshopů
+          </Button>
+        </ButtonsWrapper>
       </Section>
       <Section>
         <SectionTitle>Supervize</SectionTitle>
