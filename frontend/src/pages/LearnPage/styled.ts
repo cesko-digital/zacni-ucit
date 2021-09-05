@@ -128,7 +128,6 @@ export const Event = styled.div`
 export const EventDate = styled.span`
   display: block;
   font-weight: ${({ time }) => (time ? '400' : '700')};
-  font-family: ${({ time }) => (time ? 'Arial, Helvetica, sans-serif' : 'inherit')};
   margin-bottom: 16px;
   margin-top: ${({ time }) => (time ? '0' : '16px')};
 
