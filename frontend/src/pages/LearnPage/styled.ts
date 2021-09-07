@@ -125,6 +125,13 @@ export const Event = styled.div`
   `}
 `;
 
+export const EventDateTime = styled.div`
+  ${mediaQueriesUp('sm')`
+    min-width: 25%;
+    margin: 0 32px 0 0;
+  `}
+`;
+
 export const EventDate = styled.span`
   display: block;
   font-weight: 700;
@@ -140,6 +147,15 @@ export const EventDate = styled.span`
   &.time {
     font-size: 1rem;
   }
+`;
+
+export const EventTime = styled.span`
+  display: block;
+  font-size: 0.75rem;
+
+  ${mediaQueriesUp('sm')`
+    font-size: 1rem;
+  `}
 `;
 
 export const EventContent = styled.div`
