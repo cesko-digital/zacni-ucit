@@ -1,5 +1,6 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
+from qualifications.models import EducationSpecialization
 
 
 class College(TimeStampedModel):
@@ -71,7 +72,9 @@ class Course(TimeStampedModel):
     qualification_type = models.CharField(help_text="Typ kvalifikace", max_length=150)
     title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True, verbose_name="Titul")
     school_levels = models.ManyToManyField("teaching.SchoolLevel", verbose_name="Stupně škol")
-    # education_type = models.ForeignKey(EducationType, on_delete=models.SET_NULL, null=True, verbose_name="Typy vzdělání z hlediska zákona")
+    education_specialization = models.ForeignKey(
+        EducationSpecialization, on_delete=models.SET_NULL, null=True, verbose_name="Specializace"
+    )
     other_qualification_type = models.CharField(help_text="Typ ostatní kvalifikace", max_length=150)
     name = models.CharField(help_text="Název", max_length=300)  # Realny nazev kurzu
     university = models.ForeignKey(College, on_delete=models.SET_NULL, null=True, verbose_name="Vysoká škola")
