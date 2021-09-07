@@ -41,7 +41,6 @@ export const Section = styled.section`
       ? `
     padding: 102px 16px 40px;
     margin: -70px -16px 0px;
-    z-index: -1;
     background: linear-gradient(180deg, #FFFFFF 70px, rgba(127, 80, 255, 0.05) 70px);
     position: relative;
 
@@ -54,6 +53,7 @@ export const Section = styled.section`
         border-radius: 5px;
         content: '';
         position: absolute;
+        z-index: -1;
         top: 0;
         left: 0;
         width: 100%;
