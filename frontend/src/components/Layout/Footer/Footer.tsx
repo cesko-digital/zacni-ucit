@@ -62,7 +62,7 @@ const Footer: FC = () => {
         <FlexRow>
           <LinkToExtPage
             className="footerBtn"
-            href="https://www.facebook.com/spolekvyluka/"
+            href="https://www.facebook.com/zacniucit.cz/"
             target="_blank"
           >
             <FacebookIcon />
@@ -70,7 +70,7 @@ const Footer: FC = () => {
           </LinkToExtPage>
           <LinkToExtPage
             className="footerBtn"
-            href="https://www.instagram.com/vyluka_/?hl=en"
+            href="https://www.instagram.com/zacniucit.cz/"
             target="_blank"
           >
             <InstagramIcon />
@@ -78,7 +78,7 @@ const Footer: FC = () => {
           </LinkToExtPage>
           <LinkToExtPage
             className="footerBtn"
-            href="https://twitter.com/vyluka_?lang=en"
+            href="https://twitter.com/zacniucit?s=09"
             target="_blank"
           >
             <TwitterIcon /> Twitter
