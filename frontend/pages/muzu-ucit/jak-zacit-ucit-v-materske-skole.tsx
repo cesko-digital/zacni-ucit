@@ -12,16 +12,9 @@ const Page: React.FC = () => (
   <StartTeachingPage
     additionalInfo={
       <>
-        <strong>Pokud nemáte ani jedno</strong> z toho, budete si muset některou z těchto věcí
-        doplnit.{' '}
-        <strong>
-          Další, a pravděpodobně jednodušší cestou do školky pro vás může být práce asistenta
-          pedagoga.
-        </strong>{' '}
-        Více o ní se dozvíte{' '}
-        <Button href={routes.startTeaching.teacherAssistant.higherExpertise}>zde</Button> a to, jak
-        se asistentem pedagoga stát, zjistíte{' '}
-        <Button href={routes.startTeaching.teacherAssistant.higherExpertise}>tady</Button>.
+        Pokud nemáte ani jedno z toho, budete si muset některou z těchto věcí doplnit. Další, a
+        pravděpodobně <strong>jednodušší cestou </strong> do školky pro vás může být práce{' '}
+        <Button href={routes.startTeaching.teacherAssistant.crossroad}>asistenta pedagoga.</Button>{' '}
       </>
     }
     backButton={{
