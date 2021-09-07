@@ -115,11 +115,6 @@ const LearnPage: React.FC = () => (
           </ListItem>
           <ListItem>a spoustu dalšího</ListItem>
         </List>
-        {/* <p>Další informace zveřejníme v průběhu srpna.</p>
-        <p>
-          Pokud už nyní máte zájem o účast, napište nám na{' '}
-          <Link href={`mailto:${VYLUKA_MAIL}`}>{VYLUKA_MAIL}</Link>.
-        </p> */}
         <ButtonsWrapper>
           <SignUpButtonWrapper>
             <Button
