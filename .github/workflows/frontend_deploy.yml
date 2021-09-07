@@ -22,6 +22,10 @@ jobs:
           npx next build
           npx next export
         working-directory: ${{ env.name }}
+      - name: 'Creating test robots.txt'
+        run: |
+          cp robots-sample.txt out/robots.txt
+        working-directory: ${{ env.name }}
       - name: 'Deploy to AWS'
         run: |
           aws s3 sync --acl public-read --delete . s3://${{ env.bucket }}
