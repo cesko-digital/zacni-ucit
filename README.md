@@ -30,7 +30,7 @@ projektu (jsou v něm soubory jako např. CONTRIBUTING.md, toto README.md)
 spusť např. příkaz:
 
 ```
-virtualenv-3 .venv
+virtualenv .venv
 ```
 
 Ve složce ".venv" se ti budou ukládat všechny python balíčky a nebudou ti
