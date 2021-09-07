@@ -125,15 +125,30 @@ export const Event = styled.div`
   `}
 `;
 
+export const EventDateTime = styled.div`
+  ${mediaQueriesUp('sm')`
+    min-width: 25%;
+    margin: 0 32px 0 0;
+  `}
+`;
+
 export const EventDate = styled.span`
   display: block;
   font-weight: bold;
   margin-bottom: 16px;
 
   ${mediaQueriesUp('sm')`
-    margin: 0 32px 0 0;
-    min-width: 20%;
+    margin: 0 0 6px 0;
     font-size: 1.25rem;
+  `}
+`;
+
+export const EventTime = styled.span`
+  display: block;
+  font-size: 0.75rem;
+
+  ${mediaQueriesUp('sm')`
+    font-size: 1rem;
   `}
 `;
 
