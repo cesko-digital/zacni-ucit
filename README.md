@@ -22,6 +22,8 @@ V návodech se pracuje s PostgreSQL verzí 13.
 - Windows: https://techexpert.tips/windows/installing-postgresql-windows/
 - MacOS: https://www.sqlservercentral.com/articles/getting-started-with-postgresql-on-macos
 
+Po instalaci PostgreSQL je potřeba si vytvořit databázi, uživatele a heslo.
+
 # Backend - Instalace a spuštění virtuálního prostředí
 
 Ještě než začneš řešit projekt samotný, vytvoř si u sebe na localhostu
