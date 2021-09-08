@@ -96,7 +96,7 @@ export const NavLink = styled(ButtonComponent)<{ color?: string }>`
     color: #ff2f5b;
   }
 
-  &.chci-se-zaucit {
+  &.zacinam-ucit {
     color: #ffb60b;
   }
 `;

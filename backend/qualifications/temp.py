@@ -3,12 +3,11 @@ from .models import (
     CollegeProgramme,
     EducationType,
     Title,
-    EducationArea,
-    SubjectType,
+    EducationSpecialization,
     OtherExperience,
     Qualification,
 )
-from teaching.models import Subject, SchoolLevel
+from teaching.models import Subject, SchoolLevel, SubjectGroup
 import csv
 import os
 
@@ -311,56 +310,49 @@ Zemědělství		PŘ	F	ENV
                 programme.subjects.add(*subjects)
 
 
-def init_subject_types():
+def init_education_specialization():
     """
-    Init for subject types
+    Data Source: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=254445099
+    List Číselník oblastí VŠ studia
+    First row removed
     """
-    SUBJECT_TYPES = [
-        "cizí jazyk",
-        "všeobecně-vzdělávací předměty",
-        "odborné předměty",
-        "praktické vyučování",
-        "odborný výcvik",
-        "umělecké předměty",
-        "konverzace",
-        "tělesná výchova",
-        "jakýkoli",
-    ]
 
-    for subject_type in SUBJECT_TYPES:
-        SubjectType.objects.get_or_create(name=subject_type)
+    filepath = os.path.join(os.getcwd(), "data_init", "education_specialization.csv")
+    with open(filepath, "r", encoding="utf-8") as csvfile:
+        data = csvfile.readlines()
+        for i in range(len(data)):
+            data[i] = data[i].replace("\n", "").replace('"', "").strip()
+            education_specialization, _ = EducationSpecialization.objects.get_or_create(name=data[i])
 
 
 def init_qualification():
     """
-    Zdroj dat: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=645564954
+    Data source: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=645564954
     csv file - removed first rows (headers)
-    There are also initial data for Title, EducationArea and EducationType
-    Adds missing SubjectType - Jakýkoli kromě cizího jazyka
+    There are also initial data for Title, EducationSpecialization and EducationType
+    Adds missing SubjectGroup - Jakýkoli kromě cizího jazyka
     """
 
-    filepath = os.path.join(os.getcwd(), "data_init", "tree.csv")
+    filepath = os.path.join(os.getcwd(), "data_init", "tree_new.csv")
     csvfile = open(filepath, newline="", encoding="utf-8")
     data = csv.reader(csvfile, delimiter=",", quotechar='"')
 
     for row in data:
         (
             teaching_level,
-            teaching_subject_type,
+            teaching_subject_group,
             _,
             type_1_title,
             type_1_level_1,
             type_1_level_2,
-            type_1_subject_type,
-            type_1_area,
-            type_1_character,
+            type_1_subject_group,
+            type_1_specialization,
             type_1_name,
             __,
             type_2_title,
             type_2_level,
-            type_2_subject_type,
-            type_2_area,
-            type_2_character,
+            type_2_subject_group,
+            type_2_specialization,
             type_2_name,
             ___,
             course_level,
@@ -382,13 +374,13 @@ def init_qualification():
         else:
             teaching_level = None
 
-        if teaching_subject_type and teaching_subject_type != "None":
-            if teaching_subject_type == "Any":
-                teaching_subject_type = SubjectType.objects.get(name="jakýkoli")
+        if teaching_subject_group and teaching_subject_group != "None":
+            if teaching_subject_group == "Any":
+                teaching_subject_group = SubjectGroup.objects.get(name="jakýkoli")
             else:
-                teaching_subject_type = SubjectType.objects.get(name=teaching_subject_type)
+                teaching_subject_group = SubjectGroup.objects.get(name=teaching_subject_group)
         else:
-            teaching_subject_type = None
+            teaching_subject_group = None
 
         # init title
         if type_1_title and type_1_title != "None":
@@ -401,43 +393,43 @@ def init_qualification():
         else:
             type_2_title = None
 
-        # init educationArea
-        if type_1_area and type_1_area != "None":
-            if type_1_area == "Any":
-                type_1_area, _ = EducationArea.objects.get_or_create(name="jakákoli")
+        # init educationSpecialization
+        if type_1_specialization and type_1_specialization != "None":
+            if type_1_specialization == "Any":
+                type_1_specialization, _ = EducationSpecialization.objects.get_or_create(name="jakákoli")
             else:
-                type_1_area, _ = EducationArea.objects.get_or_create(name=type_1_area)
+                type_1_specialization, _ = EducationSpecialization.objects.get_or_create(name=type_1_specialization)
         else:
-            type_1_area = None
+            type_1_specialization = None
 
-        if type_2_area and type_2_area != "None":
-            if type_2_area == "Any":
-                type_2_area, _ = EducationArea.objects.get_or_create(name="jakákoli")
+        if type_2_specialization and type_2_specialization != "None":
+            if type_2_specialization == "Any":
+                type_2_specialization, _ = EducationSpecialization.objects.get_or_create(name="jakákoli")
             else:
-                type_2_area, _ = EducationArea.objects.get_or_create(name=type_2_area)
+                type_2_specialization, _ = EducationSpecialization.objects.get_or_create(name=type_2_specialization)
         else:
-            type_2_area = None
+            type_2_specialization = None
 
-        # adds SubjectType jakýkoli kromě cizího jazyka
-        if type_1_subject_type and type_1_subject_type != "None":
-            if type_1_subject_type == "Any":
-                type_1_subject_type, _ = SubjectType.objects.get_or_create(name="jakýkoli")
-            elif type_1_subject_type == "Any kromě cizí jazyk":
-                type_1_subject_type, _ = SubjectType.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
+        # adds SubjectGroup jakýkoli kromě cizího jazyka
+        if type_1_subject_group and type_1_subject_group != "None":
+            if type_1_subject_group == "Any":
+                type_1_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli")
+            elif type_1_subject_group == "Any kromě cizí jazyk":
+                type_1_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
             else:
-                type_1_subject_type, _ = SubjectType.objects.get_or_create(name=type_1_subject_type)
+                type_1_subject_group, _ = SubjectGroup.objects.get_or_create(name=type_1_subject_group)
         else:
-            type_1_subject_type = None
+            type_1_subject_group = None
 
-        if type_2_subject_type and type_2_subject_type != "None":
-            if type_2_subject_type == "Any":
-                type_2_subject_type, _ = SubjectType.objects.get_or_create(name="jakýkoli")
-            elif type_2_subject_type == "Any kromě cizí jazyk":
-                type_2_subject_type, _ = SubjectType.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
+        if type_2_subject_group and type_2_subject_group != "None":
+            if type_2_subject_group == "Any":
+                type_2_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli")
+            elif type_2_subject_group == "Any kromě cizí jazyk":
+                type_2_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
             else:
-                type_2_subject_type, _ = SubjectType.objects.get_or_create(name=type_2_subject_type)
+                type_2_subject_group, _ = SubjectGroup.objects.get_or_create(name=type_2_subject_group)
         else:
-            type_2_subject_type = None
+            type_2_subject_group = None
 
         # init EducationType
         if type_1_title:
@@ -445,9 +437,10 @@ def init_qualification():
                 qualification_type=EducationType.TITLE_QUALIFICATION,
                 name=type_1_name,
                 title=type_1_title,
-                area=type_1_area,
-                subject_type=type_1_subject_type,
-                defaults={"character": type_1_character},
+                subject_group=type_1_subject_group,
+                defaults={
+                    "specialization": type_1_specialization,
+                },
             )
         else:
             education_type_1 = None
@@ -457,9 +450,10 @@ def init_qualification():
                 qualification_type=EducationType.TITLE_QUALIFICATION,
                 name=type_2_name,
                 title=type_2_title,
-                area=type_2_area,
-                subject_type=type_2_subject_type,
-                defaults={"character": type_2_character},
+                subject_group=type_2_subject_group,
+                defaults={
+                    "specialization": type_1_specialization,
+                },
             )
         else:
             education_type_2 = None
@@ -542,7 +536,7 @@ def init_qualification():
                 "legal_paragraph": legal_paragraph,
                 "example": example,
                 "school_level": teaching_level,
-                "subject_type": teaching_subject_type,
+                "subject_group": teaching_subject_group,
                 "note": note,
             },
         )
@@ -562,6 +556,9 @@ def init_qualification():
 
 
 def init_other_options():
+    """
+    Init for OtherExperience
+    """
     data = """
 		rodilý mluvčí
 		doplňující studium k rozšíření odborné kvalifikace (DVPP)

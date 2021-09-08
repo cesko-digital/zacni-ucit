@@ -27,30 +27,28 @@ export const menuItems = [
       },
     ],
   },
-
-  // {
-  //   label: 'Proč jít učit?',
-  //   route: routes.whyToTeach,
-  //   lights: [
-  //     {
-  //       label: 'Příběhy učitelů',
-  //       route: routes.whyToTeach,
-  //     },
-  //     {
-  //       label: 'Platy učitelů',
-  //       route: routes.sallary,
-  //     },
-  //     {
-  //       label: 'Co můžete dělat ve škole',
-  //       route: routes.canDoAtSchool,
-  //     },
-  //     {
-  //       label: 'Volná místa ve školství',
-  //       route: routes.jobs,
-  //     },
-  //   ],
-  // },
-
+  {
+    label: 'Proč jít učit?',
+    route: routes.whyToTeach,
+    lights: [
+      {
+        label: 'Příběhy učitelů',
+        route: `${routes.whyToTeach}#pribehy-ucitelu`,
+      },
+      {
+        label: 'Platy učitelů',
+        route: `${routes.whyToTeach}#platy-ucitelu`,
+      },
+      {
+        label: 'Co můžete dělat ve škole',
+        route: `${routes.whyToTeach}#co-muzete-delat-ve-skole`,
+      },
+      {
+        label: 'Volná místa ve školství',
+        route: routes.jobs,
+      },
+    ],
+  },
   {
     label: 'Chci zkusit učit',
     route: routes.tryTeaching.main,
@@ -79,14 +77,13 @@ export const menuItems = [
 
   {
     label: 'Začni učit! je projektem spolku Výluka',
-    route: 'http://www.vyluka.org/',
-    target: '_blank',
+    route: routes.aboutUs,
   },
 
-  // {
-  //   label: 'Naši partneři a přispějte',
-  //   route: routes.partners,
-  // },
+  {
+    label: 'Naši partneři a přispějte',
+    route: routes.partners,
+  },
 ];
 
 type Props = {
@@ -110,12 +107,7 @@ export const Menu: FC<Props> = ({ isOpen, setIsOpen }) => (
         </Item>
         {menuItems.map(item => (
           <Item key={item.label}>
-            <Button
-              className="bold"
-              href={item.route}
-              target={item.target}
-              onClick={() => setIsOpen(false)}
-            >
+            <Button className="bold" href={item.route} onClick={() => setIsOpen(false)}>
               {item.label}
             </Button>
             {item.lights?.map(light => (

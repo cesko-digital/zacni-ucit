@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('teaching', '0003_schoolsubtype'),
-        ('qualifications', '0005_otheroption'),
+        
         ('colleges', '0001_initial'),
     ]
 
