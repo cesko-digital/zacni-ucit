@@ -5,7 +5,7 @@ import teaching.graphql.schema
 import qualifications.graphql.schema
 import accounts.graphql.mutations
 import teaching.graphql.mutations
-import qualitifactions.graphql.mutations
+import qualifications.graphql.mutations
 import content_management.graphql.schema
 from graphql_auth.schema import MeQuery
 
