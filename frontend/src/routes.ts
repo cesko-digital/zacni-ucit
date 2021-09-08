@@ -7,8 +7,7 @@ export const routes = {
   teachingStart: '/zacinam-ucit',
   canITeach: '/muzu-ucit',
   motivation: '/motivace',
-  aboutUs: '/o-nas',
-  partners: '/#partners',
+  partners: '/partneri',
   contact: '/kontakt',
   signUp: '/registrace',
   login: '/login',
@@ -18,13 +17,14 @@ export const routes = {
   isTeachingForMe: 'je-ucitelstvi-pro-me',
   chooseSchool: '/vybiram-skolu',
   pedagogicalLaw: '/zakon-o-ped-pracovnicich',
-  sallary: '/platy-ucitelu',
+  sallary: '/proc-jit-ucit#platy-ucitelu',
   canDoAtSchool: '/co-muzete-delat-ve-skole',
-  jobs: '/volna-mista-ve-skolstvi',
-  donate: '/pripejte-jinak',
-  vyluka: '/vyluka',
 
+  donate: '/pripejte-jinak',
+
+  aboutUs: '/o-vyluce',
   whyToTeach: '/proc-jit-ucit',
+  jobs: '/proc-jit-ucit/volna-mista-ve-skolstvi',
   tryTeaching: {
     main: '/chci-si-zkusit-uceni',
     howItWorks: '/chci-si-zkusit-uceni/jak-probiha-program',
@@ -32,6 +32,7 @@ export const routes = {
   learn: {
     main: '/chci-se-zaucit',
     howItWorks: '/chci-se-zaucit/jak-probiha-program',
+    workshops: '/chci-se-zaucit/jak-probiha-serie-workshopu',
   },
   startTeaching: {
     crossroad: '/muzu-ucit',

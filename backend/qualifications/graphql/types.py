@@ -5,10 +5,10 @@ from qualifications.models import (
     Title,
     CollegeArea,
     CollegeProgramme,
-    EducationArea,
+    EducationSpecialization,
     SubjectType,
     EducationType,
-    OtherOption,
+    OtherExperience,
 )
 
 
@@ -30,9 +30,9 @@ class CollegeProgrammeObjectType(DjangoObjectType):
         fields = ALL_FIELDS
 
 
-class EducationAreaObjectType(DjangoObjectType):
+class EducationSpecializationObjectType(DjangoObjectType):
     class Meta:
-        model = EducationArea
+        model = EducationSpecialization
         fields = ALL_FIELDS
 
 
@@ -48,7 +48,7 @@ class EducationTypeObjectType(DjangoObjectType):
         fields = ALL_FIELDS
 
 
-class OtherOptionObjectType(DjangoObjectType):
+class OtherExperienceObjectType(DjangoObjectType):
     class Meta:
-        model = OtherOption
+        model = OtherExperience
         fields = ALL_FIELDS

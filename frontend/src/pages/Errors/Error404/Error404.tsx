@@ -9,6 +9,7 @@ const Error404 = () => (
     image={errorImage}
     text="Omlouváme se, ale tady nic není."
     title="Jej, tady nic není"
+    withCheckOtherPages
   />
 );
 

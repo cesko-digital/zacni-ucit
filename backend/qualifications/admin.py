@@ -4,7 +4,7 @@ from .models import (
     CollegeProgramme,
     EducationType,
     Title,
-    EducationArea,
+    EducationSpecialization,
     SubjectType,
     OtherExperience,
     Qualification,
@@ -24,18 +24,21 @@ class CollegeProgrammeAdmin(admin.ModelAdmin):
 
 
 class EducationTypeAdmin(admin.ModelAdmin):
-    list_display = ("qualification_type", "title", "area", "subject_type")
+    list_display = ("qualification_type", "title", "specialization", "subject_group")
     list_filter = ("qualification_type", "title", "school_levels")
     search_fields = ("qualification_type", "title__name", "school_levels__name")
-    list_select_related = ("title", "area", "subject_type")
+    list_select_related = ("title", "specialization", "subject_group")
     filter_horizontal = ("school_levels",)
 
 
 class TitleAdmin(admin.ModelAdmin):
-    list_display = ("name", "code", "visible_in_form")
+    list_display = (
+        "name",
+        "code",
+    )
 
 
-class EducationAreaAdmin(admin.ModelAdmin):
+class EducationSpecializationAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
@@ -55,7 +58,7 @@ admin.site.register(CollegeArea, CollegeAreaAdmin)
 admin.site.register(CollegeProgramme, CollegeProgrammeAdmin)
 admin.site.register(EducationType, EducationTypeAdmin)
 admin.site.register(Title, TitleAdmin)
-admin.site.register(EducationArea, EducationAreaAdmin)
+admin.site.register(EducationSpecialization, EducationSpecializationAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(OtherExperience, OtherExperienceAdmin)
 admin.site.register(Qualification)

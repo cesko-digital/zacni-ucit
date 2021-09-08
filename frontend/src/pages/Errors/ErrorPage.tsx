@@ -8,6 +8,7 @@ import { H1, LightText, LinkRegular } from '@components/Typography';
 import BackButton from '@pages/BackButton/BackButton';
 import { routes } from '@routes';
 import { theme } from 'src/common/theme';
+import { VYLUKA_MAIL } from '@siteData';
 
 interface Props {
   title: string;
@@ -55,7 +56,7 @@ const ErrorPage: React.FC<Props> = ({ title, text, image, withCheckOtherPages })
 
         <LightText>
           Stále tápete? Napište nám na{' '}
-          <LinkRegular href="mailto:info@vyluka.org">info@vyluka.org</LinkRegular>
+          <LinkRegular href={`mailto:${VYLUKA_MAIL}`}>{VYLUKA_MAIL}</LinkRegular>
         </LightText>
         <BackToHomeButton />
       </Content>

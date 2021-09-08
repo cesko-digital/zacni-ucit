@@ -3,20 +3,20 @@ from qualifications.graphql.types import (
     TitleObjectType,
     CollegeAreaObjectType,
     CollegeProgrammeObjectType,
-    EducationAreaObjectType,
+    EducationSpecializationObjectType,
     PreparationTypeObjectType,
     SubjectTypeObjectType,
     EducationTypeObjectType,
-    OtherOptionObjectType,
+    OtherExperienceObjectType,
 )
 from qualifications.models import (
     Title,
     CollegeArea,
     CollegeProgramme,
-    EducationArea,
+    EducationSpecialization,
     SubjectType,
     EducationType,
-    OtherOption,
+    OtherExperience,
 )
 
 
@@ -34,8 +34,8 @@ class Query(graphene.ObjectType):
     college_programme = graphene.Field(CollegeProgrammeObjectType, pk=graphene.Int(required=True))
 
     # Education area queries
-    education_areas = graphene.List(EducationAreaObjectType)
-    education_area = graphene.Field(EducationAreaObjectType, pk=graphene.Int(required=True))
+    education_areas = graphene.List(EducationSpecializationObjectType)
+    education_area = graphene.Field(EducationSpecializationObjectType, pk=graphene.Int(required=True))
 
     # Subject type queries
     subject_types = graphene.List(SubjectTypeObjectType)
@@ -46,8 +46,8 @@ class Query(graphene.ObjectType):
     education_type = graphene.Field(EducationTypeObjectType, pk=graphene.Int(required=True))
 
     # Other option queries
-    other_options = graphene.List(OtherOptionObjectType)
-    other_option = graphene.List(OtherOptionObjectType, pk=graphene.Int(required=True))
+    other_options = graphene.List(OtherExperienceObjectType)
+    other_option = graphene.List(OtherExperienceObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
     def resolve_titles(root, info):
@@ -75,11 +75,11 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_education_areas(root, info):
-        return EducationArea.objects.all()
+        return EducationSpecialization.objects.all()
 
     @staticmethod
     def resolve_education_area(root, info, pk: int):
-        return EducationArea.objects.get(pk=pk)
+        return EducationSpecialization.objects.get(pk=pk)
 
     @staticmethod
     def resolve_subject_types(root, info):
@@ -99,8 +99,8 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_other_options(root, info):
-        return OtherOption.objects.all()
+        return OtherExperience.objects.all()
 
     @staticmethod
     def resolve_other_option(root, info, pk: int):
-        return OtherOption.objects.get(pk=pk)
+        return OtherExperience.objects.get(pk=pk)

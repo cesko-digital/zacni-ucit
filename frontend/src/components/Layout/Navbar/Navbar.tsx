@@ -21,12 +21,12 @@ const items = [
     label: 'Chci zkusit učit',
     route: routes.tryTeaching.main,
   },
-  // {
-  //   label: 'Proč jít učit?',
-  //   route: routes.whyToTeach,
-  // },
   {
-    label: 'Chci se zaučit',
+    label: 'Proč jít učit?',
+    route: routes.whyToTeach,
+  },
+  {
+    label: 'Začínám učit',
     route: routes.learn.main,
   },
   // {
