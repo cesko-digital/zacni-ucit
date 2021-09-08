@@ -4,7 +4,6 @@ from qualifications.graphql.types import (
     CollegeAreaObjectType,
     CollegeProgrammeObjectType,
     EducationSpecializationObjectType,
-    PreparationTypeObjectType,
     SubjectTypeObjectType,
     EducationTypeObjectType,
     OtherExperienceObjectType,
