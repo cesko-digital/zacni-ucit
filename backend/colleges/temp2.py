@@ -2,7 +2,7 @@ import os
 import csv
 from .models import College, Faculty, Course
 from teaching.models import SchoolLevel, Subject
-from qualifications.models import Title
+from qualifications.models import Title, EducationSpecialization
 from django.core.exceptions import ObjectDoesNotExist
 from decimal import Decimal
 
@@ -49,7 +49,7 @@ def init_courses():
     list Čistopis MVP
     The second row was removed.
     The first one was edited to:
-    Typ kvalifikace,Titul,1. stupeň ZŠ,2. stupeň ZŠ,SŠ,Typ ostatní kvalifikace,Název,Vysoká škola,Fakulta,Cena,Město,SDS / semestr,P,D,K,jednoobor,dvouobor,Odkaz na více info,Poznámka,ČJL,AJ,NJ,FJ,ŠJ,RJ,M,IKT,ČAS,D,OV / ZSV,F,CH,PŘ,Z,HV,VV,VKZ,TV,ČSP,DV,ETV,FAV,TPV,OSV,VDO,EGS,MKV,ENV,MV,ODBP,PV,ODBV,NOVÁ AKREDITACE DO 2021
+    Typ kvalifikace,Titul,1. stupeň ZŠ,2. stupeň ZŠ,SŠ,Specializace,Typ ostatní kvalifikace,Název,Vysoká škola,Fakulta,Cena,Město,SDS / semestr,P,D,K,jednoobor,dvouobor,Odkaz na více info,Poznámka,ČJL,AJ,NJ,FJ,ŠJ,RJ,M,IKT,ČAS,D,OV / ZSV,F,CH,PŘ,Z,HV,VV,VKZ,TV,ČSP,DV,ETV,FAV,TPV,OSV,VDO,EGS,MKV,ENV,MV,ODBP,PV,ODBV,NOVÁ AKREDITACE DO 2021
     """
     filepath = os.path.join(os.getcwd(), "colleges", "courses_MVP.csv")
     courses = get_courses_from_csv(filepath)
@@ -90,11 +90,18 @@ def init_courses():
         "ODBV",
     ]
 
+    count = 4
     for course in courses:
+        print("Count: ", count)
         qualification_type = course["Typ kvalifikace"]
         title = False
         if qualification_type == "Titul":
             title = Title.objects.filter(code=course["Titul"]).first()
+
+        specialization = False
+        if course["Specializace"] != "0" and course["Specializace"] != "":
+            specialization = EducationSpecialization.objects.get(name=course["Specializace"].capitalize().strip())
+
         other_qualification_type = ""
         if qualification_type == "Ostatní kvalifikace":
             other_qualification_type = course["Typ ostatní kvalifikace"]
@@ -158,6 +165,10 @@ def init_courses():
             c.faculty = faculty
             c.save()
 
+        if specialization:
+            c.education_specialization = specialization
+            c.save()
+
         if not created:
             c.subjects.clear()
             c.school_levels.clear()
@@ -182,3 +193,4 @@ def init_courses():
             if course[code] == code:
                 subjects.append(Subject.objects.get(code=code).id)
         c.subjects.add(*subjects)
+        count += 1

@@ -32,6 +32,7 @@ export const routes = {
   learn: {
     main: '/chci-se-zaucit',
     howItWorks: '/chci-se-zaucit/jak-probiha-program',
+    workshops: '/chci-se-zaucit/jak-probiha-serie-workshopu',
   },
   startTeaching: {
     crossroad: '/muzu-ucit',

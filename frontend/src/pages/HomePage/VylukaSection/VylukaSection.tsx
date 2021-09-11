@@ -29,8 +29,7 @@ const VylukaSection: React.FC = () => (
             Podpořte nás na Darujme.cz
           </Button>
         </ButtonWrapper>
-        <Button href={routes.aboutUs}>O Výluce</Button>
-        {/* <Button href={routes.donate}>Přispějte jinak</Button> */}
+        <Button href={routes.partners}>Přispějte jinak</Button>
       </Buttons>
     </Container>
   </Section>

@@ -6,6 +6,7 @@ import BackButton from '@pages/BackButton/BackButton';
 import { routes } from '@routes';
 import { MainTitle, Paragraph, Section } from './styled';
 import Button from '@components/Button/Button';
+import Meta from '@components/Meta/Meta';
 
 const links = [
   {
@@ -34,8 +35,12 @@ const links = [
   },
 ];
 
-const Partners: React.FC = () => (
+const Jobs: React.FC = () => (
   <Container>
+    <Meta
+      title="Proč jít učit? | Nejste si jistí vstupem do učitelské profese?"
+      description="Pomůžeme vám rozhodnout se díky příběhům a zkušenostem dalších učitelů i popisem požadavků na učitelskou profesi. Nabídneme i přehled volných míst ve školství."
+    />
     <BackButton href={routes.homepage} icon="home">
       Zpátky domů
     </BackButton>
@@ -73,4 +78,4 @@ const Partners: React.FC = () => (
     <BackToHomeButton />
   </Container>
 );
-export default Partners;
+export default Jobs;

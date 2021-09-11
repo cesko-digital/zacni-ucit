@@ -1,7 +1,7 @@
 import graphene
 from common.mutations import BaseMutation, MutationValidationError
 from qualifications.models import EducationSpecialization
-
+from qualifications.graphql.types import CollegeAreaObjectType 
 
 class UpdateCollegeAreaName(BaseMutation):
     college_area = graphene.Field(CollegeAreaObjectType)

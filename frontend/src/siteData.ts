@@ -1,1 +1,1 @@
-export const VYLUKA_MAIL = 'info@vyluka.org';
+export const VYLUKA_MAIL = 'info@zacniucit.cz';
