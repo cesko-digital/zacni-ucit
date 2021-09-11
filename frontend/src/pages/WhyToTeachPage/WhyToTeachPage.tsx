@@ -14,7 +14,6 @@ import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 import Meta from '@components/Meta/Meta';
-import { LinkRegular } from '@components/Typography';
 import BackButton from '@pages/BackButton/BackButton';
 import { routes } from '@routes';
 
@@ -164,10 +163,15 @@ const HowTeachingProgramWorks: React.FC = () => (
         vyučování, být bezúhonní, <strong>zdravotně způsobilí</strong> a mít{' '}
         <strong>odbornou kvalifikaci</strong> pro konkrétní přímou pedagogickou činnost. Pro
         přehledné shrnutí,{' '}
-        <LinkRegular href="https://zacniucit.ceskodigital.net/muzu-ucit#zakon-o-pedagogickych-pracovnicich">
+        <Button
+          css={css`
+            display: inline;
+          `}
+          href={'/muzu-ucit#zakon-o-pedagogickych-pracovnicich'}
+        >
           jak je to s pedagogickou kvalifikací podle zákona o ped. pracovnících, navštivte náš
-          rozcestník.{' '}
-        </LinkRegular>
+          rozcestník.
+        </Button>
       </p>
       <SectionSubtitle>Co učitelství vlastně obnáší?</SectionSubtitle>
       <p>
