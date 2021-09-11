@@ -167,7 +167,7 @@ const HowTeachingProgramWorks: React.FC = () => (
           css={css`
             display: inline;
           `}
-          href={'/muzu-ucit#zakon-o-pedagogickych-pracovnicich'}
+          href={`${routes.canITeach}#zakon-o-pedagogickych-pracovnicich`}
         >
           jak je to s pedagogickou kvalifikací podle zákona o ped. pracovnících, navštivte náš
           rozcestník.
