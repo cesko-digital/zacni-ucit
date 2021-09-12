@@ -1,51 +1,78 @@
 import { useFormikContext } from 'formik';
 import React from 'react';
-import type { FC } from 'react';
 
 import type { ConfiguratorValues } from '../Configurator';
-import { degrees } from '../DegreePage/DegreePage';
-import Input from '@components/Input/Input';
+import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePage';
 import StyleWrapper from '@components/StyledWrapper';
-import { H3, LightText, PrimaryText } from '@components/Typography';
-import education from 'src/constants/education';
+import { MainParagraph, LightText, PrimaryText } from '@components/Typography';
+import { gql, useQuery } from '@apollo/client';
+import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectPage';
+import Hint from '@components/Hint/Hint';
+import Radio from '@components/Input/Radio/Radio';
 
-const EducationPage: FC = () => {
+import { RadiosWrapper } from './styled';
+
+export interface TitlesQuery {
+  titles: {
+    id: string;
+    code: string;
+    name: string;
+  }[];
+}
+
+export const allTitlesQuery = gql`
+  query getTitles {
+    titles {
+      id
+      code
+      name
+    }
+  }
+`;
+
+const EducationPage: React.FC = () => {
   const { values, setFieldValue } = useFormikContext<ConfiguratorValues>();
+  const titlesQuery = useQuery<TitlesQuery>(allTitlesQuery);
+  const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
+  const subjectsQuery = useQuery<SubjectsQuery>(allSubjectsQuery, {
+    variables: { schoolLevelIds: [parseInt(values.degree, 10)] },
+  });
+
+  if (schoolLevelsQuery.loading || subjectsQuery.loading || titlesQuery.loading) {
+    return <>Loading</>;
+  }
+
+  const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);
+  const selectedSubject = subjectsQuery.data.subjects.find(({ id }) => id === values.subject);
 
   return (
     <>
-      <H3>
+      <MainParagraph>
         Vyberte všechna vaše vzdělání, která by mohla být relevantní pro učení předmětu{' '}
-        <PrimaryText size="1em">{values.subject}</PrimaryText> na 
-        <PrimaryText size="1em">{degrees[values.degree].label}</PrimaryText>
-      </H3>
-      <StyleWrapper margin="2rem 0 3rem 0">
+        <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
+        <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
+      </MainParagraph>
+      <StyleWrapper margin="2rem 0 1rem 0">
         <LightText>
           Vyšší než magisterský stupeň ani maturita bez odborných předmětů nejsou pro učitelství
           podstatné.
         </LightText>
       </StyleWrapper>
-      <StyleWrapper margin="2rem 0">
-        {education.map(education => (
-          <Input
-            key={education}
-            checked={values.education.includes(education)}
-            label={education}
-            name="education"
-            type="checkbox"
-            value={education}
-            onChange={() => {
-              if (values.education.includes(education)) {
-                setFieldValue(
-                  'education',
-                  values.education.filter(current => current !== education),
-                );
-              } else {
-                setFieldValue('education', [...values.education, education]);
-              }
-            }}
-          />
-        ))}
+      <Hint onClick={console.log}>Nevíte si rady? Napište nám</Hint>
+      <StyleWrapper margin="0 0 2rem 0">
+        <RadiosWrapper>
+          {titlesQuery.data.titles.map(({ id, name }) => (
+            <div key={id}>
+              <Radio
+                checked={values.education === id}
+                name="education"
+                value={id}
+                onChange={() => setFieldValue('education', id)}
+                label={name}
+              />
+            </div>
+          ))}
+        </RadiosWrapper>
       </StyleWrapper>
     </>
   );
