@@ -3,12 +3,12 @@ import React from 'react';
 import type { FC } from 'react';
 
 import type { ConfiguratorValues } from '../Configurator';
-import Button from '@components/Button/Button';
 import Hint from '@components/Hint/Hint';
 import StyleWrapper from '@components/StyledWrapper';
-import { LightText } from '@components/Typography';
 import { gql, useQuery } from '@apollo/client';
 import Radio from '@components/Input/Radio/Radio';
+
+import { RadiosWrapper } from './styled';
 
 export interface SchoolLevelsQuery {
   schoolLevels: {
@@ -35,9 +35,9 @@ const DegreePage: FC = () => {
   }
 
   return (
-    <>
-      <StyleWrapper margin="2rem 0">
-        <Hint onClick={console.log}>Příběhy učitelů z praxe</Hint>
+    <StyleWrapper margin="2rem 0">
+      <Hint onClick={console.log}>Příběhy učitelů z praxe</Hint>
+      <RadiosWrapper>
         {data?.schoolLevels.map(({ id, name }) => (
           <div key={id}>
             <Radio
@@ -49,15 +49,8 @@ const DegreePage: FC = () => {
             />
           </div>
         ))}
-      </StyleWrapper>
-      <StyleWrapper margin="2rem 0">
-        <LightText>
-          Nenašli jste vámi zvolený stupeň nebo vás zajímá jiná pedagogická profese?{' '}
-          <Button href="#">Napište nám</Button> nebo se podívejte na{' '}
-          <Button href="#">přehled zákona o ped. pracovnících</Button>.
-        </LightText>
-      </StyleWrapper>
-    </>
+      </RadiosWrapper>
+    </StyleWrapper>
   );
 };
 

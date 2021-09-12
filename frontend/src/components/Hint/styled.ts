@@ -13,6 +13,7 @@ export const Button = styled.button`
   margin-bottom: 16px;
   padding: 5px 0;
   text-align: left;
+  cursor: pointer;
 
   ${mediaQueriesUp('sm')`
     font-size: 14px;

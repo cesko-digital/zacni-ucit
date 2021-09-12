@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Label } from './styled';
+import { Input, Label } from './styled';
 
 interface Props {
   name: string;
@@ -12,7 +12,7 @@ interface Props {
 
 const Radio: React.FC<Props> = ({ name, checked, value, label, onChange }) => (
   <label>
-    <input checked={checked} name={name} type="radio" value={value} onChange={onChange} />
+    <Input checked={checked} name={name} type="radio" value={value} onChange={onChange} />
     <Label>{label}</Label>
   </label>
 );

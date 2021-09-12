@@ -32,7 +32,7 @@ export const Button = styled(ButtonComponent)`
 `;
 
 export const IconWrapper = styled.span`
-  display: block;
+  display: inline-block;
   margin-right: 12px;
 
   svg {

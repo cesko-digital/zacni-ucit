@@ -7,9 +7,12 @@ import StyleWrapper from '@components/StyledWrapper';
 import { MainParagraph, LightText, PrimaryText } from '@components/Typography';
 import { gql, useQuery } from '@apollo/client';
 import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectPage';
-import Checkbox from '@components/Input/Checkbox/Checkbox';
+import Hint from '@components/Hint/Hint';
+import Radio from '@components/Input/Radio/Radio';
 
-interface TitlesQuery {
+import { RadiosWrapper } from './styled';
+
+export interface TitlesQuery {
   titles: {
     id: string;
     code: string;
@@ -49,33 +52,27 @@ const EducationPage: React.FC = () => {
         <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
         <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
       </MainParagraph>
-      <StyleWrapper margin="2rem 0 3rem 0">
+      <StyleWrapper margin="2rem 0 1rem 0">
         <LightText>
           Vyšší než magisterský stupeň ani maturita bez odborných předmětů nejsou pro učitelství
           podstatné.
         </LightText>
       </StyleWrapper>
-      <StyleWrapper margin="2rem 0">
-        {titlesQuery.data.titles.map(({ id, name }) => (
-          <div key={id}>
-            <Checkbox
-              checked={values.education.includes(id)}
-              label={name}
-              name="education"
-              value={id}
-              onChange={() => {
-                if (values.education.includes(id)) {
-                  setFieldValue(
-                    'education',
-                    values.education.filter(current => current !== id),
-                  );
-                } else {
-                  setFieldValue('education', [...values.education, id]);
-                }
-              }}
-            />
-          </div>
-        ))}
+      <Hint onClick={console.log}>Nevíte si rady? Napište nám</Hint>
+      <StyleWrapper margin="0 0 2rem 0">
+        <RadiosWrapper>
+          {titlesQuery.data.titles.map(({ id, name }) => (
+            <div key={id}>
+              <Radio
+                checked={values.education === id}
+                name="education"
+                value={id}
+                onChange={() => setFieldValue('education', id)}
+                label={name}
+              />
+            </div>
+          ))}
+        </RadiosWrapper>
       </StyleWrapper>
     </>
   );

@@ -9,13 +9,16 @@ import SubjectPage from './SubjectPage/SubjectPage';
 import StepBack from '@components/StepBack/StepBack';
 import Stepper from '@components/Stepper/Stepper';
 import StyleWrapper from '@components/StyledWrapper';
+import Button from '@components/Button/Button';
 import { H1, LightText } from '@components/Typography';
 import Container from '@components/Container/Container';
+import Hint from '@components/Hint/Hint';
+import SpecializationPage from './SpecializationPage/SpecializationPage';
 
 export type ConfiguratorValues = {
   degree: string | null;
   subject: string | null;
-  education: string[];
+  education: string | null;
 };
 
 const getStepName = (step: number) => {
@@ -56,7 +59,7 @@ const Configurator: FC = () => {
             </StyleWrapper>
             <StyleWrapper margin="0 0 3rem 0">
               <LightText>
-                Udělejte další krok na cestě za katedru.Chcete učit? Vyplňte náš dotazník a my vám
+                Udělejte další krok na cestě za katedru. Chcete učit? Vyplňte náš dotazník a my vám
                 doporučíme seznam potřebných pedagogických studijních programů a kurzů, nebo
                 jednoduše zjistíte, že můžete začít učit třeba hned.
               </LightText>
@@ -69,7 +72,7 @@ const Configurator: FC = () => {
           initialValues={{
             degree: null,
             subject: null,
-            education: [],
+            education: null,
           }}
           onSubmit={values => {
             console.log(values);
@@ -82,6 +85,13 @@ const Configurator: FC = () => {
                   isContinueDisabled={values.degree === null}
                   title="Na jakém školním stupni chcete učit?"
                   onNextStep={() => setActiveStep(2)}
+                  additionalText={
+                    <LightText>
+                      Nenašli jste vámi zvolený stupeň nebo vás zajímá jiná pedagogická profese?{' '}
+                      <Button href="#">Napište nám</Button> nebo se podívejte na{' '}
+                      <Button href="#">přehled zákona o ped. pracovnících</Button>.
+                    </LightText>
+                  }
                 >
                   <DegreePage />
                 </ConfiguratorStep>
@@ -91,6 +101,11 @@ const Configurator: FC = () => {
                   isContinueDisabled={values.subject === ''}
                   title="Jaký předmět chcete učit?"
                   onNextStep={() => setActiveStep(3)}
+                  additionalText={
+                    <Hint onClick={console.log}>
+                      Nevíte si rady s výběrem předmětu? Napište nám
+                    </Hint>
+                  }
                 >
                   <SubjectPage />
                 </ConfiguratorStep>
@@ -108,11 +123,12 @@ const Configurator: FC = () => {
                 <ConfiguratorStep
                   isContinueDisabled={values.education.length === 0}
                   title="Jaká je vaše studijní specializace?"
+                  buttonText="Výsledky"
                   onNextStep={() => {
                     console.log('end');
                   }}
                 >
-                  Specializace
+                  <SpecializationPage />
                 </ConfiguratorStep>
               )}
             </Form>
