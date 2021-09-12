@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { mediaQueries } from '../../common/mediaQueries';
-import { theme } from '../../common/theme';
+import { mediaQueries } from '../../../common/mediaQueries';
+import { theme } from '../../../common/theme';
 
-export const Select = styled.select`
+export const SelectElement = styled.select`
   width: 100%;
   margin: 0;
   padding: 1rem;
@@ -16,15 +16,6 @@ export const Select = styled.select`
   border-radius: 4px;
   outline-color: transparent;
   font-size: ${theme.fontSize.medium};
-
-  &:focus {
-    outline-color: ${theme.color.green};
-    outline-width: 3px;
-    border-color: ${theme.color.green};
-    border-width: 3px;
-    color: ${theme.color.green};
-    font-weight: 700;
-  }
 
   & option {
     color: ${theme.color.secondary};
@@ -40,7 +31,8 @@ export const Select = styled.select`
       background: transparent;
     }
   }
+
   ${mediaQueries('md')`
- width: 100%;
+      width: 100%;
   `}
 `;
