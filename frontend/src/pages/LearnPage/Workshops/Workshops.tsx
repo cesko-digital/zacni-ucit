@@ -32,7 +32,7 @@ type Event = {
 const events: Event[] = [
   {
     date: '30. 9. 2021',
-    time: '18:00 - 19:00',
+    time: '18:00 - 19:30',
     title: 'Kateřina Vrtišková: Jak přemýšlet nad hodnocením',
   },
   {

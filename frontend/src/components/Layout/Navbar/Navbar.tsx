@@ -26,7 +26,7 @@ const items = [
     route: routes.whyToTeach,
   },
   {
-    label: 'Chci se zaučit',
+    label: 'Začínám učit',
     route: routes.learn.main,
   },
   // {

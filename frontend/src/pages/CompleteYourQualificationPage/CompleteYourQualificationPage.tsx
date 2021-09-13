@@ -157,7 +157,8 @@ const CompleteYourQualificationPage: React.FC = () => (
       Tohle je první verze našeho nápomocného rozcestníku pro hledání vhodné DPSky – najdete tu na
       ně odkazy seřazené podle jednotlivých měst a vysokých škol. Jestli se chcete ujistit, že vám
       pro danou pozici některé z DPS stačí, podívejte se do našeho{' '}
-      <Button href={routes.startTeaching.crossroad}>Rozcestníku</Button>.
+      <Button href={`${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`}>přehledu
+      Zákona o pedagogických pracovnících</Button>. 
     </p>
     <Cities>
       {citiesData.map(({ name, schools }) => (
