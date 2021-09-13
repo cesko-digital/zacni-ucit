@@ -108,7 +108,7 @@ const Workshops: React.FC = () => (
       ))}
     </div>
 
-    <BackToHomeButton href={routes.learn.main}>Zpátky na Chci se zaučit</BackToHomeButton>
+    <BackToHomeButton href={routes.learn.learnPage}>Zpátky na Chci se zaučit</BackToHomeButton>
   </Container>
 );
 
