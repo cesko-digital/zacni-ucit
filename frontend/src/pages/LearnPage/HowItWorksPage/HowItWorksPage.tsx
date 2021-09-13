@@ -131,7 +131,7 @@ const LearnHowItWorksPage: React.FC = () => (
       title="Zauč se! | Pomáháme začínajícím učitelům"
       description="Získejte podporu a možnost rozvoje ve třech komunitních programech Zauč se! – v celoročním programu, v sérii workshopů a v supervizích."
     />
-    <BackButton href={routes.learn.main} icon="home">
+    <BackButton href={routes.learn.learnPage} icon="home">
       Zpátky na chci se zaučit
     </BackButton>
     <TopWrapper>
@@ -150,7 +150,8 @@ const LearnHowItWorksPage: React.FC = () => (
             vizí.
           </ListItem>
           <ListItem>
-            Čeká vás 10 tematických a 5 reflektivních setkání, vždy pod vedením zkušených lektorů a lektorek.
+            Čeká vás 10 tematických a 5 reflektivních setkání, vždy pod vedením zkušených lektorů a
+            lektorek.
           </ListItem>
           <ListItem>Tempo svého rozvoje si určujete podle vlastní potřeby.</ListItem>
           <ListItem>Setkání probíhají v Praze.</ListItem>

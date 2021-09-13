@@ -27,7 +27,7 @@ const items = [
   },
   {
     label: 'Začínám učit',
-    route: routes.learn.main,
+    route: routes.learn.crossroad,
   },
   // {
   //   label: 'Partneři',

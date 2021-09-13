@@ -105,6 +105,7 @@ export const FlexRow = styled.div`
 export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   padding: 1rem 0;
   margin-right: 1rem;
 `;
