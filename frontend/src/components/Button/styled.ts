@@ -6,29 +6,26 @@ const baseStyles = css`
       return color;
     } else if (buttonStyle === 'link') {
       return undefined;
-    } else {
-      return variant === 'secondary' ? 'white' : '#7f50ff';
     }
+    return variant === 'secondary' ? 'white' : '#7f50ff';
   }};
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   padding: ${({ buttonStyle }) => (buttonStyle === 'button' ? '12px 32px' : undefined)};
   border: ${({ variant, buttonStyle, color }) => {
     if (buttonStyle === 'link') {
       return undefined;
-    } else {
-      if (color) {
-        return `2px solid ${color}`;
-      }
-      return variant === 'secondary' ? '2px solid #0C0807' : '2px solid #7f50ff';
     }
+    if (color) {
+      return `2px solid ${color}`;
+    }
+    return variant === 'secondary' ? '2px solid #0C0807' : '2px solid #7f50ff';
   }};
   border-radius: ${({ buttonStyle }) => (buttonStyle === 'button' ? '50px' : undefined)};
   color: ${({ variant, buttonStyle }) => {
     if (buttonStyle === 'link') {
       return 'inherit';
-    } else {
-      return variant === 'secondary' ? '#0C0807' : 'white';
     }
+    return variant === 'secondary' ? '#0C0807' : 'white';
   }};
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'underline' : 'none')};
   display: inline-flex;
@@ -45,6 +42,12 @@ const baseStyles = css`
   &:focus {
     outline: none;
     text-decoration: none;
+    border: ${({ variant, buttonStyle }) => {
+      if (buttonStyle === 'link') {
+        return undefined;
+      }
+      return variant === 'secondary' ? '2px solid #54c176' : '2px solid #54c176';
+    }};
   }
 
   svg {
@@ -53,9 +56,8 @@ const baseStyles = css`
     fill: ${({ variant, buttonStyle }) => {
       if (buttonStyle === 'link') {
         return '#7F50FF';
-      } else {
-        return variant === 'secondary' ? '#7F50FF' : 'white';
       }
+      return variant === 'secondary' ? '#7F50FF' : 'white';
     }};
   }
 
