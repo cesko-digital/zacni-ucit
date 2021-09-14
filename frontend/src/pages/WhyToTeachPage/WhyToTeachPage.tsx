@@ -108,9 +108,9 @@ const HowTeachingProgramWorks: React.FC = () => (
       </p>
       <p>
         Trend je ale pozitivní!{' '}
-        <strong>Rozpočet na učitelské platy loni vzrostl deset procent.</strong> Malé srovnání, aby
-        byl růst ještě zřejmější: za posledních pět let se zvedl průměrný hrubý plat učitele o více
-        než 16&nbsp;000&nbsp;korun.
+        <strong>Rozpočet na učitelské platy loni vzrostl o deset procent.</strong> Malé srovnání,
+        aby byl růst ještě zřejmější: za posledních pět let se zvedl průměrný hrubý plat učitele o
+        více než 16&nbsp;000&nbsp;korun.
       </p>
       <p>
         <strong>Plat asistentů pedagoga</strong> je určený platovými třídami. Pohybuje se{' '}
@@ -150,7 +150,7 @@ const HowTeachingProgramWorks: React.FC = () => (
           <ListItem>speciálního pedagoga</ListItem>
           <ListItem>psychologa</ListItem>
           <ListItem>pedagoga volného času</ListItem>
-          <ListItem>asistenta pedagoga[3] </ListItem>
+          <ListItem>asistenta pedagoga </ListItem>
           <ListItem>trenéra</ListItem>
           <ListItem>metodika prevence v pedagogicko-psychologické poradně</ListItem>
           <ListItem>vedoucího pedagogického pracovníka</ListItem>
