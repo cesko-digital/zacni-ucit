@@ -42,7 +42,7 @@ const HomePage: React.FC = () => (
     />
     <WhyTeach />
     <CtaSection
-      button={{ text: 'Chci se zaučit', href: routes.learn.crossroad, color: '#FFB60B' }}
+      button={{ text: 'Chci se zaučit', href: routes.learn.learnPage, color: '#FFB60B' }}
       image={startTeachingImage}
       // link={{ text: 'Tipy pro začínající učitele', href: '' }}
       text={
