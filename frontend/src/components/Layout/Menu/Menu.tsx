@@ -73,16 +73,6 @@ export const menuItems = [
       },
     ],
   },
-  // {
-  //   label: 'Začínám učit',
-  //   route: routes.learn.main,
-  //   lights: [
-  //     {
-  //       label: 'Zauč se!',
-  //       route: routes.learn.main,
-  //     },
-  //   ],
-  // },
 
   {
     label: 'Začni učit! je projektem spolku Výluka',
