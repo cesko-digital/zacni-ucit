@@ -61,19 +61,41 @@ class Query(graphene.ObjectType):
     subject_group = graphene.Field(SubjectGroupObjectType, pk=graphene.Int(required=True))
 
     # Qualification type queries
-    qualifications = graphene.List(QualificationObjectType)
+    qualifications = graphene.List(
+        QualificationObjectType,
+        subject=graphene.String(required=True),
+        school_level=graphene.String(required=True),
+        title=graphene.String(required=True),
+        area=graphene.String(required=True),
+        czv=graphene.String(required=True),
+        other_experience=graphene.String(required=True),
+    )
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
-    def resolve_qualifications(root, info, subject, school_level, title, area, czv, other_experience, school_level_done=None, subject_group_done=None):
+    def resolve_qualifications(
+        root,
+        info,
+        subject,
+        school_level,
+        title,
+        area,
+        czv,
+        other_experience,
+        school_level_done=None,
+        subject_group_done=None,
+    ):
 
         # query na vyfiltrovani cest + join s education types
-        subject_group = SubjectGroup.objects.filter(subject__name=subject)
-        paths = Qualification.objects.filter(subject_group=subject_group, school_level=school_level).prefetch_related(
-            "education_types").values()
+        subject_group = SubjectGroup.objects.filter(name=subject)
+        paths = (
+            Qualification.objects.filter(subject_group=subject_group, school_level=school_level)
+            .prefetch_related("education_types")
+            .values()
+        )
 
         # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
-        df = pd.DataFrame(list(paths))
+        df = pd.DataFrame(paths)
         for index, row in df.iterrows():
             for edu_type in row["education_types"]:
 
@@ -82,19 +104,22 @@ class Query(graphene.ObjectType):
                         if edu_type["subject_group"]:
                             if edu_type["subject_group"] == subject_group_done or edu_type["subject_group"] == "Any":
                                 if edu_type["school_levels"]:
-                                    if edu_type["school_levels"] == school_level_done or edu_type["school_levels"] == "Any":
+                                    if (
+                                        edu_type["school_levels"] == school_level_done
+                                        or edu_type["school_levels"] == "Any"
+                                    ):
                                         edu_type["completed"] = True
                                     else:
                                         edu_type["completed"] = False
                                 else:
                                     edu_type["completed"] = True
                             else:
-                                edu_type["completed"] = False                     
+                                edu_type["completed"] = False
                         else:
                             edu_type["completed"] = True
                     else:
                         edu_type["completed"] = False
-                
+
                 if edu_type["qualification_type"] == "czv":
                     if edu_type["name"] == czv:
                         edu_type["completed"] = True
@@ -110,8 +135,10 @@ class Query(graphene.ObjectType):
         # vsechny relevantni sloupce pro danou EduType do json sloupce
         for index, row in df.iterrows():
             for edu_type in row["education_types"]:
-                columns = edu_type.loc[:0, "name", "title", "area", "subject_group", "school_levels", "completed"] # check :0
-                json = columns.to_json()  
+                columns = edu_type.loc[
+                    :0, "name", "title", "area", "subject_group", "school_levels", "completed"
+                ]  # check :0
+                json = columns.to_json()
                 edu_type["edu_type_json"] = json
 
         # vyvoreni sloupce EduTypes list pro kazdou cestu
