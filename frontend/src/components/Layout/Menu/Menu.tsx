@@ -63,14 +63,13 @@ export const menuItems = [
       },
     ],
   },
-
   {
     label: 'Začínám učit',
-    route: routes.learn.main,
+    route: routes.learn.crossroad,
     lights: [
       {
         label: 'Zauč se!',
-        route: routes.learn.main,
+        route: routes.learn.learnPage,
       },
     ],
   },
