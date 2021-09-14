@@ -37,17 +37,18 @@ const data = [
     link: 'Nadace České spořitelny',
   },
   {
-    logo: BlizKSobeLogo,
-    href: 'https://www.blizksobe.cz/',
-    text2: 'je partnerem programu Zkus učit!',
-    link: 'Nadace Blížksobě',
-  },
-  {
     logo: ZemeKvetLogo,
     href: 'http://zemekvet.cz/',
     text2: 'přispívá k zajištění chodu organizace Výluka.',
     link: 'Nadační fond Zeměkvět',
   },
+  {
+    logo: BlizKSobeLogo,
+    href: 'https://www.blizksobe.cz/',
+    text2: 'je partnerem programu Zkus učit!',
+    link: 'Nadace Blížksobě',
+  },
+
   {
     logo: MhmpLogo,
     href: 'https://granty.praha.eu/GrantyPortal/default',
