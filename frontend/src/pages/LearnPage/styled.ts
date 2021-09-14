@@ -152,6 +152,7 @@ export const EventDate = styled.span`
 export const EventTime = styled.span`
   display: block;
   font-size: 0.75rem;
+  font-weight: 700;
 
   ${mediaQueriesUp('sm')`
     font-size: 1rem;
