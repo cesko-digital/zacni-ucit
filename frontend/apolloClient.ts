@@ -12,7 +12,7 @@ const createApolloClient = () => {
     ssrMode: typeof window === 'undefined',
     cache: new InMemoryCache(),
     link: new HttpLink({
-      uri: `${config.backendUri}/graphql`,
+      uri: config.backendUri,
     }),
   });
 
