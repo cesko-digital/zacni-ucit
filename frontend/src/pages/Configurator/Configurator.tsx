@@ -112,7 +112,7 @@ const Configurator: FC = () => {
               )}
               {activeStep === 3 && (
                 <ConfiguratorStep
-                  isContinueDisabled={values.education.length === 0}
+                  isContinueDisabled={values.education === null}
                   title="Jaké je vaše vzdělání?"
                   onNextStep={() => setActiveStep(4)}
                 >
@@ -121,7 +121,7 @@ const Configurator: FC = () => {
               )}
               {activeStep === 4 && (
                 <ConfiguratorStep
-                  isContinueDisabled={values.education.length === 0}
+                  isContinueDisabled={false}
                   title="Jaká je vaše studijní specializace?"
                   buttonText="Výsledky"
                   onNextStep={() => {

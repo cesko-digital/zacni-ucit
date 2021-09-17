@@ -90,9 +90,7 @@ def init_courses():
         "ODBV",
     ]
 
-    count = 4
     for course in courses:
-        print("Count: ", count)
         qualification_type = course["Typ kvalifikace"]
         title = False
         if qualification_type == "Titul":
@@ -193,4 +191,3 @@ def init_courses():
             if course[code] == code:
                 subjects.append(Subject.objects.get(code=code).id)
         c.subjects.add(*subjects)
-        count += 1
