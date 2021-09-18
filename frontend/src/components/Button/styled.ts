@@ -92,6 +92,6 @@ export const IconWrapper = styled.span`
 
 export const Text = styled.span`
   width: 100%;
-  display: inline-flex;
+  display: inline;
   align-items: center;
 `;

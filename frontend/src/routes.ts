@@ -30,9 +30,11 @@ export const routes = {
     howItWorks: '/chci-si-zkusit-uceni/jak-probiha-program',
   },
   learn: {
-    main: '/chci-se-zaucit',
-    howItWorks: '/chci-se-zaucit/jak-probiha-program',
-    workshops: '/chci-se-zaucit/jak-probiha-serie-workshopu',
+    crossroad: '/zacinam-ucit',
+    learnPage: '/zacinam-ucit/chci-se-zaucit',
+    howItWorks: '/zacinam-ucit/chci-se-zaucit/jak-probiha-program',
+    teachersTips: '/zacinam-ucit/tipy-pro-zacinajici-ucitele',
+    workshops: '/zacinam-ucit/chci-se-zaucit/jak-probiha-serie-workshopu',
   },
   startTeaching: {
     crossroad: '/muzu-ucit',

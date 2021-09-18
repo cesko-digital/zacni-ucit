@@ -11,6 +11,7 @@ import {
   Image,
 } from './styled';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
+import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 import Meta from '@components/Meta/Meta';
 import BackButton from '@pages/BackButton/BackButton';
@@ -18,13 +19,12 @@ import { routes } from '@routes';
 
 import image1 from './image1.jpeg';
 import image2 from './image2.jpeg';
-import Button from '@components/Button/Button';
 
 const HowTeachingProgramWorks: React.FC = () => (
   <Container>
     <Meta
-      title="Proč jít učit? | Nejste si jistí vstupem do učitelské profese?"
       description="Pomůžeme vám rozhodnout se díky příběhům a zkušenostem dalších učitelů i popisem požadavků na učitelskou profesi. Nabídneme i přehled volných míst ve školství."
+      title="Proč jít učit? | Nejste si jistí vstupem do učitelské profese?"
     />
     <BackButton href={routes.homepage} icon="home">
       Zpátky domů
@@ -108,9 +108,9 @@ const HowTeachingProgramWorks: React.FC = () => (
       </p>
       <p>
         Trend je ale pozitivní!{' '}
-        <strong>Rozpočet na učitelské platy loni vzrostl deset procent.</strong> Malé srovnání, aby
-        byl růst ještě zřejmější: za posledních pět let se zvedl průměrný hrubý plat učitele o více
-        než 16&nbsp;000&nbsp;korun.
+        <strong>Rozpočet na učitelské platy loni vzrostl o deset procent.</strong> Malé srovnání,
+        aby byl růst ještě zřejmější: za posledních pět let se zvedl průměrný hrubý plat učitele o
+        více než 16&nbsp;000&nbsp;korun.
       </p>
       <p>
         <strong>Plat asistentů pedagoga</strong> je určený platovými třídami. Pohybuje se{' '}
@@ -150,7 +150,7 @@ const HowTeachingProgramWorks: React.FC = () => (
           <ListItem>speciálního pedagoga</ListItem>
           <ListItem>psychologa</ListItem>
           <ListItem>pedagoga volného času</ListItem>
-          <ListItem>asistenta pedagoga[3] </ListItem>
+          <ListItem>asistenta pedagoga </ListItem>
           <ListItem>trenéra</ListItem>
           <ListItem>metodika prevence v pedagogicko-psychologické poradně</ListItem>
           <ListItem>vedoucího pedagogického pracovníka</ListItem>
@@ -161,9 +161,12 @@ const HowTeachingProgramWorks: React.FC = () => (
         Musíte být <strong>plně způsobilí k právním úkonům</strong>, prokázat{' '}
         <strong>znalost</strong> českého nebo jiného <strong>jazyka</strong>, ve kterém je vedeno
         vyučování, být bezúhonní, <strong>zdravotně způsobilí</strong> a mít{' '}
-        <strong>odbornou kvalifikaci</strong>
-        pro konkrétní přímou pedagogickou činnost. Pro přehledné shrnutí, jak je to s pedagogickou
-        kvalifikací podle zákona o ped. pracovnících navštivte náš rozcestník.{' '}
+        <strong>odbornou kvalifikaci</strong> pro konkrétní přímou pedagogickou činnost. Pro
+        přehledné shrnutí,{' '}
+        <Button href={`${routes.canITeach}#zakon-o-pedagogickych-pracovnicich`} buttonStyle="link">
+          jak je to s pedagogickou kvalifikací podle zákona o ped. pracovnících, navštivte náš
+          rozcestník.
+        </Button>
       </p>
       <SectionSubtitle>Co učitelství vlastně obnáší?</SectionSubtitle>
       <p>

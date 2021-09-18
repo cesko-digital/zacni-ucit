@@ -157,3 +157,13 @@ export const LinkToExtPage = styled.a`
     margin-right: 1rem;
   }
 `;
+
+export const MainParagraph = styled.p`
+  margin: 0 0 16px;
+  font-weight: bold;
+
+  ${mediaQueriesUp('sm')`
+    font-size: 1.25rem;
+    margin: 0 0 32px;
+  `}
+`;
