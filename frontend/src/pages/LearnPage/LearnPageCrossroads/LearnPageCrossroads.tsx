@@ -10,6 +10,7 @@ import { routes } from '@routes';
 
 import logoImage from '../learn.svg';
 import ChevronIcon from '@icons/chevron-right.svg';
+import { H2 } from '@components/Typography';
 
 const TryTeachingPage: React.FC = () => (
   <Container>
@@ -20,12 +21,15 @@ const TryTeachingPage: React.FC = () => (
     <BackButton href={routes.homepage} icon="home">
       Zpátky domů
     </BackButton>
-    <TopWrapper>
-      <MainTitle>Začínám učit</MainTitle>
-      <Logo alt="Chci se zaučit logo" height={149} src={logoImage} width={248} />
-    </TopWrapper>
+
+    <MainTitle>Začínám učit</MainTitle>
 
     <Section>
+      <TopWrapper>
+        <H2>Chci se zaučit</H2>
+        <Logo alt="Chci se zaučit logo" height={149} src={logoImage} width={248} />
+      </TopWrapper>
+
       <Paragraph>
         Začínáte učit a hledáte pomoc či prostor pro rozvoj? Zapojte se do Zauč se! a získáte
         podporu nejen od zkušených učitelů a lektorů, ale také dalších začínajících učitelů.
@@ -40,7 +44,9 @@ const TryTeachingPage: React.FC = () => (
         Jak probíhá Zauč se
       </Button>
     </Section>
+
     <Section>
+      <H2>Tipy pro začínající učitele</H2>
       <Paragraph>
         Chystáte se nastoupit do školy a chcete vědět, co vás čeká? Přečtěte si, jak se se začátky
         vypořádávají vaši kolegové!
