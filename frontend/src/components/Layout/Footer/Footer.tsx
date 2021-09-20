@@ -24,6 +24,8 @@ import FacebookIcon from '@icons/facebook.svg';
 import InstagramIcon from '@icons/instagram.svg';
 import TwitterIcon from '@icons/twitter.svg';
 import Button from '@components/Button/Button';
+import { routes } from '@routes';
+import { VYLUKA_MAIL } from '@siteData';
 
 const Footer: FC = () => {
   const [inputValue, setInputValue] = React.useState('');
@@ -54,13 +56,13 @@ const Footer: FC = () => {
         </FooterText>
         <FooterText>Hybernská 4</FooterText>
         <FooterText>110 00 Praha 1</FooterText>
-        <LinkRegular href="mailto:info@vyluka.org" footer>
-          info@vyluka.org
+        <LinkRegular href="mailto:{VYLUKA_MAIL}" footer>
+          {VYLUKA_MAIL}
         </LinkRegular>
         <FlexRow>
           <LinkToExtPage
             className="footerBtn"
-            href="https://www.facebook.com/spolekvyluka/"
+            href="https://www.facebook.com/zacniucit.cz/"
             target="_blank"
           >
             <FacebookIcon />
@@ -68,7 +70,7 @@ const Footer: FC = () => {
           </LinkToExtPage>
           <LinkToExtPage
             className="footerBtn"
-            href="https://www.instagram.com/vyluka_/?hl=en"
+            href="https://www.instagram.com/zacniucit.cz/"
             target="_blank"
           >
             <InstagramIcon />
@@ -76,7 +78,7 @@ const Footer: FC = () => {
           </LinkToExtPage>
           <LinkToExtPage
             className="footerBtn"
-            href="https://twitter.com/vyluka_?lang=en"
+            href="https://twitter.com/zacniucit"
             target="_blank"
           >
             <TwitterIcon /> Twitter
@@ -179,7 +181,7 @@ const Footer: FC = () => {
         </LinkSmall>
       </FooterSection>
       <FooterSection className="footer_section4">
-        <Button href="https://vyluka.org/" target="_blank">
+        <Button href={routes.aboutUs} target="_blank">
           <ButtonContent>
             <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
           </ButtonContent>

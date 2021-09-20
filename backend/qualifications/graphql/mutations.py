@@ -1,7 +1,7 @@
 import graphene
 from common.mutations import BaseMutation, MutationValidationError
-from qualifications.models import EducationArea
-
+from qualifications.models import EducationSpecialization
+from qualifications.graphql.types import CollegeAreaObjectType 
 
 class UpdateCollegeAreaName(BaseMutation):
     college_area = graphene.Field(CollegeAreaObjectType)
@@ -15,8 +15,8 @@ class UpdateCollegeAreaName(BaseMutation):
         name = kwargs.get("name")
         pk = kwargs.get("pk")
         try:
-            college_area = EducationArea.objects.get(pk=pk)
-        except EducationArea.DoesNotExist:
+            college_area = EducationSpecialization.objects.get(pk=pk)
+        except EducationSpecialization.DoesNotExist:
             message = "College Area with selected ID does not exists"
             raise MutationValidationError(ErrorCode.OBJECT_DOES_NOT_EXIST, message=message, data=pk)
         else:

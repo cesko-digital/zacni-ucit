@@ -9,6 +9,7 @@ import {
   SectionSubtitle,
   List,
   CrossroadList,
+  MainLink,
 } from './styled';
 import BackToHomeButton from '@components/BackToHomeButton/BackToHomeButton';
 import Button from '@components/Button/Button';
@@ -81,7 +82,14 @@ const CanITeachPage: React.FC = () => (
         <strong>výkladu tohoto zákona, který jsme pro vás připravili</strong>.
       </Paragraph>
       <SectionSubtitle>Rozcestník: kde chcete učit?</SectionSubtitle>
-      <Paragraph>Vyberte si, kde chcete učit, a my vám ukážeme, jak na to.</Paragraph>
+      <Paragraph>
+        Vyberte si, kde chcete učit, a my vám ukážeme, jak na to. Pokud si nejste jistí, jaké
+        předměty se svým vzděláním můžete vyučovat, podívejte se do naší{' '}
+        <MainLink href="./subjects.pdf" target="_blank" download>
+          tabulky
+        </MainLink>
+        .
+      </Paragraph>
       <CrossroadList>
         {[
           {

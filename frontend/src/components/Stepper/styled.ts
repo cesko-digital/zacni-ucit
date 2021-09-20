@@ -34,6 +34,6 @@ export const Bar = styled.li`
   margin-right: 5px;
   border-radius: 2px;
   height: 4px;
-  background: ${({ theme, isActive }) => (isActive ? theme.color.green : theme.color.gray)};
+  background: ${({ theme, isActive }) => (isActive ? '#54C176' : theme.color.gray)};
   transition: background 150ms ease-in-out;
 `;

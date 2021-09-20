@@ -5,7 +5,7 @@ from qualifications.models import (
     Title,
     CollegeArea,
     CollegeProgramme,
-    EducationArea,
+    EducationSpecialization,
     SubjectType,
     EducationType,
     OtherExperience,
@@ -34,9 +34,9 @@ class CollegeProgrammeObjectType(DjangoObjectType):
         fields = ALL_FIELDS
 
 
-class EducationAreaObjectType(DjangoObjectType):
+class EducationSpecializationObjectType(DjangoObjectType):
     class Meta:
-        model = EducationArea
+        model = EducationSpecialization
         fields = ALL_FIELDS
 
 

@@ -11,24 +11,34 @@ import ChevronIcon from '@icons/chevron-right.svg';
 type Props = {
   title: string;
   isContinueDisabled?: boolean;
+  buttonText?: string;
+  additionalText?: JSX.Element;
   onNextStep: () => void;
 };
 
-const ConfiguratorStep: FC<Props> = ({ children, title, isContinueDisabled, onNextStep }) => (
+const ConfiguratorStep: FC<Props> = ({
+  children,
+  title,
+  buttonText,
+  isContinueDisabled,
+  additionalText = null,
+  onNextStep,
+}) => (
   <div>
     <Meta title={title} />
     <Title>{title}</Title>
     {children}
-    <StyleWrapper padding="0 0 5rem 0">
+    <StyleWrapper padding="0 0 1rem 0">
       <Button
         disabled={isContinueDisabled}
         endIcon={<ChevronIcon />}
         type="button"
         onClick={() => onNextStep()}
       >
-        Pokračovat
+        {buttonText ?? 'Pokračovat'}
       </Button>
     </StyleWrapper>
+    {additionalText}
   </div>
 );
 
