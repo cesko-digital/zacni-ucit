@@ -71,6 +71,10 @@ export const menuItems = [
         label: 'Zauč se!',
         route: routes.learn.learnPage,
       },
+      {
+        label: 'Tipy pro začínající učitele',
+        route: routes.learn.teachersTips,
+      },
     ],
   },
 
