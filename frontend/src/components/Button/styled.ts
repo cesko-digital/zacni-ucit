@@ -39,6 +39,7 @@ const baseStyles = css`
   text-align: center;
 
   &:hover,
+  &:active,
   &:focus {
     outline: none;
     text-decoration: none;
@@ -47,6 +48,17 @@ const baseStyles = css`
         return undefined;
       }
       return variant === 'secondary' ? '2px solid #54c176' : '2px solid #54c176';
+    }};
+  }
+
+  /* TODO: correct color based on theme */
+  &:active {
+    color: black;
+    background-color: ${({ variant, buttonStyle }) => {
+      if (buttonStyle === 'link') {
+        return undefined;
+      }
+      return variant === 'primary' ? '#AAEC8B' : undefined;
     }};
   }
 
@@ -68,6 +80,18 @@ const baseStyles = css`
 
 export const Link = styled.a`
   ${baseStyles}
+
+  /* TODO: correct color based on theme */
+  &:active {
+    svg {
+      fill: ${({ variant, buttonStyle }) => {
+        if (buttonStyle === 'link') {
+          return undefined;
+        }
+        return variant === 'secondary' ? '#54c176' : 'black';
+      }};
+    }
+  }
 `;
 
 export const Button = styled.button`
