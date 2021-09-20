@@ -91,7 +91,6 @@ const baseStyles = css`
 export const Link = styled.a`
   ${baseStyles}
 
-  /* TODO: correct color based on theme */
   &:active {
     svg {
       fill: ${({ variant, buttonStyle }) => {
