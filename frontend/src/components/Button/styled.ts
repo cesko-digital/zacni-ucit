@@ -61,6 +61,17 @@ const baseStyles = css`
     }};
   }
 
+  /* TODO: correct color based on theme */
+  &:active {
+    color: black;
+    background-color: ${({ variant, buttonStyle }) => {
+      if (buttonStyle === 'link') {
+        return undefined;
+      }
+      return variant === 'primary' ? '#AAEC8B' : undefined;
+    }};
+  }
+
   svg {
     width: 16px;
     height: 16px;
@@ -80,6 +91,7 @@ const baseStyles = css`
 export const Link = styled.a`
   ${baseStyles}
 
+  /* TODO: correct color based on theme */
   &:active {
     svg {
       fill: ${({ variant, buttonStyle }) => {
