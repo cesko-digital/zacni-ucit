@@ -90,11 +90,11 @@ class SubjectType(TimeStampedModel):
 
     class Meta:
         verbose_name = "Typ předmětů"
-        verbose_name_plural = "Tipy předmětů"
+        verbose_name_plural = "Typy předmětů"
         ordering = ("name",)
 
     def __str__(self):
-        return self.code
+        return self.name
 
 
 class EducationType(TimeStampedModel):
@@ -139,6 +139,9 @@ class Qualification(TimeStampedModel):
     subject_group = models.ForeignKey(
         SubjectGroup, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Skupina předmětů"
     )
+    subject_group = models.ForeignKey(
+        SubjectGroup, on_delete=models.SET_NULL, null=True, verbose_name="Předmětové skupiny"
+    )
     school_level = models.ForeignKey(
         SchoolLevel, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Stupeň školy"
     )
@@ -156,7 +159,7 @@ class Qualification(TimeStampedModel):
 
     def __str__(self):
         return self.name
-
+      
 
 class OtherExperience(TimeStampedModel):
     """
