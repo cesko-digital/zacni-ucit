@@ -56,7 +56,7 @@ const TryTeachingPage: React.FC = () => (
           <Button
             buttonStyle="button"
             endIcon={<ChevronIcon />}
-            href="https://forms.gle/L3K9qV7UELiLYQen9"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfrTbhdto_ebupWmWnOqScP0KYAcODR4QmVomym8f4SFHzqgA/viewform"
             target="_blank"
           >
             Přihlaste se
