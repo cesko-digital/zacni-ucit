@@ -105,7 +105,6 @@ const WhatEllaThinks = () => {
           ))}
         <Citation>
           <p>
-            {' '}
             Pokud řešíš, <strong>co si vzít na sebe</strong> – vem si to, v čem si připadáš dobře.
             Možná tvé oblečení je něco jako kostým, aby ses cítil v roli učitele dobře a normálně si
             to mezi kamarády nebereš. I to je v pořádku. Postupem času začneš třeba nosit i méně

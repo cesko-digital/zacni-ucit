@@ -59,7 +59,7 @@ const InFrontOfChildren = () => {
         </List>
 
         {data
-          .filter((item, index) => index > 1 && index < data.length)
+          .filter((item, index) => index > 1)
           .map(item => (
             <Paragraph key={item.text1}>
               {item.text1}

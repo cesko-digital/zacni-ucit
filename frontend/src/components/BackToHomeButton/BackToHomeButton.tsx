@@ -9,7 +9,7 @@ import ArrowIcon from '@icons/arrow.svg';
 interface Props {
   href?: string;
   children?: string;
-  icon?: any;
+  icon?: JSX.Element;
   visible?: boolean;
 }
 
