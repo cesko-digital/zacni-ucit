@@ -69,10 +69,7 @@ const TeachersTips: React.FC = () => (
         </Button>
         .
       </Paragraph>
-      <Paragraph>
-        České školství vás potřebuje. Nyní <strong>chybí více než 6000 učitelů</strong> a situace se
-        nezlepšuje – brzy to bude dvojnásobek.
-      </Paragraph>
+
       <Paragraph>
         <Button href="https://twitter.com/prayforlasagne">Madame Lasagne</Button> vás zase obohatí
         svými zápisky, ve kterých shrnuje{' '}
