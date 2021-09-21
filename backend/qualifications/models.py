@@ -150,7 +150,7 @@ class Qualification(TimeStampedModel):
 
     def __str__(self):
         return str(self.id)
-      
+
 
 class OtherExperience(TimeStampedModel):
     """
