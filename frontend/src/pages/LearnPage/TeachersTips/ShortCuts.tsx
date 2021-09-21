@@ -37,7 +37,7 @@ const data: Shortcut[] = [
   },
   {
     shortcut: 'MHMP',
-    desc: 'magistrát hlavního města Prahy',
+    desc: 'Magistrát hlavního města Prahy',
   },
   {
     shortcut: 'MPP',
@@ -81,7 +81,7 @@ const data: Shortcut[] = [
   },
   {
     shortcut: 'RCh',
-    desc: 'pedagogicko–psychologická poradna',
+    desc: 'rizikové chování',
   },
   {
     shortcut: 'RVP',
