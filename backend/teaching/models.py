@@ -2,23 +2,6 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
 
-class SubjectGroup(TimeStampedModel):
-    """
-    Predmetova skupina.
-    """
-
-    name = models.CharField("Název", max_length=100, unique=True)
-    # subjects = models.ManyToManyField(Subject, verbose_name="Předměty")
-
-    class Meta:
-        verbose_name = "Předmětová skupina"
-        verbose_name_plural = "Předmětové skupiny"
-        ordering = ("name",)
-
-    def __str__(self):
-        return self.name
-
-
 class Subject(TimeStampedModel):
     """
     Skolni predmet.
@@ -28,12 +11,6 @@ class Subject(TimeStampedModel):
 
     name = models.CharField("Název předmětu", max_length=100)
     code = models.CharField("Zkratka", max_length=20, unique=True)
-    subject_group = models.ForeignKey(
-        SubjectGroup,
-        on_delete=models.SET_NULL,
-        null=True,
-        verbose_name="Předmětová skupina",
-    )
 
     class Meta:
         verbose_name = "Vzdělávací oblast podle RVP"
@@ -42,6 +19,23 @@ class Subject(TimeStampedModel):
 
     def __str__(self):
         return self.code
+
+
+class SubjectGroup(TimeStampedModel):
+    """
+    Predmetova skupina.
+    """
+
+    name = models.CharField("Název", max_length=100, unique=True)
+    subjects = models.ManyToManyField(Subject, verbose_name="Předměty")
+
+    class Meta:
+        verbose_name = "Předmětová skupina"
+        verbose_name_plural = "Předmětové skupiny"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
 
 
 class SchoolLevel(TimeStampedModel):
