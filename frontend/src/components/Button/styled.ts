@@ -65,7 +65,8 @@ const baseStyles = css`
 `;
 
 export const Link = styled.a`
-  ${baseStyles}
+  ${baseStyles};
+  display: inline;
 `;
 
 export const Button = styled.button`
