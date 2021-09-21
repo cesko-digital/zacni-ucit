@@ -31,7 +31,7 @@ const baseStyles = css`
     }
   }};
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'underline' : 'none')};
-  display: inline-flex;
+  display: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'inline' : 'inline-flex')};
   justify-content: center;
   align-items: center;
   font-size: ${({ buttonStyle }) => (buttonStyle === 'button' ? '1rem' : '0.875rem')};
@@ -65,7 +65,8 @@ const baseStyles = css`
 `;
 
 export const Link = styled.a`
-  ${baseStyles}
+  ${baseStyles};
+  display: inline;
 `;
 
 export const Button = styled.button`

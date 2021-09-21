@@ -19,6 +19,11 @@ export type ConfiguratorValues = {
   degree: string | null;
   subject: string | null;
   education: string | null;
+  educationArea: string | null;
+  teachingEducation: {
+    degree: string | null;
+    subject: string | null;
+  };
 };
 
 const getStepName = (step: number) => {
@@ -73,6 +78,11 @@ const Configurator: FC = () => {
             degree: null,
             subject: null,
             education: null,
+            educationArea: null,
+            teachingEducation: {
+              degree: null,
+              subject: null,
+            },
           }}
           onSubmit={values => {
             console.log(values);
