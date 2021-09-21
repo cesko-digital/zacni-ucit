@@ -7,7 +7,7 @@ export const SelectElement = styled.select`
   width: 100%;
   margin: 0;
   padding: 1rem;
-  font-weight: 400;
+  font-weight: bold;
   line-height: 1.5rem;
   font-family: inherit;
   color: ${theme.color.primary};

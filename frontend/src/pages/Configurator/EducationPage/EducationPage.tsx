@@ -6,11 +6,11 @@ import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePag
 import StyleWrapper from '@components/StyledWrapper';
 import { MainParagraph, LightText, PrimaryText } from '@components/Typography';
 import { gql, useQuery } from '@apollo/client';
-import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectPage';
 import Hint from '@components/Hint/Hint';
 import Radio from '@components/Input/Radio/Radio';
 
 import { RadiosWrapper } from './styled';
+import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectSelect/SubjectSelect';
 
 export interface TitlesQuery {
   titles: {
