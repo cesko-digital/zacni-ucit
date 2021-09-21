@@ -8,39 +8,13 @@ import { LightText, PrimaryText } from '@components/Typography';
 import { gql, useQuery } from '@apollo/client';
 import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePage';
 import Select from '@components/Input/Select/Select';
-
-export interface SubjectsQuery {
-  subjects: {
-    id: string;
-    code: string;
-    name: string;
-  }[];
-}
-
-export const allSubjectsQuery = gql`
-  query allSubjectsQuery($schoolLevelIds: [Int]) {
-    subjects(schoolLevelIds: $schoolLevelIds) {
-      id
-      code
-      name
-    }
-  }
-`;
+import SubjectSelect from './SubjectSelect/SubjectSelect';
 
 const SubjectPage: React.FC = () => {
-  const { values, handleChange, setFieldValue } = useFormikContext<ConfiguratorValues>();
+  const { values } = useFormikContext<ConfiguratorValues>();
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
-  const subjectsQuery = useQuery<SubjectsQuery>(allSubjectsQuery, {
-    variables: { schoolLevelIds: [parseInt(values.degree, 10)] },
-  });
 
-  React.useEffect(() => {
-    if (subjectsQuery.data && subjectsQuery.data.subjects[0]) {
-      setFieldValue('subject', subjectsQuery.data.subjects[0].id);
-    }
-  }, [subjectsQuery.data]);
-
-  if (schoolLevelsQuery.loading || subjectsQuery.loading) {
+  if (schoolLevelsQuery.loading) {
     return <>Loading</>;
   }
 
@@ -57,14 +31,7 @@ const SubjectPage: React.FC = () => {
         <Hint onClick={console.log}>Zjistěte, jaké předměty můžete s vašim vzděláním vyučovat</Hint>
       </StyleWrapper>
       <StyleWrapper margin="0 0 2rem">
-        <Select
-          name="subject"
-          value={values.subject}
-          onChange={handleChange}
-          items={
-            subjectsQuery.data?.subjects.map(({ id, name }) => ({ value: id, text: name })) ?? []
-          }
-        />
+        <SubjectSelect degreeId={values.degree} name="subject" />
       </StyleWrapper>
     </>
   );

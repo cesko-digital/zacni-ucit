@@ -26,13 +26,13 @@ const data: Person[] = [
   {
     photo: janaFryzelkovaImage,
     name: 'Jana Fryzelková',
-    role: 'předsedkyně',
+    role: 'vedení a fundraising',
     email: 'jana@zacniucit.cz',
   },
   {
     photo: sandraOrtFeyglovaImage,
     name: 'Sandra Ort Feyglová',
-    role: 'místopředsedkyně',
+    role: 'strategie',
     email: 'sandra@zacniucit.cz',
   },
   {
