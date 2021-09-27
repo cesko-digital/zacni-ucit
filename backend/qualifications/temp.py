@@ -311,12 +311,6 @@ Zemědělství		PŘ	F	ENV
 
 
 def init_education_specialization():
-    """
-    Data Source: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=254445099
-    List Číselník oblastí VŠ studia
-    First row removed
-    """
-
     filepath = os.path.join(os.getcwd(), "data_init", "education_specialization.csv")
     with open(filepath, "r", encoding="utf-8") as csvfile:
         data = csvfile.readlines()
@@ -325,11 +319,22 @@ def init_education_specialization():
             education_specialization, _ = EducationSpecialization.objects.get_or_create(name=data[i])
 
 
+def init_titles():
+    titles = {"maturita": "Odborná maturita", "Bc.": "Bakalářské studium", "Mgr.": "Magisterské studium (Mgr. nebo Ing.)", "výuční list": "Výuční list", "Dis.": "Vyšší odborné vzdělání"}
+
+    for title in titles:
+        if title == "Bc." or title == "Mgr.":
+            visible_in_form = True
+        else:
+            visible_in_form = False
+        t, _ = Title.objects.get_or_create(code=title, name=titles[title], visible_in_form=visible_in_form)
+
+
 def init_qualification():
     """
     Data source: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=645564954
     csv file - removed first rows (headers)
-    There are also initial data for Title, EducationSpecialization and EducationType
+    There are also initial data for EducationSpecialization and EducationType
     Adds missing SubjectGroup - Jakýkoli kromě cizího jazyka
     """
 
@@ -382,14 +387,13 @@ def init_qualification():
         else:
             teaching_subject_group = None
 
-        # init title
         if type_1_title and type_1_title != "None":
-            type_1_title, _ = Title.objects.get_or_create(name=type_1_title, defaults={"code": type_1_title})
+            type_1_title, _ = Title.objects.get_or_create(code=type_1_title, defaults={"name": type_1_title, "visible_in_form": False})
         else:
             type_1_title = None
 
         if type_2_title and type_2_title != "None":
-            type_2_title, _ = Title.objects.get_or_create(name=type_2_title, defaults={"code": type_2_title})
+            type_2_title, _ = Title.objects.get_or_create(code=type_2_title, defaults={"name": type_2_title, "visible_in_form": False})
         else:
             type_2_title = None
 
