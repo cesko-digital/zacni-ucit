@@ -9,9 +9,8 @@ from colleges.temp2 import (
     init_courses,
     add_missing_language_school,
     add_missing_institute_of_lifelong_learning,
-    add_missing_subjects,
 )
-from teaching.temp import init_subjects_2021_01, init_school_type_2021_02, init_school_level_2021_02, init_subject_group
+from teaching.temp import init_subjects, init_school_type_2021_02, init_school_level_2021_02, init_subject_group
 
 
 def init_user():
@@ -108,7 +107,7 @@ def init_neo4j():
 
 def init():
     init_user()
-    init_subjects_2021_01()
+    init_subjects()
     init_map_2021_01()
     init_subject_group()
     init_other_options()
@@ -121,7 +120,6 @@ def init():
     #    init_neo4j()
     import_colleges()
     init_school_level_2021_02()
-    add_missing_subjects()
     init_other_options()
     init_school_type_2021_02()
     add_missing_language_school()

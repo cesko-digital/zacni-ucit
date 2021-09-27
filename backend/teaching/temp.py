@@ -1,61 +1,38 @@
 from .models import Subject, SchoolType, SchoolSubType, SchoolLevel, SubjectGroup
 import os
+import csv
 
 
-def init_subjects_2021_01():
+def init_subjects():
     """
-    Zdroj: https://docs.google.com/spreadsheets/d/1msJu1AX_-wYLbhvz8rqsZxFMBwX7-xzghCAFHeeBQEI/edit#gid=2008534637
-    Nejasnost s dvojim vyznamem "CJ": Cizí jazyk=CJ, Další cizí jazyk=CJ
-    """
-    SUBJECTS = """
-        Český jazyk a literatura	ČJL
-        Cizí jazyk	CJ
-        Matematika a její aplikace	M
-        Informační a komunikační technologie	IKT
-        Člověk a jeho svět (pouze 1. stupeň ZŠ)	ČAS
-        Dějepis	D
-        Výchova k občanství	OV / ZSV
-        Fyzika	F
-        Chemie	CH
-        Přírodopis	PŘ
-        Zeměpis (Geografie)	Z
-        Hudební výchova	HV
-        Výtvarná výchova	VV
-        Výchova ke zdraví	VKZ
-        Tělesná výchova	TV
-        Člověk a svět práce	ČSP
-        Dramatická výchova	DV
-        Etická výchova	ETV
-        Filmová / audiovizuální výchova	FAV
-        Taneční a pohybová výchova	TPV
-        Osobnostní a sociální výchova	OSV
-        Výchova demokratického občana	VDO
-        Výchova k myšlení v evropských a globálních souvislostech	EGS
-        Multikulturní výchova	MKV
-        Environmentální výchova	ENV
-        Mediální výchova	MV
-        Odborné předměty	ODBP
-        Praktické vyučování	PV
-        Odborný výcvik	ODBV
+    Zdroj: https://docs.google.com/spreadsheets/d/1msJu1AX_-wYLbhvz8rqsZxFMBwX7-xzghCAFHeeBQEI/edit#gid=2044127896
+    List: Číselník předmětů
     """
 
-    for name, code in [i.strip().split("\t") for i in SUBJECTS.strip().split("\n")]:
-        Subject.objects.get_or_create(name=name.strip(), code=code.strip())
+    subjects_list = []
+    filepath = os.path.join(os.getcwd(), "data_init", "subjects.csv")
+    with open(filepath, "r", encoding="utf8") as data:
+        subjects = csv.DictReader(data)
+        for subject in subjects:
+            subjects_list.append(subject)
+
+    for subject in subjects_list:
+        c, created = Subject.objects.get_or_create(
+            code=subject["Zkratka"],
+            defaults={"name": subject["Název"]})
 
 
 def init_school_level_2021_02():
     """
     Zdroj https://miro.com/app/board/o9J_lby_RpM=/?moveToWidget=3074457353595062463&cot=14
     a v nem listecek s referenci na https://www.msmt.cz/file/54480/
+    21.9.2021 - Stupně škol - Upraveno podle úkolu v Jira ZU-267
     """
     data = """
-        Mateřská škola - MŠ
-        Základní škola - ZŠ
-        Základní škola - 1. stupeň
-        Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)
-        Střední škola - SŠ
-        Střední škola - víceletá gymnázia, jejichž třídy odpovídají střednímu vzdělávání
-        Konzervatoře
+        MŠ
+        1. stupeň ZŠ
+        2. stupeň ZŠ, nižší stupně gymnázií
+        SŠ, SOŠ, SOU, vyšší stupně gymnázií
     """
 
     def _get_qs_from_subjects_names(subjects_names: list) -> []:
@@ -66,19 +43,19 @@ def init_school_level_2021_02():
         return qs
 
     first_level_elementary_school_subjects = [
-        "Český jazyk a literatura",
-        "Cizí jazyk",
-        "Matematika a její aplikace",
+        "Čeština",
+        "Angličtina",
+        "Němčina",
+        "Francouzština",
+        "Španělština",
+        "Ruština",
+        "Matematika",
         "Informační a komunikační technologie",
-        "Člověk a jeho svět (pouze 1. stupeň ZŠ)",
-        "Hudební výchova",
         "Výtvarná výchova",
+        "Hudební výchova",
+        "Výchova ke zdraví",
         "Tělesná výchova",
         "Člověk a svět práce",
-        "Dramatická výchova",
-        "Etická výchova",
-        "Filmová / audiovizuální výchova",
-        "Taneční a pohybová výchova",
         "Výchova demokratického občana",
         "Výchova k myšlení v evropských a globálních souvislostech",
         "Multikulturní výchova",
@@ -88,19 +65,23 @@ def init_school_level_2021_02():
     first_level_elementary_school_subjects_qs = _get_qs_from_subjects_names(first_level_elementary_school_subjects)
 
     second_level_elementary_school_subjects = [
-        "Český jazyk a literatura",
-        "Cizí jazyk",
-        "Další cizí jazyk",
-        "Matematika a její aplikace",
+        "Čeština",
+        "Angličtina",
+        "Němčina",
+        "Francouzština",
+        "Španělština",
+        "Ruština",
+        "Matematika",
         "Informační a komunikační technologie",
         "Dějepis",
-        "Výchova k občanství",
+        "Občanská výchova",
         "Fyzika",
         "Chemie",
-        "Přírodopis",
-        "Zeměpis (Geografie)",
+        "Přírodopis / Biologie",
+        "Zeměpis",
         "Hudební výchova",
         "Výtvarná výchova",
+        "Výchova ke zdraví",
         "Tělesná výchova",
         "Člověk a svět práce",
         "Dramatická výchova",
@@ -108,6 +89,7 @@ def init_school_level_2021_02():
         "Filmová / audiovizuální výchova",
         "Taneční a pohybová výchova",
         "Osobnostní a sociální výchova",
+        "Výchova demokratického občana",
         "Výchova k myšlení v evropských a globálních souvislostech",
         "Multikulturní výchova",
         "Environmentální výchova",
@@ -116,21 +98,26 @@ def init_school_level_2021_02():
     second_level_elementary_school_subjects_qs = _get_qs_from_subjects_names(second_level_elementary_school_subjects)
 
     high_school_subjects = [
-        "Český jazyk a literatura",
-        "Cizí jazyk",
-        "Další cizí jazyk",
-        "Matematika a její aplikace",
+        "Čeština",
+        "Angličtina",
+        "Němčina",
+        "Francouzština",
+        "Španělština",
+        "Ruština",
+        "Matematika",
         "Informační a komunikační technologie",
         "Dějepis",
-        "Výchova k občanství",
         "Fyzika",
         "Chemie",
-        "Přírodopis",
-        "Zeměpis (Geografie)",
+        "Přírodopis / Biologie",
+        "Zeměpis",
         "Hudební výchova",
         "Výtvarná výchova",
-        "Výchova ke zdraví",
-        "Výchova demokratického občana",
+        "Tělesná výchova",
+        "Dramatická výchova",
+        "Etická výchova",
+        "Filmová / audiovizuální výchova",
+        "Taneční a pohybová výchova",
         "Výchova demokratického občana",
         "Výchova k myšlení v evropských a globálních souvislostech",
         "Multikulturní výchova",
@@ -139,28 +126,32 @@ def init_school_level_2021_02():
         "Odborné předměty",
         "Praktické vyučování",
         "Odborný výcvik",
+        "Základy společenských věd",
     ]
     high_school_subjects_qs = _get_qs_from_subjects_names(high_school_subjects)
 
-    conservatory = [
-        "Dramatická výchova",
-        "Etická výchova",
-        "Filmová / audiovizuální výchova",
-        "Taneční a pohybová výchova",
-    ]
+    # conservatory = [
+    #     "Dramatická výchova",
+    #     "Etická výchova",
+    #     "Filmová / audiovizuální výchova",
+    #     "Taneční a pohybová výchova",
+    # ]
 
-    conservatory_qs = _get_qs_from_subjects_names(conservatory)
+    # conservatory_qs = _get_qs_from_subjects_names(conservatory)
 
     for name in [i.strip() for i in data.strip().split("\n")]:
         school_level, _ = SchoolLevel.objects.get_or_create(name=name)
-        if name == "Základní škola - 1. stupeň":
+        if name == "1. stupeň ZŠ":
             school_level.subjects.add(*first_level_elementary_school_subjects_qs)
-        elif name == "Základní škola - 2. stupeň (+ odpovídající stupeň víceletých gymnázií, 6ti a 8mi letá)":
+        elif name == "2. stupeň ZŠ, nižší stupně gymnázií":
             school_level.subjects.add(*second_level_elementary_school_subjects_qs)
-        elif name == "Střední škola - SŠ":
+        elif name == "SŠ, SOŠ, SOU, vyšší stupně gymnázií":
             school_level.subjects.add(*high_school_subjects_qs)
-        elif name == "Konzervatoře":
-            school_level.subjects.add(*conservatory_qs)
+        elif name == "MŠ":
+            school_level.target_school_level = False
+            school_level.save()
+        # elif name == "Konzervatoře":
+        #    school_level.subjects.add(*conservatory_qs)
 
 
 def init_school_type_2021_02():

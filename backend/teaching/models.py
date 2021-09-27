@@ -28,6 +28,8 @@ class SchoolLevel(TimeStampedModel):
 
     name = models.CharField("Název", max_length=100, unique=True)
     subjects = models.ManyToManyField(Subject, related_name="school_levels", verbose_name="Předměty")
+    target_school_level = models.BooleanField(help_text="Kde chce uživatel učit", default=True)
+    user_education = models.BooleanField(help_text="Dosažené vzdělání", default=True)
 
     class Meta:
         verbose_name = "Stupeň školy"

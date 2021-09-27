@@ -483,12 +483,12 @@ def init_qualification():
             education_type_experience_2 = None
 
         type_1_school_levels = []
-        type_1_level_1 = type_1_level_1.replace(" ZŠ", "")
-        type_1_level_2 = type_1_level_2.replace(" ZŠ", "")
+        # type_1_level_1 = type_1_level_1.replace(" ZŠ", "")
+        # type_1_level_2 = type_1_level_2.replace(" ZŠ", "")
 
         if type_1_level_1 and type_1_level_1 != "None":
             if type_1_level_1 == "Any":
-                type_1_level_1, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
+                type_1_level_1, _ = SchoolLevel.objects.get_or_create(name="jakýkoli", defaults={"target_school_level": False, "user_education": False})
                 type_1_school_levels.append(type_1_level_1)
             else:
                 type_1_level_1, _ = SchoolLevel.objects.get_or_create(name__contains=type_1_level_1)
@@ -496,7 +496,7 @@ def init_qualification():
 
         if type_1_level_2 and type_1_level_2 != "None":
             if type_1_level_2 == "Any":
-                type_1_level_2, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
+                type_1_level_2, _ = SchoolLevel.objects.get_or_create(name="jakýkoli", defaults={"target_school_level": False, "user_education": False})
                 type_1_school_levels.append(type_1_level_2)
             else:
                 type_1_level_2, _ = SchoolLevel.objects.get_or_create(name__contains=type_1_level_2)
@@ -504,11 +504,11 @@ def init_qualification():
             education_type_1.school_levels.add(*type_1_school_levels)
 
         type_2_school_levels = []
-        type_2_level = type_2_level.replace(" ZŠ", "")
+        # type_2_level = type_2_level.replace(" ZŠ", "")
 
         if type_2_level and type_2_level != "None":
             if type_2_level == "Any":
-                type_2_level, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
+                type_2_level, _ = SchoolLevel.objects.get_or_create(name="jakýkoli", defaults={"target_school_level": False, "user_education": False})
                 type_2_school_levels.append(type_2_level)
             else:
                 type_2_level, _ = SchoolLevel.objects.get_or_create(name__contains=type_2_level)
@@ -516,11 +516,11 @@ def init_qualification():
             education_type_2.school_levels.add(*type_2_school_levels)
 
         type_course_school_levels = []
-        course_level = course_level.replace(" ZŠ", "")
+        # course_level = course_level.replace(" ZŠ", "")
 
         if course_level and course_level != "None":
             if course_level == "Any":
-                course_level, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
+                course_level, _ = SchoolLevel.objects.get_or_create(name="jakýkoli", defaults={"target_school_level": False, "user_education": False})
                 type_course_school_levels.append(course_level)
             else:
                 course_level, _ = SchoolLevel.objects.get_or_create(name__contains=course_level)
