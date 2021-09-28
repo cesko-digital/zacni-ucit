@@ -17,9 +17,7 @@ def init_subjects():
             subjects_list.append(subject)
 
     for subject in subjects_list:
-        c, created = Subject.objects.get_or_create(
-            code=subject["Zkratka"],
-            defaults={"name": subject["Název"]})
+        c, created = Subject.objects.get_or_create(code=subject["Zkratka"], defaults={"name": subject["Název"]})
 
 
 def init_school_level_2021_02():
@@ -29,10 +27,11 @@ def init_school_level_2021_02():
     21.9.2021 - Stupně škol - Upraveno podle úkolu v Jira ZU-267
     """
     data = """
-        MŠ
+        Mateřská škola
         1. stupeň ZŠ
-        2. stupeň ZŠ, nižší stupně gymnázií
-        SŠ, SOŠ, SOU, vyšší stupně gymnázií
+        2. stupeň ZŠ / nižší stupně gymnázií
+        SŠ / SOŠ / SOU / vyšší stupně gymnázií
+        2. stupeň ZŠ a SŠ
     """
 
     def _get_qs_from_subjects_names(subjects_names: list) -> []:
@@ -94,6 +93,7 @@ def init_school_level_2021_02():
         "Multikulturní výchova",
         "Environmentální výchova",
         "Mediální výchova",
+        "Konverzace",
     ]
     second_level_elementary_school_subjects_qs = _get_qs_from_subjects_names(second_level_elementary_school_subjects)
 
@@ -127,31 +127,24 @@ def init_school_level_2021_02():
         "Praktické vyučování",
         "Odborný výcvik",
         "Základy společenských věd",
+        "Konverzace",
     ]
     high_school_subjects_qs = _get_qs_from_subjects_names(high_school_subjects)
-
-    # conservatory = [
-    #     "Dramatická výchova",
-    #     "Etická výchova",
-    #     "Filmová / audiovizuální výchova",
-    #     "Taneční a pohybová výchova",
-    # ]
-
-    # conservatory_qs = _get_qs_from_subjects_names(conservatory)
 
     for name in [i.strip() for i in data.strip().split("\n")]:
         school_level, _ = SchoolLevel.objects.get_or_create(name=name)
         if name == "1. stupeň ZŠ":
             school_level.subjects.add(*first_level_elementary_school_subjects_qs)
-        elif name == "2. stupeň ZŠ, nižší stupně gymnázií":
+        elif name == "2. stupeň ZŠ / nižší stupně gymnázií":
             school_level.subjects.add(*second_level_elementary_school_subjects_qs)
-        elif name == "SŠ, SOŠ, SOU, vyšší stupně gymnázií":
+        elif name == "SŠ / SOŠ / SOU / vyšší stupně gymnázií":
             school_level.subjects.add(*high_school_subjects_qs)
-        elif name == "MŠ":
+        elif name == "Mateřská škola":
             school_level.target_school_level = False
             school_level.save()
-        # elif name == "Konzervatoře":
-        #    school_level.subjects.add(*conservatory_qs)
+        elif name == "2. stupeň ZŠ a SŠ":
+            school_level.target_school_level = False
+            school_level.save()
 
 
 def init_school_type_2021_02():
@@ -204,22 +197,15 @@ def init_subject_group():
     First row removed
     """
 
-    SubjectGroup.objects.get_or_create(name="jakýkoli")
-    SubjectGroup.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
-
+    subject_group_list = []
     filepath = os.path.join(os.getcwd(), "data_init", "subject_groups.csv")
-    with open(filepath, "r", encoding="utf-8") as csvfile:
-        data = csvfile.read().strip()
+    with open(filepath, "r", encoding="utf8") as data:
+        subject_groups = csv.DictReader(data)
+        for subject_group in subject_groups:
+            subject_group_list.append(subject_group)
 
-        dict = {}
-        for group_name, subject in [i.split(",") for i in data.split("\n")]:
-            if group_name in dict:
-                subj, _ = Subject.objects.get_or_create(code=subject)
-                dict[group_name].append(subj)
-            else:
-                subj, _ = Subject.objects.get_or_create(code=subject)
-                dict[group_name] = [subj]
-
-        for key in dict:
-            subj_group, _ = SubjectGroup.objects.get_or_create(name=key)
-            subj_group.subjects.add(*dict[key])
+    for subject_group in subject_group_list:
+        c, created = SubjectGroup.objects.get_or_create(name=subject_group["Skupina předmětů"])
+        subject = Subject.objects.get(code=subject_group["Předmět"])
+        subject.subject_group = c
+        subject.save()

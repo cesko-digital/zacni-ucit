@@ -4,7 +4,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.core import management
 from common.models import GraphModel
-from qualifications.temp import init_map_2021_01, init_other_options, init_qualification, init_education_specialization, init_titles
+from qualifications.temp import (
+    init_map_2021_01,
+    init_other_options,
+    init_qualification,
+    init_education_specialization,
+    init_titles,
+)
 from colleges.temp2 import (
     init_courses,
     add_missing_language_school,
@@ -115,12 +121,12 @@ def init():
     init_school_level_2021_02()
     init_education_specialization()
     init_titles()
+    init_school_level_2021_02()
     init_qualification()
     import_colleges()
     # if neo4j:
     #    init_neo4j()
     import_colleges()
-    init_school_level_2021_02()
     init_other_options()
     init_school_type_2021_02()
     add_missing_language_school()
