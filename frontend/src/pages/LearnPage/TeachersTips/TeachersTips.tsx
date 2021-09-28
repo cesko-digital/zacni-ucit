@@ -69,7 +69,6 @@ const TeachersTips: React.FC = () => (
         </Button>
         .
       </Paragraph>
-
       <Paragraph>
         <Button href="https://twitter.com/prayforlasagne">Madame Lasagne</Button> vás zase obohatí
         svými zápisky, ve kterých shrnuje{' '}

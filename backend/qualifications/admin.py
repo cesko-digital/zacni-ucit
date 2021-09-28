@@ -24,10 +24,10 @@ class CollegeProgrammeAdmin(admin.ModelAdmin):
 
 
 class EducationTypeAdmin(admin.ModelAdmin):
-    list_display = ("qualification_type", "title", "specialization", "subject_group")
+    list_display = ("qualification_type", "title")
     list_filter = ("qualification_type", "title", "school_levels")
     search_fields = ("qualification_type", "title__name", "school_levels__name")
-    list_select_related = ("title", "specialization", "subject_group")
+    list_select_related = ("title",)
     filter_horizontal = ("school_levels",)
 
 

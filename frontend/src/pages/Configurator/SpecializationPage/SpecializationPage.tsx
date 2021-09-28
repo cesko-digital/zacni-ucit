@@ -38,7 +38,6 @@ const SpecializationPage: React.FC = () => {
         <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
         <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
       </MainParagraph>
-
       <EducationArea education={selectedTitle.name} />
 
       <Section>
