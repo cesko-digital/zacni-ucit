@@ -5,12 +5,17 @@ import type { ConfiguratorValues } from '../Configurator';
 import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePage';
 import { MainParagraph, LightText, PrimaryText } from '@components/Typography';
 import { useQuery } from '@apollo/client';
-import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectPage';
 
 import { allTitlesQuery, TitlesQuery } from '../EducationPage/EducationPage';
+import EducationArea from './EducationArea/EducationArea';
+import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectSelect/SubjectSelect';
+import Hint from '@components/Hint/Hint';
+import Select from '@components/Input/Select/Select';
+
+import { Section } from './styled';
 
 const SpecializationPage: React.FC = () => {
-  const { values, setFieldValue } = useFormikContext<ConfiguratorValues>();
+  const { values, handleChange } = useFormikContext<ConfiguratorValues>();
   const titlesQuery = useQuery<TitlesQuery>(allTitlesQuery);
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
   const subjectsQuery = useQuery<SubjectsQuery>(allSubjectsQuery, {
@@ -33,7 +38,27 @@ const SpecializationPage: React.FC = () => {
         <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
         <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
       </MainParagraph>
-      TODO
+      <EducationArea education={selectedTitle.name} />
+
+      <Section>
+        <MainParagraph noMargin>
+          4.2 Máte vystudovaný relevantní kurz celoživotního vzdělávání (CŽV) pro výuku{' '}
+          <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
+          <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
+        </MainParagraph>
+        <Hint onClick={console.log}>Nevíte si rady? Napište nám</Hint>
+        <Select name="" onChange={handleChange} value="" items={[]}></Select>
+      </Section>
+
+      <Section>
+        <MainParagraph noMargin>
+          4.3 Máte další relevantní zkušenosti pro výuku{' '}
+          <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
+          <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
+        </MainParagraph>
+        <Hint onClick={console.log}>Nevíte si rady? Napište nám</Hint>
+        <Select name="" onChange={handleChange} value="" items={[]}></Select>
+      </Section>
     </>
   );
 };
