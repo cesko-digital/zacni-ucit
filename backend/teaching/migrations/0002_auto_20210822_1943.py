@@ -11,13 +11,13 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='subjectgroup',
-            name='subjects',
-        ),
-        migrations.AddField(
-            model_name='subject',
-            name='subject_group',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='teaching.subjectgroup', verbose_name='Předmětová skupina'),
-        ),
+        #migrations.RemoveField(
+        #    model_name='subjectgroup',
+        #    name='subjects',
+        #),
+        #migrations.AddField(
+        #    model_name='subject',
+        #    name='subject_group',
+        #    field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='teaching.subjectgroup', verbose_name='Předmětová skupina'),
+        #),
     ]

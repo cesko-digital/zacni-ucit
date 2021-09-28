@@ -12,9 +12,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='qualification',
-            name='subject_group',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='teaching.subjectgroup', verbose_name='Předmětové skupiny'),
-        ),
+        #migrations.AlterField(
+        #    model_name='qualification',
+        #    name='subject_group',
+        #   field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='teaching.subjectgroup', verbose_name='Předmětové skupiny'),
+        #),
     ]

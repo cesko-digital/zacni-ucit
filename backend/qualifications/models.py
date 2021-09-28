@@ -125,7 +125,7 @@ class EducationType(TimeStampedModel):
         ordering = ("qualification_type",)
 
     def __str__(self):
-        return f"{self.qualification_type} / {self.specialization} / {self.subject_group}"
+        return f"{self.qualification_type}"
 
 
 class Qualification(TimeStampedModel):
