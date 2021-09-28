@@ -37,6 +37,8 @@ class TitleAdmin(admin.ModelAdmin):
         "code",
     )
 
+class QualificationAdmin(admin.ModelAdmin):
+    pass
 
 class EducationSpecializationAdmin(admin.ModelAdmin):
     list_display = ("name",)
@@ -61,4 +63,4 @@ admin.site.register(Title, TitleAdmin)
 admin.site.register(EducationSpecialization, EducationSpecializationAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(OtherExperience, OtherExperienceAdmin)
-admin.site.register(Qualification)
+admin.site.register(Qualification, QualificationAdmin)
