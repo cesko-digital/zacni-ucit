@@ -61,14 +61,13 @@ const baseStyles = css`
     }};
   }
 
-  /* TODO: correct color based on theme */
   &:active {
     color: black;
     background-color: ${({ variant, buttonStyle }) => {
       if (buttonStyle === 'link') {
         return undefined;
       }
-      return variant === 'primary' ? '#AAEC8B' : undefined;
+      return variant === 'primary' ? ({ theme }) => theme.color.green : undefined;
     }};
   }
 
