@@ -98,7 +98,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Typ předmětů',
-                'verbose_name_plural': 'Tipy předmětů',
+                'verbose_name_plural': 'Typy předmětů',
                 'ordering': ('name',),
             },
         ),

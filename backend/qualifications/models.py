@@ -90,11 +90,11 @@ class SubjectType(TimeStampedModel):
 
     class Meta:
         verbose_name = "Typ předmětů"
-        verbose_name_plural = "Tipy předmětů"
+        verbose_name_plural = "Typy předmětů"
         ordering = ("name",)
 
     def __str__(self):
-        return self.code
+        return self.name
 
 
 class EducationType(TimeStampedModel):
@@ -149,8 +149,8 @@ class Qualification(TimeStampedModel):
         ordering = ("row_id",)
 
     def __str__(self):
-        return self.name
-
+        return str(self.id)
+      
 
 class OtherExperience(TimeStampedModel):
     """
