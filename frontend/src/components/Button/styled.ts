@@ -31,7 +31,7 @@ const baseStyles = css`
     }
   }};
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'underline' : 'none')};
-  display: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'inline' : 'inline-flex')};
+  display: ${({ inline }) => (inline ? 'inline' : 'inline-flex')};
   justify-content: center;
   align-items: center;
   font-size: ${({ buttonStyle }) => (buttonStyle === 'button' ? '1rem' : '0.875rem')};
@@ -66,11 +66,10 @@ const baseStyles = css`
 
 export const Link = styled.a`
   ${baseStyles};
-  display: inline;
 `;
 
 export const Button = styled.button`
-  ${baseStyles}
+  ${baseStyles};
 `;
 
 export const IconWrapper = styled.span`
