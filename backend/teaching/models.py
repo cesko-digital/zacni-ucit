@@ -40,23 +40,6 @@ class Subject(TimeStampedModel):
         return self.code
 
 
-class SubjectGroup(TimeStampedModel):
-    """
-    Predmetova skupina.
-    """
-
-    name = models.CharField("Název", max_length=100, unique=True)
-    subjects = models.ManyToManyField(Subject, verbose_name="Předměty")
-
-    class Meta:
-        verbose_name = "Předmětová skupina"
-        verbose_name_plural = "Předmětové skupiny"
-        ordering = ("name",)
-
-    def __str__(self):
-        return self.name
-
-
 class SchoolLevel(TimeStampedModel):
     """
     Stupen skoly.
