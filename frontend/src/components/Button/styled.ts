@@ -43,22 +43,21 @@ const baseStyles = css`
   &:focus {
     outline: none;
     text-decoration: none;
-    border: ${({ variant, buttonStyle }) => {
+    border: ${({ buttonStyle }) => {
       if (buttonStyle === 'link') {
         return undefined;
       }
-      return variant === 'secondary' ? '2px solid #54c176' : '2px solid #54c176';
+      return `2px solid #54c176`;
     }};
   }
 
-  /* TODO: correct color based on theme */
   &:active {
     color: black;
     background-color: ${({ variant, buttonStyle }) => {
       if (buttonStyle === 'link') {
         return undefined;
       }
-      return variant === 'primary' ? '#AAEC8B' : undefined;
+      return variant === 'primary' ? ({ theme }) => theme.color.green : undefined;
     }};
   }
 
@@ -67,9 +66,9 @@ const baseStyles = css`
     height: 16px;
     fill: ${({ variant, buttonStyle }) => {
       if (buttonStyle === 'link') {
-        return '#7F50FF';
+        return ({ theme }) => theme.color.primary;
       }
-      return variant === 'secondary' ? '#7F50FF' : 'white';
+      return variant === 'secondary' ? ({ theme }) => theme.color.primary : 'white';
     }};
   }
 
@@ -87,7 +86,9 @@ export const Link = styled.a`
         if (buttonStyle === 'link') {
           return undefined;
         }
-        return variant === 'secondary' ? '#54c176' : 'black';
+        return variant === 'secondary'
+          ? ({ theme }) => theme.color.darkGreen
+          : ({ theme }) => theme.color.secondary;
       }};
     }
   }
