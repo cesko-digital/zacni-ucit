@@ -99,6 +99,10 @@ export const NavLink = styled(ButtonComponent)<{ color?: string }>`
   &.zacinam-ucit {
     color: #ffb60b;
   }
+
+  &:hover {
+    color: ${({ theme }) => theme.color.darkGreen};
+  }
 `;
 
 export const Center = styled.div`
