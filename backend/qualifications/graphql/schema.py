@@ -23,7 +23,7 @@ from qualifications.models import (
     OtherExperience,
     Qualification,
 )
-from teaching.models import SubjectGroup
+from teaching.models import SubjectGroup, Subject
 
 
 class Query(graphene.ObjectType):
@@ -62,12 +62,10 @@ class Query(graphene.ObjectType):
     # Qualification type queries
     qualifications = graphene.List(
         QualificationObjectType,
-        subject=graphene.String(required=True),
-        school_level=graphene.String(required=True),
-        title=graphene.String(required=True),
-        area=graphene.String(required=True),
-        czv=graphene.String(required=True),
-        other_experience=graphene.String(required=True),
+        subject_id=graphene.Int(required=True),
+        level_id=graphene.Int(required=True),
+        title=graphene.Int(required=True),
+        area=graphene.Int(required=True),
     )
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
@@ -75,59 +73,61 @@ class Query(graphene.ObjectType):
     def resolve_qualifications(
         root,
         info,
-        subject,
-        school_level,
+        subject_id,
+        level_id,
         title,
         area,
-        czv,
-        other_experience,
         school_level_done=None,
         subject_group_done=None,
     ):
 
-        # query na vyfiltrovani cest + join s education types
-        subject_group = SubjectGroup.objects.filter(name=subject)
-        paths = (
-            Qualification.objects.filter(subject_group=subject_group, school_level=school_level)
-            .prefetch_related("education_types")
-            .values()
-        )
+        paths = Qualification.objects.filter(
+            subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_level=level_id
+        ).prefetch_related("education_types")
 
         # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
         df = pd.DataFrame(paths)
+
         for index, row in df.iterrows():
             for edu_type in row["education_types"]:
 
+                # overuje, zda uzivatel ma titul
                 if edu_type["qualification_type"] == "titul":
-                    if edu_type["title"] == title and (edu_type["area"] == area or edu_type["area"] == "Any"):
+
+                    # overuje, zda ma titul a zaroven kvalifikaci na ten stupen, kde chce ucit
+                    if edu_type["title"] == title and edu_type["area"] == area:
+
+                        # overuje, zda ma zadanou predmetovou skupinu
                         if edu_type["subject_group"]:
-                            if edu_type["subject_group"] == subject_group_done or edu_type["subject_group"] == "Any":
+
+                            # overuje, zda ma vystudovanou predmetovou skupinu
+                            if edu_type["subject_group"] == subject_group_done:
+
+                                # overuje, zda ma titul a predmetovou skupinu pro dany stupen, kde chce ucit
                                 if edu_type["school_levels"]:
-                                    if (
-                                        edu_type["school_levels"] == school_level_done
-                                        or edu_type["school_levels"] == "Any"
-                                    ):
+
+                                    # pokud ma titul a zaroven specializaci a zaroven predmetovou skupinu udelanou a
+                                    # zaroven pro dany stupen, kde chce ucit
+                                    if edu_type["school_levels"] == school_level_done:
                                         edu_type["completed"] = True
+
+                                    # pokud nema predmetovou skupinu pro dany stupen
                                     else:
                                         edu_type["completed"] = False
+
+                                # pokud nema predmetovou skupinu pro dany stupen
                                 else:
                                     edu_type["completed"] = True
+
+                            # pokud ma nejakou predmetovou skupinu, ale ne tu, kterou potrebuje
                             else:
                                 edu_type["completed"] = False
+
+                        # pokud ma titul, ale nema predmetovou skupinu
                         else:
                             edu_type["completed"] = True
-                    else:
-                        edu_type["completed"] = False
 
-                if edu_type["qualification_type"] == "czv":
-                    if edu_type["name"] == czv:
-                        edu_type["completed"] = True
-                    else:
-                        edu_type["completed"] = False
-
-                if edu_type["qualification_type"] == "Další zkušenost":
-                    if edu_type["name"] == other_experience:
-                        edu_type["completed"] = True
+                    # pokud nema zadny titul
                     else:
                         edu_type["completed"] = False
 
@@ -155,8 +155,9 @@ class Query(graphene.ObjectType):
 
         # serazeni cest podle sloupce count
         df = df.sort_values(by="count", ascending=True)
+        list_of_df_paths = df.values.tolist()
 
-        return df
+        return list_of_df_paths
 
     @staticmethod
     def resolve_titles(root, info):
