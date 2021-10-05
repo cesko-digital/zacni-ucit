@@ -1,6 +1,6 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
-from qualifications.models import EducationSpecialization
+from qualifications.models import EducationSpecialization, QualificationType, OtherExperience
 
 
 class College(TimeStampedModel):
@@ -69,13 +69,17 @@ class Course(TimeStampedModel):
     Zdroj: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=0
     """
 
-    qualification_type = models.CharField(help_text="Typ kvalifikace", max_length=150)
+    qualification_type = models.ForeignKey(
+        QualificationType, on_delete=models.SET_NULL, null=True, verbose_name="Typ kvalifikace"
+    )
     title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True, verbose_name="Titul")
     school_levels = models.ManyToManyField("teaching.SchoolLevel", verbose_name="Stupně škol")
     education_specialization = models.ForeignKey(
         EducationSpecialization, on_delete=models.SET_NULL, null=True, verbose_name="Specializace"
     )
-    other_qualification_type = models.CharField(help_text="Typ ostatní kvalifikace", max_length=150)
+    other_qualification_type = models.ForeignKey(
+        OtherExperience, verbose_name="Typ ostatní kvalifikace", on_delete=models.SET_NULL, null=True
+    )
     name = models.CharField(help_text="Název", max_length=300)  # Realny nazev kurzu
     university = models.ForeignKey(College, on_delete=models.SET_NULL, null=True, verbose_name="Vysoká škola")
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, verbose_name="Fakulta")

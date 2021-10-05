@@ -2,7 +2,7 @@ import os
 import csv
 from .models import College, Faculty, Course
 from teaching.models import SchoolLevel, Subject
-from qualifications.models import Title, EducationSpecialization
+from qualifications.models import Title, EducationSpecialization, QualificationType, OtherExperience
 from django.core.exceptions import ObjectDoesNotExist
 from decimal import Decimal
 
@@ -84,18 +84,19 @@ def init_courses():
     ]
 
     for course in courses:
-        qualification_type = course["Typ kvalifikace"]
+        qualification_type = QualificationType.objects.get(name=course["Typ kvalifikace"])
         title = False
-        if qualification_type == "Titul":
+        if qualification_type.name == "Titul":
             title = Title.objects.filter(code=course["Titul"]).first()
 
         specialization = False
         if course["Specializace"] != "0" and course["Specializace"] != "":
             specialization = EducationSpecialization.objects.get(name=course["Specializace"].capitalize().strip())
 
-        other_qualification_type = ""
-        if qualification_type == "Ostatní kvalifikace":
-            other_qualification_type = course["Typ ostatní kvalifikace"]
+        other_qualification_type = False
+        if qualification_type.name == "Ostatní kvalifikace" and course["Typ ostatní kvalifikace"] != "0":
+            other_qualification_type = OtherExperience.objects.get(name=course["Typ ostatní kvalifikace"])
+
         name = course["Název"]
 
         university = College.objects.filter(name=course["Vysoká škola"].strip()).first()
@@ -134,7 +135,6 @@ def init_courses():
             url=url,
             defaults={
                 "qualification_type": qualification_type,
-                "other_qualification_type": other_qualification_type,
                 "university": university,
                 "city": city,
                 "price": price,
@@ -147,6 +147,10 @@ def init_courses():
                 "note": note,
             },
         )
+
+        if other_qualification_type:
+            c.other_qualification_type = other_qualification_type
+            c.save()
 
         if title:
             c.title = title
