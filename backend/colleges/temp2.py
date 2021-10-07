@@ -42,7 +42,7 @@ def init_courses():
     list Čistopis MVP
     The second row was removed.
     The first one was edited to:
-    Typ kvalifikace,Titul,1. stupeň ZŠ,2. stupeň ZŠ,SŠ,Specializace,Typ ostatní kvalifikace,Název,Vysoká škola,Fakulta,Cena,Město,SDS / semestr,P,D,K,jednoobor,dvouobor,Odkaz na více info,Poznámka,ČJL,AJ,NJ,FJ,ŠJ,RJ,M,IKT,ČAS,D,OV / ZSV,F,CH,PŘ,Z,HV,VV,VKZ,TV,ČSP,DV,ETV,FAV,TPV,OSV,VDO,EGS,MKV,ENV,MV,ODBP,PV,ODBV,NOVÁ AKREDITACE DO 2021
+    Typ kvalifikace,Titul,1. stupeň ZŠ,2. stupeň ZŠ,SŠ,Specializace,Typ ostatní kvalifikace,Název,Vysoká škola,Fakulta,Cena,Město,SDS / semestr,P,DF,K,jednoobor,dvouobor,Odkaz na více info,Poznámka,ČJL,AJ,NJ,FJ,ŠJ,RJ,M,IKT,D,OV ,ZSV,F,CH,PŘ,Z,HV,VV,VKZ,TV,ČSP,DV,ETV,FAV,TPV,OSV,VDO,EGS,MKV,ENV,MV,ODBP,PV,ODBV,NOVÁ AKREDITACE DO 2021
     """
     filepath = os.path.join(os.getcwd(), "colleges", "courses_MVP.csv")
     courses = get_courses_from_csv(filepath)
@@ -119,7 +119,7 @@ def init_courses():
             study_length_in_semesters = 0
         form_present = "P" in course["P"]
         form_combined = "K" in course["K"]
-        form_distant = "D" in course["D"]
+        form_distant = "D" in course["DF"]
         double_major = False
         if course["dvouobor"] == "1":
             double_major = True
