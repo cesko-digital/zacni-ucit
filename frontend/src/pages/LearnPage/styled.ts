@@ -182,12 +182,3 @@ export const Paragraph = styled.p`
   margin: 1rem 0;
   max-width: 76ch;
 `;
-
-export const EventDateContainer = styled.div`
-  min-width: 20%;
-
-  ${mediaQueriesUp('sm')`
-    display:flex;
-    flex-direction: column;
-  `}
-`;

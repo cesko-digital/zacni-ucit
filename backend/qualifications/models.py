@@ -113,12 +113,8 @@ class EducationType(TimeStampedModel):
     qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
     name = models.CharField("Název", max_length=200, null=True)  # zákonná formulace
     title = models.ForeignKey(Title, on_delete=models.SET_NULL, null=True, verbose_name="Titul")
-    specialization = models.ForeignKey(
-        EducationSpecialization, on_delete=models.SET_NULL, null=True, verbose_name="Oblast VŠ vzdělávání"
-    )
-    subject_group = models.ForeignKey(
-        SubjectGroup, on_delete=models.SET_NULL, null=True, verbose_name="Skupina předmětů"
-    )
+    specializations = models.ManyToManyField(EducationSpecialization, verbose_name="Oblast VŠ vzdělávání", null=True)
+    subject_groups = models.ManyToManyField(SubjectGroup, verbose_name="Skupina předmětů", null=True)
     school_levels = models.ManyToManyField(
         "teaching.SchoolLevel", related_name="education_types", verbose_name="Stupeň školy"
     )
@@ -136,9 +132,7 @@ class Qualification(TimeStampedModel):
     legal_paragraph = models.CharField("Paragraf zákona", max_length=400)
     example = models.CharField("Příklad", max_length=1000)
     row_id = models.SmallIntegerField(unique=True)
-    subject_group = models.ForeignKey(
-        SubjectGroup, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Skupina předmětů"
-    )
+    subject_groups = models.ManyToManyField(SubjectGroup, verbose_name="Skupina předmětů")
     school_level = models.ForeignKey(
         SchoolLevel, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Stupeň školy"
     )

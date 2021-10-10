@@ -11,6 +11,7 @@ interface BaseProps {
   variant?: 'primary' | 'secondary';
   buttonStyle?: 'button' | 'link';
   color?: string;
+  inline?: boolean;
 }
 
 type Button = BaseProps & {
@@ -40,6 +41,7 @@ const ButtonComponent: React.FC<Props> = props =>
         target={props.target}
         title={props.title}
         variant={props.variant ?? 'primary'}
+        inline={props.inline}
         onClick={props.onClick}
       >
         {props.startIcon && <IconWrapper>{props.startIcon}</IconWrapper>}
@@ -55,6 +57,7 @@ const ButtonComponent: React.FC<Props> = props =>
       variant={props.variant ?? 'primary'}
       onClick={props.onClick}
       disabled={props.disabled}
+      inline={props.inline}
       type={props.type}
     >
       {props.startIcon && <IconWrapper>{props.startIcon}</IconWrapper>}

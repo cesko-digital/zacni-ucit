@@ -36,13 +36,6 @@ def add_missing_institute_of_lifelong_learning():
     )
 
 
-def add_missing_subjects():
-    subjects = ["Angličtina", "Němčina", "Francouzština", "Španělština", "Ruština"]
-    codes = ["AJ", "NJ", "FJ", "ŠJ", "RJ"]
-    for i in range(len(subjects)):
-        Subject.objects.get_or_create(code=codes[i], defaults={"name": subjects[i]})
-
-
 def init_courses():
     """
     Zdroj: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=0
@@ -63,9 +56,8 @@ def init_courses():
         "RJ",
         "M",
         "IKT",
-        "ČAS",
         "D",
-        "OV / ZSV",
+        "OV",
         "F",
         "CH",
         "PŘ",
@@ -88,11 +80,10 @@ def init_courses():
         "ODBP",
         "PV",
         "ODBV",
+        "ZSV",
     ]
 
-    count = 4
     for course in courses:
-        print("Count: ", count)
         qualification_type = course["Typ kvalifikace"]
         title = False
         if qualification_type == "Titul":
@@ -190,7 +181,9 @@ def init_courses():
         c.school_levels.add(*levels)
         subjects = []
         for code in subject_codes:
-            if course[code] == code:
-                subjects.append(Subject.objects.get(code=code).id)
+            course_subj_code = course.get(code)
+            if course_subj_code:
+                if course_subj_code == code:
+                    subjects.append(Subject.objects.get(code=code).id)
+
         c.subjects.add(*subjects)
-        count += 1

@@ -28,7 +28,7 @@ const baseStyles = css`
     return variant === 'secondary' ? '#0C0807' : 'white';
   }};
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'underline' : 'none')};
-  display: inline-flex;
+  display: ${({ inline }) => (inline ? 'inline' : 'inline-flex')};
   justify-content: center;
   align-items: center;
   font-size: ${({ buttonStyle }) => (buttonStyle === 'button' ? '1rem' : '0.875rem')};
@@ -105,7 +105,7 @@ export const Link = styled.a`
 `;
 
 export const Button = styled.button`
-  ${baseStyles}
+  ${baseStyles};
 `;
 
 export const IconWrapper = styled.span`
