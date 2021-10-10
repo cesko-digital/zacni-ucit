@@ -66,6 +66,7 @@ const baseStyles = css`
 
 export const Link = styled.a`
   ${baseStyles};
+
 `;
 
 export const Button = styled.button`
