@@ -6,29 +6,26 @@ const baseStyles = css`
       return color;
     } else if (buttonStyle === 'link') {
       return undefined;
-    } else {
-      return variant === 'secondary' ? 'white' : '#7f50ff';
     }
+    return variant === 'secondary' ? 'white' : '#7f50ff';
   }};
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   padding: ${({ buttonStyle }) => (buttonStyle === 'button' ? '12px 32px' : undefined)};
   border: ${({ variant, buttonStyle, color }) => {
     if (buttonStyle === 'link') {
       return undefined;
-    } else {
-      if (color) {
-        return `2px solid ${color}`;
-      }
-      return variant === 'secondary' ? '2px solid #0C0807' : '2px solid #7f50ff';
     }
+    if (color) {
+      return `2px solid ${color}`;
+    }
+    return variant === 'secondary' ? '2px solid #0C0807' : '2px solid #7f50ff';
   }};
   border-radius: ${({ buttonStyle }) => (buttonStyle === 'button' ? '50px' : undefined)};
   color: ${({ variant, buttonStyle }) => {
     if (buttonStyle === 'link') {
       return 'inherit';
-    } else {
-      return variant === 'secondary' ? '#0C0807' : 'white';
     }
+    return variant === 'secondary' ? '#0C0807' : 'white';
   }};
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'underline' : 'none')};
   display: ${({ inline }) => (inline ? 'inline' : 'inline-flex')};
@@ -42,9 +39,36 @@ const baseStyles = css`
   text-align: center;
 
   &:hover,
+  &:active,
   &:focus {
     outline: none;
     text-decoration: none;
+    border: ${({ buttonStyle }) => {
+      if (buttonStyle === 'link') {
+        return undefined;
+      }
+      return `2px solid #54c176`;
+    }};
+  }
+
+  &:active {
+    color: black;
+    background-color: ${({ variant, buttonStyle }) => {
+      if (buttonStyle === 'link') {
+        return undefined;
+      }
+      return variant === 'primary' ? ({ theme }) => theme.color.green : undefined;
+    }};
+  }
+
+  &:active {
+    color: black;
+    background-color: ${({ variant, buttonStyle }) => {
+      if (buttonStyle === 'link') {
+        return undefined;
+      }
+      return variant === 'primary' ? ({ theme }) => theme.color.green : undefined;
+    }};
   }
 
   svg {
@@ -52,10 +76,9 @@ const baseStyles = css`
     height: 16px;
     fill: ${({ variant, buttonStyle }) => {
       if (buttonStyle === 'link') {
-        return '#7F50FF';
-      } else {
-        return variant === 'secondary' ? '#7F50FF' : 'white';
+        return ({ theme }) => theme.color.primary;
       }
+      return variant === 'secondary' ? ({ theme }) => theme.color.primary : 'white';
     }};
   }
 
@@ -65,8 +88,20 @@ const baseStyles = css`
 `;
 
 export const Link = styled.a`
-  ${baseStyles};
+  ${baseStyles}
 
+  &:active {
+    svg {
+      fill: ${({ variant, buttonStyle }) => {
+        if (buttonStyle === 'link') {
+          return undefined;
+        }
+        return variant === 'secondary'
+          ? ({ theme }) => theme.color.darkGreen
+          : ({ theme }) => theme.color.secondary;
+      }};
+    }
+  }
 `;
 
 export const Button = styled.button`
