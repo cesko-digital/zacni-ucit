@@ -149,4 +149,8 @@ export const Table = styled.table`
     white-space: nowrap;
     vertical-align: top;
   }
+
+  td {
+    padding-bottom: 10px;
+  }
 `;
