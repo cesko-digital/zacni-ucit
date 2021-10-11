@@ -37,8 +37,10 @@ class TitleAdmin(admin.ModelAdmin):
         "code",
     )
 
+
 class QualificationAdmin(admin.ModelAdmin):
     pass
+
 
 class EducationSpecializationAdmin(admin.ModelAdmin):
     list_display = ("name",)

@@ -13,6 +13,9 @@ from qualifications.graphql.types import (
     QualificationObjectType,
     SubjectGroupObjectType,
 )
+
+from colleges.graphql.types import CourseObjectType
+
 from qualifications.models import (
     Title,
     CollegeArea,
@@ -23,7 +26,10 @@ from qualifications.models import (
     OtherExperience,
     Qualification,
 )
+
 from teaching.models import SubjectGroup, Subject
+
+from colleges.models import Course
 
 
 class Query(graphene.ObjectType):
@@ -68,6 +74,10 @@ class Query(graphene.ObjectType):
         area=graphene.Int(required=True),
     )
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
+
+    # Courses queries
+    courses = graphene.List(CourseObjectType)
+    course = graphene.Field(CourseObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
     def resolve_qualifications(
@@ -135,7 +145,12 @@ class Query(graphene.ObjectType):
         for index, row in df.iterrows():
             for edu_type in row["education_types"]:
                 columns = edu_type.loc[
-                    :0, "name", "title", "area", "subject_group", "school_levels", "completed"
+                    :0,
+                    "qualification_type",
+                    "title",
+                    "specialization",
+                    "school_levels",
+                    "completed",
                 ]  # check :0
                 json = columns.to_json()
                 edu_type["edu_type_json"] = json
@@ -158,6 +173,34 @@ class Query(graphene.ObjectType):
         list_of_df_paths = df.values.tolist()
 
         return list_of_df_paths
+
+    @staticmethod
+    def resolve_courses(root, info, subject_id, level_id, title, area, school_level_done=None, subject_group_done=None):
+
+        # na základě user inputu uloží vhodné cesty do proměné
+        paths = root.resolve_qualifications(
+            # info?
+            subject_id,
+            level_id,
+            title,
+            area,
+            school_level_done,
+            subject_group_done,
+        )
+
+        relevant_courses = []
+
+        # projde dané cesty a kurzy splňující parametry přidá do seznamu
+        for path in paths:
+            courses = Course.objects.filter(
+                qualification_type=path.qualification_type,
+                title=path.title,
+                school_levels=path.school_levels,
+                education_specialization=path.specialization,
+            )
+            relevant_courses.append(courses)
+
+        return relevant_courses
 
     @staticmethod
     def resolve_titles(root, info):

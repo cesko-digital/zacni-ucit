@@ -26,7 +26,7 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = ("name", "display_faculty", "display_college")
     list_select_related = ("faculty", "faculty__college")
     list_filter = ("faculty__college", "subjects")
-    #fields = ("name", "faculty", "price", "form_present", "form_combined", "subjects", "url", "note")
+    # fields = ("name", "faculty", "price", "form_present", "form_combined", "subjects", "url", "note")
     filter_horizontal = ("subjects",)
 
     def display_faculty(self, obj):
