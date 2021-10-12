@@ -4,6 +4,7 @@ import React from 'react';
 import type { ConfiguratorValues } from '../Configurator';
 import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePage';
 import { MainParagraph, LightText, PrimaryText } from '@components/Typography';
+import StyleWrapper from '@components/StyledWrapper';
 import { useQuery } from '@apollo/client';
 
 import { allTitlesQuery, TitlesQuery } from '../EducationPage/EducationPage';
@@ -39,9 +40,11 @@ const SpecializationPage: React.FC = () => {
         <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
       </MainParagraph>
 
-      <EducationArea education={selectedTitle.name} />
+      <StyleWrapper margin="0 0 2rem 0">
+        <EducationArea education={selectedTitle.name} />
+      </StyleWrapper>
 
-      <Section>
+      {/* <Section>
         <MainParagraph noMargin>
           4.2 Máte vystudovaný relevantní kurz celoživotního vzdělávání (CŽV) pro výuku{' '}
           <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
@@ -59,7 +62,7 @@ const SpecializationPage: React.FC = () => {
         </MainParagraph>
         <Hint onClick={console.log}>Nevíte si rady? Napište nám</Hint>
         <Select name="" onChange={handleChange} value="" items={[]}></Select>
-      </Section>
+      </Section> */}
     </>
   );
 };

@@ -14,3 +14,14 @@ export const Title = styled.h2`
     margin-bottom: 32px;
   `}
 `;
+
+export const Text = styled.span`
+  font-size: 0.75rem;
+`;
+
+export const Separator = styled.hr`
+  height: 1px;
+  border: none;
+  background: #d8d8d7;
+  margin: 16px 0;
+`;

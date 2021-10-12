@@ -13,6 +13,7 @@ type Props = {
   isContinueDisabled?: boolean;
   buttonText?: string;
   additionalText?: JSX.Element;
+  withButton?: boolean;
   onNextStep: () => void;
 };
 
@@ -22,22 +23,25 @@ const ConfiguratorStep: FC<Props> = ({
   buttonText,
   isContinueDisabled,
   additionalText = null,
+  withButton = true,
   onNextStep,
 }) => (
   <div>
     <Meta title={title} />
     <Title>{title}</Title>
     {children}
-    <StyleWrapper padding="0 0 1rem 0">
-      <Button
-        disabled={isContinueDisabled}
-        endIcon={<ChevronIcon />}
-        type="button"
-        onClick={() => onNextStep()}
-      >
-        {buttonText ?? 'Pokračovat'}
-      </Button>
-    </StyleWrapper>
+    {withButton && (
+      <StyleWrapper padding="0 0 1rem 0">
+        <Button
+          disabled={isContinueDisabled}
+          endIcon={<ChevronIcon />}
+          type="button"
+          onClick={() => onNextStep()}
+        >
+          {buttonText ?? 'Pokračovat'}
+        </Button>
+      </StyleWrapper>
+    )}
     {additionalText}
   </div>
 );
