@@ -449,6 +449,7 @@ def init_qualification():
         if type_1_title:
             qualification_type1 = QualificationType.objects.get(name="Titul")
             education_type_1, _ = EducationType.objects.get_or_create(
+                name=type_1_name,
                 qualification_type=qualification_type1,
                 title=type_1_title,
             )
