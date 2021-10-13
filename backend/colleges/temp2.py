@@ -117,16 +117,22 @@ def init_courses():
             study_length_in_semesters = int(course["SDS / semestr"])
         except (ValueError):
             study_length_in_semesters = 0
-        form_present = "P" in course["P"]
-        form_combined = "K" in course["K"]
-        form_distant = "D" in course["DF"]
-        double_major = False
-        if course["dvouobor"] == "1":
-            double_major = True
-        single_major = True
 
-        if course["jednoobor"] == "0":
-            single_major = False
+        study_form = []
+        if "P" in course["P"]:
+            study_form.append(Course.FORM_PRESENT)
+        if "K" in course["K"]:
+            study_form.append(Course.FORM_COMBINED)
+        if "D" in course["DF"]:
+            study_form.append(Course.FORM_DISTANT)
+
+        major = []
+        if course["dvouobor"] == "1":
+            major.append(Course.MAJOR_DOUBLE)
+
+        if course["jednoobor"] == "1":
+            major.append(Course.MAJOR_SINGLE)
+
         url = course["Odkaz na více info"]
         note = course["Poznámka"]
 
@@ -139,11 +145,8 @@ def init_courses():
                 "city": city,
                 "price": price,
                 "study_length_in_semesters": study_length_in_semesters,
-                "form_present": form_present,
-                "form_combined": form_combined,
-                "form_distant": form_distant,
-                "double_major": double_major,
-                "single_major": single_major,
+                "study_form": study_form,
+                "major": major,
                 "note": note,
             },
         )
