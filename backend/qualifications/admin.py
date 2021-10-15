@@ -44,9 +44,9 @@ class QualificationAdmin(admin.ModelAdmin):
 
 
 class QualificationTypeAdmin(admin.ModelAdmin):
-    klist_display = ("name",)
+    list_display = ("name",)
 
-
+    
 class EducationSpecializationAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
