@@ -97,24 +97,27 @@ class SubjectType(TimeStampedModel):
         return self.name
 
 
+class QualificationType(TimeStampedModel):
+    name = models.CharField("Název", max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = "Typ kvalifikace"
+        verbose_name_plural = "Typy kvalifikací"
+        ordering = ("name",)
+
+
 class EducationType(TimeStampedModel):
     """
     Typ vzdelani z hlediska zakona.
     """
 
-    TITLE_QUALIFICATION = "titul"
-    CZV_QUALIFICATION = "czv"
-    OTHER_EXPERIENCE = "dalsi"
-    QUALIFICATION_TYPE_CHOICES = (
-        (TITLE_QUALIFICATION, "Titul"),
-        (CZV_QUALIFICATION, "Kurz CŽV"),
-        (OTHER_EXPERIENCE, "Další zkušenost"),
+    qualification_type = models.ForeignKey(
+        QualificationType, on_delete=models.SET_NULL, null=True, verbose_name="Typ kvalifikace"
     )
-    qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
     name = models.CharField("Název", max_length=200, null=True)  # zákonná formulace
     title = models.ForeignKey(Title, on_delete=models.SET_NULL, null=True, verbose_name="Titul")
-    specializations = models.ManyToManyField(EducationSpecialization, verbose_name="Oblast VŠ vzdělávání", null=True)
-    subject_groups = models.ManyToManyField(SubjectGroup, verbose_name="Skupina předmětů", null=True)
+    specializations = models.ManyToManyField(EducationSpecialization, verbose_name="Oblast VŠ vzdělávání")
+    subject_groups = models.ManyToManyField(SubjectGroup, verbose_name="Skupina předmětů")
     school_levels = models.ManyToManyField(
         "teaching.SchoolLevel", related_name="education_types", verbose_name="Stupeň školy"
     )
@@ -150,7 +153,7 @@ class Qualification(TimeStampedModel):
 
     def __str__(self):
         return str(self.id)
-      
+
 
 class OtherExperience(TimeStampedModel):
     """

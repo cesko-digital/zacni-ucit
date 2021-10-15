@@ -8,6 +8,7 @@ from .models import (
     SubjectType,
     OtherExperience,
     Qualification,
+    QualificationType,
 )
 
 
@@ -42,6 +43,10 @@ class QualificationAdmin(admin.ModelAdmin):
     pass
 
 
+class QualificationTypeAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+    
 class EducationSpecializationAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
@@ -66,3 +71,4 @@ admin.site.register(EducationSpecialization, EducationSpecializationAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(OtherExperience, OtherExperienceAdmin)
 admin.site.register(Qualification, QualificationAdmin)
+admin.site.register(QualificationType, QualificationTypeAdmin)
