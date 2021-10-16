@@ -91,9 +91,16 @@ class Query(graphene.ObjectType):
         subject_group_done=None,
     ):
 
-        paths = Qualification.objects.filter(
+        # vytvoreni jednotlivych cest
+        paths = Qualification.objects.prefetch_related('education_types')
+
+        # nebo zkusit
+        # paths = EducationType.objects.prefetch_related('qualification_set')
+
+        # vyfiltrovani jednotlivych cest na zaklade user inputu
+        paths = paths.filter(
             subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_level=level_id
-        ).prefetch_related("education_types")
+        )
 
         # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
         df = pd.DataFrame(paths)
@@ -145,31 +152,32 @@ class Query(graphene.ObjectType):
         for index, row in df.iterrows():
             for edu_type in row["education_types"]:
                 columns = edu_type.loc[
-                    :0,
-                    "qualification_type",
-                    "title",
-                    "specialization",
-                    "school_levels",
-                    "completed",
-                ]  # check :0
+                          :0,  # check
+                          "qualification_type",
+                          "title",
+                          "specialization",
+                          "school_levels",
+                          "completed",
+                          ]
                 json = columns.to_json()
                 edu_type["edu_type_json"] = json
 
         # vyvoreni sloupce EduTypes list pro kazdou cestu
-        # chybi grouby
         for index, row in df.iterrows():
             row["edu_type_list"] = []
             for edu_type in row["education_types"]:
-                if edu_type["completed"] == False:
+                if not edu_type["edu_type_json"]["completed"]:
                     row["edu_type_list"].append(edu_type["edu_type_json"])
+
+        # df.groupby("row_id") - neni treba?
 
         # pridani sloupce, ktery pocita pocet EduTypes pro kazdou cestu
         for index, row in df.iterrows():
             num = len(row["edu_type_list"])
-            row["count"] = num
+            row["edu_count"] = num
 
         # serazeni cest podle sloupce count
-        df = df.sort_values(by="count", ascending=True)
+        df = df.sort_values(by="edu_count", ascending=True)
         list_of_df_paths = df.values.tolist()
 
         return list_of_df_paths
@@ -192,13 +200,16 @@ class Query(graphene.ObjectType):
 
         # projde dané cesty a kurzy splňující parametry přidá do seznamu
         for path in paths:
-            courses = Course.objects.filter(
-                qualification_type=path.qualification_type,
-                title=path.title,
-                school_levels=path.school_levels,
-                education_specialization=path.specialization,
-            )
-            relevant_courses.append(courses)
+            path_courses = []
+            for json in path["edu_type_list"]:
+                courses = Course.objects.filter(
+                    qualification_type=json.qualification_type,
+                    title=json.title,
+                    school_levels=json.school_levels,
+                    education_specialization=json.specialization,
+                )
+                path_courses.append(courses)
+            relevant_courses.append(path_courses)
 
         return relevant_courses
 
