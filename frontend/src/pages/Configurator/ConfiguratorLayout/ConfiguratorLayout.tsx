@@ -1,7 +1,6 @@
 import { Formik, Form } from 'formik';
 import React from 'react';
 
-import Container from '@components/Container/Container';
 import { useRouter } from 'next/router';
 
 export type ConfiguratorValues = {
@@ -9,10 +8,8 @@ export type ConfiguratorValues = {
   subject: string | null;
   education: string | null;
   educationArea: string | null;
-  teachingEducation: {
-    degree: string | null;
-    subject: string | null;
-  };
+  teachingEducationDegree: string | null;
+  teachingEducationSubject: string | null;
 };
 
 interface IProps {
@@ -24,10 +21,8 @@ const initialValues = {
   subject: null,
   education: null,
   educationArea: null,
-  teachingEducation: {
-    degree: null,
-    subject: null,
-  },
+  teachingEducationDegree: null,
+  teachingEducationSubject: null,
 };
 
 const ConfiguratorLayout: React.FC<IProps> = ({ queryRequired = true, children }) => {
@@ -40,15 +35,11 @@ const ConfiguratorLayout: React.FC<IProps> = ({ queryRequired = true, children }
   return (
     <Formik<ConfiguratorValues>
       initialValues={router.query ? { ...initialValues, ...router.query } : initialValues}
-      onSubmit={values => {
-        console.log(values);
-      }}
+      onSubmit={() => {}}
     >
       {() => (
         <Form noValidate>
-          <main>
-            <Container>{children}</Container>
-          </main>
+          <main>{children}</main>
         </Form>
       )}
     </Formik>

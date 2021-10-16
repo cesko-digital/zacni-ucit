@@ -13,6 +13,7 @@ import { RadiosWrapper } from './styled';
 import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectSelect/SubjectSelect';
 import { routes } from '@routes';
 import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
+import Container from '@components/Container/Container';
 
 export interface TitlesQuery {
   titles: {
@@ -48,40 +49,42 @@ const EducationPage: React.FC = () => {
   const selectedSubject = subjectsQuery.data.subjects.find(({ id }) => id === values.subject);
 
   return (
-    <ConfiguratorStep
-      title="Jaké je vaše vzdělání?"
-      step={3}
-      prevStep={{ url: routes.configurator.step2, text: 'Změnit stupeň a předmět' }}
-      nextStep={{ url: routes.configurator.step4, disabled: !values.education }}
-    >
-      <MainParagraph>
-        Vyberte všechna vaše vzdělání, která by mohla být relevantní pro učení předmětu{' '}
-        <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
-        <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
-      </MainParagraph>
-      <StyleWrapper margin="2rem 0 1rem 0">
-        <LightText>
-          Vyšší než magisterský stupeň ani maturita bez odborných předmětů nejsou pro učitelství
-          podstatné.
-        </LightText>
-      </StyleWrapper>
-      <Hint href={routes.contactUs}>Nevíte si rady? Napište nám</Hint>
-      <StyleWrapper margin="0 0 2rem 0">
-        <RadiosWrapper>
-          {titlesQuery.data.titles.map(({ id, name }) => (
-            <div key={id}>
-              <Radio
-                checked={values.education === id}
-                name="education"
-                value={id}
-                onChange={() => setFieldValue('education', id)}
-                label={name}
-              />
-            </div>
-          ))}
-        </RadiosWrapper>
-      </StyleWrapper>
-    </ConfiguratorStep>
+    <Container>
+      <ConfiguratorStep
+        title="Jaké je vaše vzdělání?"
+        step={3}
+        prevStep={{ url: routes.configurator.step2, text: 'Změnit stupeň a předmět' }}
+        nextStep={{ url: routes.configurator.step4, disabled: !values.education }}
+      >
+        <MainParagraph>
+          Vyberte všechna vaše vzdělání, která by mohla být relevantní pro učení předmětu{' '}
+          <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
+          <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
+        </MainParagraph>
+        <StyleWrapper margin="2rem 0 1rem 0">
+          <LightText>
+            Vyšší než magisterský stupeň ani maturita bez odborných předmětů nejsou pro učitelství
+            podstatné.
+          </LightText>
+        </StyleWrapper>
+        <Hint href={routes.contactUs}>Nevíte si rady? Napište nám</Hint>
+        <StyleWrapper margin="0 0 2rem 0">
+          <RadiosWrapper>
+            {titlesQuery.data.titles.map(({ id, name }) => (
+              <div key={id}>
+                <Radio
+                  checked={values.education === id}
+                  name="education"
+                  value={id}
+                  onChange={() => setFieldValue('education', id)}
+                  label={name}
+                />
+              </div>
+            ))}
+          </RadiosWrapper>
+        </StyleWrapper>
+      </ConfiguratorStep>
+    </Container>
   );
 };
 

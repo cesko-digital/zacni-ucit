@@ -12,18 +12,20 @@ type Props = {
 };
 
 const Hint: React.FC<Props> = ({ href, onClick, download, children }) => (
-  <Button
-    type="button"
-    href={href}
-    target={href ? '_blank' : undefined}
-    download={download}
-    onClick={onClick}
-  >
-    <IconWrapper>
-      <InfoIcon />
-    </IconWrapper>
-    {children}
-  </Button>
+  <div>
+    <Button
+      type="button"
+      href={href}
+      target={href ? '_blank' : undefined}
+      download={download}
+      onClick={onClick}
+    >
+      <IconWrapper>
+        <InfoIcon />
+      </IconWrapper>
+      {children}
+    </Button>
+  </div>
 );
 
 export default Hint;

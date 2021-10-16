@@ -14,6 +14,7 @@ import Hint from '@components/Hint/Hint';
 
 import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 import { routes } from '@routes';
+import Container from '@components/Container/Container';
 
 const SpecializationPage: React.FC = () => {
   const { values } = useFormikContext<ConfiguratorValues>();
@@ -32,29 +33,33 @@ const SpecializationPage: React.FC = () => {
   const selectedSubject = subjectsQuery.data.subjects.find(({ id }) => id === values.subject);
 
   return (
-    <ConfiguratorStep
-      title="Jaká je vaše studijní specializace?"
-      buttonText="Výsledky"
-      step={4}
-      prevStep={{ url: routes.configurator.step3, text: 'Změnit stupeň, předmět a vaše vzdělání' }}
-      nextStep={{
-        url: routes.configurator.results,
-        text: 'Výsledky',
-        disabled: !values.education,
-      }}
-    >
-      <MainParagraph>
-        Vyberte specializaci vašeho dosaženého vzdělání{' '}
-        <PrimaryText size="1em">{selectedTitle.name}</PrimaryText> pro předmět{' '}
-        <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
-        <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
-      </MainParagraph>
+    <Container>
+      <ConfiguratorStep
+        title="Jaká je vaše studijní specializace?"
+        buttonText="Výsledky"
+        step={4}
+        prevStep={{
+          url: routes.configurator.step3,
+          text: 'Změnit stupeň, předmět a vaše vzdělání',
+        }}
+        nextStep={{
+          url: routes.configurator.results,
+          text: 'Výsledky',
+          disabled: !values.education,
+        }}
+      >
+        <MainParagraph>
+          Vyberte specializaci vašeho dosaženého vzdělání{' '}
+          <PrimaryText size="1em">{selectedTitle.name}</PrimaryText> pro předmět{' '}
+          <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
+          <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
+        </MainParagraph>
 
-      <StyleWrapper margin="0 0 2rem 0">
-        <EducationArea education={selectedTitle.name} />
-      </StyleWrapper>
+        <StyleWrapper margin="0 0 2rem 0">
+          <EducationArea education={selectedTitle.name} />
+        </StyleWrapper>
 
-      {/* <Section>
+        {/* <Section>
         <MainParagraph noMargin>
           4.2 Máte vystudovaný relevantní kurz celoživotního vzdělávání (CŽV) pro výuku{' '}
           <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
@@ -73,7 +78,8 @@ const SpecializationPage: React.FC = () => {
         <Hint onClick={console.log}>Nevíte si rady? Napište nám</Hint>
         <Select name="" onChange={handleChange} value="" items={[]}></Select>
       </Section> */}
-    </ConfiguratorStep>
+      </ConfiguratorStep>
+    </Container>
   );
 };
 

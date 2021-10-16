@@ -9,7 +9,7 @@ export const Button = styled(ButtonComponent)`
   appearance: none;
   border: none;
   background: none;
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
   margin-bottom: 16px;
   padding: 5px 0;

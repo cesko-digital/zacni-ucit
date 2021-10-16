@@ -8,12 +8,13 @@ import Button from '@components/Button/Button';
 import { H1, LightText } from '@components/Typography';
 import { routes } from '@routes';
 import { ConfiguratorValues } from './ConfiguratorLayout/ConfiguratorLayout';
+import Container from '@components/Container/Container';
 
 const Configurator: React.FC = () => {
   const { values } = useFormikContext<ConfiguratorValues>();
 
   return (
-    <>
+    <Container>
       <StyleWrapper margin="3rem 0 1rem 0">
         <H1>Chcete se stát učitelem, ale nevíte jak na to?</H1>
       </StyleWrapper>
@@ -48,7 +49,7 @@ const Configurator: React.FC = () => {
       >
         <DegreePage />
       </ConfiguratorStep>
-    </>
+    </Container>
   );
 };
 

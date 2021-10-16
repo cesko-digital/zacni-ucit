@@ -4,6 +4,7 @@ import querystring from 'querystring';
 import {
   Top,
   Title,
+  Type,
   Paragraph,
   ImageWrapper,
   IconWrapper,
@@ -47,16 +48,16 @@ const SchoolTile: React.FC<Props> = ({
     <article>
       <Top href={`${href}?${querystring.stringify(values as any)}`}>
         <ImageWrapper />
-        <div>
+        <span>
           <Title>{schoolName}</Title>
-          <Paragraph>
+          <Type>
             <IconWrapper>
               <HatIcon />
             </IconWrapper>
             {type}
-          </Paragraph>
+          </Type>
           <Paragraph>{description}</Paragraph>
-        </div>
+        </span>
         <ChevronWrapper>
           <ChevronIcon />
         </ChevronWrapper>

@@ -1,7 +1,6 @@
 /// <reference path="../modules.d.ts"/>
 
 import { ApolloProvider } from '@apollo/client';
-import { StylesProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -19,17 +18,15 @@ const MyApp = ({ Component, pageProps }) => {
       <Head>
         <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
       </Head>
-      <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <GlobaLStyles />
-          <ApolloProvider client={apolloClient}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-            <div id="portal-root" />
-          </ApolloProvider>
-        </ThemeProvider>
-      </StylesProvider>
+      <ThemeProvider theme={theme}>
+        <GlobaLStyles />
+        <ApolloProvider client={apolloClient}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+          <div id="portal-root" />
+        </ApolloProvider>
+      </ThemeProvider>
     </>
   );
 };

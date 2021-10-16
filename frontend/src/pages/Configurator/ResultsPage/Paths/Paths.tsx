@@ -30,7 +30,7 @@ export const Paths: React.FC<Props> = ({ paths }) => {
   return (
     <Wrapper>
       <Top>
-        <Title>Vydejte se jednou ze 2 cest k učení</Title>
+        <Title>Vydejte se jednou ze {paths.length} cest k učení</Title>
       </Top>
       {paths.map(({ text, items, courseCode }) => (
         <Openable key={text} text={text}>
