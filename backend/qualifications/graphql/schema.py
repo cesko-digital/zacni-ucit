@@ -92,14 +92,11 @@ class Query(graphene.ObjectType):
     ):
 
         # vytvoreni jednotlivych cest
-        paths = Qualification.objects.prefetch_related('education_types')
-
-        # nebo zkusit
-        # paths = EducationType.objects.prefetch_related('qualification_set')
+        paths = EducationType.objects.prefetch_related('qualification_set')
 
         # vyfiltrovani jednotlivych cest na zaklade user inputu
         paths = paths.filter(
-            subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_level=level_id
+            subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_levels=level_id
         )
 
         # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
