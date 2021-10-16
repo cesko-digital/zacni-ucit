@@ -52,7 +52,7 @@ const ResultsPage: React.FC = () => (
     <Paragraph>
       Některé školy vezmou zájemce o učitelství i bez pedagogického vzdělání nebo v průběhu jeho
       studia!{' '}
-      <Button href="#" buttonStyle="link">
+      <Button href={routes.jobs} buttonStyle="link" target="_blank">
         Podívejte se na nabídku takových škol
       </Button>
     </Paragraph>

@@ -31,7 +31,6 @@ interface IProps {
 
 const EducationArea: React.FC<IProps> = ({ education }) => {
   const { values, handleChange, setFieldValue } = useFormikContext<ConfiguratorValues>();
-  console.log(values);
 
   const educationAreasQuery = useQuery<AllEducationAreasQuery>(allEducationAreasQuery);
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);

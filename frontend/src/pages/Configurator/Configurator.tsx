@@ -36,7 +36,10 @@ const Configurator: React.FC = () => {
               Napište nám
             </Button>{' '}
             nebo se podívejte na{' '}
-            <Button href={`${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`}>
+            <Button
+              href={`${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`}
+              target="_blank"
+            >
               přehled zákona o ped. pracovnících
             </Button>
             .

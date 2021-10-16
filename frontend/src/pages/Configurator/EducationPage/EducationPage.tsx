@@ -46,7 +46,6 @@ const EducationPage: React.FC = () => {
 
   const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);
   const selectedSubject = subjectsQuery.data.subjects.find(({ id }) => id === values.subject);
-  console.log(values);
 
   return (
     <ConfiguratorStep
