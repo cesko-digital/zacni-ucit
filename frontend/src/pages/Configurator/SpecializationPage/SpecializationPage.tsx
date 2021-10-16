@@ -15,8 +15,10 @@ import Hint from '@components/Hint/Hint';
 import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 import { routes } from '@routes';
 import Container from '@components/Container/Container';
+import { useRouter } from 'next/router';
 
 const SpecializationPage: React.FC = () => {
+  const router = useRouter();
   const { values } = useFormikContext<ConfiguratorValues>();
   const titlesQuery = useQuery<TitlesQuery>(allTitlesQuery);
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
@@ -26,6 +28,11 @@ const SpecializationPage: React.FC = () => {
 
   if (schoolLevelsQuery.loading || subjectsQuery.loading || titlesQuery.loading) {
     return <>Loading</>;
+  }
+
+  if (!values.education || !values.subject || !values.degree) {
+    router.replace(routes.configurator.step1);
+    return null;
   }
 
   const selectedTitle = titlesQuery.data.titles.find(({ id }) => id === values.education);

@@ -66,7 +66,7 @@ const EducationArea: React.FC<IProps> = ({ education }) => {
   }, [educationAreasQuery.data]);
 
   React.useEffect(() => {
-    if (sortedAreas.length > 0) {
+    if (sortedAreas.length > 0 && !values.educationArea) {
       setFieldValue('educationArea', sortedAreas[0].id);
     }
   }, [sortedAreas]);

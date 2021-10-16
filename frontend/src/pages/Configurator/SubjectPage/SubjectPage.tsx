@@ -15,14 +15,21 @@ import BackButton from '@pages/BackButton/BackButton';
 import Modal from '@components/Modal/Modal';
 import useModal from '@components/Modal/useModal';
 import Container from '@components/Container/Container';
+import { useRouter } from 'next/router';
 
 const SubjectPage: React.FC = () => {
+  const router = useRouter();
   const { values } = useFormikContext<ConfiguratorValues>();
   const moreSubjectsModal = useModal();
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
 
   if (schoolLevelsQuery.loading) {
     return <>Loading</>;
+  }
+
+  if (!values.degree) {
+    router.replace(routes.configurator.step1);
+    return null;
   }
 
   const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);

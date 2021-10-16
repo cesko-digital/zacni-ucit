@@ -14,6 +14,7 @@ import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectSelect/Su
 import { routes } from '@routes';
 import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 import Container from '@components/Container/Container';
+import { useRouter } from 'next/router';
 
 export interface TitlesQuery {
   titles: {
@@ -34,6 +35,7 @@ export const allTitlesQuery = gql`
 `;
 
 const EducationPage: React.FC = () => {
+  const router = useRouter();
   const { values, setFieldValue } = useFormikContext<ConfiguratorValues>();
   const titlesQuery = useQuery<TitlesQuery>(allTitlesQuery);
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
@@ -43,6 +45,11 @@ const EducationPage: React.FC = () => {
 
   if (schoolLevelsQuery.loading || subjectsQuery.loading || titlesQuery.loading) {
     return <>Loading</>;
+  }
+
+  if (!values.degree || !values.subject) {
+    router.replace(routes.configurator.step1);
+    return null;
   }
 
   const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);

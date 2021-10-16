@@ -35,7 +35,7 @@ const SubjectSelect: React.FC<IProps> = ({ name, degreeId }) => {
   });
 
   React.useEffect(() => {
-    if (subjectsQuery.data && subjectsQuery.data.subjects[0]) {
+    if (subjectsQuery.data && subjectsQuery.data.subjects[0] && !values[name]) {
       setFieldValue(name, subjectsQuery.data.subjects[0].id);
     }
   }, [subjectsQuery.data]);
@@ -44,6 +44,7 @@ const SubjectSelect: React.FC<IProps> = ({ name, degreeId }) => {
     return <>Loading</>;
   }
 
+  console.log(values[name]);
   return (
     <Select
       name={name}
