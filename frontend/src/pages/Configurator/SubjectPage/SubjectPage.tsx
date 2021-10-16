@@ -16,6 +16,7 @@ import Modal from '@components/Modal/Modal';
 import useModal from '@components/Modal/useModal';
 import Container from '@components/Container/Container';
 import { useRouter } from 'next/router';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 
 const SubjectPage: React.FC = () => {
   const router = useRouter();
@@ -23,16 +24,12 @@ const SubjectPage: React.FC = () => {
   const moreSubjectsModal = useModal();
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
 
-  if (schoolLevelsQuery.loading) {
-    return <>Loading</>;
-  }
-
   if (!values.degree) {
     router.replace(routes.configurator.step1);
     return null;
   }
 
-  const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);
+  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.degree);
 
   return (
     <Container>
@@ -54,7 +51,9 @@ const SubjectPage: React.FC = () => {
           studijních dvouoborů. Pokud vám ani jedna nebude vyhovovat, můžete se na výuce druhého
           předmětu domluvit až přímo se svým zaměstnavatelem: ředitelem školy.
         </Modal>
-        <PrimaryText>Pro {selectedLevel.name}</PrimaryText>
+        <AnimatedHeight isOpen>
+          {selectedLevel ? <PrimaryText>Pro {selectedLevel.name}</PrimaryText> : <div />}
+        </AnimatedHeight>
         <StyleWrapper margin="0 0 1rem 0">
           <LightText>Vyberte si prosím pouze jeden předmět.</LightText>
         </StyleWrapper>

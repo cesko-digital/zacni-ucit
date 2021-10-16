@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 import Select from '@components/Input/Select/Select';
 import { ConfiguratorValues } from '@pages/Configurator/ConfiguratorLayout/ConfiguratorLayout';
 import { useFormikContext } from 'formik';
@@ -40,18 +41,21 @@ const SubjectSelect: React.FC<IProps> = ({ name, degreeId }) => {
     }
   }, [subjectsQuery.data]);
 
-  if (subjectsQuery.loading) {
-    return <>Loading</>;
-  }
-
-  console.log(values[name]);
   return (
-    <Select
-      name={name}
-      value={values[name]}
-      onChange={handleChange}
-      items={subjectsQuery.data?.subjects.map(({ id, name }) => ({ value: id, text: name })) ?? []}
-    />
+    <AnimatedHeight isOpen>
+      {subjectsQuery.data ? (
+        <Select
+          name={name}
+          value={values[name]}
+          onChange={handleChange}
+          items={
+            subjectsQuery.data?.subjects.map(({ id, name }) => ({ value: id, text: name })) ?? []
+          }
+        />
+      ) : (
+        <div />
+      )}
+    </AnimatedHeight>
   );
 };
 

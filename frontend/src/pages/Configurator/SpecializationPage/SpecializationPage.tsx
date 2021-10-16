@@ -16,6 +16,7 @@ import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 import { routes } from '@routes';
 import Container from '@components/Container/Container';
 import { useRouter } from 'next/router';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 
 const SpecializationPage: React.FC = () => {
   const router = useRouter();
@@ -26,18 +27,14 @@ const SpecializationPage: React.FC = () => {
     variables: { schoolLevelIds: [parseInt(values.degree, 10)] },
   });
 
-  if (schoolLevelsQuery.loading || subjectsQuery.loading || titlesQuery.loading) {
-    return <>Loading</>;
-  }
-
   if (!values.education || !values.subject || !values.degree) {
     router.replace(routes.configurator.step1);
     return null;
   }
 
-  const selectedTitle = titlesQuery.data.titles.find(({ id }) => id === values.education);
-  const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);
-  const selectedSubject = subjectsQuery.data.subjects.find(({ id }) => id === values.subject);
+  const selectedTitle = titlesQuery.data?.titles.find(({ id }) => id === values.education);
+  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.degree);
+  const selectedSubject = subjectsQuery.data?.subjects.find(({ id }) => id === values.subject);
 
   return (
     <Container>
@@ -55,15 +52,25 @@ const SpecializationPage: React.FC = () => {
           disabled: !values.education,
         }}
       >
-        <MainParagraph>
-          Vyberte specializaci vašeho dosaženého vzdělání{' '}
-          <PrimaryText size="1em">{selectedTitle.name}</PrimaryText> pro předmět{' '}
-          <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
-          <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
-        </MainParagraph>
+        <StyleWrapper margin="0 0 1rem 0">
+          <AnimatedHeight isOpen>
+            {selectedTitle && selectedLevel && selectedSubject ? (
+              <MainParagraph>
+                Vyberte specializaci vašeho dosaženého vzdělání{' '}
+                <PrimaryText size="1em">{selectedTitle.name}</PrimaryText> pro předmět{' '}
+                <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
+                <PrimaryText size="1em">{selectedLevel.name}</PrimaryText>
+              </MainParagraph>
+            ) : (
+              <div />
+            )}
+          </AnimatedHeight>
+        </StyleWrapper>
 
         <StyleWrapper margin="0 0 2rem 0">
-          <EducationArea education={selectedTitle.name} />
+          <AnimatedHeight isOpen>
+            {selectedTitle ? <EducationArea education={selectedTitle.name} /> : <div />}
+          </AnimatedHeight>
         </StyleWrapper>
 
         {/* <Section>

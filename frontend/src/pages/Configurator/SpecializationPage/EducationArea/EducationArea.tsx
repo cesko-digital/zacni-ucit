@@ -6,7 +6,7 @@ import { ConfiguratorValues } from '@pages/Configurator/ConfiguratorLayout/Confi
 import SubjectSelect from '@pages/Configurator/SubjectPage/SubjectSelect/SubjectSelect';
 import { useFormikContext } from 'formik';
 import React from 'react';
-import { OffestArea, Area, Note, RadiosWrapper } from './styled';
+import { OffestArea, Area, Note, RadiosWrapper, Paragraph } from './styled';
 
 export interface AllEducationAreasQuery {
   educationAreas: {
@@ -78,7 +78,7 @@ const EducationArea: React.FC<IProps> = ({ education }) => {
 
   return (
     <div>
-      <p>4.1 Ze kterého oboru máte {education} vzdělání?</p>
+      <Paragraph>4.1 Ze kterého oboru máte {education} vzdělání?</Paragraph>
       <Hint href="/subjects.pdf" download>
         Zjistěte, jaké předměty můžete s vaším vzděláním vyučovat
       </Hint>
@@ -95,7 +95,7 @@ const EducationArea: React.FC<IProps> = ({ education }) => {
       {withDegreeSection.includes(values.educationArea) && (
         <OffestArea>
           <Area>
-            <p>4.1.1 Pro jaký školní stupeň máte pedagogické vzdělání?</p>
+            <Paragraph>4.1.1 Pro jaký školní stupeň máte pedagogické vzdělání?</Paragraph>
             <Note>Poznámka: Naleznete v názvu oboru či programu.</Note>
             <RadiosWrapper>
               {filteredSchoolLevels

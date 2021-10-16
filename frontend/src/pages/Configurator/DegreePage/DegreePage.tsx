@@ -9,6 +9,7 @@ import Radio from '@components/Input/Radio/Radio';
 
 import { RadiosWrapper } from './styled';
 import { routes } from '@routes';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 
 export interface SchoolLevelsQuery {
   schoolLevels: {
@@ -37,26 +38,30 @@ const DegreePage: React.FC = () => {
     [data],
   );
 
-  if (loading) {
-    return <>Loading</>;
-  }
-
   return (
     <StyleWrapper margin="2rem 0">
-      <Hint href={`${routes.whyToTeach}#pribehy-ucitelu`}>Příběhy učitelů z praxe</Hint>
-      <RadiosWrapper>
-        {filteredSchollLevels.map(({ id, name }) => (
-          <div key={id}>
-            <Radio
-              checked={values.degree === id}
-              name="degree"
-              value={id}
-              onChange={() => setFieldValue('degree', id)}
-              label={name}
-            />
+      <AnimatedHeight isOpen>
+        {loading ? (
+          <div></div>
+        ) : (
+          <div>
+            <Hint href={`${routes.whyToTeach}#pribehy-ucitelu`}>Příběhy učitelů z praxe</Hint>
+            <RadiosWrapper>
+              {filteredSchollLevels.map(({ id, name }) => (
+                <div key={id}>
+                  <Radio
+                    checked={values.degree === id}
+                    name="degree"
+                    value={id}
+                    onChange={() => setFieldValue('degree', id)}
+                    label={name}
+                  />
+                </div>
+              ))}
+            </RadiosWrapper>
           </div>
-        ))}
-      </RadiosWrapper>
+        )}
+      </AnimatedHeight>
     </StyleWrapper>
   );
 };
