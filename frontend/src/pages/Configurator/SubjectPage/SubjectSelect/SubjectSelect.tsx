@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import Select from '@components/Input/Select/Select';
-import { ConfiguratorValues } from '@pages/Configurator/Configurator';
+import { ConfiguratorValues } from '@pages/Configurator/ConfiguratorLayout/ConfiguratorLayout';
 import { useFormikContext } from 'formik';
 import React from 'react';
 

@@ -1,6 +1,14 @@
 export const routes = {
   homepage: '/',
-  configurator: '/pruvodce',
+  configurator: {
+    step1: '/pruvodce',
+    step2: '/pruvodce/predmet',
+    step3: '/pruvodce/vzdelani',
+    step4: '/pruvodce/specializace',
+    results: '/pruvodce/vysledky',
+    path: '/pruvodce/cesta',
+    course: '/pruvodce/kurz',
+  },
   searchResults: '/vysledky-hledani',
   chooseSubject: '/vyber-predmetu',
   qualification: '/kvalifikace',

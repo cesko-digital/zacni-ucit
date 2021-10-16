@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import Hint from '@components/Hint/Hint';
 import Radio from '@components/Input/Radio/Radio';
 import Select from '@components/Input/Select/Select';
-import { ConfiguratorValues } from '@pages/Configurator/Configurator';
+import { ConfiguratorValues } from '@pages/Configurator/ConfiguratorLayout/ConfiguratorLayout';
 import { allSchoolLevelsQuery, SchoolLevelsQuery } from '@pages/Configurator/DegreePage/DegreePage';
 import SubjectSelect from '@pages/Configurator/SubjectPage/SubjectSelect/SubjectSelect';
 import { useFormikContext } from 'formik';

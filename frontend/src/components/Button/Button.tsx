@@ -12,11 +12,11 @@ interface BaseProps {
   buttonStyle?: 'button' | 'link';
   color?: string;
   inline?: boolean;
+  disabled?: boolean;
 }
 
 type Button = BaseProps & {
   onClick: () => void;
-  disabled?: boolean;
   type?: 'submit' | 'button';
 };
 
@@ -42,6 +42,7 @@ const ButtonComponent: React.FC<Props> = props =>
         title={props.title}
         variant={props.variant ?? 'primary'}
         inline={props.inline}
+        disabled={props.disabled}
         onClick={props.onClick}
       >
         {props.startIcon && <IconWrapper>{props.startIcon}</IconWrapper>}

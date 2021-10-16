@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik';
 import React from 'react';
 
-import type { ConfiguratorValues } from '../Configurator';
+import type { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
 import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePage';
 import StyleWrapper from '@components/StyledWrapper';
 import { MainParagraph, LightText, PrimaryText } from '@components/Typography';
@@ -11,6 +11,8 @@ import Radio from '@components/Input/Radio/Radio';
 
 import { RadiosWrapper } from './styled';
 import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectSelect/SubjectSelect';
+import { routes } from '@routes';
+import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 
 export interface TitlesQuery {
   titles: {
@@ -44,9 +46,18 @@ const EducationPage: React.FC = () => {
 
   const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);
   const selectedSubject = subjectsQuery.data.subjects.find(({ id }) => id === values.subject);
+  console.log(values);
 
   return (
-    <>
+    <ConfiguratorStep
+      title="Jaké je vaše vzdělání?"
+      step={3}
+      prevStep={{ url: routes.configurator.step2, text: 'Změnit stupeň a předmět' }}
+      nextStep={{ url: routes.configurator.step4, disabled: !values.education }}
+      additionalText={
+        <Hint onClick={console.log}>Nevíte si rady s výběrem předmětu? Napište nám</Hint>
+      }
+    >
       <MainParagraph>
         Vyberte všechna vaše vzdělání, která by mohla být relevantní pro učení předmětu{' '}
         <PrimaryText size="1em">{selectedSubject.name}</PrimaryText> na{' '}
@@ -74,7 +85,7 @@ const EducationPage: React.FC = () => {
           ))}
         </RadiosWrapper>
       </StyleWrapper>
-    </>
+    </ConfiguratorStep>
   );
 };
 

@@ -1,7 +1,8 @@
+import Button from '@components/Button/Button';
 import { mediaQueriesUp } from 'src/common/mediaQueries';
 import styled from 'styled-components';
 
-export const Top = styled.button`
+export const Top = styled(Button)`
   appearance: none;
   width: 100%;
   background: none;
@@ -10,6 +11,7 @@ export const Top = styled.button`
   border: none;
   border-bottom: 1px solid #ecebeb;
   position: relative;
+  color: black;
 `;
 
 export const Title = styled.strong`

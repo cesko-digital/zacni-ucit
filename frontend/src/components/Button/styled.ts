@@ -89,6 +89,7 @@ const baseStyles = css`
 
 export const Link = styled.a`
   ${baseStyles}
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'initial')};
 
   &:active {
     svg {

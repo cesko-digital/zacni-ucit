@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useFormikContext } from 'formik';
-import type { ConfiguratorValues } from '../Configurator';
+import type { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
 import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePage';
 import { useQuery } from '@apollo/client';
 import { allTitlesQuery, TitlesQuery } from '../EducationPage/EducationPage';

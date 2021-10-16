@@ -2,7 +2,7 @@ import { useFormikContext } from 'formik';
 import React from 'react';
 import type { FC } from 'react';
 
-import type { ConfiguratorValues } from '../Configurator';
+import type { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
 import Hint from '@components/Hint/Hint';
 import StyleWrapper from '@components/StyledWrapper';
 import { gql, useQuery } from '@apollo/client';

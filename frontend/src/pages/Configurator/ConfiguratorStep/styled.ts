@@ -14,3 +14,9 @@ export const Title = styled.h2`
     margin-bottom: 32px;
   `}
 `;
+
+export const BackButtonOffset = styled.div`
+  ${mediaQueriesUp('sm')`
+    height: 48px;
+  `}
+`;

@@ -1,23 +1,18 @@
 import Card from '@components/Card/Card';
 import { Message } from '@components/Message/Message';
-import StepBack from '@components/StepBack/StepBack';
+import { routes } from '@routes';
 import React from 'react';
+import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 import EducationText from '../EducationText/EducationText';
 import SchoolTile from '../ResultsPage/SchoolTile/SchoolTile';
 
-import { Title, Text, Separator } from './styled';
+import { Text, Separator } from './styled';
 
-interface Props {
-  onBack: () => void;
-  onSelectCourse: (course: string) => void;
-}
-
-const PathDetailPage: React.FC<Props> = ({ onBack, onSelectCourse }) => (
-  <div>
-    <StepBack onClick={() => onBack()}>Zpátky na výběr cesty</StepBack>
-
-    <Title>Bakalářské vzdělání</Title>
-
+const PathDetailPage: React.FC = () => (
+  <ConfiguratorStep
+    title="Bakalářské vzdělání"
+    prevStep={{ url: routes.configurator.results, text: 'Zpátky na výběr cesty' }}
+  >
     <EducationText />
 
     <Message>
@@ -41,7 +36,7 @@ const PathDetailPage: React.FC<Props> = ({ onBack, onSelectCourse }) => (
         price="Zdarma, pokud jste ještě Bc. nestudovali"
         studyType="Prezenční forma studia"
         location="Praha"
-        onClick={() => onSelectCourse('uk')}
+        href={routes.configurator.course}
       />
     </Card>
     <Card theme="secondary">
@@ -53,10 +48,10 @@ const PathDetailPage: React.FC<Props> = ({ onBack, onSelectCourse }) => (
         price="Zdarma"
         studyType="Prezenční forma studia"
         location="Praha"
-        onClick={() => onSelectCourse('vut')}
+        href={routes.configurator.course}
       />
     </Card>
-  </div>
+  </ConfiguratorStep>
 );
 
 export default PathDetailPage;
