@@ -55,7 +55,9 @@ const EducationArea: React.FC<IProps> = ({ education }) => {
   return (
     <div>
       <p>4.1 Ze kterého oboru máte {education} vzdělání?</p>
-      <Hint onClick={console.log}>Zjistěte, jaké předměty můžete s vaším vzděláním vyučovat</Hint>
+      <Hint href="/subjects.pdf" download>
+        Zjistěte, jaké předměty můžete s vaším vzděláním vyučovat
+      </Hint>
       <Select
         name="educationArea"
         items={sortedAreas.map(({ id, name }) => ({

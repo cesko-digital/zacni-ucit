@@ -6,11 +6,19 @@ import InfoIcon from '@icons/info.svg';
 
 type Props = {
   children: string;
-  onClick: () => void;
+  href?: string;
+  onClick?: () => void;
+  download?: boolean;
 };
 
-const Hint: React.FC<Props> = ({ onClick, children }) => (
-  <Button type="button" onClick={onClick}>
+const Hint: React.FC<Props> = ({ href, onClick, download, children }) => (
+  <Button
+    type="button"
+    href={href}
+    target={href ? '_blank' : undefined}
+    download={download}
+    onClick={onClick}
+  >
     <IconWrapper>
       <InfoIcon />
     </IconWrapper>

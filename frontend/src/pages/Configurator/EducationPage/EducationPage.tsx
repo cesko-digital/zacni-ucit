@@ -54,9 +54,6 @@ const EducationPage: React.FC = () => {
       step={3}
       prevStep={{ url: routes.configurator.step2, text: 'Změnit stupeň a předmět' }}
       nextStep={{ url: routes.configurator.step4, disabled: !values.education }}
-      additionalText={
-        <Hint onClick={console.log}>Nevíte si rady s výběrem předmětu? Napište nám</Hint>
-      }
     >
       <MainParagraph>
         Vyberte všechna vaše vzdělání, která by mohla být relevantní pro učení předmětu{' '}
@@ -69,7 +66,7 @@ const EducationPage: React.FC = () => {
           podstatné.
         </LightText>
       </StyleWrapper>
-      <Hint onClick={console.log}>Nevíte si rady? Napište nám</Hint>
+      <Hint href={routes.contactUs}>Nevíte si rady? Napište nám</Hint>
       <StyleWrapper margin="0 0 2rem 0">
         <RadiosWrapper>
           {titlesQuery.data.titles.map(({ id, name }) => (

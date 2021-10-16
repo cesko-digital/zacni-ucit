@@ -72,4 +72,6 @@ export const routes = {
       higherExpertise: '/muzu-ucit/jak-zacit-delat-asistenta-pedagoga/vyssi-odbornost',
     },
   },
+  contactUs:
+    'https://docs.google.com/forms/d/e/1FAIpQLSeaLvvaq5Wrwe9FWsqDPtX2xM26wAUB4M0v7Vv-se6_n1r1mA/viewform',
 };

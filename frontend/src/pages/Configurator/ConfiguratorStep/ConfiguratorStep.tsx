@@ -42,13 +42,12 @@ const ConfiguratorStep: React.FC<Props> = ({
   return (
     <div>
       <Meta title={title} />
-      {prevStep ? (
+      {prevStep && (
         <BackButton icon="arrow" href={`${prevStep.url}?${querystring.stringify(values as any)}`}>
           {prevStep.text}
         </BackButton>
-      ) : (
-        <BackButtonOffset />
       )}
+      {!prevStep && step !== 1 && <BackButtonOffset />}
       {step && <Stepper step={step} totalSteps={4} />}
       <Title>{title}</Title>
       {children}

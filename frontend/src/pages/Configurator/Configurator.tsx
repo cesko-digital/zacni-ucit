@@ -32,8 +32,14 @@ const Configurator: React.FC = () => {
         additionalText={
           <LightText>
             Nenašli jste vámi zvolený stupeň nebo vás zajímá jiná pedagogická profese?{' '}
-            <Button href="#">Napište nám</Button> nebo se podívejte na{' '}
-            <Button href="#">přehled zákona o ped. pracovnících</Button>.
+            <Button href={routes.contactUs} target="_blank">
+              Napište nám
+            </Button>{' '}
+            nebo se podívejte na{' '}
+            <Button href={`${routes.startTeaching.crossroad}#zakon-o-pedagogickych-pracovnicich`}>
+              přehled zákona o ped. pracovnících
+            </Button>
+            .
           </LightText>
         }
       >

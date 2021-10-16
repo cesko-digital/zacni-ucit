@@ -42,9 +42,6 @@ const SpecializationPage: React.FC = () => {
         text: 'Výsledky',
         disabled: !values.education,
       }}
-      additionalText={
-        <Hint onClick={console.log}>Nevíte si rady s výběrem předmětu? Napište nám</Hint>
-      }
     >
       <MainParagraph>
         Vyberte specializaci vašeho dosaženého vzdělání{' '}
