@@ -1,4 +1,4 @@
-import { mediaQueriesUp } from 'src/common/mediaQueries';
+import { mediaQueriesUp, mediaQueries } from 'src/common/mediaQueries';
 import styled from 'styled-components';
 
 export const Section = styled.section`
@@ -29,6 +29,30 @@ export const LogosWrapper = styled.ul`
   ${mediaQueriesUp('sm')`
     margin: 0;
   `}
+`;
+
+export const MsmtWrapper = styled.div`
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 32px;
+
+  & p {
+    margin: 0;
+  }
+
+  ${mediaQueries('md')`
+  display:none;
+  `}
+`;
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
 `;
 
 export const LogoItem = styled.li`
