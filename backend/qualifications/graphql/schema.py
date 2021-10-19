@@ -1,5 +1,6 @@
 import graphene
 import pandas as pd
+from django.db.models import Prefetch
 import numpy as np
 
 from qualifications.graphql.types import (
@@ -86,98 +87,158 @@ class Query(graphene.ObjectType):
         subject_id,
         level_id,
         title,
-        area,
+        specialization,
         school_level_done=None,
         subject_group_done=None,
     ):
 
         # vytvoreni jednotlivych cest
-        paths = EducationType.objects.prefetch_related('qualification_set')
+        paths = Qualification.objects.prefetch_related(Prefetch("education_types", to_attr="cached_education_types"))
 
         # vyfiltrovani jednotlivych cest na zaklade user inputu
         paths = paths.filter(
             subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_levels=level_id
         )
 
-        # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
-        df = pd.DataFrame(paths)
+        completed_paths = []
+        uncompleted_paths = []
+        for path in paths:
+            completed_edu_types = []
+            uncompleted_edu_types = []
+            for edu_type in path.cached_education_types:
 
-        for index, row in df.iterrows():
-            for edu_type in row["education_types"]:
+                if edu_type.qualification_type.name == "Titul":
 
-                # overuje, zda uzivatel ma titul
-                if edu_type["qualification_type"] == "titul":
+                    # Ověřuje, zda m áuživatel titul a zároveň kvalifikaci na stupeň, kde chce učit
+                    if (
+                        edu_type.title.name == title
+                        and edu_type.specializations.all().filter(name=specialization).exists()
+                    ):
 
-                    # overuje, zda ma titul a zaroven kvalifikaci na ten stupen, kde chce ucit
-                    if edu_type["title"] == title and edu_type["area"] == area:
+                        # má education type nějakou předmětovou skupinu?
+                        if edu_type.subject_groups.all().exists():
 
-                        # overuje, zda ma zadanou predmetovou skupinu
-                        if edu_type["subject_group"]:
+                            # ověřuje, zda má uživatel vystudovanou danou přdmětovou skupinu
+                            if edu_type.subject_groups.all().filter(name=subject_group_done).exists():
 
-                            # overuje, zda ma vystudovanou predmetovou skupinu
-                            if edu_type["subject_group"] == subject_group_done:
+                                # Má education type dané nějaké school levels?
+                                if edu_type.school_levels.all().exists():
 
-                                # overuje, zda ma titul a predmetovou skupinu pro dany stupen, kde chce ucit
-                                if edu_type["school_levels"]:
+                                    # pokud ma uzivatel titul, zaroven specializaci a zaroven predmetovou skupinu udelanou a
+                                    # zaroven pro dany stupen, kde chce ucit - má cestu splněnou
+                                    if edu_type.school_levels.all().filter(name=school_level_done).exists():
+                                        completed_edu_types.append(edu_type)
 
-                                    # pokud ma titul a zaroven specializaci a zaroven predmetovou skupinu udelanou a
-                                    # zaroven pro dany stupen, kde chce ucit
-                                    if edu_type["school_levels"] == school_level_done:
-                                        edu_type["completed"] = True
-
-                                    # pokud nema predmetovou skupinu pro dany stupen
+                                    # pokud nemá předmětovou skupinu pro daný Stupeň
                                     else:
-                                        edu_type["completed"] = False
+                                        uncompleted_edu_types.append(edu_type)
 
-                                # pokud nema predmetovou skupinu pro dany stupen
+                                # pokud není určený stupeň pro předmětovou skupinu
                                 else:
-                                    edu_type["completed"] = True
+                                    completed_edu_types.append(edu_type)
 
-                            # pokud ma nejakou predmetovou skupinu, ale ne tu, kterou potrebuje
+                            # pokud má splněnou předmětovou skupinu, ale ne pro správný Stupeň
                             else:
-                                edu_type["completed"] = False
-
-                        # pokud ma titul, ale nema predmetovou skupinu
+                                uncompleted_edu_types.append(edu_type)
+                        # pokud není určená předmětová skupina pro daný Titul
                         else:
-                            edu_type["completed"] = True
-
-                    # pokud nema zadny titul
+                            completed_edu_types.append(edu_type)
+                    # pokud uživatel nemá titul a požadovAnou specializaci
                     else:
-                        edu_type["completed"] = False
+                        uncompleted_edu_types.append(edu_type)
+            if len(completed_edu_types) == len(path.cached_education_types):
+                completed_paths.append(path)
+            else:
+                uncompleted_paths.append((path, len(uncompleted_edu_types)))
 
-        # vsechny relevantni sloupce pro danou EduType do json sloupce
-        for index, row in df.iterrows():
-            for edu_type in row["education_types"]:
-                columns = edu_type.loc[
-                          :0,  # check
-                          "qualification_type",
-                          "title",
-                          "specialization",
-                          "school_levels",
-                          "completed",
-                          ]
-                json = columns.to_json()
-                edu_type["edu_type_json"] = json
+        if len(completed_paths) > 0:
+            # má splněno
+            pass
+        else:
+            return sorted(uncompleted_paths, key=lambda x: x[1])
 
-        # vyvoreni sloupce EduTypes list pro kazdou cestu
-        for index, row in df.iterrows():
-            row["edu_type_list"] = []
-            for edu_type in row["education_types"]:
-                if not edu_type["edu_type_json"]["completed"]:
-                    row["edu_type_list"].append(edu_type["edu_type_json"])
-
-        # df.groupby("row_id") - neni treba?
-
-        # pridani sloupce, ktery pocita pocet EduTypes pro kazdou cestu
-        for index, row in df.iterrows():
-            num = len(row["edu_type_list"])
-            row["edu_count"] = num
-
-        # serazeni cest podle sloupce count
-        df = df.sort_values(by="edu_count", ascending=True)
-        list_of_df_paths = df.values.tolist()
-
-        return list_of_df_paths
+        #
+        #
+        #
+        # # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
+        # df = pd.DataFrame(paths)
+        #
+        # for index, row in df.iterrows():
+        #     for edu_type in row["education_types"]:
+        #
+        #         # overuje, zda uzivatel ma titul
+        #         if edu_type["qualification_type"] == "titul":
+        #
+        #             # overuje, zda ma titul a zaroven kvalifikaci na ten stupen, kde chce ucit
+        #             if edu_type["title"] == title and edu_type["area"] == area:
+        #
+        #                 # overuje, zda ma zadanou predmetovou skupinu
+        #                 if edu_type["subject_group"]:
+        #
+        #                     # overuje, zda ma vystudovanou predmetovou skupinu
+        #                     if edu_type["subject_group"] == subject_group_done:
+        #
+        #                         # overuje, zda ma titul a predmetovou skupinu pro dany stupen, kde chce ucit
+        #                         if edu_type["school_levels"]:
+        #
+        #                             # pokud ma titul a zaroven specializaci a zaroven predmetovou skupinu udelanou a
+        #                             # zaroven pro dany stupen, kde chce ucit
+        #                             if edu_type["school_levels"] == school_level_done:
+        #                                 edu_type["completed"] = True
+        #
+        #                             # pokud nema predmetovou skupinu pro dany stupen
+        #                             else:
+        #                                 edu_type["completed"] = False
+        #
+        #                         # pokud nema predmetovou skupinu pro dany stupen
+        #                         else:
+        #                             edu_type["completed"] = True
+        #
+        #                     # pokud ma nejakou predmetovou skupinu, ale ne tu, kterou potrebuje
+        #                     else:
+        #                         edu_type["completed"] = False
+        #
+        #                 # pokud ma titul, ale nema predmetovou skupinu
+        #                 else:
+        #                     edu_type["completed"] = True
+        #
+        #             # pokud nema zadny titul
+        #             else:
+        #                 edu_type["completed"] = False
+        #
+        # # vsechny relevantni sloupce pro danou EduType do json sloupce
+        # for index, row in df.iterrows():
+        #     for edu_type in row["education_types"]:
+        #         columns = edu_type.loc[
+        #                   :0,  # check
+        #                   "qualification_type",
+        #                   "title",
+        #                   "specialization",
+        #                   "school_levels",
+        #                   "completed",
+        #                   ]
+        #         json = columns.to_json()
+        #         edu_type["edu_type_json"] = json
+        #
+        # # vyvoreni sloupce EduTypes list pro kazdou cestu
+        # for index, row in df.iterrows():
+        #     row["edu_type_list"] = []
+        #     for edu_type in row["education_types"]:
+        #         if not edu_type["edu_type_json"]["completed"]:
+        #             row["edu_type_list"].append(edu_type["edu_type_json"])
+        #
+        # # df.groupby("row_id") - neni treba?
+        #
+        # # pridani sloupce, ktery pocita pocet EduTypes pro kazdou cestu
+        # for index, row in df.iterrows():
+        #     num = len(row["edu_type_list"])
+        #     row["edu_count"] = num
+        #
+        # # serazeni cest podle sloupce count
+        # df = df.sort_values(by="edu_count", ascending=True)
+        # list_of_df_paths = df.values.tolist()
+        #
+        # return list_of_df_paths
 
     @staticmethod
     def resolve_courses(root, info, subject_id, level_id, title, area, school_level_done=None, subject_group_done=None):
