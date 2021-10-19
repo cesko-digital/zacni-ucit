@@ -10,6 +10,7 @@ from qualifications.temp import (
     init_qualification,
     init_education_specialization,
     init_titles,
+    init_qualification_types,
 )
 from colleges.temp2 import (
     init_courses,
@@ -114,6 +115,7 @@ def init_neo4j():
 def init():
     init_user()
     init_subjects()
+    init_qualification_types()
     init_map_2021_01()
     init_subject_group()
     init_other_options()

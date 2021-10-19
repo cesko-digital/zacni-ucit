@@ -8,6 +8,7 @@ from .models import (
     SubjectType,
     OtherExperience,
     Qualification,
+    QualificationType,
 )
 
 
@@ -24,8 +25,9 @@ class CollegeProgrammeAdmin(admin.ModelAdmin):
 
 
 class EducationTypeAdmin(admin.ModelAdmin):
-    list_display = ("qualification_type", "title")
-    list_filter = ("qualification_type", "title", "school_levels")
+    list_display = ("id", "qualification_type", "title", "get_school_levels", "get_subject_groups", 
+            "get_specializations", "name")
+    list_filter = ("qualification_type", "title", "school_levels", "subject_groups")
     search_fields = ("qualification_type", "title__name", "school_levels__name")
     list_select_related = ("title",)
     filter_horizontal = ("school_levels",)
@@ -38,6 +40,15 @@ class TitleAdmin(admin.ModelAdmin):
     )
 
 
+class QualificationAdmin(admin.ModelAdmin):
+    list_display = ("id", "row_id", "school_level", "get_subject_groups", "get_education_types")
+    list_filter = ("subject_groups", "school_level", "education_types__title", "education_types__specializations")
+
+
+class QualificationTypeAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+    
 class EducationSpecializationAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
@@ -61,4 +72,5 @@ admin.site.register(Title, TitleAdmin)
 admin.site.register(EducationSpecialization, EducationSpecializationAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(OtherExperience, OtherExperienceAdmin)
-admin.site.register(Qualification)
+admin.site.register(Qualification, QualificationAdmin)
+admin.site.register(QualificationType, QualificationTypeAdmin)
