@@ -9,11 +9,15 @@ export const Note = styled.p`
 `;
 
 export const RadiosWrapper = styled.div`
-  margin: -5px;
+  margin: 0 -5px;
   display: flex;
   flex-wrap: wrap;
 `;
 
 export const Area = styled.div`
   padding: 16px 0;
+`;
+
+export const Paragraph = styled.p`
+  margin: 0 0 8px;
 `;

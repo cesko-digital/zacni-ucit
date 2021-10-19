@@ -102,6 +102,7 @@ export const Paragraph = styled.p`
 
 export const ScrollLinkContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const Number = styled.span`
@@ -137,5 +138,19 @@ max-width: 50ch;
     font-size: 10em;
     margin-right: 1rem;
     `}
+  }
+`;
+
+export const Table = styled.table`
+  text-align: left;
+
+  th {
+    padding-right: 20px;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+
+  td {
+    padding-bottom: 10px;
   }
 `;

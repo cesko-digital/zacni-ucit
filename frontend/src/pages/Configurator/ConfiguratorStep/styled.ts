@@ -7,9 +7,16 @@ export const Title = styled.h2`
   font-weight: bold;
   color: #0c0807;
   margin: 0 0 16px;
+  line-height: 1.3;
 
   ${mediaQueriesUp('sm')`
     font-size: 2rem;
     margin-bottom: 32px;
+  `}
+`;
+
+export const BackButtonOffset = styled.div`
+  ${mediaQueriesUp('sm')`
+    height: 48px;
   `}
 `;
