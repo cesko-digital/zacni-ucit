@@ -151,11 +151,18 @@ class Query(graphene.ObjectType):
             else:
                 uncompleted_paths.append((path, len(uncompleted_edu_types)))
 
+        uncompleted_paths = sorted(uncompleted_paths, key=lambda x: x[1])
+        # z tuple potřebuju udělat list... ztratí se čísla o tom,
+        # kolik education types není dokončených, ale seznam už bude seřazený
+        # doufám :D
+
+        uncompleted_paths = [x[0].id for x in uncompleted_paths]
+
         if len(completed_paths) > 0:
             # má splněno
             pass
         else:
-            return sorted(uncompleted_paths, key=lambda x: x[1])
+            return Qualification.objects.filter(id__in=uncompleted_paths)
 
         #
         #
