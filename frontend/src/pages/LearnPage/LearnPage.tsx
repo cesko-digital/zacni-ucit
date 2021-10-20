@@ -145,11 +145,18 @@ const LearnPage: React.FC = () => (
           <ListItem>práci a komunikaci se žáky</ListItem>
           <ListItem>cokoliv dalšího podle vaší potřeby</ListItem>
         </List>
-        <p>Harmonogram podzimních supervizí zveřejníme již brzy!</p>
-        <p>
-          Pokud už nyní máte zájem o účast, napište nám na{' '}
-          <Link href={`mailto:${VYLUKA_MAIL}`}>{VYLUKA_MAIL}</Link>.
-        </p>
+        <p>První supervize ve školním roce 2021/2022 proběhne ve <strong>čtvrtek 21. října 2021</strong> v Kampusu Hybernská od <strong>17:00</strong>. Další supervize jsou naplánované na <strong>20. ledna a 24. března 2022</strong>.</p>
+        <p>Na každou supervizi je nutné se přihlásit zvlášť a bude otevřena při minimálním počtu 5 účastníků.</p>
+        <SignUpButtonWrapper>
+            <Button
+              buttonStyle="button"
+              endIcon={<ChevronIcon />}
+              href="https://docs.google.com/forms/d/e/1FAIpQLSf2ou2-EbPV8rLK1JWt-fKlzfQxBK8xFVxsrV8TSTD-EZVHyQ/viewform"
+              target="_blank"
+            >
+              Přihlaste se
+            </Button>
+        </SignUpButtonWrapper>
       </Section>
     </div>
     <BackToHomeButton />

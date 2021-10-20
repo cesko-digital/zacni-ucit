@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 import Select from '@components/Input/Select/Select';
-import { ConfiguratorValues } from '@pages/Configurator/Configurator';
+import { ConfiguratorValues } from '@pages/Configurator/ConfiguratorLayout/ConfiguratorLayout';
 import { useFormikContext } from 'formik';
 import React from 'react';
 
@@ -35,22 +36,26 @@ const SubjectSelect: React.FC<IProps> = ({ name, degreeId }) => {
   });
 
   React.useEffect(() => {
-    if (subjectsQuery.data && subjectsQuery.data.subjects[0]) {
+    if (subjectsQuery.data && subjectsQuery.data.subjects[0] && !values[name]) {
       setFieldValue(name, subjectsQuery.data.subjects[0].id);
     }
   }, [subjectsQuery.data]);
 
-  if (subjectsQuery.loading) {
-    return <>Loading</>;
-  }
-
   return (
-    <Select
-      name={name}
-      value={values[name]}
-      onChange={handleChange}
-      items={subjectsQuery.data?.subjects.map(({ id, name }) => ({ value: id, text: name })) ?? []}
-    />
+    <AnimatedHeight isOpen>
+      {subjectsQuery.data ? (
+        <Select
+          name={name}
+          value={values[name]}
+          onChange={handleChange}
+          items={
+            subjectsQuery.data?.subjects.map(({ id, name }) => ({ value: id, text: name })) ?? []
+          }
+        />
+      ) : (
+        <div />
+      )}
+    </AnimatedHeight>
   );
 };
 

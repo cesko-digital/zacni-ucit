@@ -1,19 +1,21 @@
 import { useFormikContext } from 'formik';
 import React from 'react';
-import type { FC } from 'react';
 
-import type { ConfiguratorValues } from '../Configurator';
+import type { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
 import Hint from '@components/Hint/Hint';
 import StyleWrapper from '@components/StyledWrapper';
 import { gql, useQuery } from '@apollo/client';
 import Radio from '@components/Input/Radio/Radio';
 
 import { RadiosWrapper } from './styled';
+import { routes } from '@routes';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 
 export interface SchoolLevelsQuery {
   schoolLevels: {
     id: string;
     name: string;
+    targetSchoolLevel: boolean;
   }[];
 }
 
@@ -22,34 +24,44 @@ export const allSchoolLevelsQuery = gql`
     schoolLevels {
       id
       name
+      targetSchoolLevel
     }
   }
 `;
 
-const DegreePage: FC = () => {
+const DegreePage: React.FC = () => {
   const { values, setFieldValue } = useFormikContext<ConfiguratorValues>();
   const { data, loading } = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
 
-  if (loading) {
-    return <>Loading</>;
-  }
+  const filteredSchollLevels = React.useMemo(
+    () => data?.schoolLevels.filter(({ targetSchoolLevel }) => targetSchoolLevel) ?? [],
+    [data],
+  );
 
   return (
     <StyleWrapper margin="2rem 0">
-      <Hint onClick={console.log}>Příběhy učitelů z praxe</Hint>
-      <RadiosWrapper>
-        {data?.schoolLevels.map(({ id, name }) => (
-          <div key={id}>
-            <Radio
-              checked={values.degree === id}
-              name="degree"
-              value={id}
-              onChange={() => setFieldValue('degree', id)}
-              label={name}
-            />
+      <AnimatedHeight isOpen>
+        {loading ? (
+          <div></div>
+        ) : (
+          <div>
+            <Hint href={`${routes.whyToTeach}#pribehy-ucitelu`}>Příběhy učitelů z praxe</Hint>
+            <RadiosWrapper>
+              {filteredSchollLevels.map(({ id, name }) => (
+                <div key={id}>
+                  <Radio
+                    checked={values.degree === id}
+                    name="degree"
+                    value={id}
+                    onChange={() => setFieldValue('degree', id)}
+                    label={name}
+                  />
+                </div>
+              ))}
+            </RadiosWrapper>
           </div>
-        ))}
-      </RadiosWrapper>
+        )}
+      </AnimatedHeight>
     </StyleWrapper>
   );
 };

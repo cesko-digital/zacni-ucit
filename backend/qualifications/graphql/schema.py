@@ -72,7 +72,7 @@ class Query(graphene.ObjectType):
         subject_id=graphene.Int(required=True),
         level_id=graphene.Int(required=True),
         title=graphene.Int(required=True),
-        area=graphene.Int(required=True),
+        specialization=graphene.Int(required=True),
     )
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
@@ -97,7 +97,7 @@ class Query(graphene.ObjectType):
 
         # vyfiltrovani jednotlivych cest na zaklade user inputu
         paths = paths.filter(
-            subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_levels=level_id
+            subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_level=level_id
         )
 
         completed_paths = []

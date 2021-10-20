@@ -23,7 +23,6 @@ const isSingleLink = (item: ISingleLink | IMultipleLinks): item is ISingleLink =
 
 const LawReference: React.FC<Props> = ({ children, ...props }) => {
   const links = React.useMemo(() => (isSingleLink(props) ? [props.link] : props.links), [props]);
-  console.log(props, links);
 
   return (
     <Wrapper>

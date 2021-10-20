@@ -1,5 +1,5 @@
 import BackToTopButton from './BackToTopButton';
-import { Paragraph, Section, SectionTitle } from './styled';
+import { Table, Section, SectionTitle } from './styled';
 
 type Shortcut = {
   shortcut: string;
@@ -173,12 +173,14 @@ const ShortCuts = () => {
   return (
     <Section id="pouzivane-zkratky" withBackground>
       <SectionTitle>Používané zkratky</SectionTitle>
-      {data.map((item, index) => (
-        <div key={index}>
-          <Paragraph>{item.shortcut}</Paragraph>
-          <Paragraph withMarginLeft>{item.desc}</Paragraph>
-        </div>
-      ))}
+      <Table>
+        {data.map(({ shortcut, desc }) => (
+          <tr key={shortcut}>
+            <th>{shortcut}</th>
+            <td>{desc}</td>
+          </tr>
+        ))}
+      </Table>
       <BackToTopButton />
     </Section>
   );
