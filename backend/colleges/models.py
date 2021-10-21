@@ -1,6 +1,7 @@
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
-from qualifications.models import EducationSpecialization
+from django.contrib.postgres.fields import ArrayField
+from qualifications.models import EducationSpecialization, QualificationType, OtherExperience
 
 
 class College(TimeStampedModel):
@@ -69,24 +70,47 @@ class Course(TimeStampedModel):
     Zdroj: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=0
     """
 
-    qualification_type = models.CharField(help_text="Typ kvalifikace", max_length=150)
+    qualification_type = models.ForeignKey(
+        QualificationType, on_delete=models.SET_NULL, null=True, verbose_name="Typ kvalifikace"
+    )
     title = models.ForeignKey("qualifications.Title", on_delete=models.SET_NULL, null=True, verbose_name="Titul")
     school_levels = models.ManyToManyField("teaching.SchoolLevel", verbose_name="Stupně škol")
     education_specialization = models.ForeignKey(
         EducationSpecialization, on_delete=models.SET_NULL, null=True, verbose_name="Specializace"
     )
-    other_qualification_type = models.CharField(help_text="Typ ostatní kvalifikace", max_length=150)
+    other_qualification_type = models.ForeignKey(
+        OtherExperience, verbose_name="Typ ostatní kvalifikace", on_delete=models.SET_NULL, null=True
+    )
     name = models.CharField(help_text="Název", max_length=300)  # Realny nazev kurzu
     university = models.ForeignKey(College, on_delete=models.SET_NULL, null=True, verbose_name="Vysoká škola")
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, verbose_name="Fakulta")
     city = models.CharField(help_text="Město", max_length=350)
     price = models.DecimalField(help_text="Cena", max_digits=8, decimal_places=2)
     study_length_in_semesters = models.IntegerField(help_text="Standardní doba studia")
-    form_present = models.BooleanField(help_text="Prezenční forma studia", default=False)
-    form_combined = models.BooleanField(help_text="Kombinovaná forma studia", default=True)
-    form_distant = models.BooleanField(help_text="Distanční forma studia", default=False)
-    double_major = models.BooleanField(help_text="Dvouobor", default=False)
-    single_major = models.BooleanField(help_text="Jednoobor", default=True)
+
+    FORM_PRESENT = "prezencni"
+    FORM_DISTANT = "distancni"
+    FORM_COMBINED = "kombinovana"
+    FORM_CHOICES = (
+        (FORM_PRESENT, "Prezenční forma studia"),
+        (FORM_DISTANT, "Distanční forma sdtudia"),
+        (FORM_COMBINED, "Kombinovaná forma studia"),
+    )
+    study_form = ArrayField(
+        models.CharField(help_text="Forma studia", max_length=20, choices=FORM_CHOICES),
+        blank=True,
+        default=list,
+    )
+
+    MAJOR_SINGLE = "jednoobor"
+    MAJOR_DOUBLE = "dvouobor"
+    MAJOR_CHOICES = ((MAJOR_SINGLE, "Jednoobor"), (MAJOR_DOUBLE, "Dvouobor"))
+    major = ArrayField(
+        models.CharField(help_text="Kombinace", max_length=20, choices=MAJOR_CHOICES),
+        blank=True,
+        default=list,
+    )
+
     url = models.URLField(help_text="URL na podrobnější informace", max_length=350)
     subjects = models.ManyToManyField("teaching.Subject", verbose_name="Předměty")
     note = models.TextField(help_text="Poznámka", blank=True)

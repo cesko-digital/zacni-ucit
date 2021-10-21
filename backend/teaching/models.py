@@ -21,7 +21,6 @@ class SubjectGroup(TimeStampedModel):
 class Subject(TimeStampedModel):
     """
     Skolni predmet.
-
     Zdroj: https://docs.google.com/spreadsheets/d/1msJu1AX_-wYLbhvz8rqsZxFMBwX7-xzghCAFHeeBQEI/edit#gid=2008534637.
     """
 

@@ -6,6 +6,7 @@ from .models import (
     EducationSpecialization,
     OtherExperience,
     Qualification,
+    QualificationType,
 )
 from teaching.models import Subject, SchoolLevel, SubjectGroup
 import csv
@@ -410,6 +411,9 @@ def init_qualification():
         if type_1_specialization and type_1_specialization != "None":
             if type_1_specialization == "Any":
                 type_1_specialization = EducationSpecialization.objects.all()
+            elif type_1_specialization == "Any kromě Učitelství a Filologie (neučitelský obor)":
+                excludes = ["Učitelství", "Filologie (neučitelský obor)"]
+                type_1_specialization = EducationSpecialization.objects.exclude(name__in=excludes)
             else:
                 type_1_specialization, _ = EducationSpecialization.objects.get_or_create(name=type_1_specialization)
         else:
@@ -446,11 +450,16 @@ def init_qualification():
 
         # init EducationType
         if type_1_title:
+            qualification_type1 = QualificationType.objects.get(name="Titul")
             education_type_1, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.TITLE_QUALIFICATION,
                 name=type_1_name,
+                qualification_type=qualification_type1,
                 title=type_1_title,
             )
+
+            if type_1_title != "Odborná maturita" and type_1_name != "None":
+                education_type_1.name = type_1_name
+                education_type_1.save()
 
             if type(type_1_specialization) == EducationSpecialization:
                 education_type_1.specializations.add(type_1_specialization)
@@ -466,8 +475,9 @@ def init_qualification():
             education_type_1 = None
 
         if type_2_title:
+            qualification_type2 = QualificationType.objects.get(name="Titul")
             education_type_2, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.TITLE_QUALIFICATION,
+                qualification_type=qualification_type2,
                 name=type_2_name,
                 title=type_2_title,
             )
@@ -486,24 +496,27 @@ def init_qualification():
             education_type_2 = None
 
         if course_name and course_name != "None":
+            qualification_type_course = QualificationType.objects.get(name="Kurz CŽV")
             education_type_course, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.CZV_QUALIFICATION,
+                qualification_type=qualification_type_course,
                 name=course_name,
             )
         else:
             education_type_course = None
 
         if experience_1_name and experience_1_name != "None":
+            qualification_type_other1 = QualificationType.objects.get(name="Ostatní kvalifikace")
             education_type_experience_1, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.OTHER_EXPERIENCE,
+                qualification_type=qualification_type_other1,
                 name=experience_1_name,
             )
         else:
             education_type_experience_1 = None
 
         if experience_2_name and experience_2_name != "None":
+            qualification_type_other2 = QualificationType.objects.get(name="Ostatní kvalifikace")
             education_type_experience_2, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.OTHER_EXPERIENCE,
+                qualification_type=qualification_type_other2,
                 name=experience_2_name,
             )
         else:
@@ -579,13 +592,25 @@ def init_other_options():
     Init for OtherExperience
     """
     data = """
-		rodilý mluvčí
 		doplňující studium k rozšíření odborné kvalifikace (DVPP)
+        jazyková zkouška min. C1 SERR pro jazyky
 		doplňující didaktické studium příslušného jazyka
 		studium pedagogiky
-		jazyková zkouška min. C1 SERR pro jazyky
-		výkonný umělec
+		rodilý mluvčí/ na úrovni rodilého mluvčího
+        výkonný či výtvarný umělec
+        kvalifikovaný učitel uměleckých odborných předmětů v ZUŠ, SŠ a konzervatoři
+        kvalifikovaný trenér
 	"""
 
     for name in data.strip().split("\n"):
         OtherExperience.objects.get_or_create(name=name.strip())
+
+
+def init_qualification_types():
+    """
+    Init for QualificationType
+    """
+    types = ["Titul", "Kurz CŽV", "Ostatní kvalifikace"]
+
+    for type in types:
+        QualificationType.objects.get_or_create(name=type)

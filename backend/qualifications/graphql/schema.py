@@ -1,4 +1,8 @@
 import graphene
+import pandas as pd
+from django.db.models import Prefetch
+import numpy as np
+
 from qualifications.graphql.types import (
     TitleObjectType,
     CollegeAreaObjectType,
@@ -7,7 +11,12 @@ from qualifications.graphql.types import (
     SubjectTypeObjectType,
     EducationTypeObjectType,
     OtherExperienceObjectType,
+    QualificationObjectType,
+    SubjectGroupObjectType,
 )
+
+from colleges.graphql.types import CourseObjectType
+
 from qualifications.models import (
     Title,
     CollegeArea,
@@ -16,7 +25,12 @@ from qualifications.models import (
     SubjectType,
     EducationType,
     OtherExperience,
+    Qualification,
 )
+
+from teaching.models import SubjectGroup, Subject
+
+from colleges.models import Course
 
 
 class Query(graphene.ObjectType):
@@ -44,9 +58,168 @@ class Query(graphene.ObjectType):
     education_types = graphene.List(EducationTypeObjectType)
     education_type = graphene.Field(EducationTypeObjectType, pk=graphene.Int(required=True))
 
-    # Other option queries
-    other_options = graphene.List(OtherExperienceObjectType)
-    other_option = graphene.List(OtherExperienceObjectType, pk=graphene.Int(required=True))
+    # Other experience queries
+    other_experiences = graphene.List(OtherExperienceObjectType)
+    other_experience = graphene.Field(OtherExperienceObjectType, pk=graphene.Int(required=True))
+
+    # Subject group queries
+    subject_groups = graphene.List(SubjectGroupObjectType)
+    subject_group = graphene.Field(SubjectGroupObjectType, pk=graphene.Int(required=True))
+
+    # Qualification type queries
+    qualifications = graphene.List(
+        QualificationObjectType,
+        subject_id=graphene.Int(required=True),
+        level_id=graphene.Int(required=True),
+        title=graphene.Int(required=True),
+        specialization=graphene.Int(required=True),
+        school_level_done=graphene.Int(required=False),
+        subject_group_done=graphene.Int(required=False),
+    )
+    qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
+
+    # Courses queries
+    courses = graphene.List(CourseObjectType)
+    course = graphene.Field(CourseObjectType, pk=graphene.Int(required=True))
+
+    @staticmethod
+    def resolve_qualifications(
+        root,
+        info,
+        subject_id,
+        level_id,
+        title,
+        specialization,
+        school_level_done=None,
+        subject_group_done=None,
+    ):
+
+        # vytvoreni jednotlivych cest
+        paths = Qualification.objects.prefetch_related(Prefetch("education_types", to_attr="cached_education_types"))
+
+        # vyfiltrovani jednotlivych cest na zaklade user inputu
+        paths = paths.filter(
+            subject_groups__id=Subject.objects.get(pk=subject_id).subject_group.id, school_level=level_id
+        )
+
+        completed_paths = []
+        partially_completed_paths = []
+        fully_uncompleted_paths = []
+        for path in paths:
+
+            completed_edu_types = []
+            uncompleted_edu_types = []
+
+            for edu_type in path.cached_education_types:
+
+                if edu_type.qualification_type.name == "Titul":
+
+                    # Ověřuje, zda m áuživatel titul a zároveň kvalifikaci na stupeň, kde chce učit
+                    if edu_type.title.id == title and edu_type.specializations.all().filter(id=specialization).exists():
+                        # vazba specializace Filologie(neučitelský obor) na hotovou subject group
+                        if (
+                            specialization
+                            == EducationSpecialization.objects.get(name="Filologie (neučitelský obor)").id
+                        ):
+                            subject_group_done = SubjectGroup.objects.get(name="cizí jazyk").id
+
+                        # vazba specializace "Tělesná výchova a sport (neučitelský obor)" na hotovou subject group
+                        elif (
+                            specialization
+                            == EducationSpecialization.objects.get(name="Tělesná výchova a sport (neučitelský obor)").id
+                        ):
+                            subject_group_done = SubjectGroup.objects.get(name="tělesná výchova").id
+
+                        elif specialization == EducationSpecialization.objects.get(name="Umělecko-pedagogický obor").id:
+                            subject_group_done = SubjectGroup.objects.get(name="umělecké předměty").id
+
+                        # má education type nějakou předmětovou skupinu?
+                        if edu_type.subject_groups.all().exists():
+
+                            # ověřuje, zda má uživatel vystudovanou danou přdmětovou skupinu
+                            if edu_type.subject_groups.all().filter(id=subject_group_done).exists():
+
+                                # Má education type dané nějaké school levels?
+                                if edu_type.school_levels.all().exists():
+
+                                    # pokud ma uzivatel titul, zaroven specializaci a zaroven predmetovou skupinu udelanou a
+                                    # zaroven pro dany stupen, kde chce ucit - má splněný education type
+                                    if edu_type.school_levels.all().filter(id=school_level_done).exists():
+                                        completed_edu_types.append(edu_type)
+
+                                    # pokud nemá předmětovou skupinu pro daný Stupeň
+                                    else:
+                                        uncompleted_edu_types.append(edu_type)
+
+                                # pokud není určený stupeň pro edu type
+                                else:
+                                    completed_edu_types.append(edu_type)
+
+                            # nemá správnou předmětovou skupinu
+                            else:
+                                uncompleted_edu_types.append(edu_type)
+                        # pokud není určená předmětová skupina pro daný Titul
+                        else:
+                            completed_edu_types.append(edu_type)
+                    # pokud uživatel nemá titul a požadovAnou specializaci
+                    else:
+                        uncompleted_edu_types.append(edu_type)
+                else:
+                    uncompleted_edu_types.append(edu_type)
+
+            if len(completed_edu_types) == len(path.cached_education_types):
+                completed_paths.append(path)
+            elif len(uncompleted_edu_types) < len(path.cached_education_types):
+                partially_completed_paths.append((path, len(uncompleted_edu_types)))
+            else:
+                fully_uncompleted_paths.append((path, len(uncompleted_edu_types)))
+
+        if len(completed_paths) > 0:
+            # má splněno
+            pass
+
+        elif len(partially_completed_paths) > 0:
+            partially_completed_paths = sorted(partially_completed_paths, key=lambda x: x[1])
+            partially_completed_paths = [x[0].id for x in partially_completed_paths]
+            queryset = Qualification.objects.filter(id__in=partially_completed_paths)
+            return sorted(queryset, key=lambda x: partially_completed_paths.index(x.id))
+
+        else:
+            uncompleted_paths = sorted(fully_uncompleted_paths, key=lambda x: x[1])
+            uncompleted_paths = [x[0].id for x in uncompleted_paths]
+            queryset = Qualification.objects.filter(id__in=uncompleted_paths)
+            return sorted(queryset, key=lambda x: uncompleted_paths.index(x.id))
+
+    @staticmethod
+    def resolve_courses(root, info, subject_id, level_id, title, area, school_level_done=None, subject_group_done=None):
+
+        # na základě user inputu uloží vhodné cesty do proměné
+        paths = root.resolve_qualifications(
+            # info?
+            subject_id,
+            level_id,
+            title,
+            area,
+            school_level_done,
+            subject_group_done,
+        )
+
+        relevant_courses = []
+
+        # projde dané cesty a kurzy splňující parametry přidá do seznamu
+        for path in paths:
+            path_courses = []
+            for json in path["edu_type_list"]:
+                courses = Course.objects.filter(
+                    qualification_type=json.qualification_type,
+                    title=json.title,
+                    school_levels=json.school_levels,
+                    education_specialization=json.specialization,
+                )
+                path_courses.append(courses)
+            relevant_courses.append(path_courses)
+
+        return relevant_courses
 
     @staticmethod
     def resolve_titles(root, info):

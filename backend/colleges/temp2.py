@@ -2,7 +2,7 @@ import os
 import csv
 from .models import College, Faculty, Course
 from teaching.models import SchoolLevel, Subject
-from qualifications.models import Title, EducationSpecialization
+from qualifications.models import Title, EducationSpecialization, QualificationType, OtherExperience
 from django.core.exceptions import ObjectDoesNotExist
 from decimal import Decimal
 
@@ -42,7 +42,7 @@ def init_courses():
     list Čistopis MVP
     The second row was removed.
     The first one was edited to:
-    Typ kvalifikace,Titul,1. stupeň ZŠ,2. stupeň ZŠ,SŠ,Specializace,Typ ostatní kvalifikace,Název,Vysoká škola,Fakulta,Cena,Město,SDS / semestr,P,D,K,jednoobor,dvouobor,Odkaz na více info,Poznámka,ČJL,AJ,NJ,FJ,ŠJ,RJ,M,IKT,ČAS,D,OV / ZSV,F,CH,PŘ,Z,HV,VV,VKZ,TV,ČSP,DV,ETV,FAV,TPV,OSV,VDO,EGS,MKV,ENV,MV,ODBP,PV,ODBV,NOVÁ AKREDITACE DO 2021
+    Typ kvalifikace,Titul,1. stupeň ZŠ,2. stupeň ZŠ,SŠ,Specializace,Typ ostatní kvalifikace,Název,Vysoká škola,Fakulta,Cena,Město,SDS / semestr,P,DF,K,jednoobor,dvouobor,Odkaz na více info,Poznámka,ČJL,AJ,NJ,FJ,ŠJ,RJ,M,IKT,D,OV ,ZSV,F,CH,PŘ,Z,HV,VV,VKZ,TV,ČSP,DV,ETV,FAV,TPV,OSV,VDO,EGS,MKV,ENV,MV,ODBP,PV,ODBV,NOVÁ AKREDITACE DO 2021
     """
     filepath = os.path.join(os.getcwd(), "colleges", "courses_MVP.csv")
     courses = get_courses_from_csv(filepath)
@@ -84,18 +84,19 @@ def init_courses():
     ]
 
     for course in courses:
-        qualification_type = course["Typ kvalifikace"]
+        qualification_type = QualificationType.objects.get(name=course["Typ kvalifikace"])
         title = False
-        if qualification_type == "Titul":
+        if qualification_type.name == "Titul":
             title = Title.objects.filter(code=course["Titul"]).first()
 
         specialization = False
         if course["Specializace"] != "0" and course["Specializace"] != "":
             specialization = EducationSpecialization.objects.get(name=course["Specializace"].capitalize().strip())
 
-        other_qualification_type = ""
-        if qualification_type == "Ostatní kvalifikace":
-            other_qualification_type = course["Typ ostatní kvalifikace"]
+        other_qualification_type = False
+        if qualification_type.name == "Ostatní kvalifikace" and course["Typ ostatní kvalifikace"] != "0":
+            other_qualification_type = OtherExperience.objects.get(name=course["Typ ostatní kvalifikace"])
+
         name = course["Název"]
 
         university = College.objects.filter(name=course["Vysoká škola"].strip()).first()
@@ -116,16 +117,22 @@ def init_courses():
             study_length_in_semesters = int(course["SDS / semestr"])
         except (ValueError):
             study_length_in_semesters = 0
-        form_present = "P" in course["P"]
-        form_combined = "K" in course["K"]
-        form_distant = "D" in course["D"]
-        double_major = False
-        if course["dvouobor"] == "1":
-            double_major = True
-        single_major = True
 
-        if course["jednoobor"] == "0":
-            single_major = False
+        study_form = []
+        if "P" in course["P"]:
+            study_form.append(Course.FORM_PRESENT)
+        if "K" in course["K"]:
+            study_form.append(Course.FORM_COMBINED)
+        if "D" in course["DF"]:
+            study_form.append(Course.FORM_DISTANT)
+
+        major = []
+        if course["dvouobor"] == "1":
+            major.append(Course.MAJOR_DOUBLE)
+
+        if course["jednoobor"] == "1":
+            major.append(Course.MAJOR_SINGLE)
+
         url = course["Odkaz na více info"]
         note = course["Poznámka"]
 
@@ -134,19 +141,19 @@ def init_courses():
             url=url,
             defaults={
                 "qualification_type": qualification_type,
-                "other_qualification_type": other_qualification_type,
                 "university": university,
                 "city": city,
                 "price": price,
                 "study_length_in_semesters": study_length_in_semesters,
-                "form_present": form_present,
-                "form_combined": form_combined,
-                "form_distant": form_distant,
-                "double_major": double_major,
-                "single_major": single_major,
+                "study_form": study_form,
+                "major": major,
                 "note": note,
             },
         )
+
+        if other_qualification_type:
+            c.other_qualification_type = other_qualification_type
+            c.save()
 
         if title:
             c.title = title

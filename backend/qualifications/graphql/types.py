@@ -9,6 +9,10 @@ from qualifications.models import (
     SubjectType,
     EducationType,
     OtherExperience,
+    Qualification,
+)
+from teaching.models import (
+    SubjectGroup,
 )
 
 
@@ -51,4 +55,16 @@ class EducationTypeObjectType(DjangoObjectType):
 class OtherExperienceObjectType(DjangoObjectType):
     class Meta:
         model = OtherExperience
+        fields = ALL_FIELDS
+
+
+class QualificationObjectType(DjangoObjectType):
+    class Meta:
+        model = Qualification
+        fields = ALL_FIELDS
+
+
+class SubjectGroupObjectType(DjangoObjectType):
+    class Meta:
+        model = SubjectGroup
         fields = ALL_FIELDS

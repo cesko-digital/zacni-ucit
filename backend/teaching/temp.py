@@ -143,6 +143,8 @@ def init_school_level_2021_02():
             school_level.target_school_level = False
             school_level.save()
         elif name == "2. stupeň ZŠ a SŠ":
+            second_level_and_high_school_subjects_qs = Subject.objects.all()
+            school_level.subjects.add(*second_level_and_high_school_subjects_qs)
             school_level.target_school_level = False
             school_level.save()
 
