@@ -25,8 +25,15 @@ class CollegeProgrammeAdmin(admin.ModelAdmin):
 
 
 class EducationTypeAdmin(admin.ModelAdmin):
-    list_display = ("id", "qualification_type", "title", "get_school_levels", "get_subject_groups", 
-            "get_specializations", "name")
+    list_display = (
+        "id",
+        "qualification_type",
+        "title",
+        "get_school_levels",
+        "get_subject_groups",
+        "get_specializations",
+        "name",
+    )
     list_filter = ("qualification_type", "title", "school_levels", "subject_groups")
     search_fields = ("qualification_type", "title__name", "school_levels__name")
     list_select_related = ("title",)
@@ -48,7 +55,7 @@ class QualificationAdmin(admin.ModelAdmin):
 class QualificationTypeAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
-    
+
 class EducationSpecializationAdmin(admin.ModelAdmin):
     list_display = ("name",)
 

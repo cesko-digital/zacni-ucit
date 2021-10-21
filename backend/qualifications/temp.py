@@ -411,6 +411,9 @@ def init_qualification():
         if type_1_specialization and type_1_specialization != "None":
             if type_1_specialization == "Any":
                 type_1_specialization = EducationSpecialization.objects.all()
+            elif type_1_specialization == "Any kromě Učitelství a Filologie (neučitelský obor)":
+                excludes = ["Učitelství", "Filologie (neučitelský obor)"]
+                type_1_specialization = EducationSpecialization.objects.exclude(name__in=excludes)
             else:
                 type_1_specialization, _ = EducationSpecialization.objects.get_or_create(name=type_1_specialization)
         else:
