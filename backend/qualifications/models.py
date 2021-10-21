@@ -129,21 +129,27 @@ class EducationType(TimeStampedModel):
     class Meta:
         verbose_name = "Typ vzdělání z hlediska zákona"
         verbose_name_plural = "Typ vzdělání z hlediska zákona"
-        ordering = ("id","qualification_type",)
+        ordering = (
+            "id",
+            "qualification_type",
+        )
 
     def __str__(self):
         return f"[{self.qualification_type}: {self.title}, {self.get_school_levels()}, {self.get_subject_groups()}, {self.get_specializations()}]"
 
     def get_school_levels(self):
         return ", ".join(school_level.name for school_level in self.school_levels.all())
+
     get_school_levels.short_description = "Stupně školy"
 
     def get_subject_groups(self):
         return ", ".join(subject_group.name for subject_group in self.subject_groups.all())
+
     get_subject_groups.short_description = "Skupiny předmětů"
 
     def get_specializations(self):
         return ", ".join(specialization.name for specialization in self.specializations.all())
+
     get_specializations.short_description = "Oblast VŠ vzdělávání"
 
 
@@ -165,17 +171,19 @@ class Qualification(TimeStampedModel):
     class Meta:
         verbose_name = "Kvalifikace"
         verbose_name_plural = "Kvalifikace"
-        ordering = ("row_id",)
+        # ordering = ("row_id",)
 
     def __str__(self):
         return str(self.id)
 
     def get_subject_groups(self):
         return ", ".join(subject_group.name for subject_group in self.subject_groups.all())
+
     get_subject_groups.short_description = "Skupiny předmětů"
 
     def get_education_types(self):
         return mark_safe("<br/>".join(str(education_type) for education_type in self.education_types.all()))
+
     get_education_types.short_description = "Vzdělání z hlediska zákona"
     get_education_types.allow_tags = True
 

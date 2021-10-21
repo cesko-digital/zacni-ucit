@@ -73,6 +73,8 @@ class Query(graphene.ObjectType):
         level_id=graphene.Int(required=True),
         title=graphene.Int(required=True),
         specialization=graphene.Int(required=True),
+        school_level_done=graphene.Int(required=False),
+        subject_group_done=graphene.Int(required=False),
     )
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
@@ -101,43 +103,59 @@ class Query(graphene.ObjectType):
         )
 
         completed_paths = []
-        uncompleted_paths = []
+        partially_completed_paths = []
+        fully_uncompleted_paths = []
         for path in paths:
+
             completed_edu_types = []
             uncompleted_edu_types = []
+
             for edu_type in path.cached_education_types:
 
                 if edu_type.qualification_type.name == "Titul":
 
                     # Ověřuje, zda m áuživatel titul a zároveň kvalifikaci na stupeň, kde chce učit
-                    if (
-                        edu_type.title.name == title
-                        and edu_type.specializations.all().filter(name=specialization).exists()
-                    ):
+                    if edu_type.title.id == title and edu_type.specializations.all().filter(id=specialization).exists():
+                        # vazba specializace Filologie(neučitelský obor) na hotovou subject group
+                        if (
+                            specialization
+                            == EducationSpecialization.objects.get(name="Filologie (neučitelský obor)").id
+                        ):
+                            subject_group_done = SubjectGroup.objects.get(name="cizí jazyk").id
+
+                        # vazba specializace "Tělesná výchova a sport (neučitelský obor)" na hotovou subject group
+                        elif (
+                            specialization
+                            == EducationSpecialization.objects.get(name="Tělesná výchova a sport (neučitelský obor)").id
+                        ):
+                            subject_group_done = SubjectGroup.objects.get(name="tělesná výchova").id
+
+                        elif specialization == EducationSpecialization.objects.get(name="Umělecko-pedagogický obor").id:
+                            subject_group_done = SubjectGroup.objects.get(name="umělecké předměty").id
 
                         # má education type nějakou předmětovou skupinu?
                         if edu_type.subject_groups.all().exists():
 
                             # ověřuje, zda má uživatel vystudovanou danou přdmětovou skupinu
-                            if edu_type.subject_groups.all().filter(name=subject_group_done).exists():
+                            if edu_type.subject_groups.all().filter(id=subject_group_done).exists():
 
                                 # Má education type dané nějaké school levels?
                                 if edu_type.school_levels.all().exists():
 
                                     # pokud ma uzivatel titul, zaroven specializaci a zaroven predmetovou skupinu udelanou a
-                                    # zaroven pro dany stupen, kde chce ucit - má cestu splněnou
-                                    if edu_type.school_levels.all().filter(name=school_level_done).exists():
+                                    # zaroven pro dany stupen, kde chce ucit - má splněný education type
+                                    if edu_type.school_levels.all().filter(id=school_level_done).exists():
                                         completed_edu_types.append(edu_type)
 
                                     # pokud nemá předmětovou skupinu pro daný Stupeň
                                     else:
                                         uncompleted_edu_types.append(edu_type)
 
-                                # pokud není určený stupeň pro předmětovou skupinu
+                                # pokud není určený stupeň pro edu type
                                 else:
                                     completed_edu_types.append(edu_type)
 
-                            # pokud má splněnou předmětovou skupinu, ale ne pro správný Stupeň
+                            # nemá správnou předmětovou skupinu
                             else:
                                 uncompleted_edu_types.append(edu_type)
                         # pokud není určená předmětová skupina pro daný Titul
@@ -146,106 +164,31 @@ class Query(graphene.ObjectType):
                     # pokud uživatel nemá titul a požadovAnou specializaci
                     else:
                         uncompleted_edu_types.append(edu_type)
+                else:
+                    uncompleted_edu_types.append(edu_type)
+
             if len(completed_edu_types) == len(path.cached_education_types):
                 completed_paths.append(path)
+            elif len(uncompleted_edu_types) < len(path.cached_education_types):
+                partially_completed_paths.append((path, len(uncompleted_edu_types)))
             else:
-                uncompleted_paths.append((path, len(uncompleted_edu_types)))
-
-        uncompleted_paths = sorted(uncompleted_paths, key=lambda x: x[1])
-        # z tuple potřebuju udělat list... ztratí se čísla o tom,
-        # kolik education types není dokončených, ale seznam už bude seřazený
-        # doufám :D
-
-        uncompleted_paths = [x[0].id for x in uncompleted_paths]
+                fully_uncompleted_paths.append((path, len(uncompleted_edu_types)))
 
         if len(completed_paths) > 0:
             # má splněno
             pass
-        else:
-            return Qualification.objects.filter(id__in=uncompleted_paths)
 
-        #
-        #
-        #
-        # # prevedeni na pandas a pridani sloupce completed do kazde EduType na zaklade user inputu
-        # df = pd.DataFrame(paths)
-        #
-        # for index, row in df.iterrows():
-        #     for edu_type in row["education_types"]:
-        #
-        #         # overuje, zda uzivatel ma titul
-        #         if edu_type["qualification_type"] == "titul":
-        #
-        #             # overuje, zda ma titul a zaroven kvalifikaci na ten stupen, kde chce ucit
-        #             if edu_type["title"] == title and edu_type["area"] == area:
-        #
-        #                 # overuje, zda ma zadanou predmetovou skupinu
-        #                 if edu_type["subject_group"]:
-        #
-        #                     # overuje, zda ma vystudovanou predmetovou skupinu
-        #                     if edu_type["subject_group"] == subject_group_done:
-        #
-        #                         # overuje, zda ma titul a predmetovou skupinu pro dany stupen, kde chce ucit
-        #                         if edu_type["school_levels"]:
-        #
-        #                             # pokud ma titul a zaroven specializaci a zaroven predmetovou skupinu udelanou a
-        #                             # zaroven pro dany stupen, kde chce ucit
-        #                             if edu_type["school_levels"] == school_level_done:
-        #                                 edu_type["completed"] = True
-        #
-        #                             # pokud nema predmetovou skupinu pro dany stupen
-        #                             else:
-        #                                 edu_type["completed"] = False
-        #
-        #                         # pokud nema predmetovou skupinu pro dany stupen
-        #                         else:
-        #                             edu_type["completed"] = True
-        #
-        #                     # pokud ma nejakou predmetovou skupinu, ale ne tu, kterou potrebuje
-        #                     else:
-        #                         edu_type["completed"] = False
-        #
-        #                 # pokud ma titul, ale nema predmetovou skupinu
-        #                 else:
-        #                     edu_type["completed"] = True
-        #
-        #             # pokud nema zadny titul
-        #             else:
-        #                 edu_type["completed"] = False
-        #
-        # # vsechny relevantni sloupce pro danou EduType do json sloupce
-        # for index, row in df.iterrows():
-        #     for edu_type in row["education_types"]:
-        #         columns = edu_type.loc[
-        #                   :0,  # check
-        #                   "qualification_type",
-        #                   "title",
-        #                   "specialization",
-        #                   "school_levels",
-        #                   "completed",
-        #                   ]
-        #         json = columns.to_json()
-        #         edu_type["edu_type_json"] = json
-        #
-        # # vyvoreni sloupce EduTypes list pro kazdou cestu
-        # for index, row in df.iterrows():
-        #     row["edu_type_list"] = []
-        #     for edu_type in row["education_types"]:
-        #         if not edu_type["edu_type_json"]["completed"]:
-        #             row["edu_type_list"].append(edu_type["edu_type_json"])
-        #
-        # # df.groupby("row_id") - neni treba?
-        #
-        # # pridani sloupce, ktery pocita pocet EduTypes pro kazdou cestu
-        # for index, row in df.iterrows():
-        #     num = len(row["edu_type_list"])
-        #     row["edu_count"] = num
-        #
-        # # serazeni cest podle sloupce count
-        # df = df.sort_values(by="edu_count", ascending=True)
-        # list_of_df_paths = df.values.tolist()
-        #
-        # return list_of_df_paths
+        elif len(partially_completed_paths) > 0:
+            partially_completed_paths = sorted(partially_completed_paths, key=lambda x: x[1])
+            partially_completed_paths = [x[0].id for x in partially_completed_paths]
+            queryset = Qualification.objects.filter(id__in=partially_completed_paths)
+            return sorted(queryset, key=lambda x: partially_completed_paths.index(x.id))
+
+        else:
+            uncompleted_paths = sorted(fully_uncompleted_paths, key=lambda x: x[1])
+            uncompleted_paths = [x[0].id for x in uncompleted_paths]
+            queryset = Qualification.objects.filter(id__in=uncompleted_paths)
+            return sorted(queryset, key=lambda x: uncompleted_paths.index(x.id))
 
     @staticmethod
     def resolve_courses(root, info, subject_id, level_id, title, area, school_level_done=None, subject_group_done=None):
