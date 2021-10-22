@@ -176,7 +176,7 @@ class Query(graphene.ObjectType):
 
         if len(completed_paths) > 0:
             # má splněno
-            pass
+            return Qualification.objects.none()
 
         elif len(partially_completed_paths) > 0:
             partially_completed_paths = sorted(partially_completed_paths, key=lambda x: x[1])
