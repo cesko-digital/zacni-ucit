@@ -191,35 +191,43 @@ class Query(graphene.ObjectType):
             return sorted(queryset, key=lambda x: uncompleted_paths.index(x.id))
 
     @staticmethod
-    def resolve_courses(root, info, subject_id, level_id, title, area, school_level_done=None, subject_group_done=None):
+    def resolve_courses(root, info, subject_id, level_id, title, specialization, school_level_done=None, subject_group_done=None):
 
-        # na základě user inputu uloží vhodné cesty do proměné
-        paths = root.resolve_qualifications(
+        # ulozi do promene vyfiltrovane qualifications
+        qualifications = root.resolve_qualifications(
             # info?
             subject_id,
             level_id,
             title,
-            area,
+            specialization,
             school_level_done,
             subject_group_done,
         )
 
-        relevant_courses = []
+        if qualifications:
 
-        # projde dané cesty a kurzy splňující parametry přidá do seznamu
-        for path in paths:
-            path_courses = []
-            for json in path["edu_type_list"]:
-                courses = Course.objects.filter(
-                    qualification_type=json.qualification_type,
-                    title=json.title,
-                    school_levels=json.school_levels,
-                    education_specialization=json.specialization,
-                )
-                path_courses.append(courses)
-            relevant_courses.append(path_courses)
+            paths = qualifications.prefetch_related(Prefetch("education_types", to_attr="cached_education_types"))
 
-        return relevant_courses
+            relevant_courses = []
+
+            for path in paths:
+                path_courses = []
+                for edu_type in path.cached_education_types:
+                    courses = Course.objects.filter(
+                        qualification_type=edu_type.qualification_type,
+                        title=edu_type.title,
+                        school_levels=edu_type.school_levels,
+                        education_specialization=edu_type.specialization,
+                    )
+
+                    # kurzy pro danou edu_type do listu dane cesty
+                    path_courses.append([courses])
+
+                # vsechny kurzy dane cesty do listu relevantnich kurzu
+                relevant_courses.append(path_courses)
+
+            # vrati seznam relevantnich kurzu pro kazdou cestu
+            return relevant_courses
 
     @staticmethod
     def resolve_titles(root, info):
