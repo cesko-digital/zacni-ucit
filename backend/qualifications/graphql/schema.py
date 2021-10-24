@@ -1,5 +1,4 @@
 import graphene
-import pandas as pd
 from django.db.models import Prefetch
 import numpy as np
 
