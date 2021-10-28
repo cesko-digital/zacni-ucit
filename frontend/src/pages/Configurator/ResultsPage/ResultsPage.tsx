@@ -23,33 +23,38 @@ export const resultsQuery = gql`
       title: $title
       specialization: $specialization
     ) {
-      id
-      rowId
-      legalParagraph
-      example
-      note
-      schoolLevel {
+      path {
         id
-        name
-      }
-      subjectGroups {
-        name
-      }
-      educationTypes {
-        id
-        name
-        title {
-          name
-        }
-        schoolLevels {
+        rowId
+        legalParagraph
+        example
+        note
+        schoolLevel {
+          id
           name
         }
         subjectGroups {
           name
         }
-        specializations {
+        educationTypes {
+          id
           name
+          title {
+            name
+          }
+          schoolLevels {
+            name
+          }
+          subjectGroups {
+            name
+          }
+          specializations {
+            name
+          }
         }
+      }
+      uncompletedEducationTypes {
+        id
       }
     }
   }
@@ -81,20 +86,26 @@ const ResultsPage: React.FC = () => {
         title="Po dokončení jedné z cest budete kvalifikovaní k tomu začít učit!"
       >
         <EducationText />
-        {console.log(data?.qualifications)}
         <StyleWrapper margin="0 0 1rem 0">
           {data?.qualifications && (
             <Paths
-              paths={data.qualifications.map(({ id, rowId, educationTypes }) => ({
-                text: `${id} - rowId: ${rowId}`,
-                items: educationTypes.map(({ id, name, title }) => ({
-                  text: title?.name ?? name,
-                  href: `${routes.configurator.path}/?id=${id}&${querystring.stringify(
-                    values as any,
-                  )}`,
-                  isAdditionalCourse: title === null,
-                })),
-              }))}
+              paths={data.qualifications.map(({ path, uncompletedEducationTypes }) => {
+                const { id, rowId, educationTypes } = path;
+                const uncompleted = uncompletedEducationTypes?.map(({ id }) => id);
+
+                return {
+                  text: `${id} - rowId: ${rowId}`,
+                  items: educationTypes
+                    .filter(({ id }) => uncompleted.includes(id))
+                    .map(({ id, name, title }) => ({
+                      text: title?.name ?? name,
+                      href: `${routes.configurator.path}/?id=${id}&${querystring.stringify(
+                        values as any,
+                      )}`,
+                      isAdditionalCourse: title === null,
+                    })),
+                };
+              })}
             />
           )}
         </StyleWrapper>
