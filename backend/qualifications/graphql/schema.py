@@ -190,43 +190,20 @@ class Query(graphene.ObjectType):
             return sorted(queryset, key=lambda x: uncompleted_paths.index(x.id))
 
     @staticmethod
-    def resolve_courses(root, info, subject_id, level_id, title, specialization, school_level_done=None, subject_group_done=None):
+    def resolve_courses(root, info, edu_type_id):
 
-        # ulozi do promene vyfiltrovane qualifications
-        qualifications = root.resolve_qualifications(
-            # info?
-            subject_id,
-            level_id,
-            title,
-            specialization,
-            school_level_done,
-            subject_group_done,
+        edu_type = EducationType.objects.get(id=edu_type_id)
+
+        qs = Course.objects.filter(
+            qualification_type=edu_type.qualification_type,
+            title=edu_type.title,
+            education_specialization__in=edu_type.specializations.all(),
         )
 
-        if qualifications:
+        if edu_type.school_levels:
+            qs = qs.filter(school_levels__in=edu_type.school_levels.all().distinct())
 
-            paths = qualifications.prefetch_related(Prefetch("education_types", to_attr="cached_education_types"))
-
-            relevant_courses = []
-
-            for path in paths:
-                path_courses = []
-                for edu_type in path.cached_education_types:
-                    courses = Course.objects.filter(
-                        qualification_type=edu_type.qualification_type,
-                        title=edu_type.title,
-                        school_levels=edu_type.school_levels,
-                        education_specialization=edu_type.specialization,
-                    )
-
-                    # kurzy pro danou edu_type do listu dane cesty
-                    path_courses.append([courses])
-
-                # vsechny kurzy dane cesty do listu relevantnich kurzu
-                relevant_courses.append(path_courses)
-
-            # vrati seznam relevantnich kurzu pro kazdou cestu
-            return relevant_courses
+        return qs
 
     @staticmethod
     def resolve_titles(root, info):
