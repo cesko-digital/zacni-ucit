@@ -207,9 +207,8 @@ class Query(graphene.ObjectType):
             edu_type_specializations_id = [x.id for x in edu_type_specializations]
             qs = qs.filter(education_specialization__in=edu_type_specializations_id)
 
-        # if edu_type.title is not None:
-        #     qs = qs.filter(title=edu_type.title.id)
-        #     print("mají titul", qs)
+        if edu_type.title is not None:
+            qs = qs.filter(title=edu_type.title.id)
 
         if edu_type.school_levels.all().exists():
             edu_type_school_levels = edu_type.school_levels.all()
