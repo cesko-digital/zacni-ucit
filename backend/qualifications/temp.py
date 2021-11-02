@@ -323,14 +323,14 @@ def init_education_specialization():
 def init_titles():
     titles = {
         "MAT": "Odborná maturita",
-        "BC": "Bakalářské vzdělání",
-        "MGR": "Magisterské vzdělání (Mgr. nebo Ing.)",
+        "Bc.": "Bakalářské vzdělání",
+        "Mgr.": "Magisterské vzdělání (Mgr. nebo Ing.)",
         "VL": "Výuční list",
         "DIS": "Vyšší odborné vzdělání",
     }
 
     for title in titles:
-        if title == "BC" or title == "MGR":
+        if title == "Bc." or title == "Mgr.":
             visible_in_form = True
         else:
             visible_in_form = False
