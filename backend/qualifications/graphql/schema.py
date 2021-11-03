@@ -84,7 +84,7 @@ class Query(graphene.ObjectType):
         title=graphene.Int(required=True),
         specialization=graphene.Int(required=True),
         school_level_done=graphene.Int(required=False),
-        subject_group_done=graphene.Int(required=False),
+        subject_done=graphene.Int(required=False),
     )
 
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
@@ -102,7 +102,7 @@ class Query(graphene.ObjectType):
         title,
         specialization,
         school_level_done=None,
-        subject_group_done=None,
+        subject_done=None,
     ):
 
         # vytvoreni jednotlivych cest
@@ -117,6 +117,21 @@ class Query(graphene.ObjectType):
         partially_completed_paths = []
         fully_uncompleted_paths = []
 
+        if subject_done:
+            subject_user = Subject.objects.get(id=subject_done)
+            subject_group_done = subject_user.subject_group.id
+        else:
+            subject_group_done = False
+
+        titles = []
+        title_user = Title.objects.get(id=title)
+        titles.append(title_user.id)
+
+        # pokud má uživatel Mgr., má i Bc dané specializace
+        if title_user.name == "Magisterské vzdělání (Mgr. nebo Ing.)":
+            title_bc = Title.objects.get(name="Bakalářské vzdělání")
+            titles.append(title_bc.id)
+
         for path in paths:
 
             completed_edu_types = []
@@ -125,9 +140,12 @@ class Query(graphene.ObjectType):
             for edu_type in path.cached_education_types:
 
                 if edu_type.qualification_type.name == "Titul":
-
                     # Ověřuje, zda má uživatel titul a zároveň kvalifikaci na stupeň, kde chce učit
-                    if edu_type.title.id == title and edu_type.specializations.all().filter(id=specialization).exists():
+                    if (
+                        edu_type.title.id in titles
+                        and edu_type.specializations.all().filter(id=specialization).exists()
+                    ):
+
                         # vazba specializace Filologie(neučitelský obor) na hotovou subject group
                         if (
                             specialization
@@ -173,7 +191,15 @@ class Query(graphene.ObjectType):
 
                         # pokud není určená předmětová skupina pro daný Titul
                         else:
-                            completed_edu_types.append(edu_type)
+                            # pokud není určená předmětová skupina, ale je určený school level (mateřská škola)
+                            if edu_type.school_levels.all().exists():
+                                if edu_type.school_levels.all().filter(id=school_level_done).exists():
+                                    completed_edu_types.append(edu_type)
+                                else:
+                                    uncompleted_edu_types.append(edu_type)
+                            # není school level ani předmětová skupina
+                            else:
+                                completed_edu_types.append(edu_type)
 
                     # pokud uživatel nemá titul a požadovAnou specializaci
                     else:
@@ -182,7 +208,7 @@ class Query(graphene.ObjectType):
                 else:
                     uncompleted_edu_types.append(edu_type)
 
-            if len(uncompleted_edu_types) == 0:
+            if len(completed_edu_types) == len(path.cached_education_types):
                 completed_paths.append(path)
 
             elif len(uncompleted_edu_types) < len(path.cached_education_types):
