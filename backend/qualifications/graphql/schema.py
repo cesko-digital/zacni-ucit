@@ -90,7 +90,7 @@ class Query(graphene.ObjectType):
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
     # Courses queries
-    courses = graphene.List(CourseObjectType)
+    courses = graphene.List(CourseObjectType, edu_type_id=graphene.Int(required=True))
     course = graphene.Field(CourseObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
@@ -224,45 +224,57 @@ class Query(graphene.ObjectType):
             return results
 
     @staticmethod
-    def resolve_courses(
-        root, info, subject_id, level_id, title, specialization, school_level_done=None, subject_group_done=None
-    ):
+    def resolve_courses(root, info, edu_type_id):
 
-        # ulozi do promene vyfiltrovane qualifications
-        qualifications = root.resolve_qualifications(
-            # info?
-            subject_id,
-            level_id,
-            title,
-            specialization,
-            school_level_done,
-            subject_group_done,
+        # získání EducationType na základě id
+        edu_type = EducationType.objects.get(id=edu_type_id)
+
+        # vyfiltrování kurzů podle qualification type (nenabývá hodnot None)
+        qs = Course.objects.filter(
+            qualification_type=edu_type.qualification_type.id,
         )
 
-        if qualifications:
+        # pokud existují specializace pro daný edu_type
+        if edu_type.specializations.all().exists():
+            edu_type_specializations = edu_type.specializations.all()
+            # získání seznamu id pro filtrování
+            edu_type_specializations_id = [x.id for x in edu_type_specializations]
+            qs = qs.filter(education_specialization__in=edu_type_specializations_id)
 
-            paths = qualifications.prefetch_related(Prefetch("education_types", to_attr="cached_education_types"))
+        if edu_type.title is not None:
+            qs = qs.filter(title=edu_type.title.id)
 
-            relevant_courses = []
+        if edu_type.school_levels.all().exists():
+            edu_type_school_levels = edu_type.school_levels.all()
+            edu_type_school_levels_id = [x.id for x in edu_type_school_levels]
+            qs = qs.filter(school_levels__in=edu_type_school_levels_id)
 
-            for path in paths:
-                path_courses = []
-                for edu_type in path.cached_education_types:
-                    courses = Course.objects.filter(
-                        qualification_type=edu_type.qualification_type,
-                        title=edu_type.title,
-                        school_levels=edu_type.school_levels,
-                        education_specialization=edu_type.specialization,
-                    )
+        if edu_type.subject_groups.all().exists():
 
-                    # kurzy pro danou edu_type do listu dane cesty
-                    path_courses.append([courses])
+            edu_type_subject_groups = edu_type.subject_groups.all()
+            # získání subject group id od education type, aby se dále mohlo porovnávat
+            edu_type_subject_groups_id = [x.id for x in edu_type_subject_groups]
 
-                # vsechny kurzy dane cesty do listu relevantnich kurzu
-                relevant_courses.append(path_courses)
+            # převedení querysetu na list
+            courses_list = list(qs)
 
-            # vrati seznam relevantnich kurzu pro kazdou cestu
-            return relevant_courses
+            for course in courses_list:
+                courses_subjects = course.subjects.all()
+                courses_subject_groups_id = set([x.subject_group.id for x in courses_subjects])
+                # získání id předmětových skupin od kurzů
+                courses_subject_groups_id = list(courses_subject_groups_id)
+
+                # porovnání, jestli kurzy mají předmětové skupiny, které odpovídají subject group v education type
+                for c_id in courses_subject_groups_id:
+                    count = 0
+                    for id in courses_subject_groups_id:
+                        if id in edu_type_subject_groups_id:
+                            count += 1
+                    # pokud nejsou všechny předmětové skupiny kurzu v seznamu
+                    # předmětových skupin education type - vyřadí kurz z querysetu
+                    if count != len(courses_subject_groups_id):
+                        qs = qs.exclude(id=course.id)
+        return qs
 
     @staticmethod
     def resolve_titles(root, info):
