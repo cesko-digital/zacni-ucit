@@ -1,6 +1,5 @@
 import graphene
 from django.db.models import Prefetch
-import numpy as np
 
 from qualifications.graphql.types import (
     TitleObjectType,
@@ -30,6 +29,18 @@ from qualifications.models import (
 from teaching.models import SubjectGroup, Subject
 
 from colleges.models import Course
+
+
+class CustomDictionary(graphene.ObjectType):
+    # klíč slosvníku a hodnota (jejich názvy budou string)
+    path = graphene.String()
+    uncompleted_education_types = graphene.String()
+
+
+class Dictionary(graphene.ObjectType):
+    # klíč - objekt Qualification, hodnota - list objektů EducationType
+    path = graphene.Field(QualificationObjectType)
+    uncompleted_education_types = graphene.List(EducationTypeObjectType)
 
 
 class Query(graphene.ObjectType):
@@ -65,9 +76,9 @@ class Query(graphene.ObjectType):
     subject_groups = graphene.List(SubjectGroupObjectType)
     subject_group = graphene.Field(SubjectGroupObjectType, pk=graphene.Int(required=True))
 
-    # Qualification type queries
+    # Qualification type queries (dictionary)
     qualifications = graphene.List(
-        QualificationObjectType,
+        Dictionary,
         subject_id=graphene.Int(required=True),
         level_id=graphene.Int(required=True),
         title=graphene.Int(required=True),
@@ -75,6 +86,7 @@ class Query(graphene.ObjectType):
         school_level_done=graphene.Int(required=False),
         subject_group_done=graphene.Int(required=False),
     )
+
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
     # Courses queries
@@ -104,6 +116,7 @@ class Query(graphene.ObjectType):
         completed_paths = []
         partially_completed_paths = []
         fully_uncompleted_paths = []
+
         for path in paths:
 
             completed_edu_types = []
@@ -113,7 +126,7 @@ class Query(graphene.ObjectType):
 
                 if edu_type.qualification_type.name == "Titul":
 
-                    # Ověřuje, zda m áuživatel titul a zároveň kvalifikaci na stupeň, kde chce učit
+                    # Ověřuje, zda má uživatel titul a zároveň kvalifikaci na stupeň, kde chce učit
                     if edu_type.title.id == title and edu_type.specializations.all().filter(id=specialization).exists():
                         # vazba specializace Filologie(neučitelský obor) na hotovou subject group
                         if (
@@ -157,37 +170,58 @@ class Query(graphene.ObjectType):
                             # nemá správnou předmětovou skupinu
                             else:
                                 uncompleted_edu_types.append(edu_type)
+
                         # pokud není určená předmětová skupina pro daný Titul
                         else:
                             completed_edu_types.append(edu_type)
+
                     # pokud uživatel nemá titul a požadovAnou specializaci
                     else:
                         uncompleted_edu_types.append(edu_type)
+
                 else:
                     uncompleted_edu_types.append(edu_type)
 
-            if len(completed_edu_types) == len(path.cached_education_types):
+            if len(uncompleted_edu_types) == 0:
                 completed_paths.append(path)
+
             elif len(uncompleted_edu_types) < len(path.cached_education_types):
-                partially_completed_paths.append((path, len(uncompleted_edu_types)))
+                # přidání tuple (cesta, počet nesplněných EducationTypes, konkrétní nesplněné EducationTypes)
+                partially_completed_paths.append((path, len(uncompleted_edu_types), uncompleted_edu_types))
             else:
-                fully_uncompleted_paths.append((path, len(uncompleted_edu_types)))
+                fully_uncompleted_paths.append((path, len(uncompleted_edu_types), uncompleted_edu_types))
 
         if len(completed_paths) > 0:
             # má splněno
-            pass
+            return {}
 
         elif len(partially_completed_paths) > 0:
+            # seřazení cest podle počtu nesplněných education types
             partially_completed_paths = sorted(partially_completed_paths, key=lambda x: x[1])
-            partially_completed_paths = [x[0].id for x in partially_completed_paths]
-            queryset = Qualification.objects.filter(id__in=partially_completed_paths)
-            return sorted(queryset, key=lambda x: partially_completed_paths.index(x.id))
+
+            # vytvoření seznamu z objektů Qualification
+            partially_compl_paths = [x[0] for x in partially_completed_paths]
+
+            # vytvoření seznamu z objektů nesplněných EducationTypes
+            uncompleted_education_types = [x[2] for x in partially_completed_paths]
+
+            results = []
+            # vytvoření seznamu slovníků
+            for i in range(len(partially_compl_paths)):
+                dictionary = Dictionary(partially_compl_paths[i], uncompleted_education_types[i])
+                results.append(dictionary)
+            return results
 
         else:
             uncompleted_paths = sorted(fully_uncompleted_paths, key=lambda x: x[1])
-            uncompleted_paths = [x[0].id for x in uncompleted_paths]
-            queryset = Qualification.objects.filter(id__in=uncompleted_paths)
-            return sorted(queryset, key=lambda x: uncompleted_paths.index(x.id))
+            uncompl_paths = [x[0] for x in uncompleted_paths]
+            uncompleted_education_types = [x[2] for x in uncompleted_paths]
+
+            results = []
+            for j in range(len(uncompl_paths)):
+                dictionary = Dictionary(uncompl_paths[j], uncompleted_education_types[j])
+                results.append(dictionary)
+            return results
 
     @staticmethod
     def resolve_courses(root, info, edu_type_id):

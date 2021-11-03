@@ -1,3 +1,4 @@
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 import React from 'react';
 
 import { Wrapper, Button, Content } from './styled';
@@ -14,7 +15,9 @@ export const Openable: React.FC<Props> = ({ text, children }) => {
       <Button isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
         {text}
       </Button>
-      {isOpen && <Content>{children}</Content>}
+      <AnimatedHeight isOpen={isOpen}>
+        <Content>{children}</Content>
+      </AnimatedHeight>
     </Wrapper>
   );
 };

@@ -14,23 +14,69 @@ import {
   Rows,
   Row,
   RowTitle,
-  Alternatives,
+  // Alternatives,
   Title,
-  Paragraph,
+  // Paragraph,
 } from './styled';
-import { schools } from '../PathDetailPage/PathDetailPage';
-import Card from '@components/Card/Card';
-import SchoolTile from '../ResultsPage/SchoolTile/SchoolTile';
+// import { schools } from '../PathDetailPage/PathDetailPage';
+// import Card from '@components/Card/Card';
+// import SchoolTile from '../ResultsPage/SchoolTile/SchoolTile';
 import Container from '@components/Container/Container';
+import { gql, useQuery } from '@apollo/client';
+
+export const courseQuery = gql`
+  query courseQuery($pk: Int!) {
+    course(pk: $pk) {
+      name
+      city
+      price
+      studyForm
+      major
+      schoolLevels {
+        name
+      }
+      educationSpecialization {
+        name
+      }
+      otherQualificationType {
+        id
+      }
+      studyLengthInSemesters
+      url
+      note
+      university {
+        name
+      }
+    }
+  }
+`;
 
 const CoursePage: React.FC = () => {
   const router = useRouter();
+
+  React.useEffect(() => {
+    if (router.isReady && !router.query.id) {
+      router.replace(routes.configurator.step1);
+      return null;
+    }
+  }, [router]);
+
+  const { loading, error, data } = useQuery<any>(courseQuery, {
+    variables: {
+      pk: router.query.id,
+    },
+  });
+
+  if (!data?.course) {
+    return null;
+  }
+  console.log(data);
 
   return (
     <>
       <Container>
         <ConfiguratorStep
-          title="Pedagogické minimum (Bc.)"
+          title={data.course.name}
           prevStep={
             Object.keys(router.query).length > 0
               ? { url: routes.configurator.results, text: 'Zpět na výsledky' }
@@ -38,60 +84,71 @@ const CoursePage: React.FC = () => {
           }
         >
           <Header>
-            <SchoolName>Univerzita Karlova</SchoolName>
-            <SchoolType>Pedagogická fakulta</SchoolType>
-            <Location>Praha</Location>
+            <SchoolName>{data.course.university.name}</SchoolName>
+            <SchoolType>{data.course.name}</SchoolType>
+            <Location>{data.course.city}</Location>
           </Header>
           <Content>
             <Details>
               <Title>Podrobnosti kurzu</Title>
               <Rows>
-                <Row>
+                {/* <Row>
                   <RowTitle>Typ kvalifikace</RowTitle>
                   Ostatní kvalifikace, jazyková zkouška min. C1 SERR pro jazyky
-                </Row>
+                </Row> */}
                 <Row>
                   <RowTitle>Na jakém stupni budete moct učit</RowTitle>
-                  SŠ / SOŠ / SOU / vyšší stupně gymnázií
+                  {data.course.schoolLevels.map(({ name }) => (
+                    <div key={name}>{name}</div>
+                  ))}
                 </Row>
                 <Row>
                   <RowTitle>Cena za studium</RowTitle>
-                  Jedná-li se o bakalářský či magisterský studijní program a zatím jste na VŠ
-                  nestudovali, bude studium zadarmo. V případě, že už jste na VŠ studovali, cena
-                  studia se liší.
+                  {data.course.price} Kč
+                  {/* Jedná-li se o bakalářský či magisterský studijní program a
+                  zatím jste na VŠ nestudovali, bude studium zadarmo. V případě, že už jste na VŠ
+                  studovali, cena studia se liší. */}
                 </Row>
                 <Row>
                   <RowTitle>Jednoobor nebo dvouobor</RowTitle>
-                  Jednobor
+                  {data.course.major.map(name => (
+                    <div key={name}>{name}</div>
+                  ))}
                 </Row>
                 <Row>
                   <RowTitle>Město</RowTitle>
-                  Praha
+                  {data.course.city}
                 </Row>
                 <Row>
-                  <RowTitle>Standardní doba studia v semestrech</RowTitle>5 semestrů
+                  <RowTitle>Standardní doba studia v semestrech</RowTitle>
+                  {data.course.studyLengthInSemesters} semestr
+                  {data.course.studyLengthInSemesters > 1 &&
+                    data.course.studyLengthInSemesters <= 4 &&
+                    'y'}
+                  {data.course.studyLengthInSemesters > 4 && 'ů'}
                 </Row>
                 <Row>
                   <RowTitle>Forma studia</RowTitle>
-                  prezenční
+                  {data.course.studyForm.map(name => (
+                    <div key={name}>{name}</div>
+                  ))}
                 </Row>
                 <Row>
                   <RowTitle>Další informace najdete na:</RowTitle>
-                  <Button href="www.cuni.cz" buttonStyle="link">
-                    www.cuni.cz
+                  <Button href={data.course.url} buttonStyle="link">
+                    {data.course.url}
                   </Button>
                 </Row>
                 <Row>
                   <RowTitle>Poznámky ke studiu na této škole</RowTitle>
-                  Ještě předtím, než si vyberete konkrétní program nebo kurz, si zkontrolujte, že
-                  oblast vašeho odborného vzdělání odpovídá předmětu, který chcete učit!
+                  {data.course.note}
                 </Row>
               </Rows>
             </Details>
           </Content>
         </ConfiguratorStep>
       </Container>
-      <Alternatives>
+      {/* <Alternatives>
         <Container>
           <Title>Jaké jsou alternativy?</Title>
           <Paragraph>
@@ -108,7 +165,7 @@ const CoursePage: React.FC = () => {
             </Card>
           ))}
         </Container>
-      </Alternatives>
+      </Alternatives> */}
     </>
   );
 };
