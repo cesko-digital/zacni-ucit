@@ -26,7 +26,7 @@ from qualifications.models import (
     Qualification,
 )
 
-from teaching.models import SubjectGroup, Subject
+from teaching.models import SubjectGroup, Subject, SchoolLevel
 
 from colleges.models import Course
 
@@ -162,6 +162,12 @@ class Query(graphene.ObjectType):
 
                         elif specialization == EducationSpecialization.objects.get(name="Umělecko-pedagogický obor").id:
                             subject_group_done = SubjectGroup.objects.get(name="umělecké předměty").id
+
+                        elif (
+                            specialization == EducationSpecialization.objects.get(name="Učitelství").id
+                            and school_level_done == SchoolLevel.objects.get(name="1. stupeň ZŠ").id
+                        ):
+                            subject_group_done = SubjectGroup.objects.get(name="všeobecně-vzdělávací předměty").id
 
                         # má education type nějakou předmětovou skupinu?
                         if edu_type.subject_groups.all().exists():

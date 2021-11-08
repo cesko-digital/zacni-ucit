@@ -1,3 +1,5 @@
+from django.db.models import Count
+
 from .models import (
     CollegeArea,
     CollegeProgramme,
@@ -394,16 +396,12 @@ def init_qualification():
             teaching_subject_group = None
 
         if type_1_title and type_1_title != "None":
-            type_1_title, _ = Title.objects.get_or_create(
-                name=type_1_title, defaults={"code": type_1_title, "visible_in_form": False}
-            )
+            type_1_title = Title.objects.get(name=type_1_title)
         else:
             type_1_title = None
 
         if type_2_title and type_2_title != "None":
-            type_2_title, _ = Title.objects.get_or_create(
-                name=type_2_title, defaults={"code": type_2_title, "visible_in_form": False}
-            )
+            type_2_title = Title.objects.get(name=type_2_title)
         else:
             type_2_title = None
 
@@ -450,24 +448,67 @@ def init_qualification():
 
         # init EducationType
         if type_1_title:
+            # všechny existující education types
+            all_existed_edu_types = EducationType.objects.all()
+
             qualification_type1 = QualificationType.objects.get(name="Titul")
-            education_type_1, _ = EducationType.objects.get_or_create(
-                name=type_1_name,
-                qualification_type=qualification_type1,
-                title=type_1_title,
-            )
+
+            if type(type_1_specialization) == EducationSpecialization:
+                # zjistí, zda již existující education types mají danou specializaci
+                already_exists = all_existed_edu_types.filter(
+                    name=type_1_name,
+                    qualification_type=qualification_type1,
+                    title=type_1_title,
+                    specializations=type_1_specialization,
+                )
+                # pokud nemají danou specializaci, vytvoří se
+                if not already_exists:
+                    education_type_1 = EducationType.objects.create(
+                        name=type_1_name,
+                        qualification_type=qualification_type1,
+                        title=type_1_title,
+                    )
+                    education_type_1.specializations.add(type_1_specialization)
+
+                else:
+                    education_type_1 = all_existed_edu_types.get(
+                        name=type_1_name,
+                        qualification_type=qualification_type1,
+                        title=type_1_title,
+                        specializations=type_1_specialization,
+                    )
+            elif type(type_1_specialization) != NoneType:
+                # zjistí, zda již existující edu types mají dané specializace
+                already_exists = all_existed_edu_types.filter(
+                    name=type_1_name,
+                    qualification_type=qualification_type1,
+                    title=type_1_title,
+                    specializations__in=type_1_specialization,
+                )
+
+                if not already_exists:
+                    education_type_1 = EducationType.objects.create(
+                        name=type_1_name,
+                        qualification_type=qualification_type1,
+                        title=type_1_title,
+                    )
+                    education_type_1.specializations.add(*type_1_specialization)
+
+                else:
+                    edu_type_1_query = all_existed_edu_types.annotate(count=Count("specializations")).filter(
+                        count=len(type_1_specialization)
+                    )
+
+                    for specialization in type_1_specialization:
+                        education_type_1_query = edu_type_1_query.filter(specializations__pk=specialization.id)
 
             if type_1_title != "Odborná maturita" and type_1_name != "None":
                 education_type_1.name = type_1_name
                 education_type_1.save()
 
-            if type(type_1_specialization) == EducationSpecialization:
-                education_type_1.specializations.add(type_1_specialization)
-            elif type(type_1_specialization) != NoneType:
-                education_type_1.specializations.add(*type_1_specialization)
-
             if type(type_1_subject_group) == SubjectGroup:
                 education_type_1.subject_groups.add(type_1_subject_group)
+
             elif type(type_1_subject_group) != NoneType:
                 education_type_1.subject_groups.add(*type_1_subject_group)
 
@@ -475,20 +516,61 @@ def init_qualification():
             education_type_1 = None
 
         if type_2_title:
+
+            all_existed_edu_types_2 = EducationType.objects.all()
             qualification_type2 = QualificationType.objects.get(name="Titul")
-            education_type_2, _ = EducationType.objects.get_or_create(
-                qualification_type=qualification_type2,
-                name=type_2_name,
-                title=type_2_title,
-            )
+
+            if type(type_2_specialization) == EducationSpecialization:
+                # zjistí, zda již existující education types mají danou specializaci
+                already_exists_2 = all_existed_edu_types_2.filter(
+                    qualification_type=qualification_type2,
+                    name=type_2_name,
+                    title=type_2_title,
+                    specializations=type_2_specialization,
+                )
+                # pokud nemají danou specializaci, vytvoří se
+                if not already_exists_2:
+                    education_type_2 = EducationType.objects.create(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        title=type_2_title,
+                    )
+                    education_type_2.specializations.add(type_2_specialization)
+
+                else:
+                    education_type_2 = all_existed_edu_types_2.get(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        title=type_2_title,
+                        specializations=type_2_specialization,
+                    )
+
+            elif type(type_2_specialization) != NoneType:
+                already_exists_2 = all_existed_edu_types_2.filter(
+                    qualification_type=qualification_type2,
+                    name=type_2_name,
+                    title=type_2_title,
+                    specializations__in=type_2_specialization,
+                )
+                if not already_exists_2:
+                    education_type_2 = EducationType.objects.create(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        title=type_2_title,
+                    )
+                    education_type_2.specializations.add(*type_2_specialization)
+
+                else:
+                    education_type_2 = all_existed_edu_types_2.get(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        title=type_2_title,
+                        specializations=type_2_specialization,
+                    ).first()
 
             if type(type_2_subject_group) == SubjectGroup:
                 education_type_2.subject_groups.add(type_2_subject_group)
-            elif type(type_2_subject_group) != NoneType:
-                education_type_2.subject_groups.add(*type_2_subject_group)
 
-            if type(type_2_subject_group) == SubjectGroup:
-                education_type_2.subject_groups.add(type_2_subject_group)
             elif type(type_2_subject_group) != NoneType:
                 education_type_2.subject_groups.add(*type_2_subject_group)
 
