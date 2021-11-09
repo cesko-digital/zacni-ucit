@@ -132,6 +132,11 @@ class Query(graphene.ObjectType):
             title_bc = Title.objects.get(name="Bakalářské vzdělání")
             titles.append(title_bc.id)
 
+        # pokud má uživatel specializaci Umění (neučitelský obor), bere se to
+        # jako Jiná neučitelská odborná specialzace
+        if specialization == EducationSpecialization.objects.get(name="Umění (neučitelský obor)").id:
+            specialization = EducationSpecialization.objects.get(name="Jiná neučitelská odborná specializace").id
+
         for path in paths:
 
             completed_edu_types = []
