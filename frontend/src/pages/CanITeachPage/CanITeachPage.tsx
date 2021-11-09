@@ -86,9 +86,12 @@ const CanITeachPage: React.FC = () => (
         Vyberte si, kde chcete učit, a my vám ukážeme, jak na to. Pokud si nejste jistí, jaké
         předměty se svým vzděláním můžete vyučovat, podívejte se do naší{' '}
         <MainLink href="./subjects.pdf" target="_blank" download>
-          tabulky
+          tabulky.
         </MainLink>
-        .
+        <i>
+          (Tato tabulka není oficiálním stanoviskem MŠMT, ale byla vytvořena na základě praxe
+          ředitelů a ředitelek škol.)
+        </i>
       </Paragraph>
       <CrossroadList>
         {[
