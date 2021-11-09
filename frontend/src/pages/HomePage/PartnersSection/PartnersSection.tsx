@@ -9,7 +9,6 @@ import {
   Logo,
   TextWrapper,
   MsmtWrapper,
-  LogoContainer,
 } from './styled';
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
