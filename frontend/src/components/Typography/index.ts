@@ -158,12 +158,12 @@ export const LinkToExtPage = styled.a`
   }
 `;
 
-export const MainParagraph = styled.p`
-  margin: 0 0 16px;
+export const MainParagraph = styled.p<{ noMargin: boolean }>`
+  margin: ${({ noMargin }) => (noMargin ? '0' : '0 0 16px')};
   font-weight: bold;
 
-  ${mediaQueriesUp('sm')`
+  @media (min-width: 500px) {
     font-size: 1.25rem;
-    margin: 0 0 32px;
-  `}
+    margin: ${({ noMargin }) => (noMargin ? '0' : '0 0 32px')};
+  }
 `;

@@ -1,3 +1,4 @@
+Skupina předmětů,Předmět
 cizí jazyk,AJ
 cizí jazyk,NJ
 cizí jazyk,FJ
@@ -6,7 +7,6 @@ cizí jazyk,RJ
 všeobecně-vzdělávací předměty,ČJL
 všeobecně-vzdělávací předměty,M
 všeobecně-vzdělávací předměty,IKT
-všeobecně-vzdělávací předměty,ČAS
 všeobecně-vzdělávací předměty,D
 všeobecně-vzdělávací předměty,OV
 všeobecně-vzdělávací předměty,F
@@ -31,8 +31,5 @@ umělecké předměty,FAV
 umělecké předměty,DV
 umělecké předměty,TPV
 tělesná výchova,TV
-konverzace,AJ
-konverzace,NJ
-konverzace,FJ
-konverzace,ŠJ
-konverzace,RJ
+konverzace,KV
+všeobecně-vzdělávací předměty,ZSV

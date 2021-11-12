@@ -2,15 +2,33 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
 
+class SubjectGroup(TimeStampedModel):
+    """
+    Predmetova skupina.
+    """
+
+    name = models.CharField("Název", max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = "Předmětová skupina"
+        verbose_name_plural = "Předmětové skupiny"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
+
+
 class Subject(TimeStampedModel):
     """
     Skolni predmet.
-
     Zdroj: https://docs.google.com/spreadsheets/d/1msJu1AX_-wYLbhvz8rqsZxFMBwX7-xzghCAFHeeBQEI/edit#gid=2008534637.
     """
 
     name = models.CharField("Název předmětu", max_length=100)
     code = models.CharField("Zkratka", max_length=20, unique=True)
+    subject_group = models.ForeignKey(
+        SubjectGroup, verbose_name="Předmětová skupina", on_delete=models.SET_NULL, null=True
+    )
 
     class Meta:
         verbose_name = "Vzdělávací oblast podle RVP"
@@ -28,6 +46,8 @@ class SchoolLevel(TimeStampedModel):
 
     name = models.CharField("Název", max_length=100, unique=True)
     subjects = models.ManyToManyField(Subject, related_name="school_levels", verbose_name="Předměty")
+    target_school_level = models.BooleanField(help_text="Kde chce uživatel učit", default=True)
+    user_education = models.BooleanField(help_text="Dosažené vzdělání", default=True)
 
     class Meta:
         verbose_name = "Stupeň školy"
@@ -70,23 +90,6 @@ class SchoolSubType(TimeStampedModel):
     class Meta:
         verbose_name = "Podtyp školy"
         verbose_name_plural = "Podtypy škol"
-        ordering = ("name",)
-
-    def __str__(self):
-        return self.name
-
-
-class SubjectGroup(TimeStampedModel):
-    """
-    Predmetova skupina.
-    """
-
-    name = models.CharField("Název", max_length=100, unique=True)
-    subjects = models.ManyToManyField(Subject, verbose_name="Předměty")
-
-    class Meta:
-        verbose_name = "Předmětová skupina"
-        verbose_name_plural = "Předmětové skupiny"
         ordering = ("name",)
 
     def __str__(self):

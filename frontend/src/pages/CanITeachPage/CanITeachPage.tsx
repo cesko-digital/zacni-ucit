@@ -33,16 +33,16 @@ const CanITeachPage: React.FC = () => (
       description="S našim přehledným shrnutím zjistíte, co potřebujete k tomu, abyste mohli začít učit, a kde si potřebné znalosti a pedagogickou kvalifikaci můžete doplnit."
     />
     <MainTitle>Můžu učit?</MainTitle>
-    {/* <Section>
+    <Section>
       <SectionTitle>Interaktivní průvodce</SectionTitle>
       <Paragraph>
         Projděte naším interaktivním průvodcem a zjistěte, co potřebujete k tomu, abyste mohli začít
         učit, a kde si potřebné znalosti a pedagogickou kvalifikaci můžete doplnit.
       </Paragraph>
-      <Button href={routes.configurator} endIcon={<ChevronIcon />} buttonStyle="button">
+      <Button href={routes.configurator.step1} endIcon={<ChevronIcon />} buttonStyle="button">
         Můžu učit
       </Button>
-    </Section> */}
+    </Section>
     <Section id="pedagogicke-minimum">
       <SectionTitle>„Pedagogické minimum“</SectionTitle>
       <Paragraph>
@@ -66,13 +66,13 @@ const CanITeachPage: React.FC = () => (
           Podívejte se na jejich seznam
         </Button>
       </ButtonWrapper>
-      {/* <Paragraph>
+      <Paragraph>
         Protože je v tom zmatek, tak jsme pro vás připravili systém, který vám najde kurz nebo
         program na míru vašeho vzdělání.
       </Paragraph>
-      <Button href={routes.configurator} endIcon={<ChevronIcon />} buttonStyle="button">
+      <Button href={routes.configurator.step1} endIcon={<ChevronIcon />} buttonStyle="button">
         Chci si najít kurz
-      </Button> */}
+      </Button>
     </Section>
     <Section id="zakon-o-pedagogickych-pracovnicich">
       <SectionTitle>Zákon o pedagogických pracovnících</SectionTitle>
@@ -86,9 +86,12 @@ const CanITeachPage: React.FC = () => (
         Vyberte si, kde chcete učit, a my vám ukážeme, jak na to. Pokud si nejste jistí, jaké
         předměty se svým vzděláním můžete vyučovat, podívejte se do naší{' '}
         <MainLink href="./subjects.pdf" target="_blank" download>
-          tabulky
+          tabulky.
         </MainLink>
-        .
+        <i>
+          (Tato tabulka není oficiálním stanoviskem MŠMT, ale byla vytvořena na základě praxe
+          ředitelů a ředitelek škol.)
+        </i>
       </Paragraph>
       <CrossroadList>
         {[

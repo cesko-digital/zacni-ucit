@@ -163,7 +163,11 @@ const HowTeachingProgramWorks: React.FC = () => (
         vyučování, být bezúhonní, <strong>zdravotně způsobilí</strong> a mít{' '}
         <strong>odbornou kvalifikaci</strong> pro konkrétní přímou pedagogickou činnost. Pro
         přehledné shrnutí,{' '}
-        <Button href={`${routes.canITeach}#zakon-o-pedagogickych-pracovnicich`} buttonStyle="link">
+        <Button
+          buttonStyle="link"
+          href={`${routes.canITeach}#zakon-o-pedagogickych-pracovnicich`}
+          inline
+        >
           jak je to s pedagogickou kvalifikací podle zákona o ped. pracovnících, navštivte náš
           rozcestník.
         </Button>

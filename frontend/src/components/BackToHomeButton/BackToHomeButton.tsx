@@ -9,14 +9,16 @@ import ArrowIcon from '@icons/arrow.svg';
 interface Props {
   href?: string;
   children?: string;
+  icon?: JSX.Element;
+  visible?: boolean;
 }
 
-const BackToHomeButton: React.FC<Props> = ({ href, children }) => (
-  <BackButtonWrapper>
+const BackToHomeButton: React.FC<Props> = ({ href, children, icon, visible }) => (
+  <BackButtonWrapper visible={visible ? true : false}>
     <Button
       buttonStyle="button"
       href={href ?? routes.homepage}
-      startIcon={<ArrowIcon />}
+      startIcon={icon ?? <ArrowIcon />}
       variant="secondary"
     >
       {children ?? 'Zpátky domů'}

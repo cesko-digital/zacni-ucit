@@ -28,15 +28,15 @@ const baseStyles = css`
     return variant === 'secondary' ? '#0C0807' : 'white';
   }};
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'link' ? 'underline' : 'none')};
-  display: inline-flex;
+  display: ${({ inline }) => (inline ? 'inline' : 'inline-flex')};
   justify-content: center;
-  align-items: center;
-  font-size: ${({ buttonStyle }) => (buttonStyle === 'button' ? '1rem' : '0.875rem')};
+  align-items: flex-start;
+  font-size: 1rem;
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'button' ? undefined : 'underline')};
   font-weight: bold;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   cursor: pointer;
-  text-align: center;
+  text-align: left;
 
   &:hover,
   &:active,
@@ -89,6 +89,7 @@ const baseStyles = css`
 
 export const Link = styled.a`
   ${baseStyles}
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'initial')};
 
   &:active {
     svg {
@@ -105,22 +106,23 @@ export const Link = styled.a`
 `;
 
 export const Button = styled.button`
-  ${baseStyles}
+  ${baseStyles};
 `;
 
 export const IconWrapper = styled.span`
   min-width: 8px;
   max-height: 16px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+  transform: translateY(4px);
 
   &:first-child {
     margin-right: 20px;
   }
 
   &:last-child {
-    margin-left: 20px;
+    margin-left: 5px;
   }
 `;
 

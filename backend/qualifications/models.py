@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import mark_safe
 from django_extensions.db.models import TimeStampedModel
 from teaching.models import SchoolLevel, SubjectGroup
 
@@ -90,11 +91,23 @@ class SubjectType(TimeStampedModel):
 
     class Meta:
         verbose_name = "Typ předmětů"
-        verbose_name_plural = "Tipy předmětů"
+        verbose_name_plural = "Typy předmětů"
         ordering = ("name",)
 
     def __str__(self):
-        return self.code
+        return self.name
+
+
+class QualificationType(TimeStampedModel):
+    name = models.CharField("Název", max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = "Typ kvalifikace"
+        verbose_name_plural = "Typy kvalifikací"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
 
 
 class EducationType(TimeStampedModel):
@@ -102,23 +115,13 @@ class EducationType(TimeStampedModel):
     Typ vzdelani z hlediska zakona.
     """
 
-    TITLE_QUALIFICATION = "titul"
-    CZV_QUALIFICATION = "czv"
-    OTHER_EXPERIENCE = "dalsi"
-    QUALIFICATION_TYPE_CHOICES = (
-        (TITLE_QUALIFICATION, "Titul"),
-        (CZV_QUALIFICATION, "Kurz CŽV"),
-        (OTHER_EXPERIENCE, "Další zkušenost"),
+    qualification_type = models.ForeignKey(
+        QualificationType, on_delete=models.SET_NULL, null=True, verbose_name="Typ kvalifikace"
     )
-    qualification_type = models.CharField("Typ kvalifikace", max_length=20, choices=QUALIFICATION_TYPE_CHOICES)
     name = models.CharField("Název", max_length=200, null=True)  # zákonná formulace
     title = models.ForeignKey(Title, on_delete=models.SET_NULL, null=True, verbose_name="Titul")
-    specialization = models.ForeignKey(
-        EducationSpecialization, on_delete=models.SET_NULL, null=True, verbose_name="Oblast VŠ vzdělávání"
-    )
-    subject_group = models.ForeignKey(
-        SubjectGroup, on_delete=models.SET_NULL, null=True, verbose_name="Skupina předmětů"
-    )
+    specializations = models.ManyToManyField(EducationSpecialization, verbose_name="Oblast VŠ vzdělávání")
+    subject_groups = models.ManyToManyField(SubjectGroup, verbose_name="Skupina předmětů")
     school_levels = models.ManyToManyField(
         "teaching.SchoolLevel", related_name="education_types", verbose_name="Stupeň školy"
     )
@@ -126,19 +129,35 @@ class EducationType(TimeStampedModel):
     class Meta:
         verbose_name = "Typ vzdělání z hlediska zákona"
         verbose_name_plural = "Typ vzdělání z hlediska zákona"
-        ordering = ("qualification_type",)
+        ordering = (
+            "id",
+            "qualification_type",
+        )
 
     def __str__(self):
-        return f"{self.qualification_type} / {self.specialization} / {self.subject_group}"
+        return f"[{self.qualification_type}: {self.title}, {self.get_school_levels()}, {self.get_subject_groups()}, {self.get_specializations()}]"
+
+    def get_school_levels(self):
+        return ", ".join(school_level.name for school_level in self.school_levels.all())
+
+    get_school_levels.short_description = "Stupně školy"
+
+    def get_subject_groups(self):
+        return ", ".join(subject_group.name for subject_group in self.subject_groups.all())
+
+    get_subject_groups.short_description = "Skupiny předmětů"
+
+    def get_specializations(self):
+        return ", ".join(specialization.name for specialization in self.specializations.all())
+
+    get_specializations.short_description = "Oblast VŠ vzdělávání"
 
 
 class Qualification(TimeStampedModel):
     legal_paragraph = models.CharField("Paragraf zákona", max_length=400)
     example = models.CharField("Příklad", max_length=1000)
     row_id = models.SmallIntegerField(unique=True)
-    subject_group = models.ForeignKey(
-        SubjectGroup, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Skupina předmětů"
-    )
+    subject_groups = models.ManyToManyField(SubjectGroup, verbose_name="Skupiny předmětů")
     school_level = models.ForeignKey(
         SchoolLevel, default="", on_delete=models.SET_DEFAULT, null=False, verbose_name="Stupeň školy"
     )
@@ -152,10 +171,21 @@ class Qualification(TimeStampedModel):
     class Meta:
         verbose_name = "Kvalifikace"
         verbose_name_plural = "Kvalifikace"
-        ordering = ("row_id",)
+        # ordering = ("row_id",)
 
     def __str__(self):
-        return self.name
+        return str(self.id)
+
+    def get_subject_groups(self):
+        return ", ".join(subject_group.name for subject_group in self.subject_groups.all())
+
+    get_subject_groups.short_description = "Skupiny předmětů"
+
+    def get_education_types(self):
+        return mark_safe("<br/>".join(str(education_type) for education_type in self.education_types.all()))
+
+    get_education_types.short_description = "Vzdělání z hlediska zákona"
+    get_education_types.allow_tags = True
 
 
 class OtherExperience(TimeStampedModel):
