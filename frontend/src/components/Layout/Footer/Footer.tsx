@@ -105,8 +105,8 @@ const Footer: FC = () => {
             type="text/css"
           />
         </NextHead>
-        <label htmlFor="mce-EMAIL" style={{ fontWeight: 'bold' }}>
-          Newsletter jednou měsíčně
+        <label htmlFor="mce-EMAIL">
+          <H2>Newsletter jednou měsíčně</H2>
         </label>
         <FooterText>
           Novinky pro budoucí i začínající učitele, tipy na zajímavé akce o vzdělávání či na
