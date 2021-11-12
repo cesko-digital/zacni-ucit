@@ -117,7 +117,7 @@ const Footer: FC = () => {
                 className="email"
                 id="mce-EMAIL"
                 name="EMAIL"
-                placeholder="e-mail"
+                placeholder="E-mail"
                 style={{
                   backgroundColor: 'white',
                   border: 'none',
