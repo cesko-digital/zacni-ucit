@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { useFormikContext } from 'formik';
-import type { ConfiguratorValues } from '../Configurator';
+import type { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
 import { allSchoolLevelsQuery, SchoolLevelsQuery } from '../DegreePage/DegreePage';
 import { useQuery } from '@apollo/client';
 import { allTitlesQuery, TitlesQuery } from '../EducationPage/EducationPage';
 import { allSubjectsQuery, SubjectsQuery } from '../SubjectPage/SubjectSelect/SubjectSelect';
 import { MainParagraph, Paragraph } from './styled';
 import StyleWrapper from '@components/StyledWrapper';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 
 const EducationText: React.FC = () => {
   const { values } = useFormikContext<ConfiguratorValues>();
@@ -18,22 +19,27 @@ const EducationText: React.FC = () => {
     variables: { schoolLevelIds: [parseInt(values.degree, 10)] },
   });
 
-  if (schoolLevelsQuery.loading || subjectsQuery.loading || titlesQuery.loading) {
-    return <>Loading</>;
-  }
-
-  const selectedTitle = titlesQuery.data.titles.find(({ id }) => id === values.education);
-  const selectedLevel = schoolLevelsQuery.data.schoolLevels.find(({ id }) => id === values.degree);
-  const selectedSubject = subjectsQuery.data.subjects.find(({ id }) => id === values.subject);
+  const selectedTitle = titlesQuery.data?.titles.find(({ id }) => id === values.education);
+  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.degree);
+  const selectedSubject = subjectsQuery.data?.subjects.find(({ id }) => id === values.subject);
 
   return (
     <StyleWrapper margin="0 0 1rem 0">
-      <MainParagraph>
-        Po dokončení jednoho z kurzů můžete s vaším vzděláním <strong>{selectedTitle.name}</strong>{' '}
-        pro předmět <strong>{selectedSubject.name}</strong> na <strong>{selectedLevel.name}</strong>{' '}
-        a Doplňující studium k rozšířené odborné kvalifikace (DVPP) začít učit Čeština na 2. stupni
-        ZŠ.
-      </MainParagraph>
+      <StyleWrapper margin="0 0 1rem 0">
+        <AnimatedHeight isOpen>
+          {selectedTitle && selectedLevel && selectedSubject ? (
+            <MainParagraph>
+              Po dokončení jednoho z kurzů můžete s vaším vzděláním{' '}
+              <strong>{selectedTitle.name}</strong> pro předmět{' '}
+              <strong>{selectedSubject.name}</strong> na <strong>{selectedLevel.name}</strong> a
+              Doplňující studium k rozšířené odborné kvalifikace (DVPP) začít učit Čeština na 2.
+              stupni ZŠ.
+            </MainParagraph>
+          ) : (
+            <div />
+          )}
+        </AnimatedHeight>
+      </StyleWrapper>
 
       <Paragraph>
         Ještě předtím, než si vyberete konkrétní program nebo kurz, si zkontrolujte, že oblast

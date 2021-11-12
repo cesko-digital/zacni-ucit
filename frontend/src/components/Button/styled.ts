@@ -31,7 +31,7 @@ const baseStyles = css`
   display: ${({ inline }) => (inline ? 'inline' : 'inline-flex')};
   justify-content: center;
   align-items: flex-start;
-  font-size: ${({ buttonStyle }) => (buttonStyle === 'button' ? '1rem' : '0.875rem')};
+  font-size: 1rem;
   text-decoration: ${({ buttonStyle }) => (buttonStyle === 'button' ? undefined : 'underline')};
   font-weight: bold;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -89,6 +89,7 @@ const baseStyles = css`
 
 export const Link = styled.a`
   ${baseStyles}
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'initial')};
 
   &:active {
     svg {

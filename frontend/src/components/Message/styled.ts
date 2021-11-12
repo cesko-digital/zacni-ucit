@@ -7,6 +7,10 @@ export const Wrapper = styled.div`
   padding: 10px 18px;
   display: flex;
   align-items: flex-start;
+
+  ${mediaQueriesUp('sm')`
+    padding: 20px 30px;
+  `}
 `;
 
 export const IconWrapper = styled.div`
