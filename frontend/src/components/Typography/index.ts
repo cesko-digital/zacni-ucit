@@ -151,6 +151,14 @@ export const LinkToExtPage = styled.a`
     width: 10rem;
     display: flex;
     align-items: center;
+
+    &:hover {
+      border: 2px solid ${theme.color.green};
+    }
+
+    &:active {
+      background: ${theme.color.green};
+    }
   }
 
   & svg {
