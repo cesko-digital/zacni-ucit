@@ -40,12 +40,21 @@ export const schools = [
 ];
 
 const resultsQuery = gql`
-  query qualificationsQuery($subjectId: Int!, $levelId: Int!, $title: Int!, $specialization: Int!) {
+  query qualificationsQuery(
+    $subjectId: Int!
+    $levelId: Int!
+    $title: Int!
+    $specialization: Int!
+    $schoolLevelDone: Int!
+    $subjectDone: Int!
+  ) {
     qualifications(
       subjectId: $subjectId
       levelId: $levelId
       title: $title
       specialization: $specialization
+      schoolLevelDone: $schoolLevelDone
+      subjectDone: $subjectDone
     ) {
       path {
         id
@@ -112,6 +121,8 @@ const PathDetailPage: React.FC = () => {
       levelId: values.degree,
       title: values.education,
       specialization: values.educationArea,
+      schoolLevelDone: values.teachingEducationDegree,
+      subjectDone: values.teachingEducationSubject,
     },
   });
 
