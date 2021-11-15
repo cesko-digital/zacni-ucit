@@ -121,8 +121,8 @@ const PathDetailPage: React.FC = () => {
       levelId: values.degree,
       title: values.education,
       specialization: values.educationArea,
-      schoolLevelDone: values.teachingEducationDegree,
-      subjectDone: values.teachingEducationSubject,
+      schoolLevelDone: values.teachingEducationDegree || undefined,
+      subjectDone: values.teachingEducationSubject || undefined,
     },
   });
 
