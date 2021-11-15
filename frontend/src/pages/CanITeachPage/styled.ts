@@ -24,6 +24,7 @@ export const Section = styled.section`
 
 export const SectionTitle = styled.h2`
   font-size: 1.5rem;
+  line-height: 1.2em;
   margin: 0 0 16px;
 
   ${mediaQueriesUp('sm')`
