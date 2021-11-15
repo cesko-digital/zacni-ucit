@@ -21,8 +21,8 @@ export const resultsQuery = gql`
     $levelId: Int!
     $title: Int!
     $specialization: Int!
-    $schoolLevelDone: Int!
-    $subjectDone: Int!
+    $schoolLevelDone: Int
+    $subjectDone: Int
   ) {
     qualifications(
       subjectId: $subjectId
