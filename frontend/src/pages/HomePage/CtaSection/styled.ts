@@ -30,6 +30,10 @@ export const ButtonWrapper = styled.div`
   `}
 `;
 
+export const Text = styled.div`
+  max-width: 90%;
+`
+
 export const Image = styled.img`
   position: absolute;
   top: 0;
