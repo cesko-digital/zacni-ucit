@@ -62,7 +62,7 @@ export const resultsQuery = gql`
 
 const ResultsPage: React.FC = () => {
   const router = useRouter();
-  const { values } = useFormikContext<ConfiguratorValues>();
+  const { values } = useFormikContext<ConfiguratorValues & { cesta?: string; kurzy?: string }>();
 
   const { loading, error, data } = useQuery<any>(resultsQuery, {
     variables: {
@@ -92,6 +92,13 @@ const ResultsPage: React.FC = () => {
               paths={data.qualifications.map(({ path, uncompletedEducationTypes }) => {
                 const { id, rowId, educationTypes } = path;
                 const uncompleted = uncompletedEducationTypes?.map(({ id }) => id);
+                const pathId = id;
+
+                const modifiedValues = Object.entries(values).reduce(
+                  (all, [key, value]) =>
+                    !['cesta', 'kurzy'].includes(key) ? { ...all, [key]: value } : all,
+                  {},
+                );
 
                 return {
                   text: `${id} - rowId: ${rowId}`,
@@ -99,9 +106,9 @@ const ResultsPage: React.FC = () => {
                     .filter(({ id }) => uncompleted.includes(id))
                     .map(({ id, name, title }) => ({
                       text: title?.name ?? name,
-                      href: `${routes.configurator.path}/?id=${id}&${querystring.stringify(
-                        values as any,
-                      )}`,
+                      href: `${routes.configurator.path}?${querystring.stringify(
+                        modifiedValues,
+                      )}&cesta=${pathId}&kurzy=${id}`,
                       isAdditionalCourse: title === null,
                     })),
                 };
