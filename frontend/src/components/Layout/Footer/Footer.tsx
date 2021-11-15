@@ -1,7 +1,6 @@
 import NextHead from 'next/head';
 import type { FC } from 'react';
 import React from 'react';
-import Image from 'next/image';
 import msmtLogo from './../../../pages/HomePage/PartnersSection/msmt.png';
 import { H2, LinkRegular, LinkToExtPage } from '../../Typography';
 import { menuItems } from '../Menu/Menu';
@@ -60,7 +59,7 @@ const Footer: FC = () => {
             </p>
           </TextWrapper>
 
-          <Image alt="msmt" height={62} src={msmtLogo} width={132} />
+          <img alt="msmt" height={62} src={msmtLogo} width={132} />
         </MsmtWrapper>
       </FooterSection>
 

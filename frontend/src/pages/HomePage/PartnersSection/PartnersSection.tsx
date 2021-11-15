@@ -13,7 +13,6 @@ import {
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 import { routes } from '@routes';
-import Image from 'next/image';
 import ceskoDigitalLogo from './cesko-digital.png';
 import laboratorVodafoneLogo from './laborator-vodafone.png';
 import msmtLogo from './msmt.png';
@@ -51,7 +50,7 @@ const PartnersSection: React.FC = () => (
           </p>
         </TextWrapper>
 
-        <Image alt="msmt" height={62} src={msmtLogo} width={132} />
+        <img alt="msmt" height={62} src={msmtLogo} width={132} />
       </MsmtWrapper>
       <Button buttonStyle="button" href={routes.partners}>
         Chci se stát partnerem
