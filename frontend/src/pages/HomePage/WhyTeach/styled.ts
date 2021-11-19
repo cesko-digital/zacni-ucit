@@ -90,9 +90,9 @@ export const ButtonWrapper = styled.span`
 `;
 
 export const Button = styled(ButtonComponent)`
-  background: #5b1fff;
-  color: white;
-  border-color: white;
+  background: white;
+  color: ${({ theme }) => theme.color.primary};;
+
 
   ${mediaQueriesUp('md')`
     border: none;
