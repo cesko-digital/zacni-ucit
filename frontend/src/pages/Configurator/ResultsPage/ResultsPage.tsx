@@ -16,12 +16,21 @@ import Container from '@components/Container/Container';
 import { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
 
 export const resultsQuery = gql`
-  query qualificationsQuery($subjectId: Int!, $levelId: Int!, $title: Int!, $specialization: Int!) {
+  query qualificationsQuery(
+    $subjectId: Int!
+    $levelId: Int!
+    $title: Int!
+    $specialization: Int!
+    $schoolLevelDone: Int
+    $subjectDone: Int
+  ) {
     qualifications(
       subjectId: $subjectId
       levelId: $levelId
       title: $title
       specialization: $specialization
+      schoolLevelDone: $schoolLevelDone
+      subjectDone: $subjectDone
     ) {
       path {
         id
@@ -62,21 +71,64 @@ export const resultsQuery = gql`
 
 const ResultsPage: React.FC = () => {
   const router = useRouter();
-  const { values } = useFormikContext<ConfiguratorValues>();
+  const { values } = useFormikContext<ConfiguratorValues & { cesta?: string; kurzy?: string }>();
 
-  const { loading, error, data } = useQuery<any>(resultsQuery, {
+  const { loading, data } = useQuery<any>(resultsQuery, {
     variables: {
       subjectId: values.subject,
       levelId: values.degree,
       title: values.education,
       specialization: values.educationArea,
+      schoolLevelDone: values.teachingEducationDegree || undefined,
+      subjectDone: values.teachingEducationSubject || undefined,
     },
   });
-  console.log(loading, error, data);
 
   if (!values.education || !values.subject || !values.degree || !values.educationArea) {
     router.replace(routes.configurator.step1);
     return null;
+  }
+
+  if (loading) {
+    return <>Čekejte...</>;
+  }
+
+  if (!loading && data?.qualifications.length === 0) {
+    return (
+      <Container>
+        <ConfiguratorStep
+          prevStep={{
+            url: routes.configurator.step4,
+            text: 'Změnit stupeň, předmět, vaše vzdělání',
+          }}
+          title="Gratulujeme! Jste kvalifikovaní k tomu začít hned učit"
+        >
+          <EducationText type="done">
+            <Paragraph>
+              Pokud chcete učit předmět mimo svou odbornost, bude pro vás nejjednodušší, pokud si
+              doplníte program či kurz pro předmět dle své odbornosti, ten pak musíte na škole učit
+              aspoň 1 hodinu. A na výuce dalších předmětů se můžete, obvykle bez problémů, domluvit
+              se svým ředitelem.
+            </Paragraph>
+          </EducationText>
+          <StyleWrapper margin="0 0 1rem 0">
+            <Button href={routes.jobs} buttonStyle="button" target="_blank">
+              Volná místa
+            </Button>
+          </StyleWrapper>
+          <StyleWrapper>
+            <Button
+              href={routes.configurator.step1}
+              buttonStyle="button"
+              variant="secondary"
+              startIcon={<RepeatIcon />}
+            >
+              Začít znovu
+            </Button>
+          </StyleWrapper>
+        </ConfiguratorStep>
+      </Container>
+    );
   }
 
   return (
@@ -92,6 +144,13 @@ const ResultsPage: React.FC = () => {
               paths={data.qualifications.map(({ path, uncompletedEducationTypes }) => {
                 const { id, rowId, educationTypes } = path;
                 const uncompleted = uncompletedEducationTypes?.map(({ id }) => id);
+                const pathId = id;
+
+                const modifiedValues = Object.entries(values).reduce(
+                  (all, [key, value]) =>
+                    !['cesta', 'kurzy'].includes(key) ? { ...all, [key]: value } : all,
+                  {},
+                );
 
                 return {
                   text: `${id} - rowId: ${rowId}`,
@@ -99,9 +158,9 @@ const ResultsPage: React.FC = () => {
                     .filter(({ id }) => uncompleted.includes(id))
                     .map(({ id, name, title }) => ({
                       text: title?.name ?? name,
-                      href: `${routes.configurator.path}/?id=${id}&${querystring.stringify(
-                        values as any,
-                      )}`,
+                      href: `${routes.configurator.path}?${querystring.stringify(
+                        modifiedValues,
+                      )}&cesta=${pathId}&kurzy=${id}`,
                       isAdditionalCourse: title === null,
                     })),
                 };

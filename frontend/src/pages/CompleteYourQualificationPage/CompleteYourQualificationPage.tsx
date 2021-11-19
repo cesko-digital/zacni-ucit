@@ -169,9 +169,9 @@ const CompleteYourQualificationPage: React.FC = () => (
               if (href) {
                 return (
                   <Row key={name}>
-                    <Link href={href} target="_blank">
+                    <Button href={href} target="_blank">
                       {name}
-                    </Link>
+                    </Button>
                     {description && ` (${description})`}
                   </Row>
                 );
@@ -184,9 +184,9 @@ const CompleteYourQualificationPage: React.FC = () => (
                     <List>
                       {programs.map(({ name, href }) => (
                         <ListItem key={name}>
-                          <Link href={href} target="_blank">
+                          <Button href={href} target="_blank">
                             {name}
-                          </Link>
+                          </Button>
                         </ListItem>
                       ))}
                     </List>

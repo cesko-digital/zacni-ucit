@@ -55,22 +55,27 @@ const CoursePage: React.FC = () => {
   const router = useRouter();
 
   React.useEffect(() => {
-    if (router.isReady && !router.query.id) {
+    if (router.isReady && !router.query.kurz) {
       router.replace(routes.configurator.step1);
       return null;
     }
   }, [router]);
+  console.log(router);
 
-  const { loading, error, data } = useQuery<any>(courseQuery, {
+  const { loading, data } = useQuery<any>(courseQuery, {
     variables: {
-      pk: router.query.id,
+      pk: router.query.kurz,
     },
+    skip: router.query.kurz === undefined,
   });
 
   if (!data?.course) {
     return null;
   }
-  console.log(data);
+
+  if (loading) {
+    return <>Čekejte...</>;
+  }
 
   return (
     <>
@@ -79,7 +84,7 @@ const CoursePage: React.FC = () => {
           title={data.course.name}
           prevStep={
             Object.keys(router.query).length > 0
-              ? { url: routes.configurator.results, text: 'Zpět na výsledky' }
+              ? { url: routes.configurator.path, text: 'Zpět na výsledky' }
               : undefined
           }
         >
@@ -104,7 +109,7 @@ const CoursePage: React.FC = () => {
                 </Row>
                 <Row>
                   <RowTitle>Cena za studium</RowTitle>
-                  {data.course.price} Kč
+                  {parseFloat(data.course.price) ? `${parseFloat(data.course.price)} Kč` : 'Zdarma'}
                   {/* Jedná-li se o bakalářský či magisterský studijní program a
                   zatím jste na VŠ nestudovali, bude studium zadarmo. V případě, že už jste na VŠ
                   studovali, cena studia se liší. */}

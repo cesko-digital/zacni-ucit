@@ -10,7 +10,11 @@ import { MainParagraph, Paragraph } from './styled';
 import StyleWrapper from '@components/StyledWrapper';
 import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 
-const EducationText: React.FC = () => {
+interface IProps {
+  type?: 'request' | 'done';
+}
+
+const EducationText: React.FC<IProps> = ({ type = 'request', children }) => {
   const { values } = useFormikContext<ConfiguratorValues>();
 
   const titlesQuery = useQuery<TitlesQuery>(allTitlesQuery);
@@ -28,28 +32,42 @@ const EducationText: React.FC = () => {
       <StyleWrapper margin="0 0 1rem 0">
         <AnimatedHeight isOpen>
           {selectedTitle && selectedLevel && selectedSubject ? (
-            <MainParagraph>
-              Po dokončení jednoho z kurzů můžete s vaším vzděláním{' '}
-              <strong>{selectedTitle.name}</strong> pro předmět{' '}
-              <strong>{selectedSubject.name}</strong> na <strong>{selectedLevel.name}</strong> a
-              Doplňující studium k rozšířené odborné kvalifikace (DVPP) začít učit Čeština na 2.
-              stupni ZŠ.
-            </MainParagraph>
+            <>
+              {type === 'done' ? (
+                <MainParagraph>
+                  Vaše vzdělání je postačující na to, abyste okamžitě mohli jít učit{' '}
+                  <strong>{selectedSubject.name}</strong> na <strong>{selectedLevel.name}</strong>.
+                </MainParagraph>
+              ) : (
+                <MainParagraph>
+                  Po dokončení jednoho z kurzů můžete s vaším vzděláním{' '}
+                  <strong>{selectedTitle.name}</strong> pro předmět{' '}
+                  <strong>{selectedSubject.name}</strong> na <strong>{selectedLevel.name}</strong> a
+                  Doplňující studium k rozšířené odborné kvalifikace (DVPP) začít učit Čeština na 2.
+                  stupni ZŠ.
+                </MainParagraph>
+              )}
+            </>
           ) : (
             <div />
           )}
         </AnimatedHeight>
       </StyleWrapper>
 
-      <Paragraph>
-        Ještě předtím, než si vyberete konkrétní program nebo kurz, si zkontrolujte, že oblast
-        vašeho odborného vzdělání odpovídá předmětu, který chcete učit!
-      </Paragraph>
-      <Paragraph>
-        Pokud chcete učit předmět mimo svou odbornost, bude pro vás nejjednodušší, pokud si doplníte
-        program či kurz pro předmět dle své odbornosti, ten pak musíte na škole učit aspoň 1 hodinu.
-        A na výuce dalších předmětů se můžete, obvykle bez problémů, domluvit se svým ředitelem.
-      </Paragraph>
+      {children ?? (
+        <>
+          <Paragraph>
+            Ještě předtím, než si vyberete konkrétní program nebo kurz, si zkontrolujte, že oblast
+            vašeho odborného vzdělání odpovídá předmětu, který chcete učit!
+          </Paragraph>
+          <Paragraph>
+            Pokud chcete učit předmět mimo svou odbornost, bude pro vás nejjednodušší, pokud si
+            doplníte program či kurz pro předmět dle své odbornosti, ten pak musíte na škole učit
+            aspoň 1 hodinu. A na výuce dalších předmětů se můžete, obvykle bez problémů, domluvit se
+            svým ředitelem.
+          </Paragraph>
+        </>
+      )}
     </StyleWrapper>
   );
 };
