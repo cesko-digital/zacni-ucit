@@ -35,7 +35,8 @@ const ConfiguratorLayout: React.FC<IProps> = ({ queryRequired = true, children }
   return (
     <Formik<ConfiguratorValues>
       initialValues={router.query ? { ...initialValues, ...router.query } : initialValues}
-      onSubmit={() => {}}
+      enableReinitialize
+      onSubmit={() => { }}
     >
       {() => (
         <Form noValidate>

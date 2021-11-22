@@ -28,7 +28,7 @@ export const Paths: React.FC<Props> = ({ paths }) => (
     <Top>
       <Title>Vydejte se jednou ze {paths?.length} cest k učení</Title>
     </Top>
-    {paths?.map(({ text, items, courseCode }) => (
+    {paths?.map(({ text, items, courseCode }, index) => (
       <Openable key={text} text={text}>
         {items.map(({ href, text, isAdditionalCourse }) => (
           <StyleWrapper key={text} margin="0 0 0.5rem 0">

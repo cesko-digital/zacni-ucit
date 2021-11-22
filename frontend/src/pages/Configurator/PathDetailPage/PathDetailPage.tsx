@@ -1,6 +1,7 @@
 import querystring from 'querystring';
 
 import { gql, useQuery } from '@apollo/client';
+import Button from '@components/Button/Button';
 import Card from '@components/Card/Card';
 import Container from '@components/Container/Container';
 import { Message } from '@components/Message/Message';
@@ -15,29 +16,6 @@ import SchoolTile from '../ResultsPage/SchoolTile/SchoolTile';
 import { Note } from '../SpecializationPage/EducationArea/styled';
 
 import { Text, Separator } from './styled';
-
-export const schools = [
-  {
-    schoolName: 'Univerzita Karlova',
-    type: 'Bc.',
-    description: 'Učitelství pro střední školy',
-    duration: '5 semestrů',
-    price: 'Zdarma, pokud jste ještě Bc. nestudovali',
-    studyType: 'Prezenční forma studia',
-    location: 'Praha',
-    href: routes.configurator.course,
-  },
-  {
-    schoolName: 'Vysoké učení technické',
-    type: 'Kurz CŽV',
-    description: 'Učitel odborného výcviku a učitel praktického vyučování',
-    duration: '1 semestr',
-    price: 'Zdarma',
-    studyType: 'Prezenční forma studia',
-    location: 'Praha',
-    href: routes.configurator.course,
-  },
-];
 
 const resultsQuery = gql`
   query qualificationsQuery(
@@ -146,6 +124,10 @@ const PathDetailPage: React.FC = () => {
     (all, [key, value]) => (!['kurz'].includes(key) ? { ...all, [key]: value } : all),
     {},
   );
+  const modifiedValuesOther = Object.entries(values).reduce(
+    (all, [key, value]) => (!['kurz', 'kurzy'].includes(key) ? { ...all, [key]: value } : all),
+    {},
+  );
 
   return (
     <Container>
@@ -166,8 +148,19 @@ const PathDetailPage: React.FC = () => {
                   {numberOfUncompletedCourses === 2
                     ? 'krok'
                     : `${numberOfUncompletedCourses - 1} kroky`}
-                  .
                 </strong>
+                :{' '}
+                {qualification?.path.educationTypes
+                  .filter(({ id }) => id !== values.kurzy)
+                  .map(({ id, name, title }) => (
+                    <Button
+                      href={`${routes.configurator.path}?${querystring.stringify(
+                        modifiedValuesOther,
+                      )}&kurzy=${id}`}
+                    >
+                      {title?.name ?? name}
+                    </Button>
+                  ))}
               </Text>
             </Message>
             <Separator />

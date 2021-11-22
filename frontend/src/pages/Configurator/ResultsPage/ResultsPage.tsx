@@ -69,6 +69,9 @@ export const resultsQuery = gql`
   }
 `;
 
+const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+const alphabet = alpha.map((x) => String.fromCharCode(x));
+
 const ResultsPage: React.FC = () => {
   const router = useRouter();
   const { values } = useFormikContext<ConfiguratorValues & { cesta?: string; kurzy?: string }>();
@@ -141,7 +144,7 @@ const ResultsPage: React.FC = () => {
         <StyleWrapper margin="0 0 1rem 0">
           {data?.qualifications && (
             <Paths
-              paths={data.qualifications.map(({ path, uncompletedEducationTypes }) => {
+              paths={data.qualifications.map(({ path, uncompletedEducationTypes }, index) => {
                 const { id, rowId, educationTypes } = path;
                 const uncompleted = uncompletedEducationTypes?.map(({ id }) => id);
                 const pathId = id;
@@ -153,7 +156,7 @@ const ResultsPage: React.FC = () => {
                 );
 
                 return {
-                  text: `${id} - rowId: ${rowId}`,
+                  text: `Cesta ${alphabet[index]} (ID: ${rowId})`,
                   items: educationTypes
                     .filter(({ id }) => uncompleted.includes(id))
                     .map(({ id, name, title }) => ({
