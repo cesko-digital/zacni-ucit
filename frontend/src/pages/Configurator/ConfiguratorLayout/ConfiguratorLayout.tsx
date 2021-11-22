@@ -2,6 +2,7 @@ import { Formik, Form } from 'formik';
 import React from 'react';
 
 import { useRouter } from 'next/router';
+import Cta from '@components/Cta/Cta';
 
 export type ConfiguratorValues = {
   degree: string | null;
@@ -33,17 +34,20 @@ const ConfiguratorLayout: React.FC<IProps> = ({ queryRequired = true, children }
   }
 
   return (
-    <Formik<ConfiguratorValues>
-      initialValues={router.query ? { ...initialValues, ...router.query } : initialValues}
-      enableReinitialize
-      onSubmit={() => { }}
-    >
-      {() => (
-        <Form noValidate>
-          <main>{children}</main>
-        </Form>
-      )}
-    </Formik>
+    <>
+      <Formik<ConfiguratorValues>
+        initialValues={router.query ? { ...initialValues, ...router.query } : initialValues}
+        enableReinitialize
+        onSubmit={() => { }}
+      >
+        {() => (
+          <Form noValidate>
+            <main>{children}</main>
+          </Form>
+        )}
+      </Formik>
+      <Cta />
+    </>
   );
 };
 
