@@ -362,15 +362,18 @@ def init_qualification():
             type_1_subject_group,
             type_1_specialization,
             type_1_name,
+            type_1_edu_name,
             __,
             type_2_title,
             type_2_level,
             type_2_subject_group,
             type_2_specialization,
             type_2_name,
+            type_2_edu_name,
             ___,
             course_level,
             course_name,
+            course_edu_name,
             ____,
             experience_1_name,
             _____,
@@ -457,6 +460,7 @@ def init_qualification():
                 # zjistí, zda již existující education types mají danou specializaci
                 already_exists = all_existed_edu_types.filter(
                     name=type_1_name,
+                    name_edu_type=type_1_edu_name,
                     qualification_type=qualification_type1,
                     title=type_1_title,
                     specializations=type_1_specialization,
@@ -465,6 +469,7 @@ def init_qualification():
                 if not already_exists:
                     education_type_1 = EducationType.objects.create(
                         name=type_1_name,
+                        name_edu_type=type_1_edu_name,
                         qualification_type=qualification_type1,
                         title=type_1_title,
                     )
@@ -473,6 +478,7 @@ def init_qualification():
                 else:
                     education_type_1 = all_existed_edu_types.get(
                         name=type_1_name,
+                        name_edu_type=type_1_edu_name,
                         qualification_type=qualification_type1,
                         title=type_1_title,
                         specializations=type_1_specialization,
@@ -481,6 +487,7 @@ def init_qualification():
                 # zjistí, zda již existující edu types mají dané specializace
                 already_exists = all_existed_edu_types.filter(
                     name=type_1_name,
+                    name_edu_type=type_1_edu_name,
                     qualification_type=qualification_type1,
                     title=type_1_title,
                     specializations__in=type_1_specialization,
@@ -489,6 +496,7 @@ def init_qualification():
                 if not already_exists:
                     education_type_1 = EducationType.objects.create(
                         name=type_1_name,
+                        name_edu_type=type_1_edu_name,
                         qualification_type=qualification_type1,
                         title=type_1_title,
                     )
@@ -501,9 +509,11 @@ def init_qualification():
 
                     for specialization in type_1_specialization:
                         education_type_1_query = edu_type_1_query.filter(specializations__pk=specialization.id)
+                    education_type_1 = education_type_1_query.first()
 
             if type_1_title != "Odborná maturita" and type_1_name != "None":
                 education_type_1.name = type_1_name
+                education_type_1.name_edu_type = type_1_edu_name
                 education_type_1.save()
 
             if type(type_1_subject_group) == SubjectGroup:
@@ -525,6 +535,7 @@ def init_qualification():
                 already_exists_2 = all_existed_edu_types_2.filter(
                     qualification_type=qualification_type2,
                     name=type_2_name,
+                    name_edu_type=type_2_edu_name,
                     title=type_2_title,
                     specializations=type_2_specialization,
                 )
@@ -533,6 +544,7 @@ def init_qualification():
                     education_type_2 = EducationType.objects.create(
                         qualification_type=qualification_type2,
                         name=type_2_name,
+                        name_edu_type=type_2_edu_name,
                         title=type_2_title,
                     )
                     education_type_2.specializations.add(type_2_specialization)
@@ -541,6 +553,7 @@ def init_qualification():
                     education_type_2 = all_existed_edu_types_2.get(
                         qualification_type=qualification_type2,
                         name=type_2_name,
+                        name_edu_type=type_2_edu_name,
                         title=type_2_title,
                         specializations=type_2_specialization,
                     )
@@ -549,6 +562,7 @@ def init_qualification():
                 already_exists_2 = all_existed_edu_types_2.filter(
                     qualification_type=qualification_type2,
                     name=type_2_name,
+                    name_edu_type=type_2_edu_name,
                     title=type_2_title,
                     specializations__in=type_2_specialization,
                 )
@@ -556,6 +570,7 @@ def init_qualification():
                     education_type_2 = EducationType.objects.create(
                         qualification_type=qualification_type2,
                         name=type_2_name,
+                        name_edu_type=type_2_edu_name,
                         title=type_2_title,
                     )
                     education_type_2.specializations.add(*type_2_specialization)
@@ -564,6 +579,7 @@ def init_qualification():
                     education_type_2 = all_existed_edu_types_2.get(
                         qualification_type=qualification_type2,
                         name=type_2_name,
+                        name_edu_type=type_2_edu_name,
                         title=type_2_title,
                         specializations=type_2_specialization,
                     ).first()
@@ -580,8 +596,7 @@ def init_qualification():
         if course_name and course_name != "None":
             qualification_type_course = QualificationType.objects.get(name="Kurz CŽV")
             education_type_course, _ = EducationType.objects.get_or_create(
-                qualification_type=qualification_type_course,
-                name=course_name,
+                qualification_type=qualification_type_course, name=course_name, name_edu_type=course_edu_name
             )
         else:
             education_type_course = None
@@ -589,8 +604,7 @@ def init_qualification():
         if experience_1_name and experience_1_name != "None":
             qualification_type_other1 = QualificationType.objects.get(name="Ostatní kvalifikace")
             education_type_experience_1, _ = EducationType.objects.get_or_create(
-                qualification_type=qualification_type_other1,
-                name=experience_1_name,
+                qualification_type=qualification_type_other1, name=experience_1_name, name_edu_type=experience_1_name
             )
         else:
             education_type_experience_1 = None
@@ -598,8 +612,7 @@ def init_qualification():
         if experience_2_name and experience_2_name != "None":
             qualification_type_other2 = QualificationType.objects.get(name="Ostatní kvalifikace")
             education_type_experience_2, _ = EducationType.objects.get_or_create(
-                qualification_type=qualification_type_other2,
-                name=experience_2_name,
+                qualification_type=qualification_type_other2, name=experience_2_name, name_edu_type=experience_2_name
             )
         else:
             education_type_experience_2 = None
@@ -669,6 +682,35 @@ def init_qualification():
         qualification.education_types.add(*education)
 
 
+def init_edu_type_links():
+    """
+    File edu_types.csv
+    Source file: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=1469530586
+    - Číselník názvů edu_types
+    headers: ID,Typ,Název edu_type,Link
+    Dá do databáze, zda daný edu_type má kurzy (zda budou na FE aktivní linky)
+    """
+    edu_types_list = []
+    filepath = os.path.join(os.getcwd(), "data_init", "edu_types.csv")
+    with open(filepath, "r", encoding="utf8") as data:
+        edu_types = csv.DictReader(data)
+        for edu_type in edu_types:
+            edu_types_list.append(edu_type)
+
+    for edu_type in edu_types_list:
+        if EducationType.objects.filter(name_edu_type=edu_type["Název edu_type"].strip()).exists():
+            education_type = EducationType.objects.get(name_edu_type=edu_type["Název edu_type"].strip())
+            if edu_type["Link"] == "ANO":
+                link = True
+            else:
+                link = False
+            education_type.link_available = link
+            education_type.save()
+        else:
+            print(edu_type["Název edu_type"])
+            print("*******Matching query doesnt exist.*******")
+
+
 def init_other_options():
     """
     Init for OtherExperience
@@ -678,7 +720,7 @@ def init_other_options():
         jazyková zkouška min. C1 SERR pro jazyky
 		doplňující didaktické studium příslušného jazyka
 		studium pedagogiky
-		rodilý mluvčí/ na úrovni rodilého mluvčího
+		jazyková zkouška min. C2 SERR pro jazyky (= na úrovni rodilého mluvčího) / rodilý mluvčí
         výkonný či výtvarný umělec
         kvalifikovaný učitel uměleckých odborných předmětů v ZUŠ, SŠ a konzervatoři
         kvalifikovaný trenér

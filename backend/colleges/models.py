@@ -121,4 +121,5 @@ class Course(TimeStampedModel):
         ordering = ("name", "faculty", "faculty__college")
 
     def __str__(self):
-        return f"{self.name} / {self.faculty}"
+        return f"{self.qualification_type}, {self.title}, {self.education_specialization}"
+        # return f"{self.name} / {self.faculty}"   původně

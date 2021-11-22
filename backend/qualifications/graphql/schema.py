@@ -90,7 +90,9 @@ class Query(graphene.ObjectType):
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
     # Courses queries
-    courses = graphene.List(CourseObjectType, edu_type_id=graphene.Int(required=True))
+    courses = graphene.List(
+        CourseObjectType, edu_type_id=graphene.Int(required=True), subject_id=graphene.Int(required=True)
+    )
     course = graphene.Field(CourseObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
@@ -261,7 +263,7 @@ class Query(graphene.ObjectType):
             return results
 
     @staticmethod
-    def resolve_courses(root, info, edu_type_id):
+    def resolve_courses(root, info, edu_type_id, subject_id):
 
         # získání EducationType na základě id
         edu_type = EducationType.objects.get(id=edu_type_id)
@@ -311,6 +313,8 @@ class Query(graphene.ObjectType):
                     # předmětových skupin education type - vyřadí kurz z querysetu
                     if count != len(courses_subject_groups_id):
                         qs = qs.exclude(id=course.id)
+            # filtruje na základě konkrétního předmětu, který chce uživatel učit
+            qs = qs.filter(subjects=subject_id)
         return qs
 
     @staticmethod
