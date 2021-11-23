@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h2`
   color: #4b4848;
   font-size: 1.5rem;
+  line-height: 1.2em;
   margin: 0 0 8px;
 
   ${mediaQueriesUp('sm')`
@@ -29,6 +30,10 @@ export const ButtonWrapper = styled.div`
     margin: 32px 0 16px;
   `}
 `;
+
+export const Text = styled.div`
+  max-width: 90%;
+`
 
 export const Image = styled.img`
   position: absolute;

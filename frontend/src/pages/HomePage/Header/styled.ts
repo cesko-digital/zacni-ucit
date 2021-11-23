@@ -48,7 +48,7 @@ export const Image = styled.img`
 `;
 
 export const Paragraph = styled.p`
-  max-width: 550px;
+  max-width: 90%;
   margin-bottom: 55px;
 
   ${mediaQueriesUp('sm')`

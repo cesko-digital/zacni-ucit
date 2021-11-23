@@ -20,6 +20,7 @@ export const Section = styled.section`
 export const Title = styled.h2`
   color: #4b4848;
   font-size: 1.5rem;
+  line-height: 1.2em;
   margin: 0;
   margin-right: 20px;
 

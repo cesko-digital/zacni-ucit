@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Wrapper, Image, Title, ButtonWrapper } from './styled';
+import { Wrapper, Image, Title, ButtonWrapper, Text } from './styled';
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 
@@ -24,7 +24,7 @@ const CtaSection: React.FC<Props> = ({ title, image, text, button, link }) => (
     <Wrapper>
       <Image alt="" height={237} src={image} width={132} />
       <Title>{title}</Title>
-      {text}
+      <Text>{text}</Text>
       <ButtonWrapper>
         <Button buttonStyle="button" color={button.color} href={button.href}>
           {button.text}

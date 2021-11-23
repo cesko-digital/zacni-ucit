@@ -157,7 +157,7 @@ export const SmallText = styled.p`
 `;
 
 export const Copy = styled.p`
-  font-size: ${theme.fontSize.normal};
+  font-size: ${theme.fontSize.large};
   font-weight: 400;
   display: inline;
   margin: 10px 0 0;

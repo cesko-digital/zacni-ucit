@@ -76,7 +76,6 @@ export const NavLink = styled(ButtonComponent)<{ color?: string }>`
   `};
 
   &.muzu-ucit {
-    color: ${({ theme }) => theme.color.primary};
     display: inline-block;
     border-radius: 40px;
     border: 2px solid #7f50ff;
@@ -90,14 +89,6 @@ export const NavLink = styled(ButtonComponent)<{ color?: string }>`
     ${mediaQueries('sm')`
     display:none;
     `};
-  }
-
-  &.chci-zkusit-ucit {
-    color: #ff2f5b;
-  }
-
-  &.zacinam-ucit {
-    color: #ffb60b;
   }
 
   &:hover {
