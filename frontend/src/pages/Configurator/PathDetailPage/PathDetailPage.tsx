@@ -17,7 +17,7 @@ import { Note } from '../SpecializationPage/EducationArea/styled';
 
 import { Text, Separator } from './styled';
 
-const resultsQuery = gql`
+export const resultsQuery = gql`
   query qualificationsQuery(
     $subjectId: Int!
     $levelId: Int!
@@ -39,6 +39,8 @@ const resultsQuery = gql`
         educationTypes {
           id
           name
+          nameEduType
+          linkAvailable
           title {
             name
           }
@@ -52,8 +54,8 @@ const resultsQuery = gql`
 `;
 
 const coursesQuery = gql`
-  query coursesQuery($eduTypeId: Int!) {
-    courses(eduTypeId: $eduTypeId) {
+  query coursesQuery($eduTypeId: Int!, $subjectId: Int!) {
+    courses(eduTypeId: $eduTypeId, subjectId: $subjectId) {
       id
       name
       city
@@ -107,6 +109,7 @@ const PathDetailPage: React.FC = () => {
   const courses = useQuery<any>(coursesQuery, {
     variables: {
       eduTypeId: values.kurzy.toString(),
+      subjectId: values.predmet.toString(),
     },
   });
 
@@ -132,10 +135,12 @@ const PathDetailPage: React.FC = () => {
   return (
     <Container>
       <ConfiguratorStep
-        title={educationType?.title?.name ?? educationType?.name ?? ''}
+        title={
+          educationType?.nameEduType ?? educationType?.title?.name ?? educationType?.name ?? ''
+        }
         prevStep={{ url: routes.configurator.results, text: 'Zpátky na výběr cesty' }}
       >
-        <EducationText />
+        <EducationText page="courses" />
 
         {numberOfUncompletedCourses > 1 && (
           <>
@@ -152,15 +157,20 @@ const PathDetailPage: React.FC = () => {
                 :{' '}
                 {qualification?.path.educationTypes
                   .filter(({ id }) => id !== values.kurzy)
-                  .map(({ id, name, title }) => (
-                    <Button
-                      href={`${routes.configurator.path}?${querystring.stringify(
-                        modifiedValuesOther,
-                      )}&kurzy=${id}`}
-                    >
-                      {title?.name ?? name}
-                    </Button>
-                  ))}
+                  .map(({ id, nameEduType, linkAvailable, title }) =>
+                    linkAvailable ? (
+                      <Button
+                        key={id}
+                        href={`${routes.configurator.path}?${querystring.stringify(
+                          modifiedValuesOther,
+                        )}&kurzy=${id}`}
+                      >
+                        {nameEduType ?? title?.name ?? name}
+                      </Button>
+                    ) : (
+                      <span key={id}>{nameEduType ?? title?.name ?? name}</span>
+                    ),
+                  )}
               </Text>
             </Message>
             <Separator />

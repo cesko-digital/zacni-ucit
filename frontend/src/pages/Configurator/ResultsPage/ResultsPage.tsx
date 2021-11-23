@@ -48,6 +48,8 @@ export const resultsQuery = gql`
         educationTypes {
           id
           name
+          nameEduType
+          linkAvailable
           title {
             name
           }
@@ -106,7 +108,7 @@ const ResultsPage: React.FC = () => {
           }}
           title="Gratulujeme! Jste kvalifikovaní k tomu začít hned učit"
         >
-          <EducationText type="done">
+          <EducationText type="done" page="results">
             <Paragraph>
               Pokud chcete učit předmět mimo svou odbornost, bude pro vás nejjednodušší, pokud si
               doplníte program či kurz pro předmět dle své odbornosti, ten pak musíte na škole učit
@@ -140,7 +142,7 @@ const ResultsPage: React.FC = () => {
         prevStep={{ url: routes.configurator.step4, text: 'Změnit stupeň, předmět, vaše vzdělání' }}
         title="Po dokončení jedné z cest budete kvalifikovaní k tomu začít učit!"
       >
-        <EducationText />
+        <EducationText page="results" />
         <StyleWrapper margin="0 0 1rem 0">
           {data?.qualifications && (
             <Paths
@@ -159,11 +161,13 @@ const ResultsPage: React.FC = () => {
                   text: `Cesta ${alphabet[index]} (ID: ${rowId})`,
                   items: educationTypes
                     .filter(({ id }) => uncompleted.includes(id))
-                    .map(({ id, name, title }) => ({
-                      text: title?.name ?? name,
-                      href: `${routes.configurator.path}?${querystring.stringify(
-                        modifiedValues,
-                      )}&cesta=${pathId}&kurzy=${id}`,
+                    .map(({ id, nameEduType, linkAvailable, title }) => ({
+                      text: nameEduType,
+                      href: linkAvailable
+                        ? `${routes.configurator.path}?${querystring.stringify(
+                            modifiedValues,
+                          )}&cesta=${pathId}&kurzy=${id}`
+                        : undefined,
                       isAdditionalCourse: title === null,
                     })),
                 };

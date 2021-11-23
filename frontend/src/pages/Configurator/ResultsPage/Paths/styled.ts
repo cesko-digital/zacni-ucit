@@ -1,3 +1,4 @@
+import ButtonComponent from '@components/Button/Button';
 import { mediaQueriesUp } from 'src/common/mediaQueries';
 import styled from 'styled-components';
 
@@ -25,4 +26,13 @@ export const Title = styled.h2`
   ${mediaQueriesUp('md')(`
     font-size: 1.75rem;
   `)}
+`;
+
+export const Row = styled.div`
+  padding: 5px 0;
+`;
+
+export const Button = styled(ButtonComponent)`
+  font-size: 15px;
+  padding: 12px 20px;
 `;

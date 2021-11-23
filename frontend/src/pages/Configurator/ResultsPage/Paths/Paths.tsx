@@ -1,15 +1,10 @@
 import React from 'react';
-import querystring from 'querystring';
 
-import Button from '@components/Button/Button';
 import { Message } from '@components/Message/Message';
 import { Openable } from '@components/Openable/Openable';
 
 import ChevronIcon from '@icons/chevron-right.svg';
-import { Wrapper, Top, Title } from './styled';
-import StyleWrapper from '@components/StyledWrapper';
-import { useFormikContext } from 'formik';
-import { ConfiguratorValues } from '@pages/Configurator/ConfiguratorLayout/ConfiguratorLayout';
+import { Wrapper, Top, Title, Row, Button } from './styled';
 
 interface Props {
   paths: {
@@ -28,19 +23,23 @@ export const Paths: React.FC<Props> = ({ paths }) => (
     <Top>
       <Title>Vydejte se jednou ze {paths?.length} cest k učení</Title>
     </Top>
-    {paths?.map(({ text, items, courseCode }, index) => (
+    {paths?.map(({ text, items, courseCode }) => (
       <Openable key={text} text={text}>
         {items.map(({ href, text, isAdditionalCourse }) => (
-          <StyleWrapper key={text} margin="0 0 0.5rem 0">
-            <Button
-              href={href}
-              buttonStyle="button"
-              variant={isAdditionalCourse ? 'secondary' : 'primary'}
-              endIcon={<ChevronIcon />}
-            >
-              {text}
-            </Button>
-          </StyleWrapper>
+          <Row key={text}>
+            {href ? (
+              <Button
+                href={href}
+                buttonStyle="button"
+                variant={isAdditionalCourse ? 'secondary' : 'primary'}
+                endIcon={<ChevronIcon />}
+              >
+                {text}
+              </Button>
+            ) : (
+              <div>{text}</div>
+            )}
+          </Row>
         ))}
         {courseCode && (
           <Message>
