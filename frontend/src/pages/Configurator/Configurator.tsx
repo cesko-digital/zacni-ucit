@@ -29,7 +29,7 @@ const Configurator: React.FC = () => {
       <ConfiguratorStep
         title="Na jakém školním stupni chcete učit?"
         step={1}
-        nextStep={{ url: routes.configurator.step2, disabled: !values.degree }}
+        nextStep={{ url: routes.configurator.step2, disabled: !values.stupen }}
         additionalText={
           <LightText>
             Nenašli jste vámi zvolený stupeň nebo vás zajímá jiná pedagogická profese?{' '}

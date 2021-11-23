@@ -24,12 +24,12 @@ const SubjectPage: React.FC = () => {
   const moreSubjectsModal = useModal();
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
 
-  if (!values.degree) {
+  if (!values.stupen) {
     router.replace(routes.configurator.step1);
     return null;
   }
 
-  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.degree);
+  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.stupen);
 
   return (
     <Container>
@@ -37,7 +37,7 @@ const SubjectPage: React.FC = () => {
         title="Jaký předmět chcete učit?"
         step={2}
         prevStep={{ url: routes.configurator.step1, text: 'Změnit stupeň' }}
-        nextStep={{ url: routes.configurator.step3, disabled: !values.subject }}
+        nextStep={{ url: routes.configurator.step3, disabled: !values.stupen }}
         additionalText={
           <Hint href={routes.contactUs}>Nevíte si rady s výběrem předmětu? Napište nám</Hint>
         }
@@ -70,7 +70,7 @@ const SubjectPage: React.FC = () => {
           </Hint>
         </StyleWrapper>
         <StyleWrapper margin="0 0 2rem">
-          <SubjectSelect degreeId={values.degree} name="subject" />
+          <SubjectSelect degreeId={values.stupen} name="predmet" />
         </StyleWrapper>
       </ConfiguratorStep>
     </Container>

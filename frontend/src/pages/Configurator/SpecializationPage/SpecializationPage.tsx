@@ -24,17 +24,17 @@ const SpecializationPage: React.FC = () => {
   const titlesQuery = useQuery<TitlesQuery>(allTitlesQuery);
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
   const subjectsQuery = useQuery<SubjectsQuery>(allSubjectsQuery, {
-    variables: { schoolLevelIds: [parseInt(values.degree, 10)] },
+    variables: { schoolLevelIds: [parseInt(values.stupen, 10)] },
   });
 
-  if (!values.education || !values.subject || !values.degree) {
+  if (!values.vzdelani || !values.predmet || !values.stupen) {
     router.replace(routes.configurator.step1);
     return null;
   }
 
-  const selectedTitle = titlesQuery.data?.titles.find(({ id }) => id === values.education);
-  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.degree);
-  const selectedSubject = subjectsQuery.data?.subjects.find(({ id }) => id === values.subject);
+  const selectedTitle = titlesQuery.data?.titles.find(({ id }) => id === values.vzdelani);
+  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.stupen);
+  const selectedSubject = subjectsQuery.data?.subjects.find(({ id }) => id === values.predmet);
 
   return (
     <Container>
@@ -49,7 +49,7 @@ const SpecializationPage: React.FC = () => {
         nextStep={{
           url: routes.configurator.results,
           text: 'Výsledky',
-          disabled: !values.education,
+          disabled: !values.vzdelani,
         }}
       >
         <StyleWrapper margin="0 0 1rem 0">

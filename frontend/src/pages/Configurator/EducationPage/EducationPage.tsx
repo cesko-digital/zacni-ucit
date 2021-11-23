@@ -41,16 +41,16 @@ const EducationPage: React.FC = () => {
   const titlesQuery = useQuery<TitlesQuery>(allTitlesQuery);
   const schoolLevelsQuery = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
   const subjectsQuery = useQuery<SubjectsQuery>(allSubjectsQuery, {
-    variables: { schoolLevelIds: [parseInt(values.degree, 10)] },
+    variables: { schoolLevelIds: [parseInt(values.stupen, 10)] },
   });
 
-  if (!values.degree || !values.subject) {
+  if (!values.stupen || !values.predmet) {
     router.replace(routes.configurator.step1);
     return null;
   }
 
-  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.degree);
-  const selectedSubject = subjectsQuery.data?.subjects.find(({ id }) => id === values.subject);
+  const selectedLevel = schoolLevelsQuery.data?.schoolLevels.find(({ id }) => id === values.stupen);
+  const selectedSubject = subjectsQuery.data?.subjects.find(({ id }) => id === values.predmet);
 
   return (
     <Container>
@@ -58,7 +58,7 @@ const EducationPage: React.FC = () => {
         title="Jaké je vaše vzdělání?"
         step={3}
         prevStep={{ url: routes.configurator.step2, text: 'Změnit stupeň a předmět' }}
-        nextStep={{ url: routes.configurator.step4, disabled: !values.education }}
+        nextStep={{ url: routes.configurator.step4, disabled: !values.vzdelani }}
       >
         <AnimatedHeight isOpen>
           {selectedSubject && selectedLevel ? (
@@ -85,10 +85,10 @@ const EducationPage: React.FC = () => {
                 {titlesQuery.data.titles.map(({ id, name }) => (
                   <div key={id}>
                     <Radio
-                      checked={values.education === id}
-                      name="education"
+                      checked={values.vzdelani === id}
+                      name="vzdelani"
                       value={id}
-                      onChange={() => setFieldValue('education', id)}
+                      onChange={() => setFieldValue('vzdelani', id)}
                       label={name}
                     />
                   </div>

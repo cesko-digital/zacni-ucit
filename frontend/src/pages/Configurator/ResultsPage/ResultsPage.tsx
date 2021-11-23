@@ -70,7 +70,7 @@ export const resultsQuery = gql`
 `;
 
 const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-const alphabet = alpha.map((x) => String.fromCharCode(x));
+const alphabet = alpha.map(x => String.fromCharCode(x));
 
 const ResultsPage: React.FC = () => {
   const router = useRouter();
@@ -78,16 +78,16 @@ const ResultsPage: React.FC = () => {
 
   const { loading, data } = useQuery<any>(resultsQuery, {
     variables: {
-      subjectId: values.subject,
-      levelId: values.degree,
-      title: values.education,
-      specialization: values.educationArea,
-      schoolLevelDone: values.teachingEducationDegree || undefined,
-      subjectDone: values.teachingEducationSubject || undefined,
+      subjectId: values.predmet,
+      levelId: values.stupen,
+      title: values.vzdelani,
+      specialization: values.oblast,
+      schoolLevelDone: values.stupenSpecializace || undefined,
+      subjectDone: values.predmetSpecializace || undefined,
     },
   });
 
-  if (!values.education || !values.subject || !values.degree || !values.educationArea) {
+  if (!values.vzdelani || !values.predmet || !values.stupen || !values.oblast) {
     router.replace(routes.configurator.step1);
     return null;
   }

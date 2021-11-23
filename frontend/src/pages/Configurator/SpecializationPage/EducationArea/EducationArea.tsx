@@ -66,8 +66,8 @@ const EducationArea: React.FC<IProps> = ({ education }) => {
   }, [educationAreasQuery.data]);
 
   React.useEffect(() => {
-    if (sortedAreas.length > 0 && !values.educationArea) {
-      setFieldValue('educationArea', sortedAreas[0].id);
+    if (sortedAreas.length > 0 && !values.oblast) {
+      setFieldValue('oblast', sortedAreas[0].id);
     }
   }, [sortedAreas]);
 
@@ -83,16 +83,16 @@ const EducationArea: React.FC<IProps> = ({ education }) => {
         Zjistěte, jaké předměty můžete s vaším vzděláním vyučovat
       </Hint>
       <Select
-        name="educationArea"
+        name="oblast"
         items={sortedAreas.map(({ id, name }) => ({
           text: name,
           value: id,
         }))}
-        value={values.educationArea}
+        value={values.oblast}
         onChange={handleChange}
       />
       {/* Učitelství */}
-      {withDegreeSection.includes(values.educationArea) && (
+      {withDegreeSection.includes(values.oblast) && (
         <OffestArea>
           <Area>
             <Paragraph>4.1.1 Pro jaký školní stupeň máte pedagogické vzdělání?</Paragraph>
@@ -103,27 +103,23 @@ const EducationArea: React.FC<IProps> = ({ education }) => {
                 .map(({ id, name }) => (
                   <div key={id}>
                     <Radio
-                      checked={values.teachingEducationDegree === id}
-                      name="teachingEducationDegree"
+                      checked={values.stupenSpecializace === id}
+                      name="stupenSpecializace"
                       value={id}
-                      onChange={() => setFieldValue('teachingEducationDegree', id)}
+                      onChange={() => setFieldValue('stupenSpecializace', id)}
                       label={name}
                     />
                   </div>
                 ))}
             </RadiosWrapper>
           </Area>
-          {values.teachingEducationDegree &&
-            !withoutSubjectSection.includes(values.teachingEducationDegree) && (
-              <Area>
-                <p>4.1.2 Pro jaké studijní předměty máte pedagogické vzdělání?</p>
-                <p>Poznámka: Naleznete v názvu oboru či programu.</p>
-                <SubjectSelect
-                  degreeId={values.teachingEducationDegree}
-                  name="teachingEducationSubject"
-                />
-              </Area>
-            )}
+          {values.stupenSpecializace && !withoutSubjectSection.includes(values.stupenSpecializace) && (
+            <Area>
+              <p>4.1.2 Pro jaké studijní předměty máte pedagogické vzdělání?</p>
+              <p>Poznámka: Naleznete v názvu oboru či programu.</p>
+              <SubjectSelect degreeId={values.stupenSpecializace} name="predmetSpecializace" />
+            </Area>
+          )}
         </OffestArea>
       )}
     </div>

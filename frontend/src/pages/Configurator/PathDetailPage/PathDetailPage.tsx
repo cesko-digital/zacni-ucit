@@ -95,12 +95,12 @@ const PathDetailPage: React.FC = () => {
 
   const results = useQuery<any>(resultsQuery, {
     variables: {
-      subjectId: values.subject,
-      levelId: values.degree,
-      title: values.education,
-      specialization: values.educationArea,
-      schoolLevelDone: values.teachingEducationDegree || undefined,
-      subjectDone: values.teachingEducationSubject || undefined,
+      subjectId: values.predmet,
+      levelId: values.stupen,
+      title: values.vzdelani,
+      specialization: values.oblast,
+      schoolLevelDone: values.stupenSpecializace || undefined,
+      subjectDone: values.predmetSpecializace || undefined,
     },
   });
 
@@ -115,7 +115,7 @@ const PathDetailPage: React.FC = () => {
 
   const numberOfUncompletedCourses = qualification?.uncompletedEducationTypes.length;
 
-  if (!values.education || !values.subject || !values.degree || !values.educationArea) {
+  if (!values.vzdelani || !values.predmet || !values.stupen || !values.oblast) {
     router.replace(routes.configurator.step1);
     return null;
   }
