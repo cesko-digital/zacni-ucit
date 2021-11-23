@@ -6,7 +6,12 @@ export const Wrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 24px 32px;
+  padding: ${({ isVisible }) => {
+    if (isVisible) {
+      return '24px 32px';
+    }
+    return '10px 32px';
+  }};
   background: #e0d5ff;
   border-top: 3px solid #7f50ff;
 `;
@@ -54,7 +59,12 @@ export const CloseButton = styled.button`
   border: none;
   background: #7f50ff;
   position: absolute;
-  top: -50px;
+  top: ${({ isVisible }) => {
+    if (isVisible) {
+      return '-50px';
+    }
+    return '-34px';
+  }};
   border-radius: 50%;
   right: -10px;
 
