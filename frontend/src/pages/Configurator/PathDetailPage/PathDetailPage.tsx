@@ -54,8 +54,8 @@ export const resultsQuery = gql`
 `;
 
 const coursesQuery = gql`
-  query coursesQuery($eduTypeId: Int!, $subjectId: Int!) {
-    courses(eduTypeId: $eduTypeId, subjectId: $subjectId) {
+  query coursesQuery($eduTypeId: Int!, $subjectId: Int!, $levelId: Int!) {
+    courses(eduTypeId: $eduTypeId, subjectId: $subjectId, levelId: $levelId) {
       id
       name
       city
@@ -110,6 +110,7 @@ const PathDetailPage: React.FC = () => {
     variables: {
       eduTypeId: values.kurzy.toString(),
       subjectId: values.predmet.toString(),
+      levelId: values.stupen.toString(),
     },
   });
 
