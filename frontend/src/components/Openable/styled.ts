@@ -5,12 +5,14 @@ export const Button = styled.button`
   apparance: none;
   border: none;
   background: none;
-  color: #7f50ff;
+  background: #7f50ff;
+  color: ${({ isOpen }) => (isOpen ? 'white' : 'rgba(255, 255, 255, 0.5)')};
+  transition: color 300ms ease-in-out;
   padding: 16px;
   width: 100%;
   text-align: left;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.125rem;
   position: relative;
   cursor: pointer;
 
@@ -22,7 +24,7 @@ export const Button = styled.button`
     right: 16px;
     width: 14px;
     height: 3px;
-    background: #7f50ff;
+    background: ${({ isOpen }) => (isOpen ? 'white' : 'rgba(255, 255, 255, 0.5)')};
     border-radius: 3px;
     transform: translateY(-50%);
   }
@@ -37,7 +39,7 @@ export const Button = styled.button`
   }
 
   ${mediaQueriesUp('md')(`
-    padding: 32px;
+    padding: 15px 32px 13px;
 
     &:after,
     &:before {
@@ -55,9 +57,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 0 16px 16px;
+  padding: 0 16px;
 
   ${mediaQueriesUp('md')(`
-    padding: 0 32px 32px;
+    padding: 0 32px;
   `)}
 `;

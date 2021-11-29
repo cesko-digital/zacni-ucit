@@ -14,6 +14,7 @@ import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 import { routes } from '@routes';
 import Container from '@components/Container/Container';
 import { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
+import { Loading } from '@components/Loading/Loading';
 
 export const resultsQuery = gql`
   query qualificationsQuery(
@@ -95,7 +96,7 @@ const ResultsPage: React.FC = () => {
   }
 
   if (loading) {
-    return <>Čekejte...</>;
+    return <Loading />;
   }
 
   if (!loading && data?.qualifications.length === 0) {

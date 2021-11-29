@@ -16,6 +16,7 @@ import SchoolTile from '../ResultsPage/SchoolTile/SchoolTile';
 import { Note } from '../SpecializationPage/EducationArea/styled';
 
 import { Text, Separator } from './styled';
+import { Loading } from '@components/Loading/Loading';
 
 export const resultsQuery = gql`
   query qualificationsQuery(
@@ -178,7 +179,7 @@ const PathDetailPage: React.FC = () => {
           </>
         )}
 
-        {courses.loading && <>Čekejte...</>}
+        {courses.loading && <Loading />}
         {courses.error && <Note>{courses.error}</Note>}
 
         {courses.data?.courses.map((course, index) => (
