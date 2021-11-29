@@ -9,6 +9,7 @@ import {
   Logo,
   TextWrapper,
   MsmtWrapper,
+  ButtonWrapper
 } from './styled';
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
@@ -52,9 +53,12 @@ const PartnersSection: React.FC = () => (
 
         <img alt="msmt" height={62} src={msmtLogo} width={132} />
       </MsmtWrapper>
+      <ButtonWrapper>
+
       <Button buttonStyle="button" href={routes.partners}>
         Chci se stát partnerem
       </Button>
+      </ButtonWrapper>
     </Container>
   </Section>
 );

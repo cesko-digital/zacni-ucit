@@ -24,7 +24,7 @@ export const LogosWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 24px 0;
-  margin: -12px;
+  /* margin: 10px; */
 
   ${mediaQueriesUp('sm')`
     margin: 0;
@@ -57,12 +57,20 @@ export const TextWrapper = styled.div`
 
 export const LogoItem = styled.li`
   list-style-type: none;
-  width: 50%;
+  width: 150px;
+  height: 150px;
   padding: 12px;
+  margin: 10px;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   ${mediaQueriesUp('sm')`
     padding: 30px;
     width: 25%;
+    border: none;
+    margin: 0;
   `}
 `;
 
@@ -74,3 +82,9 @@ export const Logo = styled.img`
   width: 100%;
   height: auto;
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`
