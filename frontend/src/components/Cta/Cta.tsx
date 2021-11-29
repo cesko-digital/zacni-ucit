@@ -14,12 +14,22 @@ import CrossIcon from '@icons/cross.svg';
 import ArrowUpIcon from '@icons/arrow-up.svg';
 
 const Cta: React.FC = () => {
-  const [isVisible, setIsVisible] = React.useState(true);
+  const [isVisible, setIsVisible] = React.useState(
+    typeof localStorage !== 'undefined'
+      ? JSON.parse(localStorage.getItem('dotaznik')) ?? true
+      : true,
+  );
 
   return (
     <Wrapper isVisible={isVisible}>
       <Container>
-        <CloseButton isVisible={isVisible} onClick={() => setIsVisible(!isVisible)}>
+        <CloseButton
+          isVisible={isVisible}
+          onClick={() => {
+            localStorage.setItem('dotaznik', (!isVisible).toString());
+            setIsVisible(!isVisible);
+          }}
+        >
           {isVisible ? <CrossIcon /> : <ArrowUpIcon />}
         </CloseButton>
         {isVisible && (
