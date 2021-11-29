@@ -23,6 +23,7 @@ import {
 // import SchoolTile from '../ResultsPage/SchoolTile/SchoolTile';
 import Container from '@components/Container/Container';
 import { gql, useQuery } from '@apollo/client';
+import { Loading } from '@components/Loading/Loading';
 
 export const courseQuery = gql`
   query courseQuery($pk: Int!) {
@@ -74,7 +75,7 @@ const CoursePage: React.FC = () => {
   }
 
   if (loading) {
-    return <>Čekejte...</>;
+    return <Loading />;
   }
 
   return (

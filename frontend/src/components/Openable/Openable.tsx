@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const Openable: React.FC<Props> = ({ text, children }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(true);
 
   return (
     <Wrapper>

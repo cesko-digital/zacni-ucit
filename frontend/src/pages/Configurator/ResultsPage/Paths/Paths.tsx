@@ -1,15 +1,10 @@
 import React from 'react';
-import querystring from 'querystring';
 
-import Button from '@components/Button/Button';
 import { Message } from '@components/Message/Message';
 import { Openable } from '@components/Openable/Openable';
 
 import ChevronIcon from '@icons/chevron-right.svg';
-import { Wrapper, Top, Title } from './styled';
-import StyleWrapper from '@components/StyledWrapper';
-import { useFormikContext } from 'formik';
-import { ConfiguratorValues } from '@pages/Configurator/ConfiguratorLayout/ConfiguratorLayout';
+import { Wrapper, Path, Top, Title, Row, Button, Number, Inactive } from './styled';
 
 interface Props {
   paths: {
@@ -29,25 +24,33 @@ export const Paths: React.FC<Props> = ({ paths }) => (
       <Title>Vydejte se jednou ze {paths?.length} cest k učení</Title>
     </Top>
     {paths?.map(({ text, items, courseCode }) => (
-      <Openable key={text} text={text}>
-        {items.map(({ href, text, isAdditionalCourse }) => (
-          <StyleWrapper key={text} margin="0 0 0.5rem 0">
-            <Button
-              href={href}
-              buttonStyle="button"
-              variant={isAdditionalCourse ? 'secondary' : 'primary'}
-              endIcon={<ChevronIcon />}
-            >
-              {text}
-            </Button>
-          </StyleWrapper>
-        ))}
-        {courseCode && (
-          <Message>
-            Pak si jen uděláte zkošku <strong>{courseCode}</strong>
-          </Message>
-        )}
-      </Openable>
+      <Path key={text}>
+        <Openable text={text}>
+          {items.map(({ href, text, isAdditionalCourse }, index) => (
+            <Row key={text}>
+              {href ? (
+                <Button
+                  href={href}
+                  buttonStyle="button"
+                  variant={isAdditionalCourse ? 'secondary' : 'primary'}
+                  endIcon={<ChevronIcon />}
+                >
+                  <Number>{index + 1}.</Number> {text}
+                </Button>
+              ) : (
+                <Inactive>
+                  <Number>{index + 1}.</Number> {text}
+                </Inactive>
+              )}
+            </Row>
+          ))}
+          {courseCode && (
+            <Message>
+              Pak si jen uděláte zkošku <strong>{courseCode}</strong>
+            </Message>
+          )}
+        </Openable>
+      </Path>
     ))}
   </Wrapper>
 );

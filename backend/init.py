@@ -8,6 +8,7 @@ from qualifications.temp import (
     init_map_2021_01,
     init_other_options,
     init_qualification,
+    init_edu_type_links,
     init_education_specialization,
     init_titles,
     init_qualification_types,
@@ -125,6 +126,7 @@ def init():
     init_titles()
     init_school_level_2021_02()
     init_qualification()
+    init_edu_type_links()
     import_colleges()
     # if neo4j:
     #    init_neo4j()

@@ -178,13 +178,18 @@ def init_courses():
         ]
         levels = []
         for level in school_levels:
-            level = level.replace(" ZŠ", "")
             if level != "0":
-                levels_db = SchoolLevel.objects.filter(name__contains=level)
-                if len(levels_db) > 1:
-                    levels.append(levels_db[1].id)
-                else:
-                    levels.append(levels_db[0].id)
+                if level == "1. stupeň ZŠ":
+                    level_db = SchoolLevel.objects.get(name="1. stupeň ZŠ")
+                elif level == "2. stupeň ZŠ":
+                    level_db = SchoolLevel.objects.get(name="2. stupeň ZŠ / nižší stupně gymnázií")
+                elif level == "SŠ":
+                    level_db = SchoolLevel.objects.get(name="SŠ / SOŠ / SOU / vyšší stupně gymnázií")
+                levels.append(level_db.id)
+
+        if course["2. stupeň ZŠ"] != "0" and course["SŠ"] != "0":
+            levels.append(SchoolLevel.objects.get(name="2. stupeň ZŠ a SŠ").id)
+
         c.school_levels.add(*levels)
         subjects = []
         for code in subject_codes:

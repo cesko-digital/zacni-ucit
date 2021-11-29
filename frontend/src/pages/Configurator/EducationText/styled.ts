@@ -9,6 +9,11 @@ export const MainParagraph = styled.p`
     font-size: 1.25rem;
   `}
 
+  a {
+    font-size: inherit;
+    font-weight: 400;
+  }
+
   strong {
     color: ${({ theme }) => theme.color.primary};
   }

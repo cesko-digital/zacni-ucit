@@ -118,7 +118,9 @@ class EducationType(TimeStampedModel):
     qualification_type = models.ForeignKey(
         QualificationType, on_delete=models.SET_NULL, null=True, verbose_name="Typ kvalifikace"
     )
-    name = models.CharField("Název", max_length=200, null=True)  # zákonná formulace
+    name = models.CharField("Zákonná formulace", max_length=200, null=True)  # zákonná formulace
+    name_edu_type = models.CharField("Název edu_type", max_length=200, null=True)
+    link_available = models.BooleanField(default=True)  # máme pro to kurzy?
     title = models.ForeignKey(Title, on_delete=models.SET_NULL, null=True, verbose_name="Titul")
     specializations = models.ManyToManyField(EducationSpecialization, verbose_name="Oblast VŠ vzdělávání")
     subject_groups = models.ManyToManyField(SubjectGroup, verbose_name="Skupina předmětů")

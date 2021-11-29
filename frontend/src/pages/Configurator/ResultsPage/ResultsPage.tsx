@@ -14,6 +14,7 @@ import ConfiguratorStep from '../ConfiguratorStep/ConfiguratorStep';
 import { routes } from '@routes';
 import Container from '@components/Container/Container';
 import { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
+import { Loading } from '@components/Loading/Loading';
 
 export const resultsQuery = gql`
   query qualificationsQuery(
@@ -48,6 +49,8 @@ export const resultsQuery = gql`
         educationTypes {
           id
           name
+          nameEduType
+          linkAvailable
           title {
             name
           }
@@ -69,28 +72,31 @@ export const resultsQuery = gql`
   }
 `;
 
+const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+const alphabet = alpha.map(x => String.fromCharCode(x));
+
 const ResultsPage: React.FC = () => {
   const router = useRouter();
   const { values } = useFormikContext<ConfiguratorValues & { cesta?: string; kurzy?: string }>();
 
   const { loading, data } = useQuery<any>(resultsQuery, {
     variables: {
-      subjectId: values.subject,
-      levelId: values.degree,
-      title: values.education,
-      specialization: values.educationArea,
-      schoolLevelDone: values.teachingEducationDegree || undefined,
-      subjectDone: values.teachingEducationSubject || undefined,
+      subjectId: values.predmet,
+      levelId: values.stupen,
+      title: values.vzdelani,
+      specialization: values.oblast,
+      schoolLevelDone: values.stupenSpecializace || undefined,
+      subjectDone: values.predmetSpecializace || undefined,
     },
   });
 
-  if (!values.education || !values.subject || !values.degree || !values.educationArea) {
+  if (!values.vzdelani || !values.predmet || !values.stupen || !values.oblast) {
     router.replace(routes.configurator.step1);
     return null;
   }
 
   if (loading) {
-    return <>Čekejte...</>;
+    return <Loading />;
   }
 
   if (!loading && data?.qualifications.length === 0) {
@@ -103,7 +109,7 @@ const ResultsPage: React.FC = () => {
           }}
           title="Gratulujeme! Jste kvalifikovaní k tomu začít hned učit"
         >
-          <EducationText type="done">
+          <EducationText type="done" page="results">
             <Paragraph>
               Pokud chcete učit předmět mimo svou odbornost, bude pro vás nejjednodušší, pokud si
               doplníte program či kurz pro předmět dle své odbornosti, ten pak musíte na škole učit
@@ -137,11 +143,11 @@ const ResultsPage: React.FC = () => {
         prevStep={{ url: routes.configurator.step4, text: 'Změnit stupeň, předmět, vaše vzdělání' }}
         title="Po dokončení jedné z cest budete kvalifikovaní k tomu začít učit!"
       >
-        <EducationText />
+        <EducationText page="results" />
         <StyleWrapper margin="0 0 1rem 0">
           {data?.qualifications && (
             <Paths
-              paths={data.qualifications.map(({ path, uncompletedEducationTypes }) => {
+              paths={data.qualifications.map(({ path, uncompletedEducationTypes }, index) => {
                 const { id, rowId, educationTypes } = path;
                 const uncompleted = uncompletedEducationTypes?.map(({ id }) => id);
                 const pathId = id;
@@ -153,14 +159,16 @@ const ResultsPage: React.FC = () => {
                 );
 
                 return {
-                  text: `${id} - rowId: ${rowId}`,
+                  text: `Cesta ${alphabet[index]} (ID: ${rowId})`,
                   items: educationTypes
                     .filter(({ id }) => uncompleted.includes(id))
-                    .map(({ id, name, title }) => ({
-                      text: title?.name ?? name,
-                      href: `${routes.configurator.path}?${querystring.stringify(
-                        modifiedValues,
-                      )}&cesta=${pathId}&kurzy=${id}`,
+                    .map(({ id, nameEduType, linkAvailable, title }) => ({
+                      text: nameEduType,
+                      href: linkAvailable
+                        ? `${routes.configurator.path}?${querystring.stringify(
+                            modifiedValues,
+                          )}&cesta=${pathId}&kurzy=${id}`
+                        : undefined,
                       isAdditionalCourse: title === null,
                     })),
                 };

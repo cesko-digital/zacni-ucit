@@ -50,10 +50,10 @@ const DegreePage: React.FC = () => {
               {filteredSchollLevels.map(({ id, name }) => (
                 <div key={id}>
                   <Radio
-                    checked={values.degree === id}
-                    name="degree"
+                    checked={values.stupen === id}
+                    name="stupen"
                     value={id}
-                    onChange={() => setFieldValue('degree', id)}
+                    onChange={() => setFieldValue('stupen', id)}
                     label={name}
                   />
                 </div>

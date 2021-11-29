@@ -1,0 +1,45 @@
+ID,Typ,Název edu_type,Link
+1,TITUL,Magisterské vzdělání z učitelství všeobecně-vzdělávacích předmětů na 2. stupni ZŠ a SŠ,ANO
+2,TITUL,Magisterské vzdělání z učitelství všeobecně-vzdělávacích předmětů na 2. stupni ZŠ,ANO
+3,TITUL,Magisterské vzdělání z učitelství všeobecně-vzdělávacích předmětů na SŠ,ANO
+4,TITUL,Magisterské vzdělání z učitelství odborných předmětů na SŠ,ANO
+5,TITUL,Magisterské vzdělání z učitelství na 1. stupni ZŠ,ANO
+6,TITUL,Magisterské vzdělání z učitelství na MŠ,ANO
+7,TITUL,Magisterské vzdělání z učitelství příslušných cizích jazyků,ANO
+8,TITUL,Magisterské vzdělání z učitelství na ZUŠ ,NE
+9,TITUL,Magisterské vzdělání ze speciální pedagogiky pro učitele,ANO
+10,TITUL,Magisterské vzdělání ze speciální pedagogiky (neučitelské),ANO
+12,TITUL,Magisterské vzdělání z  vychovatelství,ANO
+13,TITUL,Magisterské vzdělání z pedagogiky volného času,ANO
+14,TITUL,Magisterské vzdělání z učitelství tělesné výchovy a sportu,ANO
+15,TITUL,Magisterské vzdělání z tělesné výchovy a sportu (neučitelský obor),NE
+16,TITUL,Magisterské vzdělání z filologie,NE
+17,TITUL,Magisterské vzdělání s umělecko–pedagogickým zaměřením,ANO
+18,TITUL,"Jakékoliv neučitelské magisterské vzdělání, odpovídající příslušnému předmětu",NE
+19,TITUL,Jakékoliv neučitelské magisterské vzdělání,NE
+21,TITUL,Bakalářské vzdělání z  učitelství všeobecně-vzdělávacích předmětů na 2. stupni ZŠ,ANO
+22,TITUL,Bakalářské vzdělání z učitelství všeobecně-vzdělávacích předmětů na SŠ,ANO
+23,TITUL,Bakalářské vzdělání z učitelství příslušných cizích jazyků,ANO
+24,TITUL,Bakalářské vzdělání z učitelství na 2. stupni ZŠ,ANO
+25,TITUL,Bakalářské vzdělání z učitelství na SŠ,ANO
+26,TITUL,Bakalářské vzdělání z učitelství,ANO
+27,TITUL,"Jakékoliv neučitelské bakalářské vzdělání, odpovídající příslušnému předmětu",NE
+28,TITUL,Jakékoliv neučitelské bakalářské vzdělání,NE
+29,TITUL,"Vyšší odborné vzdělání z nepedagogické oblasti, odpovídající příslušnému předmětu",NE
+30,TITUL,"Odborná maturita z nepedaogické oblasti, odpovídající příslušnému předmětu",NE
+31,TITUL,"Výuční list z nepedagogické oblasti, odpovídající příslušnému předmětu",NE
+32,KURZ CŽV,Kurz celoživotního vzdělávání z přípravy učitelů 2. stupně ZŠ,ANO
+33,KURZ CŽV,Kurz celoživotního vzdělávání z přípravy učitelů SŠ,ANO
+34,KURZ CŽV,Kurz celoživotního vzdělávání z přípravy učitelů 1. stupně ZŠ,ANO
+35,KURZ CŽV,Kurz celoživotního vzdělávání z přípravy učitelů,ANO
+36,OSTATNÍ KVALIFIKACE,doplňující studium k rozšíření odborné kvalifikace (DVPP),ANO
+37,OSTATNÍ KVALIFIKACE,doplňující didaktické studium příslušného jazyka,ANO
+38,OSTATNÍ KVALIFIKACE,studium pedagogiky,ANO
+39,OSTATNÍ KVALIFIKACE,jazyková zkouška min. C1 SERR pro jazyky,NE
+40,OSTATNÍ KVALIFIKACE,jazyková zkouška min. C2 SERR pro jazyky (= na úrovni rodilého mluvčího) / rodilý mluvčí,NE
+41,OSTATNÍ KVALIFIKACE,výkonný či výtvarný umělec,NE
+42,OSTATNÍ KVALIFIKACE,kvalifikovaný trenér,NE
+,,"Magisterské vzdělání z učitelství všeobecně-vzdělávacích předmětů na 2. stupni ZŠ a SŠ, odpovídající příslušnému odbornému předmětu",ANO
+,,"Magisterské vzdělání z učitelství všeobecně-vzdělávacích předmětů na SŠ, odpovídající příslušnému odbornému předmětu",ANO
+,,"Magisterské vzdělání s umělecko–pedagogickým zaměřením, odpovídající příslušnému odbornému předmětu",ANO
+,,"kvalifikovaný učitel uměleckých odborných předmětů v ZUŠ, SŠ a konzervatoři",NE

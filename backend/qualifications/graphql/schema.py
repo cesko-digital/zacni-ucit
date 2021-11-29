@@ -90,7 +90,12 @@ class Query(graphene.ObjectType):
     qualification = graphene.Field(QualificationObjectType, pk=graphene.Int(required=True))
 
     # Courses queries
-    courses = graphene.List(CourseObjectType, edu_type_id=graphene.Int(required=True))
+    courses = graphene.List(
+        CourseObjectType,
+        edu_type_id=graphene.Int(required=True),
+        subject_id=graphene.Int(required=True),
+        level_id=graphene.Int(required=True),
+    )
     course = graphene.Field(CourseObjectType, pk=graphene.Int(required=True))
 
     @staticmethod
@@ -261,7 +266,7 @@ class Query(graphene.ObjectType):
             return results
 
     @staticmethod
-    def resolve_courses(root, info, edu_type_id):
+    def resolve_courses(root, info, edu_type_id, subject_id, level_id):
 
         # získání EducationType na základě id
         edu_type = EducationType.objects.get(id=edu_type_id)
@@ -271,46 +276,58 @@ class Query(graphene.ObjectType):
             qualification_type=edu_type.qualification_type.id,
         )
 
-        # pokud existují specializace pro daný edu_type
-        if edu_type.specializations.all().exists():
-            edu_type_specializations = edu_type.specializations.all()
-            # získání seznamu id pro filtrování
-            edu_type_specializations_id = [x.id for x in edu_type_specializations]
-            qs = qs.filter(education_specialization__in=edu_type_specializations_id)
+        if edu_type.qualification_type.name == "Titul":
+            # pokud existují specializace pro daný edu_type
+            if edu_type.specializations.all().exists():
+                edu_type_specializations = edu_type.specializations.all()
+                # získání seznamu id pro filtrování
+                edu_type_specializations_id = [x.id for x in edu_type_specializations]
+                qs = qs.filter(education_specialization__in=edu_type_specializations_id)
 
-        if edu_type.title is not None:
-            qs = qs.filter(title=edu_type.title.id)
+            if edu_type.title is not None:
+                qs = qs.filter(title=edu_type.title.id)
 
-        if edu_type.school_levels.all().exists():
-            edu_type_school_levels = edu_type.school_levels.all()
-            edu_type_school_levels_id = [x.id for x in edu_type_school_levels]
-            qs = qs.filter(school_levels__in=edu_type_school_levels_id)
+            if edu_type.school_levels.all().exists():
+                edu_type_school_levels = edu_type.school_levels.all()
+                edu_type_school_levels_id = [x.id for x in edu_type_school_levels]
+                qs = qs.filter(school_levels__in=edu_type_school_levels_id)
 
-        if edu_type.subject_groups.all().exists():
+            if edu_type.subject_groups.all().exists():
 
-            edu_type_subject_groups = edu_type.subject_groups.all()
-            # získání subject group id od education type, aby se dále mohlo porovnávat
-            edu_type_subject_groups_id = [x.id for x in edu_type_subject_groups]
+                edu_type_subject_groups = edu_type.subject_groups.all()
+                # získání subject group id od education type, aby se dále mohlo porovnávat
+                edu_type_subject_groups_id = [x.id for x in edu_type_subject_groups]
 
-            # převedení querysetu na list
-            courses_list = list(qs)
+                # převedení querysetu na list
+                courses_list = list(qs)
 
-            for course in courses_list:
-                courses_subjects = course.subjects.all()
-                courses_subject_groups_id = set([x.subject_group.id for x in courses_subjects])
-                # získání id předmětových skupin od kurzů
-                courses_subject_groups_id = list(courses_subject_groups_id)
+                for course in courses_list:
+                    courses_subjects = course.subjects.all()
+                    courses_subject_groups_id = set([x.subject_group.id for x in courses_subjects])
+                    # získání id předmětových skupin od kurzů
+                    courses_subject_groups_id = list(courses_subject_groups_id)
 
-                # porovnání, jestli kurzy mají předmětové skupiny, které odpovídají subject group v education type
-                for c_id in courses_subject_groups_id:
-                    count = 0
-                    for id in courses_subject_groups_id:
-                        if id in edu_type_subject_groups_id:
-                            count += 1
-                    # pokud nejsou všechny předmětové skupiny kurzu v seznamu
-                    # předmětových skupin education type - vyřadí kurz z querysetu
-                    if count != len(courses_subject_groups_id):
-                        qs = qs.exclude(id=course.id)
+                    # porovnání, jestli kurzy mají předmětové skupiny, které odpovídají subject group v education type
+                    for c_id in courses_subject_groups_id:
+                        count = 0
+                        for id in courses_subject_groups_id:
+                            if id in edu_type_subject_groups_id:
+                                count += 1
+                        # pokud nejsou všechny předmětové skupiny kurzu v seznamu
+                        # předmětových skupin education type - vyřadí kurz z querysetu
+                        if count != len(courses_subject_groups_id):
+                            qs = qs.exclude(id=course.id)
+                # filtruje na základě konkrétního předmětu, který chce uživatel učit
+
+        qs = qs.filter(subjects=subject_id)
+
+        if edu_type.qualification_type.name == "Ostatní kvalifikace":
+            other_qualification_type_id = OtherExperience.objects.get(name=edu_type.name_edu_type)
+            qs = qs.filter(other_qualification_type=other_qualification_type_id.id)
+
+        if edu_type.qualification_type.name != "Titul":
+            qs = qs.filter(school_levels=level_id)
+
         return qs
 
     @staticmethod

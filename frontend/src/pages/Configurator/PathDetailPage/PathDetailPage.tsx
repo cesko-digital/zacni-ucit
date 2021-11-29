@@ -1,6 +1,7 @@
 import querystring from 'querystring';
 
 import { gql, useQuery } from '@apollo/client';
+import Button from '@components/Button/Button';
 import Card from '@components/Card/Card';
 import Container from '@components/Container/Container';
 import { Message } from '@components/Message/Message';
@@ -15,31 +16,9 @@ import SchoolTile from '../ResultsPage/SchoolTile/SchoolTile';
 import { Note } from '../SpecializationPage/EducationArea/styled';
 
 import { Text, Separator } from './styled';
+import { Loading } from '@components/Loading/Loading';
 
-export const schools = [
-  {
-    schoolName: 'Univerzita Karlova',
-    type: 'Bc.',
-    description: 'Učitelství pro střední školy',
-    duration: '5 semestrů',
-    price: 'Zdarma, pokud jste ještě Bc. nestudovali',
-    studyType: 'Prezenční forma studia',
-    location: 'Praha',
-    href: routes.configurator.course,
-  },
-  {
-    schoolName: 'Vysoké učení technické',
-    type: 'Kurz CŽV',
-    description: 'Učitel odborného výcviku a učitel praktického vyučování',
-    duration: '1 semestr',
-    price: 'Zdarma',
-    studyType: 'Prezenční forma studia',
-    location: 'Praha',
-    href: routes.configurator.course,
-  },
-];
-
-const resultsQuery = gql`
+export const resultsQuery = gql`
   query qualificationsQuery(
     $subjectId: Int!
     $levelId: Int!
@@ -61,6 +40,8 @@ const resultsQuery = gql`
         educationTypes {
           id
           name
+          nameEduType
+          linkAvailable
           title {
             name
           }
@@ -74,8 +55,8 @@ const resultsQuery = gql`
 `;
 
 const coursesQuery = gql`
-  query coursesQuery($eduTypeId: Int!) {
-    courses(eduTypeId: $eduTypeId) {
+  query coursesQuery($eduTypeId: Int!, $subjectId: Int!, $levelId: Int!) {
+    courses(eduTypeId: $eduTypeId, subjectId: $subjectId, levelId: $levelId) {
       id
       name
       city
@@ -117,18 +98,20 @@ const PathDetailPage: React.FC = () => {
 
   const results = useQuery<any>(resultsQuery, {
     variables: {
-      subjectId: values.subject,
-      levelId: values.degree,
-      title: values.education,
-      specialization: values.educationArea,
-      schoolLevelDone: values.teachingEducationDegree || undefined,
-      subjectDone: values.teachingEducationSubject || undefined,
+      subjectId: values.predmet,
+      levelId: values.stupen,
+      title: values.vzdelani,
+      specialization: values.oblast,
+      schoolLevelDone: values.stupenSpecializace || undefined,
+      subjectDone: values.predmetSpecializace || undefined,
     },
   });
 
   const courses = useQuery<any>(coursesQuery, {
     variables: {
       eduTypeId: values.kurzy.toString(),
+      subjectId: values.predmet.toString(),
+      levelId: values.stupen.toString(),
     },
   });
 
@@ -137,7 +120,7 @@ const PathDetailPage: React.FC = () => {
 
   const numberOfUncompletedCourses = qualification?.uncompletedEducationTypes.length;
 
-  if (!values.education || !values.subject || !values.degree || !values.educationArea) {
+  if (!values.vzdelani || !values.predmet || !values.stupen || !values.oblast) {
     router.replace(routes.configurator.step1);
     return null;
   }
@@ -146,14 +129,20 @@ const PathDetailPage: React.FC = () => {
     (all, [key, value]) => (!['kurz'].includes(key) ? { ...all, [key]: value } : all),
     {},
   );
+  const modifiedValuesOther = Object.entries(values).reduce(
+    (all, [key, value]) => (!['kurz', 'kurzy'].includes(key) ? { ...all, [key]: value } : all),
+    {},
+  );
 
   return (
     <Container>
       <ConfiguratorStep
-        title={educationType?.title?.name ?? educationType?.name ?? ''}
+        title={
+          educationType?.nameEduType ?? educationType?.title?.name ?? educationType?.name ?? ''
+        }
         prevStep={{ url: routes.configurator.results, text: 'Zpátky na výběr cesty' }}
       >
-        <EducationText />
+        <EducationText page="courses" />
 
         {numberOfUncompletedCourses > 1 && (
           <>
@@ -166,15 +155,31 @@ const PathDetailPage: React.FC = () => {
                   {numberOfUncompletedCourses === 2
                     ? 'krok'
                     : `${numberOfUncompletedCourses - 1} kroky`}
-                  .
                 </strong>
+                :{' '}
+                {qualification?.path.educationTypes
+                  .filter(({ id }) => id !== values.kurzy)
+                  .map(({ id, nameEduType, linkAvailable, title }) =>
+                    linkAvailable ? (
+                      <Button
+                        key={id}
+                        href={`${routes.configurator.path}?${querystring.stringify(
+                          modifiedValuesOther,
+                        )}&kurzy=${id}`}
+                      >
+                        {nameEduType ?? title?.name ?? name}
+                      </Button>
+                    ) : (
+                      <span key={id}>{nameEduType ?? title?.name ?? name}</span>
+                    ),
+                  )}
               </Text>
             </Message>
             <Separator />
           </>
         )}
 
-        {courses.loading && <>Čekejte...</>}
+        {courses.loading && <Loading />}
         {courses.error && <Note>{courses.error}</Note>}
 
         {courses.data?.courses.map((course, index) => (

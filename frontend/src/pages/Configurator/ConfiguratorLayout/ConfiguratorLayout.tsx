@@ -2,27 +2,28 @@ import { Formik, Form } from 'formik';
 import React from 'react';
 
 import { useRouter } from 'next/router';
+import Cta from '@components/Cta/Cta';
 
 export type ConfiguratorValues = {
-  degree: string | null;
-  subject: string | null;
-  education: string | null;
-  educationArea: string | null;
-  teachingEducationDegree: string | null;
-  teachingEducationSubject: string | null;
+  stupen: string | null;
+  predmet: string | null;
+  vzdelani: string | null;
+  oblast: string | null;
+  stupenSpecializace: string | null;
+  predmetSpecializace: string | null;
 };
 
 interface IProps {
   queryRequired?: boolean;
 }
 
-const initialValues = {
-  degree: null,
-  subject: null,
-  education: null,
-  educationArea: null,
-  teachingEducationDegree: null,
-  teachingEducationSubject: null,
+const initialValues: ConfiguratorValues = {
+  stupen: null,
+  predmet: null,
+  vzdelani: null,
+  oblast: null,
+  stupenSpecializace: null,
+  predmetSpecializace: null,
 };
 
 const ConfiguratorLayout: React.FC<IProps> = ({ queryRequired = true, children }) => {
@@ -33,16 +34,20 @@ const ConfiguratorLayout: React.FC<IProps> = ({ queryRequired = true, children }
   }
 
   return (
-    <Formik<ConfiguratorValues>
-      initialValues={router.query ? { ...initialValues, ...router.query } : initialValues}
-      onSubmit={() => {}}
-    >
-      {() => (
-        <Form noValidate>
-          <main>{children}</main>
-        </Form>
-      )}
-    </Formik>
+    <>
+      <Formik<ConfiguratorValues>
+        initialValues={router.query ? { ...initialValues, ...router.query } : initialValues}
+        enableReinitialize
+        onSubmit={() => {}}
+      >
+        {() => (
+          <Form noValidate>
+            <main>{children}</main>
+          </Form>
+        )}
+      </Formik>
+      <Cta />
+    </>
   );
 };
 
