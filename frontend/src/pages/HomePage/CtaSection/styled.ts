@@ -25,10 +25,6 @@ export const Title = styled.h2`
 
 export const ButtonWrapper = styled.div`
   margin-bottom: 16px;
-
-  ${mediaQueriesUp('sm')`
-    margin: 32px 0 16px;
-  `}
 `;
 
 export const Text = styled.div`
