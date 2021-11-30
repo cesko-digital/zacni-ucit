@@ -7,7 +7,7 @@ import { routes } from '@routes';
 import pathImage from './path.svg';
 
 const PathSection: React.FC = () => (
-  <Container>
+  <Container withPaddingBottom={false}>
     <Section>
       <Wrapper>
         <Button align="right" href={routes.whyToTeach} left={-100} top={0}>

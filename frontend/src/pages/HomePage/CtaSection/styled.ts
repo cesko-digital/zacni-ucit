@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  padding: 0 130px 32px 0;
+  padding: 60px 130px 32px 0;
 
   ${mediaQueriesUp('sm')`
-    padding: 0 130px 80px 0;
+    padding: 60px 130px 80px 0;
   `}
 `;
 
@@ -39,4 +39,8 @@ export const Image = styled.img`
   position: absolute;
   top: 0;
   right: -16px;
+
+  ${mediaQueriesUp('sm')`
+    top: 60px;
+  `}
 `;
