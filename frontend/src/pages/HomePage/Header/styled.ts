@@ -12,11 +12,12 @@ export const Wrapper = styled.div`
 
 export const MainTitle = styled.h1`
   font-size: 2rem;
-  margin: 0 0 8px;
+  margin: 0;
+  padding: 0;
 
   ${mediaQueriesUp('sm')`
     font-size: 5rem;
-    margin: 0 0 30px;
+    margin: 0 0 -20px;
   `}
 
   ${mediaQueriesUp('md')`
