@@ -24,6 +24,12 @@ export const MainTitle = styled.h1`
   `}
 `;
 
+export const CanITeachButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+`
+
 export const ButtonWrapper = styled.span`
   margin-right: 16px;
 
@@ -34,7 +40,6 @@ export const ButtonWrapper = styled.span`
 
 export const LinksWrapper = styled.div`
   width: calc(100% + 100px);
-  padding-top: 16px;
 `;
 
 export const Image = styled.img`
@@ -49,7 +54,7 @@ export const Image = styled.img`
 
 export const Paragraph = styled.p`
   max-width: 90%;
-  margin-bottom: 55px;
+  margin-bottom: 30px;
 
   ${mediaQueriesUp('sm')`
     font-size: 1.5rem;
