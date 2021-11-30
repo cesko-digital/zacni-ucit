@@ -92,12 +92,14 @@ export const ButtonWrapper = styled.span`
 export const Button = styled(ButtonComponent)`
   background: white;
   color: ${({ theme }) => theme.color.primary};;
+  margin-bottom: 20px;
+  border: none;
 
 
   ${mediaQueriesUp('md')`
-    border: none;
     box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.1);
     padding: 20px 30px;
+    margin-bottom: 30px;
   `}
 `;
 
