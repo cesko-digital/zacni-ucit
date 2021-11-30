@@ -24,7 +24,6 @@ export const LogosWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 24px 0;
-  /* margin: 10px; */
 
   ${mediaQueriesUp('sm')`
     margin: 0;
