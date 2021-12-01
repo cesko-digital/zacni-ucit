@@ -83,14 +83,16 @@ const CanITeachPage: React.FC = () => (
       </Paragraph>
       <SectionSubtitle>Rozcestník: kde chcete učit?</SectionSubtitle>
       <Paragraph>
-        Vyberte si, kde chcete učit, a my vám ukážeme, jak na to. Pokud si nejste jistí, jaké
-        předměty se svým vzděláním můžete vyučovat, podívejte se do naší{' '}
+        Vyberte si, kde chcete učit, a my vám ukážeme, jak na to! Pokud vás ještě před tím zajímá,
+        jaké předměty budete (po doplnění pedagogické kvalifikace) moci se svojí specializací učit,
+        podívejte se do naší{' '}
         <MainLink href="./subjects.pdf" target="_blank" download>
           tabulky.
         </MainLink>
         <i>
           (Tato tabulka není oficiálním stanoviskem MŠMT, ale byla vytvořena na základě praxe
-          ředitelů a ředitelek škol.)
+          ředitelů a ředitelek škol s učiteli, kteří si doplňovali pedagogickou kvalifikaci k již
+          dokončenému odbornému vzdělání.)
         </i>
       </Paragraph>
       <CrossroadList>
