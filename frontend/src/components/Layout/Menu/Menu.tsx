@@ -14,6 +14,10 @@ export const menuItems = [
     route: routes.canITeach,
     lights: [
       {
+        label: 'Interaktivní průvodce ',
+        route: routes.startTeaching.crossroad,
+      },
+      {
         label: 'Pedagogické minimum',
         route: `${routes.startTeaching.crossroad}#pedagogicke-minimum`,
       },

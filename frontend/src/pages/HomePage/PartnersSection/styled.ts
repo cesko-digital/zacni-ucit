@@ -24,6 +24,7 @@ export const LogosWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 24px 0;
+  justify-content: center;
 
   ${mediaQueriesUp('sm')`
     margin: 0;
@@ -56,16 +57,23 @@ export const TextWrapper = styled.div`
 
 export const LogoItem = styled.li`
   list-style-type: none;
-  width: 150px;
-  height: 150px;
+  width: 46%;
   padding: 12px;
-  margin: 10px;
+  margin: 5px;
   border: 1px solid lightgray;
   display: flex;
   justify-content: center;
   align-items: center;
 
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
   ${mediaQueriesUp('sm')`
+    width: 150px;
+    height: 150px;
     padding: 30px;
     width: 25%;
     border: none;
@@ -86,4 +94,4 @@ export const ButtonWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-`
+`;
