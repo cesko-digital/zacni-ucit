@@ -182,7 +182,7 @@ const PathDetailPage: React.FC = () => {
         {courses.error && <Note>{courses.error}</Note>}
 
         {courses.data?.courses.map((course, index) => (
-          <Card key={course.id} theme="primary" badge={index === 0 ? 'Doporučujeme' : undefined}>
+          <Card key={course.id} theme="primary">
             <SchoolTile
               href={`${routes.configurator.course}?kurz=${course.id}&${querystring.stringify(
                 modifiedValues,

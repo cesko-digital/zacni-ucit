@@ -81,7 +81,7 @@ export const Inactive = styled.div`
   background: rgba(255, 182, 11, 0.1);
 
   &:after {
-    content: 'Pro tento krok neumíme v součastné době zobrazit dostupné kurzy.';
+    content: 'Pro tento krok neumíme v současné době zobrazit dostupné kurzy.';
     opacity: 0.8;
     font-size: 14px;
     margin-top: 10px;
