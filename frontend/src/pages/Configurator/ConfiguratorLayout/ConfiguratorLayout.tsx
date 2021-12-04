@@ -3,6 +3,7 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 import Cta from '@components/Cta/Cta';
+import { BetaBadge } from '@components/BetaBadge/BetaBadge';
 
 export type ConfiguratorValues = {
   stupen: string | null;
@@ -35,10 +36,11 @@ const ConfiguratorLayout: React.FC<IProps> = ({ queryRequired = true, children }
 
   return (
     <>
+      <BetaBadge />
       <Formik<ConfiguratorValues>
         initialValues={router.query ? { ...initialValues, ...router.query } : initialValues}
         enableReinitialize
-        onSubmit={() => {}}
+        onSubmit={() => { }}
       >
         {() => (
           <Form noValidate>

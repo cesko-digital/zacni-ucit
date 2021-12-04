@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Top,
   Title,
-  Type,
+  // Type,
   Paragraph,
   ImageWrapper,
   IconWrapper,
@@ -44,12 +44,12 @@ const SchoolTile: React.FC<Props> = ({
       <ImageWrapper />
       <span>
         <Title>{schoolName}</Title>
-        <Type>
+        {/* <Type>
           <IconWrapper>
             <HatIcon />
           </IconWrapper>
           {type}
-        </Type>
+        </Type> */}
         <Paragraph>{description}</Paragraph>
       </span>
       <ChevronWrapper>

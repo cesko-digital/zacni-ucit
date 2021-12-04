@@ -61,7 +61,6 @@ const CoursePage: React.FC = () => {
       return null;
     }
   }, [router]);
-  console.log(router);
 
   const { loading, data } = useQuery<any>(courseQuery, {
     variables: {

@@ -159,10 +159,9 @@ const PathDetailPage: React.FC = () => {
                 :{' '}
                 {qualification?.path.educationTypes
                   .filter(({ id }) => id !== values.kurzy)
-                  .map(({ id, nameEduType, linkAvailable, title }) =>
-                    linkAvailable ? (
+                  .map(({ id, nameEduType, linkAvailable, title }, index) => <span key={id}>
+                    {linkAvailable ? (
                       <Button
-                        key={id}
                         href={`${routes.configurator.path}?${querystring.stringify(
                           modifiedValuesOther,
                         )}&kurzy=${id}`}
@@ -170,8 +169,8 @@ const PathDetailPage: React.FC = () => {
                         {nameEduType ?? title?.name ?? name}
                       </Button>
                     ) : (
-                      <span key={id}>{nameEduType ?? title?.name ?? name}</span>
-                    ),
+                      <span>{nameEduType ?? title?.name ?? name}</span>
+                    )}{index + 1 !== qualification.path.educationTypes.length && ', '}</span>
                   )}
               </Text>
             </Message>
