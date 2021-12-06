@@ -1,6 +1,14 @@
 export const routes = {
   homepage: '/',
-  configurator: '/pruvodce',
+  configurator: {
+    step1: '/pruvodce',
+    step2: '/pruvodce/predmet',
+    step3: '/pruvodce/vzdelani',
+    step4: '/pruvodce/specializace',
+    results: '/pruvodce/vysledky',
+    path: '/pruvodce/cesta',
+    course: '/pruvodce/kurz',
+  },
   searchResults: '/vysledky-hledani',
   chooseSubject: '/vyber-predmetu',
   qualification: '/kvalifikace',
@@ -30,9 +38,11 @@ export const routes = {
     howItWorks: '/chci-si-zkusit-uceni/jak-probiha-program',
   },
   learn: {
-    main: '/chci-se-zaucit',
-    howItWorks: '/chci-se-zaucit/jak-probiha-program',
-    workshops: '/chci-se-zaucit/jak-probiha-serie-workshopu',
+    crossroad: '/zacinam-ucit',
+    learnPage: '/zacinam-ucit/chci-se-zaucit',
+    howItWorks: '/zacinam-ucit/chci-se-zaucit/jak-probiha-program',
+    teachersTips: '/zacinam-ucit/tipy-pro-zacinajici-ucitele',
+    workshops: '/zacinam-ucit/chci-se-zaucit/jak-probiha-serie-workshopu',
   },
   startTeaching: {
     crossroad: '/muzu-ucit',
@@ -62,4 +72,6 @@ export const routes = {
       higherExpertise: '/muzu-ucit/jak-zacit-delat-asistenta-pedagoga/vyssi-odbornost',
     },
   },
+  contactUs:
+    'https://docs.google.com/forms/d/e/1FAIpQLSeaLvvaq5Wrwe9FWsqDPtX2xM26wAUB4M0v7Vv-se6_n1r1mA/viewform',
 };

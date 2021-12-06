@@ -24,6 +24,7 @@ export const Section = styled.section`
 
 export const SectionTitle = styled.h2`
   font-size: 1.5rem;
+  line-height: 1.2em;
   margin: 0 0 16px;
 
   ${mediaQueriesUp('sm')`
@@ -71,7 +72,7 @@ export const MainLink = styled(Button)`
   display: inline-block;
   font-weight: 700;
   font-size: 1rem;
-  margin: 0 0 8px;
+  margin-right: 2px;
   text-decoration: underline;
 
   &:hover {

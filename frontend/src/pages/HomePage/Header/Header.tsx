@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Wrapper, MainTitle, LinksWrapper, ButtonWrapper, Image, Paragraph } from './styled';
+import {
+  Wrapper,
+  MainTitle,
+  LinksWrapper,
+  ButtonWrapper,
+  Image,
+  Paragraph,
+  CanITeachButtonWrapper,
+} from './styled';
 import Button from '@components/Button/Button';
 import Container from '@components/Container/Container';
 import { routes } from '@routes';
@@ -16,9 +24,11 @@ const Header: React.FC = () => (
         Provádíme zájemce o učitelství vším, co potřebují znát, aby se mohli stát spokojenými
         pedagogy.
       </Paragraph>
-      <Button buttonStyle="button" href={routes.startTeaching.crossroad}>
-        Můžu učit?
-      </Button>
+      <CanITeachButtonWrapper>
+        <Button buttonStyle="button" href={routes.startTeaching.crossroad}>
+          Můžu učit?
+        </Button>
+      </CanITeachButtonWrapper>
       <LinksWrapper>
         <ButtonWrapper>
           <Button href={`${routes.startTeaching.crossroad}#pedagogicke-minimum`}>

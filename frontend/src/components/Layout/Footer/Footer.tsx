@@ -1,7 +1,7 @@
 import NextHead from 'next/head';
 import type { FC } from 'react';
 import React from 'react';
-
+import msmtLogo from './../../../pages/HomePage/PartnersSection/msmt.png';
 import { H2, LinkRegular, LinkToExtPage } from '../../Typography';
 import { menuItems } from '../Menu/Menu';
 import {
@@ -18,6 +18,8 @@ import {
   MainLink,
   Copy,
   ButtonContent,
+  MsmtWrapper,
+  TextWrapper,
 } from './styled';
 
 import FacebookIcon from '@icons/facebook.svg';
@@ -48,6 +50,18 @@ const Footer: FC = () => {
           ))}
         </FlexRowSB>
       </FooterSection>
+      <FooterSection className="footer_section5">
+        <MsmtWrapper>
+          <TextWrapper>
+            <p>Projekt Začni učit! má </p>{' '}
+            <p>
+              <strong>záštitu od MŠMT ČR.</strong>
+            </p>
+          </TextWrapper>
+
+          <img alt="msmt" height={62} src={msmtLogo} width={132} />
+        </MsmtWrapper>
+      </FooterSection>
 
       <FooterSection className="footer_section2">
         <H2>Výluka, z.s.</H2>
@@ -76,11 +90,7 @@ const Footer: FC = () => {
             <InstagramIcon />
             Instagram
           </LinkToExtPage>
-          <LinkToExtPage
-            className="footerBtn"
-            href="https://twitter.com/zacniucit"
-            target="_blank"
-          >
+          <LinkToExtPage className="footerBtn" href="https://twitter.com/zacniucit" target="_blank">
             <TwitterIcon /> Twitter
           </LinkToExtPage>
         </FlexRow>
@@ -94,8 +104,8 @@ const Footer: FC = () => {
             type="text/css"
           />
         </NextHead>
-        <label htmlFor="mce-EMAIL" style={{ fontWeight: 'bold' }}>
-          Newsletter jednou měsíčně
+        <label htmlFor="mce-EMAIL">
+          <H2>Newsletter jednou měsíčně</H2>
         </label>
         <FooterText>
           Novinky pro budoucí i začínající učitele, tipy na zajímavé akce o vzdělávání či na
@@ -117,7 +127,7 @@ const Footer: FC = () => {
                 className="email"
                 id="mce-EMAIL"
                 name="EMAIL"
-                placeholder="e-mail"
+                placeholder="E-mail"
                 style={{
                   backgroundColor: 'white',
                   border: 'none',
@@ -131,8 +141,8 @@ const Footer: FC = () => {
                 }}
                 type="email"
                 value={inputValue}
-                onChange={({ target }) => setInputValue(target.value)}
                 required
+                onChange={({ target }) => setInputValue(target.value)}
               />
 
               <div aria-hidden="true" style={{ position: 'absolute', left: '-5000px' }}>
@@ -183,10 +193,13 @@ const Footer: FC = () => {
       <FooterSection className="footer_section4">
         <Button href={routes.aboutUs} target="_blank">
           <ButtonContent>
-            <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka.
+            <strong>Začni učit!</strong>&nbsp;je projektem neziskové organizace Výluka
           </ButtonContent>
         </Button>
         <br></br>
+        <span className="msmt">
+          • Projekt Začni učit! má <strong> záštitu od MŠMT ČR </strong> •
+        </span>
         <Copy margin={0}> © 2021 Výluka, z.s.</Copy>
       </FooterSection>
     </FooterWrap>

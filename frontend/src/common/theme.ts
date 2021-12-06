@@ -5,6 +5,7 @@ export const theme = {
     primary: '#7F50FF' /* violet */,
     secondary: '#0C0807' /* dark black */,
     green: '#AAEC8B' /* green '#54C176' */,
+    darkGreen: '#54C176',
     error: '#EA4435' /* red */,
     gray: '#e5e5e5',
   },

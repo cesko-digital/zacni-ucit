@@ -39,6 +39,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-size: 1rem;
     font-family: 'StabilGrotesk', sans-serif;
+    overflow-x: hidden;
   }
 
   #root {

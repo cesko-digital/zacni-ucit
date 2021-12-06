@@ -4,15 +4,13 @@ import ButtonComponent from '@components/Button/Button';
 import { mediaQueriesUp } from 'src/common/mediaQueries';
 
 export const Section = styled.section`
-  padding: 0 0 32px;
+  padding: 40px 0;
   position: relative;
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid #ecebeb;
   transform: scale(0.8);
 
   ${mediaQueriesUp('sm')`
-    padding: 40px 0;
     border: none;
     transform: scale(1);
   `}

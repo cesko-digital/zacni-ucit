@@ -1,47 +1,68 @@
 import { useFormikContext } from 'formik';
 import React from 'react';
-import type { FC } from 'react';
 
-import type { ConfiguratorValues } from '../Configurator';
-import Button from '@components/Button/Button';
+import type { ConfiguratorValues } from '../ConfiguratorLayout/ConfiguratorLayout';
 import Hint from '@components/Hint/Hint';
-import Input from '@components/Input/Input';
 import StyleWrapper from '@components/StyledWrapper';
-import { LightText } from '@components/Typography';
+import { gql, useQuery } from '@apollo/client';
+import Radio from '@components/Input/Radio/Radio';
 
-export const degrees = [
-  { id: 0, label: '1. Stupeň ZŠ' },
-  { id: 1, label: '2. Stupeň ZŠ, nižší stupně gymnázií' },
-  { id: 2, label: 'SŠ, SOŠ, SOU, vyšší stupně gymnázií' },
-];
+import { RadiosWrapper } from './styled';
+import { routes } from '@routes';
+import AnimatedHeight from '@components/AnimatedHeight/AnimatedHeight';
 
-const DegreePage: FC = () => {
+export interface SchoolLevelsQuery {
+  schoolLevels: {
+    id: string;
+    name: string;
+    targetSchoolLevel: boolean;
+  }[];
+}
+
+export const allSchoolLevelsQuery = gql`
+  query allSchoolLevelsQuery {
+    schoolLevels {
+      id
+      name
+      targetSchoolLevel
+    }
+  }
+`;
+
+const DegreePage: React.FC = () => {
   const { values, setFieldValue } = useFormikContext<ConfiguratorValues>();
+  const { data, loading } = useQuery<SchoolLevelsQuery>(allSchoolLevelsQuery);
+
+  const filteredSchollLevels = React.useMemo(
+    () => data?.schoolLevels.filter(({ targetSchoolLevel }) => targetSchoolLevel) ?? [],
+    [data],
+  );
 
   return (
-    <>
-      <StyleWrapper margin="2rem 0">
-        <Hint onClick={console.log}>Příběhy učitelů z praxe</Hint>
-        {degrees.map(({ id, label }) => (
-          <Input
-            key={id}
-            checked={values.degree === id}
-            label={label}
-            name="degree"
-            type="radio"
-            value={id}
-            onChange={() => setFieldValue('degree', id)}
-          />
-        ))}
-      </StyleWrapper>
-      <StyleWrapper margin="2rem 0">
-        <LightText>
-          Nenašli jste vámi zvolený stupeň nebo vás zajímá jiná pedagogická profese?{' '}
-          <Button href="#">Napište nám</Button> nebo se podívejte na{' '}
-          <Button href="#">přehled zákona o ped. pracovnících</Button>.
-        </LightText>
-      </StyleWrapper>
-    </>
+    <StyleWrapper margin="2rem 0">
+      <AnimatedHeight isOpen>
+        {loading ? (
+          <div></div>
+        ) : (
+          <div>
+            <Hint href={`${routes.whyToTeach}#pribehy-ucitelu`}>Příběhy učitelů z praxe</Hint>
+            <RadiosWrapper>
+              {filteredSchollLevels.sort((a, b) => a.id > b.id ? 1 : -1).map(({ id, name }) => (
+                <div key={id}>
+                  <Radio
+                    checked={values.stupen === id}
+                    name="stupen"
+                    value={id}
+                    onChange={() => setFieldValue('stupen', id)}
+                    label={name}
+                  />
+                </div>
+              ))}
+            </RadiosWrapper>
+          </div>
+        )}
+      </AnimatedHeight>
+    </StyleWrapper>
   );
 };
 

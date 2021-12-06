@@ -4,16 +4,17 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  padding: 32px 130px 32px 0;
+  padding: 60px 130px 32px 0;
 
   ${mediaQueriesUp('sm')`
-    padding: 80px 130px 80px 0;
+    padding: 60px 130px 80px 0;
   `}
 `;
 
 export const Title = styled.h2`
   color: #4b4848;
   font-size: 1.5rem;
+  line-height: 1.2em;
   margin: 0 0 8px;
 
   ${mediaQueriesUp('sm')`
@@ -24,11 +25,11 @@ export const Title = styled.h2`
 
 export const ButtonWrapper = styled.div`
   margin-bottom: 16px;
-
-  ${mediaQueriesUp('sm')`
-    margin: 32px 0 16px;
-  `}
 `;
+
+export const Text = styled.div`
+  max-width: 90%;
+`
 
 export const Image = styled.img`
   position: absolute;
@@ -36,6 +37,6 @@ export const Image = styled.img`
   right: -16px;
 
   ${mediaQueriesUp('sm')`
-    top: 80px;
+    top: 60px;
   `}
 `;

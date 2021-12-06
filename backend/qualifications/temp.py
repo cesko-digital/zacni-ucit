@@ -1,3 +1,5 @@
+from django.db.models import Count
+
 from .models import (
     CollegeArea,
     CollegeProgramme,
@@ -6,6 +8,7 @@ from .models import (
     EducationSpecialization,
     OtherExperience,
     Qualification,
+    QualificationType,
 )
 from teaching.models import Subject, SchoolLevel, SubjectGroup
 import csv
@@ -311,12 +314,6 @@ Zemědělství		PŘ	F	ENV
 
 
 def init_education_specialization():
-    """
-    Data Source: https://docs.google.com/spreadsheets/d/1_karAzypSkiUOgrp6cm0_PLCimXyzdunxuUbdZKqjvI/edit#gid=254445099
-    List Číselník oblastí VŠ studia
-    First row removed
-    """
-
     filepath = os.path.join(os.getcwd(), "data_init", "education_specialization.csv")
     with open(filepath, "r", encoding="utf-8") as csvfile:
         data = csvfile.readlines()
@@ -325,14 +322,32 @@ def init_education_specialization():
             education_specialization, _ = EducationSpecialization.objects.get_or_create(name=data[i])
 
 
+def init_titles():
+    titles = {
+        "MAT": "Odborná maturita",
+        "Bc.": "Bakalářské vzdělání",
+        "Mgr.": "Magisterské vzdělání (Mgr. nebo Ing.)",
+        "VL": "Výuční list",
+        "DIS": "Vyšší odborné vzdělání",
+    }
+
+    for title in titles:
+        if title == "Bc." or title == "Mgr.":
+            visible_in_form = True
+        else:
+            visible_in_form = False
+        t, _ = Title.objects.get_or_create(code=title, name=titles[title], visible_in_form=visible_in_form)
+
+
 def init_qualification():
     """
     Data source: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=645564954
     csv file - removed first rows (headers)
-    There are also initial data for Title, EducationSpecialization and EducationType
+    There are also initial data for EducationSpecialization and EducationType
     Adds missing SubjectGroup - Jakýkoli kromě cizího jazyka
     """
 
+    NoneType = type(None)
     filepath = os.path.join(os.getcwd(), "data_init", "tree_new.csv")
     csvfile = open(filepath, newline="", encoding="utf-8")
     data = csv.reader(csvfile, delimiter=",", quotechar='"')
@@ -344,19 +359,21 @@ def init_qualification():
             _,
             type_1_title,
             type_1_level_1,
-            type_1_level_2,
             type_1_subject_group,
             type_1_specialization,
             type_1_name,
+            type_1_edu_name,
             __,
             type_2_title,
             type_2_level,
             type_2_subject_group,
             type_2_specialization,
             type_2_name,
+            type_2_edu_name,
             ___,
             course_level,
             course_name,
+            course_edu_name,
             ____,
             experience_1_name,
             _____,
@@ -369,34 +386,35 @@ def init_qualification():
         ) = [item.strip() for item in row]
 
         if teaching_level and teaching_level != "None":
-            teaching_level = teaching_level.replace(" ZŠ", "")
-            teaching_level = SchoolLevel.objects.get(name__contains=teaching_level)
+            teaching_level = SchoolLevel.objects.get(name=teaching_level)
         else:
             teaching_level = None
 
         if teaching_subject_group and teaching_subject_group != "None":
             if teaching_subject_group == "Any":
-                teaching_subject_group = SubjectGroup.objects.get(name="jakýkoli")
+                teaching_subject_group = SubjectGroup.objects.all()
             else:
                 teaching_subject_group = SubjectGroup.objects.get(name=teaching_subject_group)
         else:
             teaching_subject_group = None
 
-        # init title
         if type_1_title and type_1_title != "None":
-            type_1_title, _ = Title.objects.get_or_create(name=type_1_title, defaults={"code": type_1_title})
+            type_1_title = Title.objects.get(name=type_1_title)
         else:
             type_1_title = None
 
         if type_2_title and type_2_title != "None":
-            type_2_title, _ = Title.objects.get_or_create(name=type_2_title, defaults={"code": type_2_title})
+            type_2_title = Title.objects.get(name=type_2_title)
         else:
             type_2_title = None
 
         # init educationSpecialization
         if type_1_specialization and type_1_specialization != "None":
             if type_1_specialization == "Any":
-                type_1_specialization, _ = EducationSpecialization.objects.get_or_create(name="jakákoli")
+                type_1_specialization = EducationSpecialization.objects.all()
+            elif type_1_specialization == "Any kromě Učitelství a Filologie (neučitelský obor)":
+                excludes = ["Učitelství", "Filologie (neučitelský obor)"]
+                type_1_specialization = EducationSpecialization.objects.exclude(name__in=excludes)
             else:
                 type_1_specialization, _ = EducationSpecialization.objects.get_or_create(name=type_1_specialization)
         else:
@@ -404,7 +422,7 @@ def init_qualification():
 
         if type_2_specialization and type_2_specialization != "None":
             if type_2_specialization == "Any":
-                type_2_specialization, _ = EducationSpecialization.objects.get_or_create(name="jakákoli")
+                type_2_specialization = EducationSpecialization.objects.all()
             else:
                 type_2_specialization, _ = EducationSpecialization.objects.get_or_create(name=type_2_specialization)
         else:
@@ -413,9 +431,9 @@ def init_qualification():
         # adds SubjectGroup jakýkoli kromě cizího jazyka
         if type_1_subject_group and type_1_subject_group != "None":
             if type_1_subject_group == "Any":
-                type_1_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli")
+                type_1_subject_group = SubjectGroup.objects.all()
             elif type_1_subject_group == "Any kromě cizí jazyk":
-                type_1_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
+                type_1_subject_group = SubjectGroup.objects.exclude(name="cizí jazyk")
             else:
                 type_1_subject_group, _ = SubjectGroup.objects.get_or_create(name=type_1_subject_group)
         else:
@@ -423,9 +441,9 @@ def init_qualification():
 
         if type_2_subject_group and type_2_subject_group != "None":
             if type_2_subject_group == "Any":
-                type_2_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli")
+                type_2_subject_group = SubjectGroup.objects.all()
             elif type_2_subject_group == "Any kromě cizí jazyk":
-                type_2_subject_group, _ = SubjectGroup.objects.get_or_create(name="jakýkoli kromě cizího jazyka")
+                type_2_subject_group = SubjectGroup.objects.exclude(name="cizí jazyk")
             else:
                 type_2_subject_group, _ = SubjectGroup.objects.get_or_create(name=type_2_subject_group)
         else:
@@ -433,99 +451,204 @@ def init_qualification():
 
         # init EducationType
         if type_1_title:
-            education_type_1, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.TITLE_QUALIFICATION,
-                name=type_1_name,
-                title=type_1_title,
-                subject_group=type_1_subject_group,
-                defaults={
-                    "specialization": type_1_specialization,
-                },
-            )
+            # všechny existující education types
+            all_existed_edu_types = EducationType.objects.all()
+
+            qualification_type1 = QualificationType.objects.get(name="Titul")
+
+            if type(type_1_specialization) == EducationSpecialization:
+                # zjistí, zda již existující education types mají danou specializaci
+                already_exists = all_existed_edu_types.filter(
+                    name=type_1_name,
+                    name_edu_type=type_1_edu_name,
+                    qualification_type=qualification_type1,
+                    title=type_1_title,
+                    specializations=type_1_specialization,
+                )
+                # pokud nemají danou specializaci, vytvoří se
+                if not already_exists:
+                    education_type_1 = EducationType.objects.create(
+                        name=type_1_name,
+                        name_edu_type=type_1_edu_name,
+                        qualification_type=qualification_type1,
+                        title=type_1_title,
+                    )
+                    education_type_1.specializations.add(type_1_specialization)
+
+                else:
+                    education_type_1 = all_existed_edu_types.get(
+                        name=type_1_name,
+                        name_edu_type=type_1_edu_name,
+                        qualification_type=qualification_type1,
+                        title=type_1_title,
+                        specializations=type_1_specialization,
+                    )
+            elif type(type_1_specialization) != NoneType:
+                # zjistí, zda již existující edu types mají dané specializace
+                already_exists = all_existed_edu_types.filter(
+                    name=type_1_name,
+                    name_edu_type=type_1_edu_name,
+                    qualification_type=qualification_type1,
+                    title=type_1_title,
+                    specializations__in=type_1_specialization,
+                )
+
+                if not already_exists:
+                    education_type_1 = EducationType.objects.create(
+                        name=type_1_name,
+                        name_edu_type=type_1_edu_name,
+                        qualification_type=qualification_type1,
+                        title=type_1_title,
+                    )
+                    education_type_1.specializations.add(*type_1_specialization)
+
+                else:
+                    edu_type_1_query = all_existed_edu_types.annotate(count=Count("specializations")).filter(
+                        count=len(type_1_specialization)
+                    )
+
+                    for specialization in type_1_specialization:
+                        education_type_1_query = edu_type_1_query.filter(specializations__pk=specialization.id)
+                    education_type_1 = education_type_1_query.first()
+
+            if type_1_title != "Odborná maturita" and type_1_name != "None":
+                education_type_1.name = type_1_name
+                education_type_1.name_edu_type = type_1_edu_name
+                education_type_1.save()
+
+            if type(type_1_subject_group) == SubjectGroup:
+                education_type_1.subject_groups.add(type_1_subject_group)
+
+            elif type(type_1_subject_group) != NoneType:
+                education_type_1.subject_groups.add(*type_1_subject_group)
+
         else:
             education_type_1 = None
 
         if type_2_title:
-            education_type_2, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.TITLE_QUALIFICATION,
-                name=type_2_name,
-                title=type_2_title,
-                subject_group=type_2_subject_group,
-                defaults={
-                    "specialization": type_1_specialization,
-                },
-            )
+
+            all_existed_edu_types_2 = EducationType.objects.all()
+            qualification_type2 = QualificationType.objects.get(name="Titul")
+
+            if type(type_2_specialization) == EducationSpecialization:
+                # zjistí, zda již existující education types mají danou specializaci
+                already_exists_2 = all_existed_edu_types_2.filter(
+                    qualification_type=qualification_type2,
+                    name=type_2_name,
+                    name_edu_type=type_2_edu_name,
+                    title=type_2_title,
+                    specializations=type_2_specialization,
+                )
+                # pokud nemají danou specializaci, vytvoří se
+                if not already_exists_2:
+                    education_type_2 = EducationType.objects.create(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        name_edu_type=type_2_edu_name,
+                        title=type_2_title,
+                    )
+                    education_type_2.specializations.add(type_2_specialization)
+
+                else:
+                    education_type_2 = all_existed_edu_types_2.get(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        name_edu_type=type_2_edu_name,
+                        title=type_2_title,
+                        specializations=type_2_specialization,
+                    )
+
+            elif type(type_2_specialization) != NoneType:
+                already_exists_2 = all_existed_edu_types_2.filter(
+                    qualification_type=qualification_type2,
+                    name=type_2_name,
+                    name_edu_type=type_2_edu_name,
+                    title=type_2_title,
+                    specializations__in=type_2_specialization,
+                )
+                if not already_exists_2:
+                    education_type_2 = EducationType.objects.create(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        name_edu_type=type_2_edu_name,
+                        title=type_2_title,
+                    )
+                    education_type_2.specializations.add(*type_2_specialization)
+
+                else:
+                    education_type_2 = all_existed_edu_types_2.get(
+                        qualification_type=qualification_type2,
+                        name=type_2_name,
+                        name_edu_type=type_2_edu_name,
+                        title=type_2_title,
+                        specializations=type_2_specialization,
+                    ).first()
+
+            if type(type_2_subject_group) == SubjectGroup:
+                education_type_2.subject_groups.add(type_2_subject_group)
+
+            elif type(type_2_subject_group) != NoneType:
+                education_type_2.subject_groups.add(*type_2_subject_group)
+
         else:
             education_type_2 = None
 
         if course_name and course_name != "None":
+            qualification_type_course = QualificationType.objects.get(name="Kurz CŽV")
             education_type_course, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.CZV_QUALIFICATION,
-                name=course_name,
+                qualification_type=qualification_type_course, name=course_name, name_edu_type=course_edu_name
             )
         else:
             education_type_course = None
 
         if experience_1_name and experience_1_name != "None":
+            qualification_type_other1 = QualificationType.objects.get(name="Ostatní kvalifikace")
             education_type_experience_1, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.OTHER_EXPERIENCE,
-                name=experience_1_name,
+                qualification_type=qualification_type_other1, name=experience_1_name, name_edu_type=experience_1_name
             )
         else:
             education_type_experience_1 = None
 
         if experience_2_name and experience_2_name != "None":
+            qualification_type_other2 = QualificationType.objects.get(name="Ostatní kvalifikace")
             education_type_experience_2, _ = EducationType.objects.get_or_create(
-                qualification_type=EducationType.OTHER_EXPERIENCE,
-                name=experience_2_name,
+                qualification_type=qualification_type_other2, name=experience_2_name, name_edu_type=experience_2_name
             )
         else:
             education_type_experience_2 = None
 
-        type_1_school_levels = []
-        type_1_level_1 = type_1_level_1.replace(" ZŠ", "")
-        type_1_level_2 = type_1_level_2.replace(" ZŠ", "")
-
         if type_1_level_1 and type_1_level_1 != "None":
             if type_1_level_1 == "Any":
-                type_1_level_1, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
-                type_1_school_levels.append(type_1_level_1)
+                type_1_level_1 = SchoolLevel.objects.all()
             else:
-                type_1_level_1, _ = SchoolLevel.objects.get_or_create(name__contains=type_1_level_1)
-                type_1_school_levels.append(type_1_level_1)
+                type_1_level_1, _ = SchoolLevel.objects.get_or_create(name=type_1_level_1)
 
-        if type_1_level_2 and type_1_level_2 != "None":
-            if type_1_level_2 == "Any":
-                type_1_level_2, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
-                type_1_school_levels.append(type_1_level_2)
+            if type(type_1_level_1) == SchoolLevel:
+                education_type_1.school_levels.add(type_1_level_1)
             else:
-                type_1_level_2, _ = SchoolLevel.objects.get_or_create(name__contains=type_1_level_2)
-                type_1_school_levels.append(type_1_level_2)
-            education_type_1.school_levels.add(*type_1_school_levels)
-
-        type_2_school_levels = []
-        type_2_level = type_2_level.replace(" ZŠ", "")
+                education_type_1.school_levels.add(*type_1_level_1)
 
         if type_2_level and type_2_level != "None":
             if type_2_level == "Any":
-                type_2_level, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
-                type_2_school_levels.append(type_2_level)
+                type_2_level = SchoolLevel.objects.all()
             else:
-                type_2_level, _ = SchoolLevel.objects.get_or_create(name__contains=type_2_level)
-                type_2_school_levels.append(type_2_level)
-            education_type_2.school_levels.add(*type_2_school_levels)
+                type_2_level, _ = SchoolLevel.objects.get_or_create(name=type_2_level)
 
-        type_course_school_levels = []
-        course_level = course_level.replace(" ZŠ", "")
+            if type(type_2_level) == SchoolLevel:
+                education_type_2.school_levels.add(type_2_level)
+            else:
+                education_type_2.school_levels.add(*type_2_level)
 
         if course_level and course_level != "None":
             if course_level == "Any":
-                course_level, _ = SchoolLevel.objects.get_or_create(name="jakýkoli")
-                type_course_school_levels.append(course_level)
+                course_level = SchoolLevel.objects.all()
             else:
-                course_level, _ = SchoolLevel.objects.get_or_create(name__contains=course_level)
-                type_course_school_levels.append(course_level)
-                education_type_course.school_levels.add(*type_course_school_levels)
+                course_level, _ = SchoolLevel.objects.get_or_create(name=course_level)
+
+            if type(course_level) == SchoolLevel:
+                education_type_course.school_levels.add(course_level)
+            else:
+                education_type_course.school_levels.add(*course_level)
 
         if note == "None":
             note = None
@@ -536,10 +659,14 @@ def init_qualification():
                 "legal_paragraph": legal_paragraph,
                 "example": example,
                 "school_level": teaching_level,
-                "subject_group": teaching_subject_group,
                 "note": note,
             },
         )
+
+        if type(teaching_subject_group) == SubjectGroup:
+            qualification.subject_groups.add(teaching_subject_group)
+        else:
+            qualification.subject_groups.add(*teaching_subject_group)
 
         education = [
             x
@@ -555,18 +682,59 @@ def init_qualification():
         qualification.education_types.add(*education)
 
 
+def init_edu_type_links():
+    """
+    File edu_types.csv
+    Source file: https://docs.google.com/spreadsheets/d/1mPvFm_5fgUjswlrOIkU2pnnTP4oIpy5b6GfxZFpt8iU/edit#gid=1469530586
+    - Číselník názvů edu_types
+    headers: ID,Typ,Název edu_type,Link
+    Dá do databáze, zda daný edu_type má kurzy (zda budou na FE aktivní linky)
+    """
+    edu_types_list = []
+    filepath = os.path.join(os.getcwd(), "data_init", "edu_types.csv")
+    with open(filepath, "r", encoding="utf8") as data:
+        edu_types = csv.DictReader(data)
+        for edu_type in edu_types:
+            edu_types_list.append(edu_type)
+
+    for edu_type in edu_types_list:
+        if EducationType.objects.filter(name_edu_type=edu_type["Název edu_type"].strip()).exists():
+            education_type = EducationType.objects.get(name_edu_type=edu_type["Název edu_type"].strip())
+            if edu_type["Link"] == "ANO":
+                link = True
+            else:
+                link = False
+            education_type.link_available = link
+            education_type.save()
+        else:
+            print(edu_type["Název edu_type"])
+            print("*******Matching query doesnt exist.*******")
+
+
 def init_other_options():
     """
     Init for OtherExperience
     """
     data = """
-		rodilý mluvčí
 		doplňující studium k rozšíření odborné kvalifikace (DVPP)
+        jazyková zkouška min. C1 SERR pro jazyky
 		doplňující didaktické studium příslušného jazyka
 		studium pedagogiky
-		jazyková zkouška min. C1 SERR pro jazyky
-		výkonný umělec
+		jazyková zkouška min. C2 SERR pro jazyky (= na úrovni rodilého mluvčího) / rodilý mluvčí
+        výkonný či výtvarný umělec
+        kvalifikovaný učitel uměleckých odborných předmětů v ZUŠ, SŠ a konzervatoři
+        kvalifikovaný trenér
 	"""
 
     for name in data.strip().split("\n"):
         OtherExperience.objects.get_or_create(name=name.strip())
+
+
+def init_qualification_types():
+    """
+    Init for QualificationType
+    """
+    types = ["Titul", "Kurz CŽV", "Ostatní kvalifikace"]
+
+    for type in types:
+        QualificationType.objects.get_or_create(name=type)

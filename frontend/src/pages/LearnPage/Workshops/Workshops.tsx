@@ -65,7 +65,7 @@ const Workshops: React.FC = () => (
       title="Zauč se! | Pomáháme začínajícím učitelům"
       description="Získejte podporu a možnost rozvoje ve třech komunitních programech Zauč se! – v celoročním programu, v sérii workshopů a v supervizích."
     />
-    <BackButton href={routes.learn.main} icon="home">
+    <BackButton href={routes.learn.learnPage} icon="home">
       Zpátky na chci se zaučit
     </BackButton>
     <TopWrapper>
@@ -114,7 +114,7 @@ const Workshops: React.FC = () => (
       ))}
     </div>
 
-    <BackToHomeButton href={routes.learn.main}>Zpátky na Chci se zaučit</BackToHomeButton>
+    <BackToHomeButton href={routes.learn.learnPage}>Zpátky na Chci se zaučit</BackToHomeButton>
   </Container>
 );
 

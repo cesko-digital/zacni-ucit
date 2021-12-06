@@ -1,7 +1,7 @@
-import { mediaQueriesUp } from 'src/common/mediaQueries';
+import Button from '@components/Button/Button';
+import { mediaQueriesUp, mediaQueries } from 'src/common/mediaQueries';
 import { theme } from 'src/common/theme';
 import styled from 'styled-components';
-import Button from '@components/Button/Button';
 
 export const FooterWrap = styled.footer`
   display: flex;
@@ -85,7 +85,41 @@ export const FooterSection = styled.section`
   &.footer_section4 {
     background: rgba(127, 80, 255, 0.32);
     text-align: left;
+
+    & .msmt {
+      margin-left: 0.5rem;
+
+      ${mediaQueries('md')`
+        display:none;
+    `};
+    }
   }
+
+  &.footer_section5 {
+    ${mediaQueriesUp('md')`
+  display:none;
+  `}
+  }
+`;
+
+export const MsmtWrapper = styled.div`
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 24px;
+
+  & p {
+    margin: 0;
+  }
+`;
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
 `;
 
 export const FlexRowSB = styled.div`
@@ -105,6 +139,7 @@ export const FlexRow = styled.div`
 export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   padding: 1rem 0;
   margin-right: 1rem;
 `;
@@ -122,7 +157,7 @@ export const SmallText = styled.p`
 `;
 
 export const Copy = styled.p`
-  font-size: ${theme.fontSize.normal};
+  font-size: ${theme.fontSize.large};
   font-weight: 400;
   display: inline;
   margin: 10px 0 0;

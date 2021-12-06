@@ -14,6 +14,10 @@ export const menuItems = [
     route: routes.canITeach,
     lights: [
       {
+        label: 'Interaktivní průvodce ',
+        route: routes.startTeaching.crossroad,
+      },
+      {
         label: 'Pedagogické minimum',
         route: `${routes.startTeaching.crossroad}#pedagogicke-minimum`,
       },
@@ -63,14 +67,17 @@ export const menuItems = [
       },
     ],
   },
-
   {
     label: 'Začínám učit',
-    route: routes.learn.main,
+    route: routes.learn.crossroad,
     lights: [
       {
         label: 'Zauč se!',
-        route: routes.learn.main,
+        route: routes.learn.learnPage,
+      },
+      {
+        label: 'Tipy pro začínající učitele',
+        route: routes.learn.teachersTips,
       },
     ],
   },

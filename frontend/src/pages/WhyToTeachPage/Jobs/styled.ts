@@ -4,6 +4,7 @@ import Button from '@components/Button/Button';
 
 export const MainTitle = styled.h1`
   font-size: 2rem;
+  line-height: 1.2em;
   font-weight: bold;
   text-align: center;
   margin: 0 0 16px;

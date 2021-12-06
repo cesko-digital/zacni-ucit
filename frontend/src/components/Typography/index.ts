@@ -123,6 +123,7 @@ export const LinkLight = styled.a<{
 export const LinkToExtPage = styled.a`
   text-decoration: none;
   white-space: nowrap;
+  min-height: 49px;
 
   &.button {
     padding: 1rem 2rem;
@@ -143,17 +144,34 @@ export const LinkToExtPage = styled.a`
     border: 2px solid ${theme.color.primary};
     border-radius: ${theme.radius.max};
     padding: 0.5rem 1rem;
-    margin: 1rem 0.5rem;
+    margin: 1rem 0.5rem 0 0;
     font-size: ${theme.fontSize.normal};
     font-weight: 700;
     color: ${theme.color.primary};
     text-decoration: none;
-    width: 10rem;
     display: flex;
     align-items: center;
+
+    &:hover {
+      border: 2px solid ${theme.color.green};
+    }
+
+    &:active {
+      background: ${theme.color.green};
+    }
   }
 
   & svg {
     margin-right: 1rem;
+  }
+`;
+
+export const MainParagraph = styled.p<{ noMargin: boolean }>`
+  margin: ${({ noMargin }) => (noMargin ? '0' : '0 0 16px')};
+  font-weight: bold;
+
+  @media (min-width: 500px) {
+    font-size: 1.25rem;
+    margin: ${({ noMargin }) => (noMargin ? '0' : '0 0 32px')};
   }
 `;
