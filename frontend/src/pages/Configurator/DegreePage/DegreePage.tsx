@@ -47,7 +47,7 @@ const DegreePage: React.FC = () => {
           <div>
             <Hint href={`${routes.whyToTeach}#pribehy-ucitelu`}>Příběhy učitelů z praxe</Hint>
             <RadiosWrapper>
-              {filteredSchollLevels.map(({ id, name }) => (
+              {filteredSchollLevels.sort((a, b) => a.id > b.id ? 1 : -1).map(({ id, name }) => (
                 <div key={id}>
                   <Radio
                     checked={values.stupen === id}

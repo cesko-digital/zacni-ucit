@@ -44,6 +44,7 @@ export const Type = styled.span`
 
 export const Paragraph = styled.p`
   margin: 0 0 4px;
+  padding-right: 20px;
   font-size: 0.875rem;
 
   ${mediaQueriesUp('sm')`

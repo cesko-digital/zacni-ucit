@@ -181,7 +181,9 @@ const PathDetailPage: React.FC = () => {
         {courses.loading && <Loading />}
         {courses.error && <Note>{courses.error}</Note>}
 
-        {courses.data?.courses.map((course, index) => (
+        {courses.data?.courses.length === 0 && <Message><Text>Informace o dalších kurzech připravujeme, omluvte, prosím, současný nulový či omezený výběr.</Text></Message>}
+
+        {courses.data?.courses.map((course) => (
           <Card key={course.id} theme="primary">
             <SchoolTile
               href={`${routes.configurator.course}?kurz=${course.id}&${querystring.stringify(
