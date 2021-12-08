@@ -17,12 +17,11 @@ import Container from '@components/Container/Container';
 import { routes } from '@routes';
 import ceskoDigitalLogo from './cesko-digital.png';
 import laboratorVodafoneLogo from './laborator-vodafone.png';
-// import MhmpLogo from './logos/mhmp.svg';
 import msmtLogo from './msmt.png';
 import nadaceCsLogo from './nadace-cs.png';
 
 const logos = [
-  { logo: MhmpLogo, href: 'https://www.edu.cz/' },
+  { logo: MhmpLogo, href: 'https://www.praha.eu/' },
   { logo: ceskoDigitalLogo, href: 'https://cesko.digital/' },
   { logo: nadaceCsLogo, href: 'https://www.nadacecs.cz/' },
   { logo: laboratorVodafoneLogo, href: 'https://www.laboratornadacevodafone.cz/' },
