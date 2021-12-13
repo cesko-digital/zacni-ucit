@@ -4,10 +4,14 @@ import InfoIcon from '@icons/info.svg';
 
 import { Wrapper, IconWrapper, Paragraph } from './styled';
 
-export const Message: React.FC = ({ children }) => (
+interface IProps {
+  icon?: JSX.Element;
+}
+
+export const Message: React.FC<IProps> = ({ icon, children }) => (
   <Wrapper>
     <IconWrapper>
-      <InfoIcon />
+      {icon ?? <InfoIcon />}
     </IconWrapper>
     <Paragraph>{children}</Paragraph>
   </Wrapper>

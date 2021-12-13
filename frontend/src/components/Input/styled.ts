@@ -1,69 +1,32 @@
 import styled, { css } from 'styled-components';
-import { mediaQueries } from '../../common/mediaQueries';
+import { Field } from 'formik';
 
-const defaultLabelStyle = css`
-  font-size: ${({ theme }) => theme.fontSize.medium};
-`;
-const radioLabelStyle = ({ checked, margin }) => css`
-  background-color: ${({ theme }) => (checked ? theme.color.green : 'transparent')};
-  color: ${({ theme }) => (checked ? 'white' : theme.color.secondary)};
-  padding: 0.8rem 1.5rem;
-  box-sizing: border-box;
-  //margin: 0.3rem;
-  margin: ${({ theme }) => (margin ? margin : '0 0.5rem 0.5rem 0')};
-  border: ${({ theme }) =>
-    checked ? `1px solid ${theme.color.green}` : `1px solid ${theme.color.secondary}`};
-  border-radius: 100px;
-  float: left;
-  font-size: ${({ theme }) => theme.fontSize.normal};
-  font-weight: bold;
-  font-weight: bolder;
-  cursor: pointer;
-`;
-
-export const StyledInput = styled.input<{
-  hasError?: boolean;
-  type: string;
-  bgColor: string;
-  color: string;
-  padding: string;
-  margin: string;
-  disabled: boolean;
-}>`
-  padding: ${({ padding }) => (!!padding ? padding : '1rem 1.2rem')};
-  margin: ${({ margin }) => (!!margin ? margin : '0')};
+export const StyledInput = styled(Field)<{ withError: boolean }>`
+  padding: 5px 10px;
+  min-height: 40px;
   width: 100%;
-  border: 2px solid
-    ${({ hasError }) =>
-      ({ theme }) =>
-        hasError ? theme.color.red : theme.color.gray};
-  border-radius: ${({ theme, type }) =>
-    type === 'button' ? theme.radius.max : theme.radius.basic};
-  background-color: ${({ theme, bgColor, disabled }) => {
-    if (disabled) {
-      return theme.color.gray;
-    }
-    return !!bgColor ? bgColor : theme.color.secondary;
-  }};
-  color: ${({ theme, color }) => (!!color ? color : 'white')};
-  font-size: ${({ theme }) => theme.fontSize.large};
-  cursor: pointer;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
   font-weight: 700;
-  ${({ type }) => (type === 'radio' || type === 'checkbox' ? 'display: none;' : null)}
+  border: ${({ withError }) => (withError ? '1px solid #eb8e93' : '1px solid #cac9c8')};
 `;
 
-export const Label = styled.label<{
-  type: string;
-  checked?: boolean;
-  margin?: string;
-}>`
-  ${({ type, checked, margin }) =>
-    type === 'radio' || type === 'checkbox'
-      ? radioLabelStyle({ checked, margin })
-      : defaultLabelStyle};
+export const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
 `;
 
-export const StyledError = styled.div`
+export const Error = styled.div`
   color: ${({ theme }) => theme.color.red};
-  margin-top: 0.4rem;
+  position: absolute;
+  font-size: 12px;
+  color: #ad1f26;
+`;
+
+export const Wrapper = styled.div`
+  position: relative;
+  margin-bottom: 35px;
 `;

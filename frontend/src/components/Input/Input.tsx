@@ -1,56 +1,24 @@
+import { useFormikContext } from 'formik';
 import React from 'react';
-import type { ChangeEvent, FC, InputHTMLAttributes } from 'react';
-import type { ChangeEventHandler } from 'react';
 
-import { Label, StyledInput } from './styled';
+import { Wrapper, Label, StyledInput, Error } from './styled';
 
-type Props = InputHTMLAttributes<HTMLInputElement> & {
+type Props = {
   label?: string;
-  id?: string;
   name?: string;
-  checked?: boolean;
-  value?: string | number;
-  bgColor?: string;
-  color?: string;
-  padding?: string;
-  margin?: string;
-  disabled?: boolean;
-  onChange?: (e: ChangeEventHandler<HTMLInputElement> & ChangeEvent<Element>) => void;
-  onClick?: (e?: MouseEvent) => void;
+  validate?: (value: string) => void;
 };
 
-const Input: FC<Props> = ({
-  label,
-  name,
-  type = 'text',
-  id,
-  checked,
-  onChange,
-  onClick,
-  value,
-  bgColor,
-  color,
-  padding,
-  margin,
-  disabled,
-}) => (
-  <Label checked={checked} htmlFor={id} type={type}>
-    <StyledInput
-      bgColor={bgColor}
-      checked={checked}
-      color={color}
-      disabled={disabled}
-      id={id}
-      margin={margin}
-      name={name}
-      padding={padding}
-      type={type}
-      value={type === 'button' ? value : ''}
-      onChange={onChange}
-      onClick={onClick}
-    />
-    {label}
-  </Label>
-);
+const Input: React.FC<Props> = ({ label, name, validate }) => {
+  const { touched, errors } = useFormikContext();
+
+  return (
+    <Wrapper>
+      <Label>{label}</Label>
+      <StyledInput name={name} validate={validate} withError={errors[name] !== undefined} />
+      {touched[name] && errors[name] && <Error>{errors[name]}</Error>}
+    </Wrapper>
+  )
+};
 
 export default Input;

@@ -16,7 +16,7 @@ interface BaseProps {
 }
 
 type Button = BaseProps & {
-  onClick: () => void;
+  onClick?: () => void;
   type?: 'submit' | 'button';
 };
 

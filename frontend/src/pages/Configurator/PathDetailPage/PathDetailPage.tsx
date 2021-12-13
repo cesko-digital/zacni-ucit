@@ -17,6 +17,8 @@ import { Note } from '../SpecializationPage/EducationArea/styled';
 
 import { Text, Separator } from './styled';
 import { Loading } from '@components/Loading/Loading';
+import useModal from '@components/Modal/useModal';
+import { SendToEmail } from './SendToEmail/SendToEmail';
 
 export const resultsQuery = gql`
   query qualificationsQuery(
@@ -94,6 +96,7 @@ const countText = (count: number) => (count < 5 ? `${count} kroky` : `${count} k
 
 const PathDetailPage: React.FC = () => {
   const router = useRouter();
+  const resultsModal = useModal();
   const { values } = useFormikContext<ConfiguratorValues & { cesta?: string; kurzy?: string }>();
 
   const results = useQuery<any>(resultsQuery, {
@@ -159,19 +162,22 @@ const PathDetailPage: React.FC = () => {
                 :{' '}
                 {qualification?.path.educationTypes
                   .filter(({ id }) => id !== values.kurzy)
-                  .map(({ id, nameEduType, linkAvailable, title }, index) => <span key={id}>
-                    {linkAvailable ? (
-                      <Button
-                        href={`${routes.configurator.path}?${querystring.stringify(
-                          modifiedValuesOther,
-                        )}&kurzy=${id}`}
-                      >
-                        {nameEduType ?? title?.name ?? name}
-                      </Button>
-                    ) : (
-                      <span>{nameEduType ?? title?.name ?? name}</span>
-                    )}{index + 1 !== qualification.path.educationTypes.length && ', '}</span>
-                  )}
+                  .map(({ id, nameEduType, linkAvailable, title }, index) => (
+                    <span key={id}>
+                      {linkAvailable ? (
+                        <Button
+                          href={`${routes.configurator.path}?${querystring.stringify(
+                            modifiedValuesOther,
+                          )}&kurzy=${id}`}
+                        >
+                          {nameEduType ?? title?.name ?? name}
+                        </Button>
+                      ) : (
+                        <span>{nameEduType ?? title?.name ?? name}</span>
+                      )}
+                      {index + 1 !== qualification.path.educationTypes.length && ', '}
+                    </span>
+                  ))}
               </Text>
             </Message>
             <Separator />
@@ -181,9 +187,16 @@ const PathDetailPage: React.FC = () => {
         {courses.loading && <Loading />}
         {courses.error && <Note>{courses.error}</Note>}
 
-        {courses.data?.courses.length === 0 && <Message><Text>Informace o dalších kurzech připravujeme, omluvte, prosím, současný nulový či omezený výběr.</Text></Message>}
+        {courses.data?.courses.length === 0 && (
+          <Message>
+            <Text>
+              Informace o dalších kurzech připravujeme, omluvte, prosím, současný nulový či omezený
+              výběr.
+            </Text>
+          </Message>
+        )}
 
-        {courses.data?.courses.map((course) => (
+        {courses.data?.courses.map(course => (
           <Card key={course.id} theme="primary">
             <SchoolTile
               href={`${routes.configurator.course}?kurz=${course.id}&${querystring.stringify(
@@ -204,6 +217,14 @@ const PathDetailPage: React.FC = () => {
           </Card>
         ))}
       </ConfiguratorStep>
+
+      {courses.data?.courses.length > 0 && (
+        <SendToEmail
+          isOpen={resultsModal.isOpen}
+          closeModal={resultsModal.closeModal}
+          openModal={resultsModal.openModal}
+        />
+      )}
     </Container>
   );
 };
