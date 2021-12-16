@@ -69,6 +69,10 @@ export const CloseButton = styled.button`
   border-radius: 50%;
   right: -10px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   svg {
     width: 14px;
     height: 14px;
