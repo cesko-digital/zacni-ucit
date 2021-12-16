@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   }};
   background: #e0d5ff;
   border-top: 3px solid #7f50ff;
+  z-index: 5000;
 `;
 
 export const Title = styled.strong`
