@@ -58,7 +58,11 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const Buttons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   ${mediaQueriesUp('sm')`
-    display: flex;
+    justify-content: flex-start;
   `}
 `;
