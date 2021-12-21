@@ -63,7 +63,7 @@ const CanITeachPage: React.FC = () => (
           endIcon={<ChevronIcon />}
           href={routes.startTeaching.completeYourQualification}
         >
-          Podívejte se na jejich seznam
+          Podívejte se na seznam škol nabízejících kurzy
         </Button>
       </ButtonWrapper>
       <Paragraph>
