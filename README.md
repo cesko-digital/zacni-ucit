@@ -1,3 +1,9 @@
+-----
+
+**Repozitář se zdrojovým kódem byl přesunut na https://code.zacniucit.cz**
+
+-----
+
 Projekt Zacniucit.cz.
 
 # Základní požadavky na instalaci projektu
